@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Clashculator</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/0cb9d10f8e.js" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+    body {
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    #app{
+      width:900px;
+      margin:auto;
+    }
+    .unit-row {
+      border-bottom: 1px solid #505050;
+      margin-bottom: 1em;
+      padding-bottom: 0.5rem;
+      position:relative;
+    }
+    .unit-row-stats {
+      vertical-align: top;
+    }
+    .unit-cell {
+      display: inline-block;
+      box-sizing: border-box;
+      border-right:solid #a0a0a0 1px;
+      vertical-align: top;
+    }
+    .unit-row-title {
+      background-color: #e0e0e0;
+      font-weight: bold;
+    }
+    .unit-cell-name {
+      font-weight: bold;
+    }
+    .unit-cell-large {
+      width: 20%;
+    }
+    .unit-cell-medium {
+      width: 19%;
+    }
+    .unit-cell-small {
+      width: 3%;
+    }
+
+    .button-bar {
+      text-align:right;
+      margin: 1em;
+    }
+    .add-unit {
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 16px;
+    }
+    .add-figure {
+      cursor:pointer;
+      color:green;
+    }
+    .unit-delete {
+      color:red;
+      cursor:pointer;
+      padding:1em;
+    }
+    .unit-row .unit-delete {
+      position:absolute;
+      right:0;
+      top:0;
+    }
+
+    @media only screen and (max-width: 900px) {
+      #app{
+        width:100%;      
+      }
+      .unit-cell-medium{
+        width: 30%;
+      }
+      .unit-cell-small{
+        width: 10%;
+      }
+    }
+  </style>
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      const NO_SHIELD = 'no shield';
+      const NO_ARMOUR = 'no armour';
+      const FULL = 'full armour';
+      const PARTIAL = 'partial armour';
+      const SHIELD = 'shield';
+      const HEAVY_SHIELD = 'heavy shield';
+      const THROWING = 'throwing spear';
+      const THRUSTING = 'thrusting spear';
+      const CAVALRY = 'thrusting spear';
+      const LONG_SPEAR = 'long spear';
+      const JAVELIN = 'javelin';
+
+      const OPT_BUCKLER = {
+        name:"add buckler (+1pts/model)",
+        cost:1,
+        upgradeWeapon:'',
+        upgradeArmour:'',
+        upgradeShield:SHIELD
+      };
+      const OPT_DOWN_NO_ARMOUR = {
+        name:"downgrade to no armour",
+        cost:-2,
+        upgradeWeapon:'',
+        upgradeArmour:NO_ARMOUR,
+        upgradeShield:''
+      };
+      const OPT_DOWN_PARTIAL_ARMOUR = {
+        name:"downgrade to partial armour",
+        cost:-1,
+        upgradeWeapon:'',
+        upgradeArmour:PARTIAL,
+        upgradeShield:''
+      };
+      const OPT_UP_PARTIAL_ARMOUR = {
+        name:"upgrade to partial armor (+2 pts/model)",
+        cost:2,
+        upgradeWeapon:'',
+        upgradeArmour:PARTIAL,
+        upgradeShield:''
+        };
+      const OPT_UPGRADE_CAVALRY_JAVELIN = {
+        name:"upgrade to gain javelin and extra equipment javelin (+3 pts/model)",
+        cost:3,
+        upgradeWeapon:'javelin and extra equipment javelin',
+        upgradeArmour:'',
+        upgradeShield:''
+      };
+      const OPT_DOWN_HEAVY_SHIELD = {
+        name:"downgrade heavy shield to shield ( -1 pts)",
+        cost:-1,
+        upgradeWeapon:'',
+        upgradeArmour:'',
+        upgradeShield:SHIELD
+      };
+      
+      const characterOptions  =[
+        {name:'Upgrade to thrusting spear',cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:THRUSTING},
+        {name:'Upgrade to throwing spear',cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:THROWING},
+        {name:"Upgrade to Cavalry Spear(must be mounted)",cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:CAVALRY,requiresMounted:true},
+        {name:"Upgrade to Javelin",cost:2,upgradeArmour:'',upgradeShield:'',upgradeWeapon:JAVELIN},
+        {name:"Upgrade to Horse",cost:4,upgradeArmour:'',upgradeShield:'',upgradeWeapon:'',unlessMounted:true},
+        {name:"Downgrade to no armor",cost:-3,upgradeArmour:NO_ARMOUR,upgradeShield:'',upgradeWeapon:''},
+        {name:"Downgrade to partial armor",cost:-1,upgradeArmour:PARTIAL,upgradeShield:'',upgradeWeapon:''},
+        {name:"Downgrade to no shield",cost:-1,upgradeArmour:'',upgradeShield:NO_SHIELD,upgradeWeapon:''},
+        {name:"Upgrade to heavy shield",cost:1,upgradeArmour:'',upgradeShield:HEAVY_SHIELD,upgradeWeapon:'',unlessMounted:true},
+      ];
+
+Vue.component('title-row', {
+  template:`
+      <div class="unit-row unit-row-title">
+          <div class="unit-cell unit-cell-medium">
+            Troop type 
+          </div>
+          <div class="unit-cell unit-cell-small">
+            ML
+          </div>
+          <div class="unit-cell unit-cell-small">
+            SH 
+          </div>
+          <div class="unit-cell unit-cell-small">
+            GR
+          </div>
+          <div class="unit-cell unit-cell-small">
+            SV
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            Weapon
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            Armour
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            Traits
+          </div>
+        </div>
+        `}
+);
+
+Vue.component('unit-row', {
+  data:function(){
+    return {
+      optionToAdd: -1
+    }
+  },
+  props: ['row','index'],
+  computed:{
+    optionsCostPerFigure: function() {
+      return this.row.selectedOptions.reduce((total,selectedOption) => {
+        return total + this.row.options[selectedOption].cost;
+      },0);
+    },    
+    save: function() {
+      let save = 7;
+      const mods = {};      
+        mods[NO_ARMOUR]=0;
+        mods[NO_SHIELD]=0;
+        mods[FULL]=2;
+        mods[PARTIAL]=1;
+        mods[SHIELD]=1;
+        mods[HEAVY_SHIELD]=2;
+      let armour = this.row.upgradedArmour ? this.row.upgradedArmour : this.row.defaultBody;
+      let shield = this.row.upgradedShield ? this.row.upgradedShield : this.row.defaultShield;
+      if(armour){
+        save -= mods[armour];
+      }
+      if(shield){
+        save -= mods[shield];
+      }
+      return save;
+    }
+  },
+  methods:{    
+    removeOption: function(optionIndex){
+      let option = this.row.options[optionIndex];
+      if(option.upgradeWeapon){
+        this.row.upgradedWeapon = '';
+      }
+      if(option.upgradeArmour){
+        this.row.upgradedArmour = '';
+      }
+      if(option.upgradeShield){
+        this.row.upgradedShield = '';
+      }
+      this.row.selectedOptions.splice(this.row.selectedOptions.indexOf(optionIndex),1);
+      this.row.excludedOptions = this.generatExclusions(this.row);
+    },
+    addOption: function(){
+      let option = this.row.options[this.optionToAdd];
+      this.row.selectedOptions.push(this.optionToAdd);
+      if(option.upgradeWeapon){
+        this.row.upgradedWeapon = option.upgradeWeapon;
+      }
+      if(option.upgradeArmour){
+        this.row.upgradedArmour = option.upgradeArmour;
+      }
+      if(option.upgradeShield){
+        this.row.upgradedShield = option.upgradeShield;
+      } 
+      this.optionToAdd = -1;
+      this.row.excludedOptions = this.generatExclusions(this.row);
+    },
+    generatExclusions: function(row){
+
+      // loop through selected options
+      //   for each selected option, record if it mods armour,shield or weapon
+      let excludeWeaponOptions = false;
+      let excludeArmourOptions = false;
+      let excludeShieldOptions = false;
+      let exclusions = [];
+      let isMounted = false;
+      row.selectedOptions.forEach(key => {
+        if(row.options[key].upgradeArmour){
+          excludeArmourOptions = true;
+        }
+        if(row.options[key].upgradeWeapon){
+          excludeWeaponOptions = true;
+        }
+        if(row.options[key].upgradeShield){
+          excludeShieldOptions = true;
+        }
+        if(row.options[key].name == 'Upgrade to Horse'){
+          isMounted = true;
+        }
+      });
+      // loop through all options,
+      //   if that option has shield or armour or weapon and not allowed, then add it to excludedOptions
+      row.options.forEach((option,idx) => {
+        if(  (excludeShieldOptions && option.upgradeShield )
+          || (excludeWeaponOptions && option.upgradeWeapon )
+          || (excludeArmourOptions && option.upgradeArmour )
+          || (isMounted && option.unlessMounted)
+          || (!isMounted && option.requiresMounted)
+          ){
+            exclusions.push(idx);
+        }
+      });
+      return exclusions;
+    },
+    addFigure: function(idx){
+      this.row.size++;
+    },
+    removeFigure: function(idx){
+      this.row.size--;
+    }
+  },
+  template: `
+    <div class="unit-row">
+      <div class="unit-row-stats">
+        <div class="unit-cell unit-cell-medium">
+          <strong>{{row.displayName}}</strong> ({{row.availability}})
+        </div>
+        <div class="unit-cell unit-cell-small">
+          {{row.combat}}+
+        </div>
+        <div class="unit-cell unit-cell-small">
+          {{row.ranged}}+
+        </div>
+        <div class="unit-cell unit-cell-small">
+          {{row.grit}}+
+        </div>
+        <div class="unit-cell unit-cell-small">
+          {{save}}+
+        </div>
+        <div class="unit-cell unit-cell-medium">
+          {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
+        </div>
+        <div class="unit-cell unit-cell-medium">
+          {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
+          {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
+        </div>
+        <div class="unit-cell unit-cell-medium">
+          {{row.traits}}
+        </div>
+        <i class="fas fa-trash-alt unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
+      </div>
+      <div class="unit-row-stats">
+        <div class="unit-cell unit-cell-medium">
+          <i class="fas fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
+          {{row.size}}
+          <i class="fas fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
+          figures
+        </div>
+        <div class="unit-cell unit-cell-medium">
+          @ {{row.cost}} 
+          <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
+          <span v-if="optionsCostPerFigure < 0">({{optionsCostPerFigure}})</span>  
+          points each
+        </div>
+        <div class="unit-cell unit-cell-medium">
+          <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
+        </div>
+      </div>
+      <button v-for="(value, index) in row.selectedOptions" v-on:click="removeOption(value)">
+        X {{row.options[value].name}}
+      </button>
+
+      <select v-if="row.options.length && row.options.length > row.excludedOptions.length"  
+            v-model="optionToAdd" v-on:change="addOption(index)">
+        <option value="-1">Add an option</option>
+        <option v-for="(value, index) in row.options" v-if="row.excludedOptions.indexOf(index) < 0" 
+                  :value="index" v-bind:key="index">
+          {{ value.name }}
+        </option>
+      </select>
+    </div>`
+});
+
+
+new Vue({
+  el: '#app',
+  computed:{
+  	totalCost: function(){ 
+    	return this.armyContents.reduce((total, unit) => {
+        let optionsCost = unit.selectedOptions.reduce((total,selectedOption) => {
+          return total + unit.options[selectedOption].cost;
+        },0);
+      	return total + (unit.size * (unit.cost + optionsCost));
+      }, 0);
+    },
+    totalFiguresCount: function(){ 
+    	return this.armyContents.reduce((total, unit) => {
+      	return total + (unit.size );
+      }, 0);
+    },
+    leadersCount: function(){
+    	return this.armyContents.reduce((total, unit) => {
+      	return unit.availability == 'leader'
+          ? total + (unit.size )
+          :total;
+      }, 0);
+    },
+    civisCount: function(){
+    	return this.armyContents.reduce((total, unit) => {
+      	return unit.availability == 'civis'
+          ? total + (unit.size )
+          :total;
+      }, 0);
+    },
+    militesCount: function(){
+    	return this.armyContents.reduce((total, unit) => {
+      	return unit.availability == 'milites'
+          ? total + (unit.size )
+          :total;
+      }, 0);
+    },
+    rareCount: function(){
+    	return this.armyContents.reduce((total, unit) => {
+      	return unit.availability == 'rare'
+          ? total + (unit.size )
+          :total;
+      }, 0);
+    }
+  },
+  methods:{
+     addUnit: function(){
+     	let newEntry = { ...this.lists[this.selectedArmy][this.unitToAdd] };
+      Vue.set(newEntry,'id',Date.now());
+     	Vue.set(newEntry,'size' , newEntry.isCharacter ? 1 : 6);
+      Vue.set(newEntry,'selectedOptions' , []);
+      Vue.set(newEntry,'excludedOptions' , []);
+      Vue.set(newEntry,'upgradedArmour' , '');
+      Vue.set(newEntry,'upgradedShield' , '');
+      Vue.set(newEntry,'upgradedWeapon' , '');
+     	this.armyContents.push(newEntry);
+     	this.unitToAdd = '';
+		},
+    removeUnit: function(idx){
+    	this.armyContents.splice(idx,1);
+    },
+    reset: function(){
+      this.selectedArmy = '';
+      this.armyContents = [];
+    }
+  },
+  data: {
+    title: 'Clashculator',
+    lists: {
+    	Roman: {
+        lvl5:{
+          isCharacter:true,
+          displayName:'Level V leader',
+          availability:'leader',
+          cost:155,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(3), wounds(3), Iron Will'
+        },
+        lvl4:{
+          isCharacter:true,
+          displayName:'Level IV leader',
+          availability:'leader',
+          cost:125,
+          options:characterOptions, 
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(3), Iron Will'
+        },
+        lvl3:{
+          isCharacter:true,
+          displayName:'Level III leader',
+          availability:'leader',
+          cost:95,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:8,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(2), Iron Will'
+        },
+        lv2:{
+          isCharacter:true,
+          displayName:'Level II leader',
+          availability:'leader',
+          cost:65,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'wounds(2), Iron Will'
+        },
+        soothsayer:{
+          isCharacter:true,
+          displayName:'Soothsayer',
+          availability:'leader',
+          cost:15,
+          options:[],
+          combat:0,
+          ranged:0,
+          grit:0,
+          commandRange:0,
+          commandPoints:0,
+          defaultShield:'',
+          defaultBody:'',
+          traits:'luck'
+        },
+        leves:{
+        	displayName:'Leves',
+          availability:'civis',
+          traits:'skirmish specialist',
+          cost:8,
+          options:[
+          	OPT_BUCKLER
+          ],
+          defaultWeapon:JAVELIN,
+          combat:5,
+          ranged:5,
+          grit:5,
+          defaultShield:'',
+          defaultBody:''
+        },
+        velites:{
+        	displayName:'Velites',
+          availability:'civis',
+          traits:'skirmish specialist',
+          cost:13,
+          options:[
+          ],
+          defaultWeapon:JAVELIN,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:'shield',
+          defaultBody:''
+        },
+        raw:{
+        	displayName:'Raw Legionnaries',
+          availability:'civis',
+          traits:'shield overlap, wall of spears',
+          cost:14,
+          options:[
+            OPT_UP_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:4,
+          ranged:5,
+          grit:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:''
+          },
+        samnite:{
+        	displayName:'Samnite Allies',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, guerrilla, allies',
+          cost:19,
+          options:[
+            OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+          },
+        hastati:{
+        	displayName:'Hastati',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, impulsum, drilled',
+          cost:20,
+          options:[
+            OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+          },
+        principes:{
+        	displayName:'Principes',
+          availability:'milites',
+          traits:'shield overlap, wall of spears, impulsum, drilled',
+          cost:25,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL
+          },
+        tirarii:{
+        	displayName:'tirarii',
+          availability:'rare',
+          traits:'shield overlap, wall of spears, offensive spear, fidelis, drilled',
+          cost:24,
+          options:[],
+          defaultWeapon:THRUSTING,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL
+          },
+        extraordinarii:{
+        	displayName:'Italian Extraordinarii',
+          availability:'rare',
+          traits:'shield overlap, wall of spears, guerilla tactics, allies',
+          cost:24,
+          options:[          	
+            OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+          },
+      	equites:{
+        	displayName:'Equites or Alae',
+          availability:'rare',
+          traits:'mounted, impetus',
+          cost:23,
+          options:[
+          	OPT_UPGRADE_CAVALRY_JAVELIN
+          ],
+          defaultWeapon:CAVALRY,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:SHIELD,
+          defaultBody:FULL
+          },
+      	cretan:{
+        	displayName:'Cretan Archers',
+          availability:'rare',
+          traits:'skirmish specialist, aimed shot, allies',
+          cost:17,
+          options:[
+            OPT_BUCKLER
+          ],
+          defaultWeapon:'bow',
+          combat:4,
+          ranged:4,
+          grit:3,
+          defaultShield:'',
+          defaultBody:''
+          }
+        },
+      Carthaginian: {
+        lvl5:{
+          isCharacter:true,
+          displayName:'Level V leader',
+          availability:'leader',
+          cost:155,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(3), wounds(3), Iron Will'
+        },
+        lvl4:{
+          isCharacter:true,
+          displayName:'Level IV leader',
+          availability:'leader',
+          cost:125,
+          options:characterOptions, 
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(3), Iron Will'
+        },
+        lvl3:{
+          isCharacter:true,
+          displayName:'Level III leader',
+          availability:'leader',
+          cost:95,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:8,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(2), Iron Will'
+        },
+        lv2:{
+          isCharacter:true,
+          displayName:'Level II leader',
+          availability:'leader',
+          cost:65,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'wounds(2), Iron Will'
+        },
+        soothsayer:{
+          isCharacter:true,
+          displayName:'Soothsayer',
+          availability:'leader',
+          cost:15,
+          options:[],
+          combat:0,
+          ranged:0,
+          grit:0,
+          commandRange:0,
+          commandPoints:0,
+          defaultShield:'',
+          defaultBody:'',
+          traits:'luck'
+        },
+        javelinmen:{
+        	displayName:'Javelin men',
+          availability:'civis',
+          traits:'skirmish specialist',
+          cost:8,
+          options:[
+          	OPT_BUCKLER
+          ],
+          defaultWeapon:JAVELIN,
+          combat:5,
+          ranged:5,
+          grit:5,
+          defaultShield:'',
+          defaultBody:''
+        },
+        citizen:{
+        	displayName:'Punic Citizens Levy',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, offensive spear',
+          cost:13,
+          options:[
+            OPT_DOWN_HEAVY_SHIELD
+          ],
+          defaultWeapon:LONG_SPEAR,
+          combat:4,
+          ranged:5,
+          grit:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:''
+        },
+        infantry:{
+        	displayName:'Punic Infantry',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, offensive spear, drilled',
+          cost:18,
+          options:[
+          ],
+          defaultWeapon:LONG_SPEAR,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+        },
+        scutarii:{
+        	displayName:'Iberian Scutarii',
+          availability:'civis',
+          traits:'wall of spears, guerrilla , impulsum, determined, allies',
+          cost:18,
+          options:[
+          ],
+          defaultWeapon:THROWING,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:''
+        },
+        veteran:{
+        	displayName:'Veteran Punic Infantry',
+          availability:'milites',
+          traits:'shield overlap, wall of spears, offensive spear, drilled',
+          cost:23,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:LONG_SPEAR,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL
+        },
+        romanised:{
+        	displayName:'Romanized Veteran Infantry',
+          availability:'milites',
+          traits:'shield overlap, wall of spears, drilled',
+          cost:24,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL
+        },
+        numidian:{
+        	displayName:'Numidian light cavalry',
+          availability:'milites',
+          traits:'mounted, marauders',
+          cost:17,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:JAVELIN,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:SHIELD,
+          defaultBody:''
+        },
+        numidian:{
+        	displayName:'Numidian light cavalry',
+          availability:'milites',
+          traits:'mounted, marauders',
+          cost:17,
+          options:[
+          ],
+          defaultWeapon:JAVELIN,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:SHIELD,
+          defaultBody:''
+        },
+        iberianCav:{
+        	displayName:'Iberian noble cavalry',
+          availability:'milites',
+          traits:'mounted, impetus, allies, extra equipment-(javelin)',
+          cost:25,
+          options:[
+            OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:'cavalry spear & javelin',
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:SHIELD,
+          defaultBody:PARTIAL
+        },
+        balearic:{
+        	displayName:'Balearic slingers',
+          availability:'rare',
+          traits:'skirmish specialist, sling specialist, allies',
+          cost:17,
+          options:[
+            OPT_BUCKLER
+          ],
+          defaultWeapon:'sling',
+          combat:4,
+          ranged:4,
+          grit:3,
+          defaultShield:'',
+          defaultBody:''
+        },
+        punicCav:{
+        	displayName:'Punic cavalry',
+          availability:'rare',
+          traits:'mounted, impetus, extra equipment-(javelin)',
+          cost:26,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR
+          ],
+          defaultWeapon:'cavalry spear & javelin',
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:SHIELD,
+          defaultBody:FULL
+        }
+      }
+    },
+    selectedArmy:'',
+    armyContents:[],
+    unitToAdd:''
+  }
+})
+
+
+    }    
+
+  //]]></script>
+
+</head>
+<body>
+    <script src="https://unpkg.com/vue"></script>
+
+    <div id="app">
+      <h1>{{ title }}</h1>
+      <select id="armySelect"  v-if="!selectedArmy"  v-model="selectedArmy" class="add-unit">
+        <option value="">Please select an army to start</option>
+        <option v-for="(value, name) in lists" :value="name" v-bind:key="name">
+        {{ name }}
+        </option>
+      </select>
+      <div v-if="selectedArmy" >
+        <h2>
+          {{selectedArmy}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
+          <i class="fas fa-undo unit-delete" title='Reset' v-on:click="reset"></i>
+        </h2>
+        <div>Leaders: {{leadersCount}}</div>
+        <div>Civis: {{civisCount}}</div>
+        <div>Milites{{militesCount}}</div>
+        <div>Rare: {{rareCount}}</div>
+        <div class="button-bar">
+          <select class="add-unit" v-if="selectedArmy"  v-model="unitToAdd" 
+            v-on:change="addUnit">
+            <option value="">Add a unit</option>
+            <option v-for="(value, name) in lists[selectedArmy]" :value="name" v-bind:key="name">
+              {{ value.displayName }}
+            </option>
+          </select>
+        </div>
+
+        <title-row></title-row>
+        <div v-for="(row, index) in armyContents" v-bind:key="row.id"> 
+          <unit-row
+            v-bind:key="row.id"
+            v-bind:row="row"
+            v-bind:index="index"
+            v-on:remove-unit="removeUnit"
+          ></unit-row>          
+        </div>
+
+      </div>
+    
+    </div>
+    <h3>Still to come</h3>
+  <p>
+    elephants, printer friendly, mounted bugs, display command range etc for leaders, more armies, break points
+  </p> 
+</body></html>
