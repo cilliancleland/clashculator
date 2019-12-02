@@ -4,7 +4,7 @@
   <title>Clashculator</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://kit.fontawesome.com/0cb9d10f8e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
   <style type="text/css">
     body {
@@ -18,6 +18,7 @@
       border-bottom: 1px solid #505050;
       padding-bottom: 0.5rem;
       position:relative;
+      min-height:60px;
     }
     .unit-row-stats {
       vertical-align: top;
@@ -31,6 +32,7 @@
     .unit-row-title {
       background-color: #e0e0e0;
       font-weight: bold;
+      min-height:1em;
     }
     .unit-cell-name {
       font-weight: bold;
@@ -46,12 +48,23 @@
     }
     .row-reposition{
       position:absolute;
-      padding-left:16px;
-      padding-top:16px;
+      padding-top:8px;
       color:green;
     }
+    .unit-up{
+      top:0;
+      position:absolute;
+      padding:8px;
+      cursor:pointer;
+    }
+    .unit-down{
+      top:35px;
+      position:absolute;
+      padding:8px;
+      cursor:pointer;
+    }
     .button-bar {
-      text-align:right;
+      float:right;
       margin: 1em;
     }
     .add-unit {
@@ -75,6 +88,9 @@
     }
 
     @media only screen and (max-width: 900px) {
+    .unit-delete {
+      padding:0.5em;
+    }
       #app{
         width:100%;      
       }
@@ -84,6 +100,7 @@
       .unit-cell-small{
         width: 10%;
       }
+
     }
   </style>
 
@@ -160,7 +177,7 @@
 Vue.component('title-row', {
   template:`
       <div class="unit-row unit-row-title">
-          <div class="unit-cell unit-cell-medium" style="margin-left:48px;">
+          <div class="unit-cell unit-cell-medium" style="margin-left:32px;">
             Troop type 
           </div>
           <div class="unit-cell unit-cell-small">
@@ -194,7 +211,7 @@ Vue.component('unit-row', {
       optionToAdd: -1
     }
   },
-  props: ['row','index'],
+  props: ['row','index','num-units'],
   computed:{
     optionsCostPerFigure: function() {
       return this.row.selectedOptions.reduce((total,selectedOption) => {
@@ -297,10 +314,11 @@ Vue.component('unit-row', {
   },
   template: `
     <div class="unit-row">
-      <div class="row-reposition" title="Drag to re-order">
-        <i class="fas fa-arrows-alt-v"></i>
+      <div class="row-reposition">
+        <i class="fa fa-arrow-up unit-up" title="Move up" v-if="index != 0" v-on:click="$emit('repos-up',index)"></i>
+        <i class="fa fa-arrow-down unit-down" title="Move down" v-if="numUnits -1 != index" v-on:click="$emit('repos-down',index)"></i>
       </div>
-      <div style="margin-left:48px;">
+      <div style="margin-left:32px;">
         <div class="unit-row-stats">
           <div class="unit-cell unit-cell-medium">
             <strong>{{row.displayName}}</strong> ({{row.availability}})
@@ -327,13 +345,13 @@ Vue.component('unit-row', {
           <div class="unit-cell unit-cell-medium">
             {{row.traits}}
           </div>
-          <i class="fas fa-trash-alt unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
+          <i class="fa fa-trash unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
         </div>
         <div class="unit-row-stats">
           <div class="unit-cell unit-cell-medium">
-            <i class="fas fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
+            <i class="fa fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
             {{row.size}}
-            <i class="fas fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
+            <i class="fa fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
             figures
           </div>
           <div class="unit-cell unit-cell-medium">
@@ -427,6 +445,16 @@ new Vue({
     reset: function(){
       this.selectedArmy = '';
       this.armyContents = [];
+    },
+    reposUp:function(idx){
+      let tmp = this.armyContents[idx];
+      this.armyContents.splice(idx,1);
+      this.armyContents.splice(idx-1,0,tmp);
+    },
+    reposDown:function(idx){
+      let tmp = this.armyContents[idx];
+      this.armyContents.splice(idx,1);
+      this.armyContents.splice(idx+1,0,tmp);
     }
   },
   data: {
@@ -922,12 +950,8 @@ new Vue({
       <div v-if="selectedArmy" >
         <h2>
           {{selectedArmy}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
-          <i class="fas fa-undo unit-delete" title='Reset' v-on:click="reset"></i>
+          <i class="fa fa-undo unit-delete" title='Reset' v-on:click="reset"></i>
         </h2>
-        <div>Leaders: {{leadersCount}}</div>
-        <div>Civis: {{civisCount}}</div>
-        <div>Milites{{militesCount}}</div>
-        <div>Rare: {{rareCount}}</div>
         <div class="button-bar">
           <select class="add-unit" v-if="selectedArmy"  v-model="unitToAdd" 
             v-on:change="addUnit">
@@ -937,6 +961,10 @@ new Vue({
             </option>
           </select>
         </div>
+        <div>Leaders: {{leadersCount}}</div>
+        <div>Civis: {{civisCount}}</div>
+        <div>Milites{{militesCount}}</div>
+        <div>Rare: {{rareCount}}</div>
 
         <title-row></title-row>
         <div v-for="(row, index) in armyContents" v-bind:key="row.id"> 
@@ -944,7 +972,10 @@ new Vue({
             v-bind:key="row.id"
             v-bind:row="row"
             v-bind:index="index"
+            v-bind:num-units="armyContents.length"
             v-on:remove-unit="removeUnit"
+            v-on:repos-up="reposUp"
+            v-on:repos-down="reposDown"
           ></unit-row>          
         </div>
 
