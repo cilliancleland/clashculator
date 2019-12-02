@@ -16,7 +16,6 @@
     }
     .unit-row {
       border-bottom: 1px solid #505050;
-      margin-bottom: 1em;
       padding-bottom: 0.5rem;
       position:relative;
     }
@@ -45,7 +44,12 @@
     .unit-cell-small {
       width: 3%;
     }
-
+    .row-reposition{
+      position:absolute;
+      padding-left:16px;
+      padding-top:16px;
+      color:green;
+    }
     .button-bar {
       text-align:right;
       margin: 1em;
@@ -156,7 +160,7 @@
 Vue.component('title-row', {
   template:`
       <div class="unit-row unit-row-title">
-          <div class="unit-cell unit-cell-medium">
+          <div class="unit-cell unit-cell-medium" style="margin-left:48px;">
             Troop type 
           </div>
           <div class="unit-cell unit-cell-small">
@@ -293,63 +297,68 @@ Vue.component('unit-row', {
   },
   template: `
     <div class="unit-row">
-      <div class="unit-row-stats">
-        <div class="unit-cell unit-cell-medium">
-          <strong>{{row.displayName}}</strong> ({{row.availability}})
-        </div>
-        <div class="unit-cell unit-cell-small">
-          {{row.combat}}+
-        </div>
-        <div class="unit-cell unit-cell-small">
-          {{row.ranged}}+
-        </div>
-        <div class="unit-cell unit-cell-small">
-          {{row.grit}}+
-        </div>
-        <div class="unit-cell unit-cell-small">
-          {{save}}+
-        </div>
-        <div class="unit-cell unit-cell-medium">
-          {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
-        </div>
-        <div class="unit-cell unit-cell-medium">
-          {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
-          {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
-        </div>
-        <div class="unit-cell unit-cell-medium">
-          {{row.traits}}
-        </div>
-        <i class="fas fa-trash-alt unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
+      <div class="row-reposition" title="Drag to re-order">
+        <i class="fas fa-arrows-alt-v"></i>
       </div>
-      <div class="unit-row-stats">
-        <div class="unit-cell unit-cell-medium">
-          <i class="fas fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
-          {{row.size}}
-          <i class="fas fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
-          figures
+      <div style="margin-left:48px;">
+        <div class="unit-row-stats">
+          <div class="unit-cell unit-cell-medium">
+            <strong>{{row.displayName}}</strong> ({{row.availability}})
+          </div>
+          <div class="unit-cell unit-cell-small">
+            {{row.combat}}+
+          </div>
+          <div class="unit-cell unit-cell-small">
+            {{row.ranged}}+
+          </div>
+          <div class="unit-cell unit-cell-small">
+            {{row.grit}}+
+          </div>
+          <div class="unit-cell unit-cell-small">
+            {{save}}+
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
+            {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            {{row.traits}}
+          </div>
+          <i class="fas fa-trash-alt unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
         </div>
-        <div class="unit-cell unit-cell-medium">
-          @ {{row.cost}} 
-          <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
-          <span v-if="optionsCostPerFigure < 0">({{optionsCostPerFigure}})</span>  
-          points each
+        <div class="unit-row-stats">
+          <div class="unit-cell unit-cell-medium">
+            <i class="fas fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
+            {{row.size}}
+            <i class="fas fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
+            figures
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            @ {{row.cost}} 
+            <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
+            <span v-if="optionsCostPerFigure < 0">({{optionsCostPerFigure}})</span>  
+            points each
+          </div>
+          <div class="unit-cell unit-cell-medium">
+            <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
+          </div>
         </div>
-        <div class="unit-cell unit-cell-medium">
-          <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
-        </div>
-      </div>
-      <button v-for="(value, index) in row.selectedOptions" v-on:click="removeOption(value)">
-        X {{row.options[value].name}}
-      </button>
+        <button v-for="(value, index) in row.selectedOptions" v-on:click="removeOption(value)">
+          X {{row.options[value].name}}
+        </button>
 
-      <select v-if="row.options.length && row.options.length > row.excludedOptions.length"  
-            v-model="optionToAdd" v-on:change="addOption(index)">
-        <option value="-1">Add an option</option>
-        <option v-for="(value, index) in row.options" v-if="row.excludedOptions.indexOf(index) < 0" 
-                  :value="index" v-bind:key="index">
-          {{ value.name }}
-        </option>
-      </select>
+        <select v-if="row.options.length && row.options.length > row.excludedOptions.length"  
+              v-model="optionToAdd" v-on:change="addOption(index)">
+          <option value="-1">Add an option</option>
+          <option v-for="(value, index) in row.options" v-if="row.excludedOptions.indexOf(index) < 0" 
+                    :value="index" v-bind:key="index">
+            {{ value.name }}
+          </option>
+        </select>
+      </div>
     </div>`
 });
 
@@ -943,7 +952,13 @@ new Vue({
     
     </div>
     <h3>Still to come</h3>
-  <p>
-    elephants, printer friendly, mounted bugs, display command range etc for leaders, more armies, break points
-  </p> 
+  <ul>
+    <li>change unit order</li>
+    <li>elephants</li>
+    <li>printer friendly</li>
+    <li>display command range etc for leaders</li>
+    <li>mounted options bugs</li>
+    <li>break points</li>
+    <li>more armies, final lists</li>
+  </ul> 
 </body></html>
