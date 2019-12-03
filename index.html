@@ -446,11 +446,11 @@ new Vue({
       this.armyName = obj.an;
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
-    debugger;
+
   },
   methods:{
     loadArmy: function(){
-      let savedArmies = JSON.parse(localStorage.getItem('armies'));
+      let savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
       let savedArmy = savedArmies[this.savedName];
       this.selectedArmy = savedArmy.selectedArmy;
       this.armyContents = savedArmy.armyContents;
@@ -463,15 +463,19 @@ new Vue({
       document.execCommand("copy");
     },
     saveLocally: function(){
-      let armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      let armies = JSON.parse(localStorage.getItem('armies') || '{}');
-      armyNames.push(this.armyName);
-      armies[this.armyName]={
-        selectedArmy: this.selectedArmy,
-        armyContents: this.armyContents
-      };
-      localStorage.setItem('armyNames',JSON.stringify(armyNames));
-      localStorage.setItem('armies',JSON.stringify(armies));
+      let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
+      let armies = JSON.parse(localStorage.getItem('armies')) || {};
+      if((armyNames.indexOf(this.armyName) > -1 && confirm("Click ok to overwrite!") || armyNames.indexOf(this.armyName) < 0 )){
+        if(armyNames.indexOf(this.armyName) < 0){
+          armyNames.push(this.armyName);
+        }
+        armies[this.armyName]={
+          selectedArmy: this.selectedArmy,
+          armyContents: this.armyContents
+        };
+        localStorage.setItem('armyNames',JSON.stringify(armyNames));
+        localStorage.setItem('armies',JSON.stringify(armies));
+      }
     },
     addUnit: function(){
      	let newEntry = { ...this.lists[this.selectedArmy][this.unitToAdd] };
