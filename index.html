@@ -438,7 +438,6 @@ new Vue({
   },
   created:function(){
     let objStr = decodeURI(document.location.search);
-    // objStr = '{"sa":"Roman","ac":[{"displayName":"Raw Legionnaries","availability":"civis","traits":"shield overlap, wall of spears","cost":14,"options":[{"name":"upgrade to partial armor (+2 pts/model)","cost":2,"upgradeWeapon":"","upgradeArmour":"partial armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":4,"ranged":5,"grit":5,"defaultShield":"heavy shield","defaultBody":"","id":1575324398471,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Samnite Allies","availability":"civis","traits":"shield overlap, wall of spears, guerrilla, allies","cost":19,"options":[{"name":"downgrade to no armour","cost":-2,"upgradeWeapon":"","upgradeArmour":"no armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":4,"ranged":5,"grit":4,"defaultShield":"heavy shield","defaultBody":"partial armour","id":1575324525518,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Principes","availability":"milites","traits":"shield overlap, wall of spears, impulsum, drilled","cost":25,"options":[{"name":"downgrade to partial armour","cost":-1,"upgradeWeapon":"","upgradeArmour":"partial armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"full armour","id":1575324526606,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Italian Extraordinarii","availability":"rare","traits":"shield overlap, wall of spears, guerilla tactics, allies","cost":24,"options":[{"name":"downgrade to no armour","cost":-2,"upgradeWeapon":"","upgradeArmour":"no armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"partial armour","id":1575324527862,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Equites or Alae","availability":"rare","traits":"mounted, impetus","cost":23,"options":[{"name":"upgrade to gain javelin and extra equipment javelin (+3 pts/model)","cost":3,"upgradeWeapon":"javelin and extra equipment javelin","upgradeArmour":"","upgradeShield":""}],"defaultWeapon":"thrusting spear","combat":3,"ranged":5,"grit":3,"defaultShield":"shield","defaultBody":"full armour","id":1575324529230,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Cretan Archers","availability":"rare","traits":"skirmish specialist, aimed shot, allies","cost":17,"options":[{"name":"add buckler (+1pts/model)","cost":1,"upgradeWeapon":"","upgradeArmour":"","upgradeShield":"shield"}],"defaultWeapon":"bow","combat":4,"ranged":4,"grit":3,"defaultShield":"","defaultBody":"","id":1575324530990,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Samnite Allies","availability":"civis","traits":"shield overlap, wall of spears, guerrilla, allies","cost":19,"options":[{"name":"downgrade to no armour","cost":-2,"upgradeWeapon":"","upgradeArmour":"no armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":4,"ranged":5,"grit":4,"defaultShield":"heavy shield","defaultBody":"partial armour","id":1575324532398,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Velites","availability":"civis","traits":"skirmish specialist","cost":13,"options":[],"defaultWeapon":"javelin","combat":4,"ranged":5,"grit":4,"defaultShield":"shield","defaultBody":"","id":1575324533934,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"isCharacter":true,"displayName":"Level II leader","availability":"leader","cost":65,"options":[{"name":"Upgrade to thrusting spear","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"thrusting spear"},{"name":"Upgrade to throwing spear","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"throwing spear"},{"name":"Upgrade to Cavalry Spear(must be mounted)","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"thrusting spear","requiresMounted":true},{"name":"Upgrade to Javelin","cost":2,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"javelin"},{"name":"Upgrade to Horse","cost":4,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"","unlessMounted":true},{"name":"Downgrade to no armor","cost":-3,"upgradeArmour":"no armour","upgradeShield":"","upgradeWeapon":""},{"name":"Downgrade to partial armor","cost":-1,"upgradeArmour":"partial armour","upgradeShield":"","upgradeWeapon":""},{"name":"Downgrade to no shield","cost":-1,"upgradeArmour":"","upgradeShield":"no shield","upgradeWeapon":""},{"name":"Upgrade to heavy shield","cost":1,"upgradeArmour":"","upgradeShield":"heavy shield","upgradeWeapon":"","unlessMounted":true}],"combat":3,"ranged":5,"grit":3,"commandRange":10,"commandPoints":5,"defaultShield":"heavy shield","defaultBody":"full armour","traits":"wounds(2), Iron Will","id":1575324535062,"size":1,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"isCharacter":true,"displayName":"Level III leader","availability":"leader","cost":95,"options":[{"name":"Upgrade to thrusting spear","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"thrusting spear"},{"name":"Upgrade to throwing spear","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"throwing spear"},{"name":"Upgrade to Cavalry Spear(must be mounted)","cost":1,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"thrusting spear","requiresMounted":true},{"name":"Upgrade to Javelin","cost":2,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"javelin"},{"name":"Upgrade to Horse","cost":4,"upgradeArmour":"","upgradeShield":"","upgradeWeapon":"","unlessMounted":true},{"name":"Downgrade to no armor","cost":-3,"upgradeArmour":"no armour","upgradeShield":"","upgradeWeapon":""},{"name":"Downgrade to partial armor","cost":-1,"upgradeArmour":"partial armour","upgradeShield":"","upgradeWeapon":""},{"name":"Downgrade to no shield","cost":-1,"upgradeArmour":"","upgradeShield":"no shield","upgradeWeapon":""},{"name":"Upgrade to heavy shield","cost":1,"upgradeArmour":"","upgradeShield":"heavy shield","upgradeWeapon":"","unlessMounted":true}],"combat":3,"ranged":5,"grit":3,"commandRange":8,"commandPoints":5,"defaultShield":"heavy shield","defaultBody":"full armour","traits":"attacks(2), wounds(2), Iron Will","id":1575324536318,"size":1,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"isCharacter":true,"displayName":"Soothsayer","availability":"leader","cost":15,"options":[],"combat":0,"ranged":0,"grit":0,"commandRange":0,"commandPoints":0,"defaultShield":"","defaultBody":"","traits":"luck","id":1575324538254,"size":1,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Principes","availability":"milites","traits":"shield overlap, wall of spears, impulsum, drilled","cost":25,"options":[{"name":"downgrade to partial armour","cost":-1,"upgradeWeapon":"","upgradeArmour":"partial armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"full armour","id":1575324539574,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Italian Extraordinarii","availability":"rare","traits":"shield overlap, wall of spears, guerilla tactics, allies","cost":24,"options":[{"name":"downgrade to no armour","cost":-2,"upgradeWeapon":"","upgradeArmour":"no armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"partial armour","id":1575324540990,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Italian Extraordinarii","availability":"rare","traits":"shield overlap, wall of spears, guerilla tactics, allies","cost":24,"options":[{"name":"downgrade to no armour","cost":-2,"upgradeWeapon":"","upgradeArmour":"no armour","upgradeShield":""}],"defaultWeapon":"throwing spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"partial armour","id":1575324542342,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Equites or Alae","availability":"rare","traits":"mounted, impetus","cost":23,"options":[{"name":"upgrade to gain javelin and extra equipment javelin (+3 pts/model)","cost":3,"upgradeWeapon":"javelin and extra equipment javelin","upgradeArmour":"","upgradeShield":""}],"defaultWeapon":"thrusting spear","combat":3,"ranged":5,"grit":3,"defaultShield":"shield","defaultBody":"full armour","id":1575324543862,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"Equites or Alae","availability":"rare","traits":"mounted, impetus","cost":23,"options":[{"name":"upgrade to gain javelin and extra equipment javelin (+3 pts/model)","cost":3,"upgradeWeapon":"javelin and extra equipment javelin","upgradeArmour":"","upgradeShield":""}],"defaultWeapon":"thrusting spear","combat":3,"ranged":5,"grit":3,"defaultShield":"shield","defaultBody":"full armour","id":1575324545422,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"tirarii","availability":"rare","traits":"shield overlap, wall of spears, offensive spear, fidelis, drilled","cost":24,"options":[],"defaultWeapon":"thrusting spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"full armour","id":1575324547102,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""},{"displayName":"tirarii","availability":"rare","traits":"shield overlap, wall of spears, offensive spear, fidelis, drilled","cost":24,"options":[],"defaultWeapon":"thrusting spear","combat":3,"ranged":5,"grit":3,"defaultShield":"heavy shield","defaultBody":"full armour","id":1575324548822,"size":6,"selectedOptions":[],"excludedOptions":[],"upgradedArmour":"","upgradedShield":"","upgradedWeapon":""}]}'
     if(objStr.substr(0,3) == '?a='){
       objStr = objStr.substr(3);
       let obj = JSON.parse(objStr);
@@ -446,8 +445,16 @@ new Vue({
       this.armyContents = obj.ac;
       this.armyName = obj.an;
     }
+    this.localSaves = JSON.parse(localStorage.getItem('armyNames'));
   },
   methods:{
+    loadArmy: function(){
+      let savedArmies = JSON.parse(localStorage.getItem('armies'));
+      let savedArmy = savedArmies[this.savedName];
+      this.selectedArmy = savedArmy.selectedArmy;
+      this.armyContents = savedArmy.armyContents;
+      this.savedName = '';
+    },
     copyToClip: function(){
       this.$refs.sharableInput.focus()
       this.$refs.sharableInput.select();
@@ -456,7 +463,7 @@ new Vue({
     },
     saveLocally: function(){
       let armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      let armies = JSON.parse(localStorage.getItem('armyNames') || '{}');
+      let armies = JSON.parse(localStorage.getItem('armies') || '{}');
       armyNames.push(this.armyName);
       armies[this.armyName]={
         selectedArmy: this.selectedArmy,
@@ -483,7 +490,8 @@ new Vue({
     reset: function(){
       this.selectedArmy = '';
       this.armyContents = [];
-      this.armyName = 'Unknown soldiers'
+      this.armyName = 'Unknown soldiers';
+      this.created();
     },
     reposUp:function(idx){
       let tmp = this.armyContents[idx];
@@ -966,7 +974,9 @@ new Vue({
     selectedArmy:'',
     armyContents:[],
     unitToAdd:'',
-    armyName:'Unknown soldiers'
+    armyName:'Unknown soldiers',
+    localSaves:[],
+    savedName:''
   }
 })
 
@@ -987,6 +997,16 @@ new Vue({
         {{ name }}
         </option>
       </select>
+
+      <span v-if="localSaves.length && !selectedArmy">
+        or 
+        <select id="saveSelect" v-model="savedName" class="add-unit" v-on:change="loadArmy">
+            <option value="">Load a saved army</option>
+            <option v-for="(value, index) in localSaves" :value="value" v-bind:key="value">
+              {{ value }}
+            </option>
+        </select>
+      </span>
       <div v-if="selectedArmy" >
         <h2>
           {{selectedArmy}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
@@ -995,7 +1015,7 @@ new Vue({
         </h2>
         <label >
           Army name 
-          <input v-model="armyName" />{{armyName}}
+          <input v-model="armyName" />
         </label>
         <div class="button-bar">
           <select class="add-unit" v-if="selectedArmy"  v-model="unitToAdd" 
@@ -1023,12 +1043,10 @@ new Vue({
             v-on:repos-down="reposDown"
           ></unit-row>          
         </div>
-
+        <h2>Share this list</h2>
+        <input v-model="sharable" ref="sharableInput" v-on:click="copyToClip" v/>
+        <i class="fa fa-link" v-on:click="copyToClip"></i>
       </div>
-      <h2>Share this list</h2>
-      <input v-model="sharable" ref="sharableInput" v-on:click="copyToClip" v/>
-      <i class="fa fa-link" v-on:click="copyToClip"></i>
-
     </div>
 
     <h3>Still to come</h3>
