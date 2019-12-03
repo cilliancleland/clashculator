@@ -445,7 +445,8 @@ new Vue({
       this.armyContents = obj.ac;
       this.armyName = obj.an;
     }
-    this.localSaves = JSON.parse(localStorage.getItem('armyNames'));
+    this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
+    debugger;
   },
   methods:{
     loadArmy: function(){
