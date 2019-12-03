@@ -350,6 +350,9 @@ Vue.component('unit-row', {
           </div>
           <div class="unit-cell unit-cell-medium">
             {{row.traits}}
+            <span v-if="row.commandPoints">
+                , {{row.commandPoints}} command points @ {{row.commandRange}}&quot;
+            </span>
           </div>
           <i class="fa fa-trash unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
         </div>
@@ -1060,7 +1063,6 @@ new Vue({
     <li>toastr-style notifications</li>
     <li>elephants</li>
     <li>printer friendlier</li>
-    <li>display command range etc for leaders</li>
     <li>mounted options bugs</li>
     <li>break points</li>
     <li>more armies, final lists</li>
