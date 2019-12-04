@@ -11,9 +11,19 @@
       font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       position: relative;
     }
+    input, select{
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
     #app{
       width:900px;
       margin:auto;
+    }
+    input.army-name{
+      line-height: 30px;
+      border-radius: 5px;
+      padding-left: 3px;
+      font-size: 16px;
+      width: 250px;
     }
     .toastr{
       position: fixed;
@@ -21,9 +31,14 @@
       width: 100%;
       left: 0;
       background: green;
-      /* display: none; */
+      display: none;
       opacity:0;
       transition: opacity 0.5s;
+      animation: hidetoastr 4s;
+    }
+    @keyframes hidetoastr {
+      0% {display: block}
+      100% {display: none}
     }
     .toastr.toastr-visible{
       display:block;
@@ -106,6 +121,11 @@
     }
     .army-save {
       color:green;
+      cursor:pointer;
+      padding:1em;
+    }
+    .army-delete{      
+      color:red;
       cursor:pointer;
       padding:1em;
     }
@@ -223,7 +243,28 @@ Vue.component('toastr', {
     }
   }
 
-})
+});
+Vue.component('sharable-link',{
+  props: ['sharable','showToastr'],
+  methods:{
+    copyToClip: function(){
+      this.$refs.sharableInput.focus()
+      this.$refs.sharableInput.select();
+      this.$refs.sharableInput.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      this.$emit('show-toastr', 'Sharing link copied to clipboard');
+    }
+  },
+  template:
+        `<div>
+          <h2>Share this list</h2>
+          <span class="sharable-link" title="Click to copy sharable link">
+            <input v-model="sharable" ref="sharableInput"  v-on:click="copyToClip" />
+            <i class="fa fa-link"  v-on:click="copyToClip"></i>
+          </span>
+        </div>
+        `,
+});
 Vue.component('title-row', {
   template:`
       <div class="unit-row unit-row-title">
@@ -437,6 +478,9 @@ Vue.component('unit-row', {
 new Vue({
   el: '#app',
   computed:{
+    armyChanged: function(){
+      return (JSON.stringify(this.armyContents) == JSON.stringify(this.onDiskArmy)) && (this.armyName == this.savedArmyName);      
+    },
     sharable: function(){
       let loc = document.location.protocol + '//' + document.location.host + document.location.pathname;
       return loc + '?a=' +  JSON.stringify({sa:this.selectedArmy,ac:this.armyContents,an:this.armyName});
@@ -500,16 +544,11 @@ new Vue({
       let savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
       let savedArmy = savedArmies[this.savedName];
       this.selectedArmy = savedArmy.selectedArmy;
-      this.armyContents = savedArmy.armyContents;
+      this.armyContents = JSON.parse(JSON.stringify(savedArmy.armyContents));
+      this.onDiskArmy = savedArmy.armyContents;
       this.armyName = this.savedName;
+      this.savedArmyName = this.savedName;
       this.savedName = '';
-    },
-    copyToClip: function(){
-      this.$refs.sharableInput.focus()
-      this.$refs.sharableInput.select();
-      this.$refs.sharableInput.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      this.showToastr('Sharing link copied to clipboard');
     },
     saveLocally: function(){
       let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
@@ -524,8 +563,20 @@ new Vue({
         };
         localStorage.setItem('armyNames',JSON.stringify(armyNames));
         localStorage.setItem('armies',JSON.stringify(armies));
+        this.onDiskArmy = JSON.parse(JSON.stringify(this.armyContents))
+        this.savedArmyName = this.armyName;
         this.showToastr('Your army has been saved to this device');
       }
+    },
+    deleteLocally: function(){
+      debugger;
+      let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
+      let armies = JSON.parse(localStorage.getItem('armies')) || {};
+      armyNames.splice(armyNames.indexOf(this.armyName),1);
+      delete armies[this.armyName];
+      localStorage.setItem('armyNames',JSON.stringify(armyNames));
+      localStorage.setItem('armies',JSON.stringify(armies));
+      this.reset();
     },
     showToastr: function(msg){
       clearTimeout(this.toastrTimeout);      
@@ -553,7 +604,9 @@ new Vue({
     reset: function(){
       this.selectedArmy = '';
       this.armyContents = [];
-      this.armyName = 'Unknown soldiers';      
+      this.armyName = 'Unknown soldiers';
+      this.onDiskArmy = '';
+      this.savedArmyName = '';
       this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
     },
     reposUp:function(idx){
@@ -1036,6 +1089,8 @@ new Vue({
     },
     selectedArmy:'',
     armyContents:[],
+    onDiskArmy:[],
+    savedArmyName:[],
     unitToAdd:'',
     armyName:'Unknown soldiers',
     localSaves:[],
@@ -1076,11 +1131,12 @@ new Vue({
         <h2>
           {{selectedArmy}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
           <i class="fa fa-undo unit-delete" title='Reset' v-on:click="reset"></i>          
-          <i class="fa fa-floppy-o army-save" title="Save locally" v-on:click="saveLocally"></i>
+          <i class="fa fa-floppy-o army-save" title="Save locally" v-on:click="saveLocally" v-if="!armyChanged"></i>
+          <i class="fa fa-trash army-delete" v-on:click="deleteLocally"  v-if="armyChanged" title="Delete army from device"></i>
         </h2>
         <label >
           Army name 
-          <input v-model="armyName" />
+          <input v-model="armyName" class="army-name" />
         </label>
         <div class="button-bar">
           <select class="add-unit" v-if="selectedArmy"  v-model="unitToAdd" 
@@ -1108,18 +1164,16 @@ new Vue({
             v-on:repos-down="reposDown"
           ></unit-row>          
         </div>
-        <h2>Share this list</h2>
-        <span class="sharable-link" title="Click to copy sharable link">
-          <input v-model="sharable" ref="sharableInput" v-on:click="copyToClip" v/>
-          <i class="fa fa-link" v-on:click="copyToClip"></i>
-        </span>
+        <sharable-link 
+          v-bind:sharable="sharable"
+          v-on:show-toastr="showToastr"
+        ></sharable-link>
       </div>
       <toastr v-bind:message="toastrMessage"></toastr>
     </div>
 
     <h3>Still to come</h3>
   <ul>
-    <li>delete locally saved lists</li>
     <li>elephants</li>
     <li>printer friendlier</li>
     <li>mounted options bugs</li>
