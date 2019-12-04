@@ -9,10 +9,37 @@
   <style type="text/css">
     body {
       font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      position: relative;
     }
     #app{
       width:900px;
       margin:auto;
+    }
+    .toastr{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      background: green;
+      /* display: none; */
+      opacity:0;
+      transition: opacity 0.5s;
+    }
+    .toastr.toastr-visible{
+      display:block;
+      opacity:1;
+      transition: opacity 0.3s;
+    }   
+    .toastr-message{
+      display: block;
+      width: 500px;
+      height: 100px;
+      padding-top: 20px;
+      margin: auto;
+      color: white;
+    }
+    .sharable-link{
+      cursor:pointer;
     }
     .unit-row {
       border-bottom: 1px solid #505050;
@@ -179,7 +206,24 @@
         {name:"Downgrade to no shield",cost:-1,upgradeArmour:'',upgradeShield:NO_SHIELD,upgradeWeapon:''},
         {name:"Upgrade to heavy shield",cost:1,upgradeArmour:'',upgradeShield:HEAVY_SHIELD,upgradeWeapon:'',unlessMounted:true},
       ];
+Vue.component('toastr', {
+  template:`
+    <div :class="displayClasses">
+      <div class="toastr-message">
+        {{message}}
+      </div>
+    </div>
+  `,
+  props: ['message'],
+  computed:{
+    displayClasses(){
+      return this.message == ''
+        ? 'toastr'
+        : 'toastr toastr-visible'
+    }
+  }
 
+})
 Vue.component('title-row', {
   template:`
       <div class="unit-row unit-row-title">
@@ -457,6 +501,7 @@ new Vue({
       let savedArmy = savedArmies[this.savedName];
       this.selectedArmy = savedArmy.selectedArmy;
       this.armyContents = savedArmy.armyContents;
+      this.armyName = this.savedName;
       this.savedName = '';
     },
     copyToClip: function(){
@@ -464,6 +509,7 @@ new Vue({
       this.$refs.sharableInput.select();
       this.$refs.sharableInput.setSelectionRange(0, 99999);
       document.execCommand("copy");
+      this.showToastr('Sharing link copied to clipboard');
     },
     saveLocally: function(){
       let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
@@ -478,7 +524,16 @@ new Vue({
         };
         localStorage.setItem('armyNames',JSON.stringify(armyNames));
         localStorage.setItem('armies',JSON.stringify(armies));
+        this.showToastr('Your army has been saved to this device');
       }
+    },
+    showToastr: function(msg){
+      clearTimeout(this.toastrTimeout);      
+      this.toastrMessage = msg;
+      let v = this;
+      this.toastrTimeout = setTimeout(function(){
+        v.toastrMessage = '';
+      },3000);
     },
     addUnit: function(){
      	let newEntry = { ...this.lists[this.selectedArmy][this.unitToAdd] };
@@ -498,8 +553,8 @@ new Vue({
     reset: function(){
       this.selectedArmy = '';
       this.armyContents = [];
-      this.armyName = 'Unknown soldiers';
-      this.created();
+      this.armyName = 'Unknown soldiers';      
+      this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
     },
     reposUp:function(idx){
       let tmp = this.armyContents[idx];
@@ -984,7 +1039,9 @@ new Vue({
     unitToAdd:'',
     armyName:'Unknown soldiers',
     localSaves:[],
-    savedName:''
+    savedName:'',
+    toastrMessage:'',
+    toastrTimeout:0
   }
 })
 
@@ -1052,15 +1109,17 @@ new Vue({
           ></unit-row>          
         </div>
         <h2>Share this list</h2>
-        <input v-model="sharable" ref="sharableInput" v-on:click="copyToClip" v/>
-        <i class="fa fa-link" v-on:click="copyToClip"></i>
+        <span class="sharable-link" title="Click to copy sharable link">
+          <input v-model="sharable" ref="sharableInput" v-on:click="copyToClip" v/>
+          <i class="fa fa-link" v-on:click="copyToClip"></i>
+        </span>
       </div>
+      <toastr v-bind:message="toastrMessage"></toastr>
     </div>
 
     <h3>Still to come</h3>
   <ul>
-    <li>saving and sharing lists</li>
-    <li>toastr-style notifications</li>
+    <li>delete locally saved lists</li>
     <li>elephants</li>
     <li>printer friendlier</li>
     <li>mounted options bugs</li>
