@@ -118,6 +118,7 @@
     .add-figure {
       cursor:pointer;
       color:green;
+      font-size:150%;
     }
     .army-save {
       color:green;
@@ -244,6 +245,35 @@ Vue.component('toastr', {
   }
 
 });
+Vue.component('intro-screen',{
+  props:[
+    'selectedNation',
+    'lists',
+    'localSaves',
+    'savedName',
+    'loadArmy',
+    'selectNation'
+  ],  
+  template:`
+  <div>
+    <select id="armySelect" v-bind:value="selectedNation" class="add-unit" v-on:change="$emit('select-nation', $event.target.value)">
+      <option value="">Please select an army to start</option>
+      <option v-for="(value, name) in lists" :value="name" v-bind:key="name">
+      {{ name }}
+      </option>
+    </select>
+    <span v-if="localSaves.length">
+      or 
+      <select id="saveSelect" v-bind:value="savedName" class="add-unit" v-on:change="$emit('load-army', $event.target.value)">
+          <option value="">Load a saved army</option>
+          <option v-for="(value, index) in localSaves" :value="value" v-bind:key="value">
+            {{ value }}
+          </option>
+      </select>
+    </span>
+  </div>
+  `
+})
 Vue.component('sharable-link',{
   props: ['sharable','showToastr'],
   methods:{
@@ -293,9 +323,8 @@ Vue.component('title-row', {
             Traits
           </div>
         </div>
-        `}
-);
-
+        `
+});
 Vue.component('unit-row', {
   data:function(){
     return {
@@ -360,7 +389,6 @@ Vue.component('unit-row', {
       this.row.excludedOptions = this.generatExclusions(this.row);
     },
     generatExclusions: function(row){
-
       // loop through selected options
       //   for each selected option, record if it mods armour,shield or weapon
       let excludeWeaponOptions = false;
@@ -439,14 +467,19 @@ Vue.component('unit-row', {
                 , {{row.commandPoints}} command points @ {{row.commandRange}}&quot;
             </span>
           </div>
-          <i class="fa fa-trash unit-delete" v-on:click="$emit('remove-unit',index)"  title="Remove unit"></i>
+          <button v-on:click="$emit('remove-unit',index)"  title="Remove unit">
+            <i class="fa fa-trash unit-delete"></i>
+          </button>
         </div>
         <div class="unit-row-stats">
           <div class="unit-cell unit-cell-medium">
-            <i class="fa fa-minus-square add-figure" v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'"></i>
-            {{row.size}}
-            <i class="fa fa-plus-square add-figure" v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'"></i>
-            figures
+            <button v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'">
+              <i class="fa fa-minus-square add-figure"></i>
+            </button>
+            {{row.size}} figures
+            <button v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'">
+              <i class="fa fa-plus-square add-figure"></i>
+            </button>
           </div>
           <div class="unit-cell unit-cell-medium">
             @ {{row.cost}} 
@@ -473,19 +506,57 @@ Vue.component('unit-row', {
       </div>
     </div>`
 });
-
-
-new Vue({
-  el: '#app',
+Vue.component('header-section',{
+  props:[
+    'armyContents',
+    'selectedNation',
+    'armyName',
+    'lists',
+    'unitToAdd',
+    'armyChanged',
+    'reset',
+    'saveLocally',
+    'deleteLocally',
+    'addUnit',
+    'updateArmyName'
+  ],
+  template:
+  `
+  <div>
+    <h2>
+      {{selectedNation}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
+      <button title='Reset' v-on:click="$emit('reset')">
+        <i class="fa fa-undo unit-delete"></i>
+      </button>
+      <button title="Save locally" v-on:click="$emit('save-locally')" v-if="!armyChanged">
+        <i class="fa fa-floppy-o army-save"></i>
+      </button>
+      <button title="Delete army from device" v-on:click="$emit('delete-locally')"  v-if="armyChanged">
+        <i class="fa fa-trash army-delete"></i>
+      </button>
+    </h2>
+    <label >
+      Army name 
+      <input v-bind:value="armyName"
+        v-on:keyup="$emit('update-army-name', $event.target.value)" class="army-name" />
+    </label>
+    <div class="button-bar">
+      <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
+        v-on:change="$emit('add-unit', $event.target.value)">
+        <option value="">Add a unit</option>
+        <option v-for="(value, name) in lists[selectedNation]" :value="name" v-bind:key="name">
+          {{ value.displayName }}
+        </option>
+      </select>
+    </div>
+    <div>Leaders: {{leadersCount}}</div>
+    <div>Civis: {{civisCount}}</div>
+    <div>Milites{{militesCount}}</div>
+    <div>Rare: {{rareCount}}</div>
+  </div>
+  `,
   computed:{
-    armyChanged: function(){
-      return (JSON.stringify(this.armyContents) == JSON.stringify(this.onDiskArmy)) && (this.armyName == this.savedArmyName);      
-    },
-    sharable: function(){
-      let loc = document.location.protocol + '//' + document.location.host + document.location.pathname;
-      return loc + '?a=' +  JSON.stringify({sa:this.selectedArmy,ac:this.armyContents,an:this.armyName});
-    },
-  	totalCost: function(){ 
+    totalCost: function(){ 
     	return this.armyContents.reduce((total, unit) => {
         let optionsCost = unit.selectedOptions.reduce((total,selectedOption) => {
           return total + unit.options[selectedOption].cost;
@@ -526,29 +597,44 @@ new Vue({
           :total;
       }, 0);
     }
+  }
+})
+
+new Vue({
+  el: '#app',
+  computed:{
+    armyChanged: function(){
+      return (JSON.stringify(this.armyContents) == JSON.stringify(this.onDiskArmy)) && (this.armyName == this.savedArmyName);      
+    },
+    sharable: function(){
+      let loc = document.location.protocol + '//' + document.location.host + document.location.pathname;
+      return loc + '?a=' +  JSON.stringify({sa:this.selectedNation,ac:this.armyContents,an:this.armyName});
+    }
   },
   created:function(){
     let objStr = decodeURI(document.location.search);
     if(objStr.substr(0,3) == '?a='){
       objStr = objStr.substr(3);
       let obj = JSON.parse(objStr);
-      this.selectedArmy = obj.sa;
+      this.selectedNation = obj.sa;
       this.armyContents = obj.ac;
       this.armyName = obj.an;
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
-
   },
   methods:{
-    loadArmy: function(){
+    loadArmy: function(savedName){
       let savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
-      let savedArmy = savedArmies[this.savedName];
-      this.selectedArmy = savedArmy.selectedArmy;
+      let savedArmy = savedArmies[savedName];
+      this.selectedNation = savedArmy.selectedNation;
       this.armyContents = JSON.parse(JSON.stringify(savedArmy.armyContents));
       this.onDiskArmy = savedArmy.armyContents;
-      this.armyName = this.savedName;
-      this.savedArmyName = this.savedName;
+      this.armyName = savedName;
+      this.savedArmyName = savedName;
       this.savedName = '';
+    },
+    selectNation: function(selectedNation){
+      this.selectedNation = selectedNation;
     },
     saveLocally: function(){
       let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
@@ -558,7 +644,7 @@ new Vue({
           armyNames.push(this.armyName);
         }
         armies[this.armyName]={
-          selectedArmy: this.selectedArmy,
+          selectedNation: this.selectedNation,
           armyContents: this.armyContents
         };
         localStorage.setItem('armyNames',JSON.stringify(armyNames));
@@ -569,7 +655,6 @@ new Vue({
       }
     },
     deleteLocally: function(){
-      debugger;
       let armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
       let armies = JSON.parse(localStorage.getItem('armies')) || {};
       armyNames.splice(armyNames.indexOf(this.armyName),1);
@@ -586,8 +671,8 @@ new Vue({
         v.toastrMessage = '';
       },3000);
     },
-    addUnit: function(){
-     	let newEntry = { ...this.lists[this.selectedArmy][this.unitToAdd] };
+    addUnit: function(unitToAdd){
+     	let newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry,'id',Date.now());
      	Vue.set(newEntry,'size' , newEntry.isCharacter ? 1 : 6);
       Vue.set(newEntry,'selectedOptions' , []);
@@ -596,13 +681,13 @@ new Vue({
       Vue.set(newEntry,'upgradedShield' , '');
       Vue.set(newEntry,'upgradedWeapon' , '');
      	this.armyContents.push(newEntry);
-     	this.unitToAdd = '';
+      this.unitToAdd = '';
 		},
     removeUnit: function(idx){
     	this.armyContents.splice(idx,1);
     },
     reset: function(){
-      this.selectedArmy = '';
+      this.selectedNation = '';
       this.armyContents = [];
       this.armyName = 'Unknown soldiers';
       this.onDiskArmy = '';
@@ -618,6 +703,9 @@ new Vue({
       let tmp = this.armyContents[idx];
       this.armyContents.splice(idx,1);
       this.armyContents.splice(idx+1,0,tmp);
+    },
+    updateArmyName: function(armyName){
+      this.armyName = armyName;
     }
   },
   data: {
@@ -1087,7 +1175,7 @@ new Vue({
         }
       }
     },
-    selectedArmy:'',
+    selectedNation:'',
     armyContents:[],
     onDiskArmy:[],
     savedArmyName:[],
@@ -1111,59 +1199,38 @@ new Vue({
 
     <div id="app">
       <h1>{{ title }}</h1>
-      <select id="armySelect"  v-if="!selectedArmy"  v-model="selectedArmy" class="add-unit">
-        <option value="">Please select an army to start</option>
-        <option v-for="(value, name) in lists" :value="name" v-bind:key="name">
-        {{ name }}
-        </option>
-      </select>
-
-      <span v-if="localSaves.length && !selectedArmy">
-        or 
-        <select id="saveSelect" v-model="savedName" class="add-unit" v-on:change="loadArmy">
-            <option value="">Load a saved army</option>
-            <option v-for="(value, index) in localSaves" :value="value" v-bind:key="value">
-              {{ value }}
-            </option>
-        </select>
-      </span>
-      <div v-if="selectedArmy" >
-        <h2>
-          {{selectedArmy}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
-          <i class="fa fa-undo unit-delete" title='Reset' v-on:click="reset"></i>          
-          <i class="fa fa-floppy-o army-save" title="Save locally" v-on:click="saveLocally" v-if="!armyChanged"></i>
-          <i class="fa fa-trash army-delete" v-on:click="deleteLocally"  v-if="armyChanged" title="Delete army from device"></i>
-        </h2>
-        <label >
-          Army name 
-          <input v-model="armyName" class="army-name" />
-        </label>
-        <div class="button-bar">
-          <select class="add-unit" v-if="selectedArmy"  v-model="unitToAdd" 
-            v-on:change="addUnit">
-            <option value="">Add a unit</option>
-            <option v-for="(value, name) in lists[selectedArmy]" :value="name" v-bind:key="name">
-              {{ value.displayName }}
-            </option>
-          </select>
-        </div>
-        <div>Leaders: {{leadersCount}}</div>
-        <div>Civis: {{civisCount}}</div>
-        <div>Milites{{militesCount}}</div>
-        <div>Rare: {{rareCount}}</div>
-
+      <intro-screen  v-if="!selectedNation"
+        v-bind:selected-army="selectedNation"
+        v-bind:lists="lists"
+        v-bind:local-saves="localSaves"
+        v-bind:saved-name="savedName"
+        v-on:load-army="loadArmy"
+        v-on:select-nation="selectNation"
+      ></intro-screen>
+      <div v-if="selectedNation" >
+        <header-section
+          v-bind:army-changed="armyChanged"
+          v-bind:army-contents="armyContents"
+          v-bind:selected-nation="selectedNation"
+          v-bind:army-name="armyName"
+          v-bind:lists="lists"
+          v-bind:unit-to-add="unitToAdd"
+          v-on:update-army-name="updateArmyName"
+          v-on:reset="reset"
+          v-on:save-locally="saveLocally"
+          v-on:delete-locally="deleteLocally"
+          v-on:add-unit="addUnit"
+        ></header-section>
         <title-row></title-row>
-        <div v-for="(row, index) in armyContents" v-bind:key="row.id"> 
-          <unit-row
-            v-bind:key="row.id"
-            v-bind:row="row"
-            v-bind:index="index"
-            v-bind:num-units="armyContents.length"
-            v-on:remove-unit="removeUnit"
-            v-on:repos-up="reposUp"
-            v-on:repos-down="reposDown"
-          ></unit-row>          
-        </div>
+        <unit-row v-for="(row, index) in armyContents" v-bind:key="row.id"
+          v-bind:key="row.id"
+          v-bind:row="row"
+          v-bind:index="index"
+          v-bind:num-units="armyContents.length"
+          v-on:remove-unit="removeUnit"
+          v-on:repos-up="reposUp"
+          v-on:repos-down="reposDown"
+        ></unit-row>
         <sharable-link 
           v-bind:sharable="sharable"
           v-on:show-toastr="showToastr"
