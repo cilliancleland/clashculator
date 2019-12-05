@@ -14,6 +14,9 @@
     input, select{
       font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
+    textarea:focus,select:focus, input:focus{
+      outline: none;
+    }
     #app{
       width:900px;
       margin:auto;
@@ -64,6 +67,7 @@
     }
     .unit-row-stats {
       vertical-align: top;
+      min-height: 40px;
     }
     .unit-cell {
       display: inline-block;
@@ -91,20 +95,6 @@
     }
     .row-reposition{
       position:absolute;
-      padding-top:8px;
-      color:green;
-    }
-    .unit-up{
-      top:0;
-      position:absolute;
-      padding:8px;
-      cursor:pointer;
-    }
-    .unit-down{
-      top:35px;
-      position:absolute;
-      padding:8px;
-      cursor:pointer;
     }
     .button-bar {
       float:right;
@@ -114,6 +104,52 @@
       border-radius: 10px;
       padding: 1rem;
       font-size: 16px;
+    }
+    /* buttons */
+    .adjust-figure{
+      color: green;
+      background-color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .unit-down,
+    .unit-up{
+      position:absolute;
+      line-height: 20px;
+      color: green;
+      background-color: white;
+      cursor: pointer;
+    }
+    .unit-up{
+      top:8px;
+    }
+    .unit-down{
+      top:50px;
+    }
+    .unit-delete{
+      position: absolute;
+      top: 8px;
+      color: red;
+      background-color: white;
+      cursor: pointer;
+      line-height: 26px;
+      right: 16px;
+      font-size: 20px;
+    }
+
+    /* .unit-up{
+      top:0;
+      position:absolute;
+      padding:8px;
+      cursor:pointer;
+      color:green;
+    }
+    .unit-down{
+      top:35px;
+      position:absolute;
+      padding:8px;
+      cursor:pointer;
+      color:green;
     }
     .add-figure {
       cursor:pointer;
@@ -139,12 +175,12 @@
       position:absolute;
       right:0;
       top:0;
-    }
+    } */
 
     @media only screen and (max-width: 900px) {
-    .unit-delete {
-      padding:0.5em;
-    }
+      /* .unit-delete {
+        padding:0.5em;
+      } */
       #app{
         width:100%;      
       }
@@ -434,8 +470,12 @@ Vue.component('unit-row', {
   template: `
     <div class="unit-row">
       <div class="row-reposition">
-        <i class="fa fa-arrow-up unit-up" title="Move up" v-if="index != 0" v-on:click="$emit('repos-up',index)"></i>
-        <i class="fa fa-arrow-down unit-down" title="Move down" v-if="numUnits -1 != index" v-on:click="$emit('repos-down',index)"></i>
+      <button title="Move up" v-if="index != 0" v-on:click="$emit('repos-up',index)" class="unit-up">
+        <i class="fa fa-arrow-up"></i>
+      </button>
+      <button title="Move down" v-if="numUnits -1 != index" v-on:click="$emit('repos-down',index)" class="unit-down">
+        <i class="fa fa-arrow-down"></i>
+      </button>
       </div>
       <div style="margin-left:32px;">
         <div class="unit-row-stats">
@@ -467,18 +507,18 @@ Vue.component('unit-row', {
                 , {{row.commandPoints}} command points @ {{row.commandRange}}&quot;
             </span>
           </div>
-          <button v-on:click="$emit('remove-unit',index)"  title="Remove unit">
-            <i class="fa fa-trash unit-delete"></i>
+          <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
+            <i class="fa fa-trash"></i>
           </button>
         </div>
         <div class="unit-row-stats">
           <div class="unit-cell unit-cell-medium">
-            <button v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'">
-              <i class="fa fa-minus-square add-figure"></i>
+            <button v-on:click="removeFigure" title="Remove figure" v-if="row.availability != 'leader'" class="adjust-figure">
+              <i class="fa fa-minus"></i>
             </button>
             {{row.size}} figures
-            <button v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'">
-              <i class="fa fa-plus-square add-figure"></i>
+            <button v-on:click="addFigure" title="Add figure" v-if="row.availability != 'leader'" class="adjust-figure">
+              <i class="fa fa-plus"></i>
             </button>
           </div>
           <div class="unit-cell unit-cell-medium">
@@ -526,7 +566,7 @@ Vue.component('header-section',{
     <h2>
       {{selectedNation}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
       <button title='Reset' v-on:click="$emit('reset')">
-        <i class="fa fa-undo unit-delete"></i>
+        <i class="fa fa-undo army-delete"></i>
       </button>
       <button title="Save locally" v-on:click="$emit('save-locally')" v-if="!armyChanged">
         <i class="fa fa-floppy-o army-save"></i>
