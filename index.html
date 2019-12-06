@@ -105,10 +105,16 @@
       padding: 1rem;
       font-size: 16px;
     }
+    .unit-option{
+      border-radius: 5px;
+      padding: 3px;
+    }
+
     /* buttons */
+    unit-option-remove
     .adjust-figure{
-      color: green;
-      background-color: white;
+      /* color: green; */
+      /* background-color: white; */
       font-size: 16px;
       cursor: pointer;
     }
@@ -116,8 +122,8 @@
     .unit-up{
       position:absolute;
       line-height: 20px;
-      color: green;
-      background-color: white;
+      /* color: green; */
+      /* background-color: white; */
       cursor: pointer;
     }
     .unit-up{
@@ -129,14 +135,24 @@
     .unit-delete{
       position: absolute;
       top: 8px;
-      color: red;
-      background-color: white;
+      /* color: red; */
+      /* background-color: white; */
       cursor: pointer;
       line-height: 26px;
       right: 16px;
       font-size: 20px;
     }
-
+    .top-button{
+      position: relative;
+      padding-top: 22px;
+    }
+    .top-button-icon{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -0.5em;
+      font-size: 20px;
+    }
     /* .unit-up{
       top:0;
       position:absolute;
@@ -508,7 +524,7 @@ Vue.component('unit-row', {
             </span>
           </div>
           <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-times"></i>
           </button>
         </div>
         <div class="unit-row-stats">
@@ -531,12 +547,11 @@ Vue.component('unit-row', {
             <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
           </div>
         </div>
-        <button v-for="(value, index) in row.selectedOptions" v-on:click="removeOption(value)">
-          X {{row.options[value].name}}
+        <button v-for="(value, index) in row.selectedOptions" v-on:click="removeOption(value)"  class="unit-option-remove">
+            <i class="fa fa-times"></i> {{row.options[value].name}}
         </button>
-
         <select v-if="row.options.length && row.options.length > row.excludedOptions.length"  
-              v-model="optionToAdd" v-on:change="addOption(index)">
+              v-model="optionToAdd" v-on:change="addOption(index)" class="unit-option">
           <option value="-1">Add an option</option>
           <option v-for="(value, index) in row.options" v-if="row.excludedOptions.indexOf(index) < 0" 
                     :value="index" v-bind:key="index">
@@ -565,14 +580,25 @@ Vue.component('header-section',{
   <div>
     <h2>
       {{selectedNation}} ({{totalCost}} points) ({{totalFiguresCount}} figures in {{armyContents.length}} units)
-      <button title='Reset' v-on:click="$emit('reset')">
-        <i class="fa fa-undo army-delete"></i>
+      <button 
+        title="Reset" 
+        v-on:click="$emit('reset')" 
+        class="top-button">
+        <i class="fa fa-undo top-button-icon"></i> Reset
       </button>
-      <button title="Save locally" v-on:click="$emit('save-locally')" v-if="!armyChanged">
-        <i class="fa fa-floppy-o army-save"></i>
+      <button 
+        title="Save locally" 
+        v-on:click="$emit('save-locally')" 
+        :disabled="armyChanged" 
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyChanged }">
+        <i class="fa fa-floppy-o top-button-icon"></i> Save
       </button>
-      <button title="Delete army from device" v-on:click="$emit('delete-locally')"  v-if="armyChanged">
-        <i class="fa fa-trash army-delete"></i>
+      <button 
+        title="Delete army from device" 
+        v-on:click="$emit('delete-locally')" 
+        :disabled="!armyChanged" 
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
+        <i class="fa fa-trash top-button-icon"></i> Delete
       </button>
     </h2>
     <label >
