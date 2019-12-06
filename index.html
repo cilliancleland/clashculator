@@ -113,8 +113,6 @@
     /* buttons */
     unit-option-remove
     .adjust-figure{
-      /* color: green; */
-      /* background-color: white; */
       font-size: 16px;
       cursor: pointer;
     }
@@ -122,8 +120,6 @@
     .unit-up{
       position:absolute;
       line-height: 20px;
-      /* color: green; */
-      /* background-color: white; */
       cursor: pointer;
     }
     .unit-up{
@@ -135,8 +131,6 @@
     .unit-delete{
       position: absolute;
       top: 8px;
-      /* color: red; */
-      /* background-color: white; */
       cursor: pointer;
       line-height: 26px;
       right: 16px;
@@ -153,50 +147,8 @@
       margin-left: -0.5em;
       font-size: 20px;
     }
-    /* .unit-up{
-      top:0;
-      position:absolute;
-      padding:8px;
-      cursor:pointer;
-      color:green;
-    }
-    .unit-down{
-      top:35px;
-      position:absolute;
-      padding:8px;
-      cursor:pointer;
-      color:green;
-    }
-    .add-figure {
-      cursor:pointer;
-      color:green;
-      font-size:150%;
-    }
-    .army-save {
-      color:green;
-      cursor:pointer;
-      padding:1em;
-    }
-    .army-delete{      
-      color:red;
-      cursor:pointer;
-      padding:1em;
-    }
-    .unit-delete {
-      color:red;
-      cursor:pointer;
-      padding:1em;
-    }
-    .unit-row .unit-delete {
-      position:absolute;
-      right:0;
-      top:0;
-    } */
 
     @media only screen and (max-width: 900px) {
-      /* .unit-delete {
-        padding:0.5em;
-      } */
       #app{
         width:100%;      
       }
@@ -221,9 +173,12 @@
       const HEAVY_SHIELD = 'heavy shield';
       const THROWING = 'throwing spear';
       const THRUSTING = 'thrusting spear';
-      const CAVALRY = 'thrusting spear';
+      const CAVALRY_SPEAR = 'cavalry spear';
       const LONG_SPEAR = 'long spear';
       const JAVELIN = 'javelin';
+      const CAVALRY_JAVELIN = 'cavalry spear & javelin';
+      const SLING = 'sling';
+      const BOW = 'bow';
 
       const OPT_BUCKLER = {
         name:"add buckler (+1pts/model)",
@@ -253,6 +208,13 @@
         upgradeArmour:PARTIAL,
         upgradeShield:''
         };
+      const OPT_UP_FULL_ARMOUR = {
+        name:"upgrade to full armor (+1 pts/model)",
+        cost:1,
+        upgradeWeapon:'',
+        upgradeArmour:FULL,
+        upgradeShield:''
+        };
       const OPT_UPGRADE_CAVALRY_JAVELIN = {
         name:"upgrade to gain javelin and extra equipment javelin (+3 pts/model)",
         cost:3,
@@ -271,7 +233,7 @@
       const characterOptions  =[
         {name:'Upgrade to thrusting spear',cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:THRUSTING},
         {name:'Upgrade to throwing spear',cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:THROWING},
-        {name:"Upgrade to Cavalry Spear(must be mounted)",cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:CAVALRY,requiresMounted:true},
+        {name:"Upgrade to Cavalry Spear(must be mounted)",cost:1,upgradeArmour:'',upgradeShield:'',upgradeWeapon:CAVALRY_SPEAR,requiresMounted:true},
         {name:"Upgrade to Javelin",cost:2,upgradeArmour:'',upgradeShield:'',upgradeWeapon:JAVELIN},
         {name:"Upgrade to Horse",cost:4,upgradeArmour:'',upgradeShield:'',upgradeWeapon:'',unlessMounted:true},
         {name:"Downgrade to no armor",cost:-3,upgradeArmour:NO_ARMOUR,upgradeShield:'',upgradeWeapon:''},
@@ -777,6 +739,187 @@ new Vue({
   data: {
     title: 'Clashculator',
     lists: {
+    	Samnite: {
+        lvl5:{
+          isCharacter:true,
+          displayName:'Level V leader',
+          availability:'leader',
+          cost:155,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(3), wounds(3), Iron Will'
+        },
+        lvl4:{
+          isCharacter:true,
+          displayName:'Level IV leader',
+          availability:'leader',
+          cost:125,
+          options:characterOptions, 
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(3), Iron Will'
+        },
+        lvl3:{
+          isCharacter:true,
+          displayName:'Level III leader',
+          availability:'leader',
+          cost:95,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:8,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'attacks(2), wounds(2), Iron Will'
+        },
+        lv2:{
+          isCharacter:true,
+          displayName:'Level II leader',
+          availability:'leader',
+          cost:65,
+          options:characterOptions,
+          combat:3,
+          ranged:5,
+          grit:3,
+          commandRange:10,
+          commandPoints:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:FULL,
+          traits:'wounds(2), Iron Will'
+        },
+        soothsayer:{
+          isCharacter:true,
+          displayName:'Soothsayer',
+          availability:'leader',
+          cost:15,
+          options:[],
+          combat:0,
+          ranged:0,
+          grit:0,
+          commandRange:0,
+          commandPoints:0,
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR,
+          traits:'luck'
+        },
+        javelinmen:{
+        	displayName:'Javelin men',
+          availability:'civis',
+          traits:'skirmish specialist',
+          cost:8,
+          options:[
+          	OPT_BUCKLER
+          ],
+          defaultWeapon:JAVELIN,
+          combat:5,
+          ranged:5,
+          grit:5,
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
+        },
+        hoplites:{
+        	displayName:'Campanian Allied Hoplites',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, offensive spear, allies',
+          cost:18,
+          options:[
+          	OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:THRUSTING,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+        },
+        tribesmen:{
+        	displayName:'Tribesmen',
+          availability:'civis',
+          traits:'',
+          cost:12,
+          options:[
+          ],
+          defaultWeapon:THRUSTING,
+          combat:4,
+          ranged:5,
+          grit:5,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:NO_ARMOUR
+        },
+        samnite:{
+        	displayName:'Samnite Warriors',
+          availability:'civis',
+          traits:'shield overlap, wall of spears, guerrilla',
+          cost:19,
+          options:[
+          	OPT_DOWN_NO_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:4,
+          ranged:5,
+          grit:4,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:NO_ARMOUR
+        },
+        veterans:{
+        	displayName:'Veteran Samnite Warriors',
+          availability:'milites',
+          traits:'shield overlap, wall of spears, guerrilla',
+          cost:23,
+          options:[
+            OPT_UP_FULL_ARMOUR
+          ],
+          defaultWeapon:THROWING,
+          combat:3,
+          ranged:5,
+          grit:3,
+          defaultShield:HEAVY_SHIELD,
+          defaultBody:PARTIAL
+        },
+        slingers:{
+        	displayName:'Slingers',
+          availability:'milites',
+          traits:'skirmish specialist',
+          cost:8,
+          options:[
+            OPT_BUCKLER
+          ],
+          defaultWeapon:SLING,
+          combat:5,
+          ranged:5,
+          grit:5,
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
+        },
+        cavalry:{
+        	displayName:'Samnite Cavalry',
+          availability:'rare',
+          traits:'mounted',
+          cost:8,
+          options:[
+            OPT_DOWN_PARTIAL_ARMOUR            
+          ],
+          defaultWeapon:SLING,
+          combat:5,
+          ranged:5,
+          grit:5,
+          defaultShield:SHIELD,
+          defaultBody:FULL
+        }
+      },
     	Roman: {
         lvl5:{
           isCharacter:true,
@@ -849,8 +992,8 @@ new Vue({
           grit:0,
           commandRange:0,
           commandPoints:0,
-          defaultShield:'',
-          defaultBody:'',
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR,
           traits:'luck'
         },
         leves:{
@@ -865,8 +1008,8 @@ new Vue({
           combat:5,
           ranged:5,
           grit:5,
-          defaultShield:'',
-          defaultBody:''
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
         },
         velites:{
         	displayName:'Velites',
@@ -879,8 +1022,8 @@ new Vue({
           combat:4,
           ranged:5,
           grit:4,
-          defaultShield:'shield',
-          defaultBody:''
+          defaultShield:SHIELD,
+          defaultBody:NO_ARMOUR
         },
         raw:{
         	displayName:'Raw Legionnaries',
@@ -895,7 +1038,7 @@ new Vue({
           ranged:5,
           grit:5,
           defaultShield:HEAVY_SHIELD,
-          defaultBody:''
+          defaultBody:NO_ARMOUR
           },
         samnite:{
         	displayName:'Samnite Allies',
@@ -978,7 +1121,7 @@ new Vue({
           options:[
           	OPT_UPGRADE_CAVALRY_JAVELIN
           ],
-          defaultWeapon:CAVALRY,
+          defaultWeapon:CAVALRY_SPEAR,
           combat:3,
           ranged:5,
           grit:3,
@@ -993,12 +1136,12 @@ new Vue({
           options:[
             OPT_BUCKLER
           ],
-          defaultWeapon:'bow',
+          defaultWeapon:BOW,
           combat:4,
           ranged:4,
           grit:3,
-          defaultShield:'',
-          defaultBody:''
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
           }
         },
       Carthaginian: {
@@ -1073,8 +1216,8 @@ new Vue({
           grit:0,
           commandRange:0,
           commandPoints:0,
-          defaultShield:'',
-          defaultBody:'',
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR,
           traits:'luck'
         },
         javelinmen:{
@@ -1089,8 +1232,8 @@ new Vue({
           combat:5,
           ranged:5,
           grit:5,
-          defaultShield:'',
-          defaultBody:''
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
         },
         citizen:{
         	displayName:'Punic Citizens Levy',
@@ -1105,7 +1248,7 @@ new Vue({
           ranged:5,
           grit:5,
           defaultShield:HEAVY_SHIELD,
-          defaultBody:''
+          defaultBody:NO_ARMOUR
         },
         infantry:{
         	displayName:'Punic Infantry',
@@ -1133,7 +1276,7 @@ new Vue({
           ranged:5,
           grit:4,
           defaultShield:HEAVY_SHIELD,
-          defaultBody:''
+          defaultBody:NO_ARMOUR
         },
         veteran:{
         	displayName:'Veteran Punic Infantry',
@@ -1178,7 +1321,7 @@ new Vue({
           ranged:5,
           grit:4,
           defaultShield:SHIELD,
-          defaultBody:''
+          defaultBody:NO_ARMOUR
         },
         numidian:{
         	displayName:'Numidian light cavalry',
@@ -1192,7 +1335,7 @@ new Vue({
           ranged:5,
           grit:4,
           defaultShield:SHIELD,
-          defaultBody:''
+          defaultBody:NO_ARMOUR
         },
         iberianCav:{
         	displayName:'Iberian noble cavalry',
@@ -1202,7 +1345,7 @@ new Vue({
           options:[
             OPT_DOWN_NO_ARMOUR
           ],
-          defaultWeapon:'cavalry spear & javelin',
+          defaultWeapon:CAVALRY_JAVELIN,
           combat:3,
           ranged:5,
           grit:3,
@@ -1217,12 +1360,12 @@ new Vue({
           options:[
             OPT_BUCKLER
           ],
-          defaultWeapon:'sling',
+          defaultWeapon:SLING,
           combat:4,
           ranged:4,
           grit:3,
-          defaultShield:'',
-          defaultBody:''
+          defaultShield:NO_SHIELD,
+          defaultBody:NO_ARMOUR
         },
         punicCav:{
         	displayName:'Punic cavalry',
@@ -1232,7 +1375,7 @@ new Vue({
           options:[
             OPT_DOWN_PARTIAL_ARMOUR
           ],
-          defaultWeapon:'cavalry spear & javelin',
+          defaultWeapon:CAVALRY_JAVELIN,
           combat:3,
           ranged:5,
           grit:3,
