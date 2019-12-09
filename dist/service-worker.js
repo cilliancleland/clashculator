@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.f5601cf0f45664e82e422aaa01416d2a.js"
+  "precache-manifest.26863f6a8ea09a4cbb4456b81be17278.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "clashapp"});
