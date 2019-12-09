@@ -1,0 +1,192 @@
+<template>
+    <div >
+      <h1>{{ title }}</h1>
+      <intro-screen  v-if="!selectedNation"
+        v-bind:selected-army="selectedNation"
+        v-bind:lists="lists"
+        v-bind:local-saves="localSaves"
+        v-bind:saved-name="savedName"
+        v-on:load-army="loadArmy"
+        v-on:select-nation="selectNation"
+      ></intro-screen>
+      <div v-if="selectedNation" >
+        <header-section
+          v-bind:army-changed="armyChanged"
+          v-bind:army-contents="armyContents"
+          v-bind:selected-nation="selectedNation"
+          v-bind:army-name="armyName"
+          v-bind:lists="lists"
+          v-bind:unit-to-add="unitToAdd"
+          v-on:update-army-name="updateArmyName"
+          v-on:reset="reset"
+          v-on:save-locally="saveLocally"
+          v-on:delete-locally="deleteLocally"
+          v-on:add-unit="addUnit"
+        ></header-section>
+        <title-row></title-row>
+        <unit-row v-for="(row, index) in armyContents"
+          v-bind:key="row.id"
+          v-bind:row="row"
+          v-bind:index="index"
+          v-bind:num-units="armyContents.length"
+          v-on:remove-unit="removeUnit"
+          v-on:repos-up="reposUp"
+          v-on:repos-down="reposDown"
+        ></unit-row>
+        <sharable-link
+          v-bind:sharable="sharable"
+          v-on:show-toastr="showToastr"
+        ></sharable-link>
+      </div>
+      <toastr v-bind:message="toastrMessage"></toastr>
+    </div>
+</template>
+
+<script>
+import Vue from 'vue';
+import lists from '../helpers/lists';
+import HeaderSection from './HeaderSection.vue';
+import IntroScreen from './IntroScreen.vue';
+import SharableLink from './SharableLink.vue';
+import TitleRow from './TitleRow.vue';
+import Toastr from './Toastr.vue';
+import UnitRow from './UnitRow.vue';
+
+export default {
+  name: 'Calculator',
+  components: {
+    'header-section': HeaderSection,
+    'intro-screen': IntroScreen,
+    'sharable-link': SharableLink,
+    'title-row': TitleRow,
+    toastr: Toastr,
+    'unit-row': UnitRow,
+  },
+  data: function data() {
+    return {
+      title: 'Clashculator',
+      lists,
+      selectedNation: '',
+      armyContents: [],
+      onDiskArmy: [],
+      savedArmyName: [],
+      unitToAdd: '',
+      armyName: 'Unknown soldiers',
+      localSaves: [],
+      savedName: '',
+      toastrMessage: '',
+      toastrTimeout: 0,
+    };
+  },
+  computed: {
+    armyChanged: function armyChanged() {
+      return (JSON.stringify(this.armyContents) === JSON.stringify(this.onDiskArmy))
+              && (this.armyName === this.savedArmyName);
+    },
+    sharable: function sharable() {
+      const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
+      return `${loc}?a=${JSON.stringify({ sa: this.selectedNation, ac: this.armyContents, an: this.armyName })}`;
+    },
+  },
+  created: function created() {
+    let objStr = decodeURI(document.location.search);
+    if (objStr.substr(0, 3) === '?a=') {
+      objStr = objStr.substr(3);
+      const obj = JSON.parse(objStr);
+      this.selectedNation = obj.sa;
+      this.armyContents = obj.ac;
+      this.armyName = obj.an;
+    }
+    this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
+  },
+  methods: {
+    loadArmy: function loadArmy(savedName) {
+      const savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
+      const savedArmy = savedArmies[savedName];
+      this.selectedNation = savedArmy.selectedNation;
+      this.armyContents = JSON.parse(JSON.stringify(savedArmy.armyContents));
+      this.onDiskArmy = savedArmy.armyContents;
+      this.armyName = savedName;
+      this.savedArmyName = savedName;
+      this.savedName = '';
+    },
+    selectNation: function selectNation(selectedNation) {
+      this.selectedNation = selectedNation;
+    },
+    saveLocally: function saveLocally() {
+      const armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
+      const armies = JSON.parse(localStorage.getItem('armies')) || {};
+      if (((armyNames.indexOf(this.armyName) > -1 && confirm('Click ok to overwrite!')) || armyNames.indexOf(this.armyName) < 0)) {
+        if (armyNames.indexOf(this.armyName) < 0) {
+          armyNames.push(this.armyName);
+        }
+        armies[this.armyName] = {
+          selectedNation: this.selectedNation,
+          armyContents: this.armyContents,
+        };
+        localStorage.setItem('armyNames', JSON.stringify(armyNames));
+        localStorage.setItem('armies', JSON.stringify(armies));
+        this.onDiskArmy = JSON.parse(JSON.stringify(this.armyContents));
+        this.savedArmyName = this.armyName;
+        this.showToastr('Your army has been saved to this device');
+      }
+    },
+    deleteLocally: function deleteLocally() {
+      const armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
+      const armies = JSON.parse(localStorage.getItem('armies')) || {};
+      armyNames.splice(armyNames.indexOf(this.armyName), 1);
+      delete armies[this.armyName];
+      localStorage.setItem('armyNames', JSON.stringify(armyNames));
+      localStorage.setItem('armies', JSON.stringify(armies));
+      this.reset();
+    },
+    showToastr: function showToastr(msg) {
+      clearTimeout(this.toastrTimeout);
+      this.toastrMessage = msg;
+      const v = this;
+      this.toastrTimeout = setTimeout(() => {
+        v.toastrMessage = '';
+      }, 3000);
+    },
+    addUnit: function addUnit(unitToAdd) {
+      const newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
+      Vue.set(newEntry, 'id', Date.now());
+      Vue.set(newEntry, 'size', newEntry.isCharacter ? 1 : 6);
+      Vue.set(newEntry, 'selectedOptions', []);
+      Vue.set(newEntry, 'excludedOptions', []);
+      Vue.set(newEntry, 'upgradedArmour', '');
+      Vue.set(newEntry, 'upgradedShield', '');
+      Vue.set(newEntry, 'upgradedWeapon', '');
+      this.armyContents.push(newEntry);
+      this.unitToAdd = '';
+    },
+    removeUnit: function removeUnit(idx) {
+      this.armyContents.splice(idx, 1);
+    },
+    reset: function reset() {
+      this.selectedNation = '';
+      this.armyContents = [];
+      this.armyName = 'Unknown soldiers';
+      this.onDiskArmy = '';
+      this.savedArmyName = '';
+      this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
+    },
+    reposUp: function reposUp(idx) {
+      const tmp = this.armyContents[idx];
+      this.armyContents.splice(idx, 1);
+      this.armyContents.splice(idx - 1, 0, tmp);
+    },
+    reposDown: function reposDown(idx) {
+      const tmp = this.armyContents[idx];
+      this.armyContents.splice(idx, 1);
+      this.armyContents.splice(idx + 1, 0, tmp);
+    },
+    updateArmyName: function updateArmyName(armyName) {
+      this.armyName = armyName;
+    },
+  },
+};
+</script>
+<style scoped lang="scss">
+
+</style>
