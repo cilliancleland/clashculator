@@ -38,7 +38,13 @@ export default {
       font-size: 16px;
       width: 250px;
     }
-
+    h2.army-title {
+      display: inline-block;
+    }
+    h2.army-title span {
+      display: block;
+      font-size: 80%;
+    }
     .unit-row {
       border-bottom: 1px solid #505050;
       padding-bottom: 0.5rem;
@@ -52,14 +58,14 @@ export default {
     .unit-cell {
       display: inline-block;
       box-sizing: border-box;
-      border-right:solid #a0a0a0 1px;
+      // border-right:solid #a0a0a0 1px;
       vertical-align: top;
     }
 
     .unit-cell-name {
       font-weight: bold;
     }
-    .unit-cell-large {
+    .unit-cell-wide {
       width: 20%;
     }
     .unit-cell-medium {
@@ -67,6 +73,9 @@ export default {
     }
     .unit-cell-small {
       width: 3%;
+    }
+    .unit-cell-full-on-mob {
+      width: 20%;
     }
     .row-reposition{
       position:absolute;
@@ -110,25 +119,53 @@ export default {
     .top-button{
       position: relative;
       padding-top: 22px;
+      margin-right: 2em;
     }
     .top-button-icon{
       position: absolute;
       top: 0;
       left: 50%;
-      margin-left: -0.5em;
+      margin-left: -0.4em;
       font-size: 20px;
     }
 
-    @media only screen and (max-width: 900px) {
+    .top-buttons {
+      display: inline-block;
+      text-align: center;
+      width: 500px;
+    }
+    @media only screen and (max-width: 890px) {
       #app{
         width:100%;
       }
+      .unit-cell {
+        padding-right: 1em;
+      }
+      .unit-cell-wide {
+        width: 60%;
+      }
       .unit-cell-medium{
-        width: 30%;
+        width: 33%;
       }
       .unit-cell-small{
         width: 10%;
       }
+      .unit-cell-full-on-mob{
+        width: 100%;
+      }
+      .unit-delete {
+          position: absolute;
+          top: unset;
+          cursor: pointer;
+          line-height: 20px;
+          right: unset;
+          bottom: 20px;
+          left: 0;
+          font-size: 15px;
+      }
 
+      .top-buttons {
+        width: 300px;
+      }
     }
 </style>

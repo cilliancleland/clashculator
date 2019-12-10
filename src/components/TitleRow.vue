@@ -1,6 +1,6 @@
 <template>
-  <div class="unit-row unit-row-title">
-      <div class="unit-cell unit-cell-medium" style="margin-left:32px;">
+  <div class="unit-row unit-row-title" style="padding-left:32px;">
+      <div class="unit-cell unit-cell-wide">
         Troop type
       </div>
       <div class="unit-cell unit-cell-small">

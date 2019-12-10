@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h2>
+    <h2 class="army-title">
       {{selectedNation}} ({{totalCost}} points)
-      ({{totalFiguresCount}} figures in {{armyContents.length}} units)
+      <span>
+        ({{totalFiguresCount}} figures in {{armyContents.length}} units)
+      </span>
+    </h2>
+    <div class="top-buttons">
       <button
         title="Reset"
         v-on:click="$emit('reset')"
@@ -23,25 +27,27 @@
         v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
         <i class="fa fa-trash top-button-icon"></i> Delete
       </button>
-    </h2>
-    <label >
-      Army name
-      <input v-bind:value="armyName"
-        v-on:keyup="$emit('update-army-name', $event.target.value)" class="army-name" />
-    </label>
-    <div class="button-bar">
-      <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
-        v-on:change="$emit('add-unit', $event.target.value)">
-        <option value="">Add a unit</option>
-        <option v-for="(value, name) in lists[selectedNation]" :value="name" v-bind:key="name">
-          {{ value.displayName }}
-        </option>
-      </select>
     </div>
-    <div>Leaders: {{leadersCount}}</div>
-    <div>Civis: {{civisCount}}</div>
-    <div>Milites{{militesCount}}</div>
-    <div>Rare: {{rareCount}}</div>
+    <div class="army-breakup">
+      <label >
+        Army name
+        <input v-bind:value="armyName"
+          v-on:keyup="$emit('update-army-name', $event.target.value)" class="army-name" />
+      </label>
+      <div class="button-bar">
+        <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
+          v-on:change="$emit('add-unit', $event.target.value)">
+          <option value="">Add a unit</option>
+          <option v-for="(value, name) in lists[selectedNation]" :value="name" v-bind:key="name">
+            {{ value.displayName }}
+          </option>
+        </select>
+      </div>
+      <div>Leaders: {{leadersCount}}</div>
+      <div>Civis: {{civisCount}}</div>
+      <div>Milites{{militesCount}}</div>
+      <div>Rare: {{rareCount}}</div>
+    </div>
   </div>
 </template>
 

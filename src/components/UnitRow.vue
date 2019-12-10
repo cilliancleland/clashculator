@@ -14,7 +14,7 @@
     </div>
     <div style="margin-left:32px;">
       <div class="unit-row-stats">
-        <div class="unit-cell unit-cell-medium">
+        <div class="unit-cell unit-cell-wide">
           <strong>{{row.displayName}}</strong> ({{row.availability}})
         </div>
         <div class="unit-cell unit-cell-small">
@@ -50,7 +50,7 @@
         </button>
       </div>
       <div class="unit-row-stats">
-        <div class="unit-cell unit-cell-medium">
+        <div class="unit-cell unit-cell-full-on-mob">
           <button v-on:click="removeFigure"
             title="Remove figure"
             v-if="row.availability != 'leader'"
@@ -65,13 +65,13 @@
             <i class="fa fa-plus"></i>
           </button>
         </div>
-        <div class="unit-cell unit-cell-medium">
+        <div class="unit-cell unit-cell-wide">
           @ {{row.cost}}
           <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
           <span v-if="optionsCostPerFigure < 0">({{optionsCostPerFigure}})</span>
           points each
         </div>
-        <div class="unit-cell unit-cell-medium">
+        <div class="unit-cell unit-cell-wide">
           <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
         </div>
       </div>
