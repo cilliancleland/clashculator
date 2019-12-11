@@ -1,10 +1,18 @@
 <template>
   <div>
-    <h2>Share this list</h2>
-    <span class="sharable-link" title="Click to copy sharable link">
-      <input v-model="sharable" ref="sharableInput"  v-on:click="copyToClip" />
-      <i class="fa fa-link"  v-on:click="copyToClip"></i>
-    </span>
+    <div class="sharable-link" title="Click to copy sharable link">
+      <label>Share this list
+        <div class="input-flag">
+          <i class="fa fa-link"  v-on:click="copyToClip"></i>
+        </div>
+        <input
+              readonly
+              v-model="sharable"
+              ref="sharableInput"
+              v-on:click="copyToClip"
+              class="sharable-input" />
+      </label>
+    </div>
   </div>
 </template>
 
@@ -24,7 +32,23 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-    .sharable-link{
-      cursor:pointer;
+    .sharable-link {
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .input-flag {
+      background: darkslategrey;
+      color: white;
+      border: 5px solid darkslategray;
+      border-radius: 8px 0 0 8px;
+      display: inline-block;
+      height: 25px;
+      box-sizing: border-box;
+    }
+    .sharable-input {
+      height: 25px;
+      display: inline-block;
+      box-sizing: border-box;
+      vertical-align: top;
     }
 </style>
