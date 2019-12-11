@@ -168,4 +168,17 @@ export default {
         width: 300px;
       }
     }
+
+@media print {
+  select,
+  button,
+  .sharable-link {
+    display: none;
+  }
+  button.unit-option-remove{
+    display:inline-block;
+  }
+}
+
+
 </style>

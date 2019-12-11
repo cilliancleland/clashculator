@@ -38,11 +38,11 @@ export default {
       font-weight: bold;
       min-height:1em;
       clear: both;
+      min-height: 30px;
     }
     .unit-row {
       border-bottom: 1px solid #505050;
       padding-bottom: 0.5rem;
       position:relative;
-      min-height:60px;
     }
 </style>
