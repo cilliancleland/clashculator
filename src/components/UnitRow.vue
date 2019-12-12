@@ -17,32 +17,40 @@
         <div class="unit-cell unit-cell-wide">
           <strong>{{row.displayName}}</strong> ({{row.availability}})
         </div>
-        <div class="unit-cell unit-cell-small">
+        <div class="unit-cell unit-cell-small larger-text">
           {{row.combat}}+
         </div>
-        <div class="unit-cell unit-cell-small">
+        <div class="unit-cell unit-cell-small larger-text">
           {{row.ranged}}+
         </div>
-        <div class="unit-cell unit-cell-small">
+        <div class="unit-cell unit-cell-small larger-text">
           {{row.grit}}+
         </div>
-        <div class="unit-cell unit-cell-small">
+        <div class="unit-cell unit-cell-small larger-text">
           {{calculateSave}}+
         </div>
         <div class="unit-cell unit-cell-medium">
-          {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
+          <span class="unit-trait">
+            {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
+          </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
-          {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
+          <span class="unit-trait">
+            {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
+          </span>
+          <span class="unit-trait">
+            {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
+          </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          {{row.traits}}
-          <span v-if="upgradedTraits.length">
-            , {{upgradedTraits.join(', ')}}
+          <span v-for="(trait) in row.traits" v-bind:key="trait">
+            <span class="unit-trait">{{trait}}</span>
+          </span>
+          <span v-for="(trait) in upgradedTraits" v-bind:key="trait">
+            <span class="unit-trait">{{trait}}</span>
           </span>
           <span v-if="row.commandPoints">
-            , {{row.commandPoints}} command points @ {{row.commandRange}}&quot;
+            <span class="unit-trait">{{row.commandPoints}} cmd @ {{row.commandRange}}&quot;</span>
           </span>
         </div>
         <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
@@ -72,14 +80,15 @@
           points each
         </div>
         <div class="unit-cell unit-cell-wide">
-          <strong>Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}</strong>
+          Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}
         </div>
       </div>
       <button v-for="(value, index) in row.selectedOptions"
         v-on:click="removeOption(value)"
         class="unit-option-remove"
         v-bind:key="index">
-          <i class="fa fa-times"></i> {{row.options[value].name}}
+          <i class="fa fa-times"></i>
+          {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add/g, '')}}
       </button>
       <select v-if="row.options.length && row.options.length > excludedOptions.length"
             v-model="optionToAdd" v-on:change="addOption(index)" class="unit-option">
@@ -228,5 +237,16 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
+  .unit-trait {
+    background-color: #505050;
+    border: solid #505050 1px;
+    border-radius: 10px;
+    display: inline-block;
+    color: white;
+    padding: 3px;
+    margin: 2px;
+  }
+  .larger-text {
+    font-size:125%
+  }
 </style>

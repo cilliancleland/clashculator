@@ -6,6 +6,7 @@ const SHIELD = 'shield';
 const HEAVY_SHIELD = 'heavy shield';
 const THROWING = 'throwing spear';
 const THRUSTING = 'thrusting spear';
+const SWORD = 'sword';
 const CAVALRY_SPEAR = 'cavalry spear';
 const LONG_SPEAR = 'long spear';
 const JAVELIN = 'javelin';
@@ -14,7 +15,7 @@ const SLING = 'sling';
 const BOW = 'bow';
 
 const OPT_BUCKLER = {
-  name: 'add buckler (+1pts/model)',
+  name: 'Add buckler (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
   upgradeArmour: '',
@@ -124,6 +125,7 @@ export {
   CAVALRY_JAVELIN,
   SLING,
   BOW,
+  SWORD,
   OPT_BUCKLER,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,

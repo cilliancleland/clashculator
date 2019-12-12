@@ -14,6 +14,7 @@ import {
   CAVALRY_JAVELIN,
   SLING,
   BOW,
+  SWORD,
   OPT_BUCKLER,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
@@ -33,6 +34,7 @@ const lists = {
       availability: 'leader',
       cost: 155,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -40,7 +42,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(3), wounds(3), Iron Will',
+      traits: ['attacks(3)', 'wounds(3)', 'Iron Will'],
     },
     lvl4: {
       isCharacter: true,
@@ -48,6 +50,7 @@ const lists = {
       availability: 'leader',
       cost: 125,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -55,7 +58,7 @@ const lists = {
       commandPoints: 4,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(3), Iron Will',
+      traits: ['attacks(2)', 'wounds(3)', 'Iron Will'],
     },
     lvl3: {
       isCharacter: true,
@@ -63,6 +66,7 @@ const lists = {
       availability: 'leader',
       cost: 95,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -70,7 +74,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(2), Iron Will',
+      traits: ['attacks(2)', 'wounds(2)', 'Iron Will'],
     },
     lv2: {
       isCharacter: true,
@@ -78,6 +82,7 @@ const lists = {
       availability: 'leader',
       cost: 65,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -85,7 +90,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'wounds(2), Iron Will',
+      traits: ['wounds(2)', 'Iron Will'],
     },
     soothsayer: {
       isCharacter: true,
@@ -100,12 +105,12 @@ const lists = {
       commandPoints: 0,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: 'luck',
+      traits: ['luck'],
     },
     javelinmen: {
       displayName: 'Javelin men',
       availability: 'civis',
-      traits: 'skirmish specialist',
+      traits: ['skirmish specialist'],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -120,7 +125,7 @@ const lists = {
     hoplites: {
       displayName: 'Campanian Allied Hoplites',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, offensive spear, allies',
+      traits: ['shield overlap', 'wall of spears', 'offensive spear', 'allies'],
       cost: 18,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -135,7 +140,7 @@ const lists = {
     tribesmen: {
       displayName: 'Tribesmen',
       availability: 'civis',
-      traits: '',
+      traits: [''],
       cost: 12,
       options: [
       ],
@@ -149,7 +154,7 @@ const lists = {
     samnite: {
       displayName: 'Samnite Warriors',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, guerrilla',
+      traits: ['shield overlap', 'wall of spears', 'guerrilla'],
       cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -164,7 +169,7 @@ const lists = {
     veterans: {
       displayName: 'Veteran Samnite Warriors',
       availability: 'milites',
-      traits: 'shield overlap, wall of spears, guerrilla',
+      traits: ['shield overlap', 'wall of spears', 'guerrilla'],
       cost: 23,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -179,7 +184,7 @@ const lists = {
     slingers: {
       displayName: 'Slingers',
       availability: 'milites',
-      traits: 'skirmish specialist',
+      traits: ['skirmish specialist'],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -194,7 +199,7 @@ const lists = {
     cavalry: {
       displayName: 'Samnite Cavalry',
       availability: 'rare',
-      traits: 'mounted',
+      traits: ['mounted'],
       cost: 8,
       options: [
         OPT_CHARGING,
@@ -215,6 +220,7 @@ const lists = {
       availability: 'leader',
       cost: 155,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -222,7 +228,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(3), wounds(3), Iron Will',
+      traits: ['attacks(3)', 'wounds(3)', 'Iron Will'],
     },
     lvl4: {
       isCharacter: true,
@@ -230,6 +236,7 @@ const lists = {
       availability: 'leader',
       cost: 125,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -237,7 +244,7 @@ const lists = {
       commandPoints: 4,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(3), Iron Will',
+      traits: ['attacks(2)', 'wounds(3)', 'Iron Will'],
     },
     lvl3: {
       isCharacter: true,
@@ -245,6 +252,7 @@ const lists = {
       availability: 'leader',
       cost: 95,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -252,7 +260,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(2), Iron Will',
+      traits: ['attacks(2)', 'wounds(2)', 'Iron Will'],
     },
     lv2: {
       isCharacter: true,
@@ -260,6 +268,7 @@ const lists = {
       availability: 'leader',
       cost: 65,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -267,7 +276,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'wounds(2), Iron Will',
+      traits: ['wounds(2)', 'Iron Will'],
     },
     soothsayer: {
       isCharacter: true,
@@ -282,12 +291,12 @@ const lists = {
       commandPoints: 0,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: 'luck',
+      traits: ['luck'],
     },
     leves: {
       displayName: 'Leves',
       availability: 'civis',
-      traits: 'skirmish specialist',
+      traits: ['skirmish specialist'],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -302,7 +311,7 @@ const lists = {
     velites: {
       displayName: 'Velites',
       availability: 'civis',
-      traits: 'skirmish specialist',
+      traits: ['skirmish specialist'],
       cost: 13,
       options: [
       ],
@@ -316,7 +325,7 @@ const lists = {
     raw: {
       displayName: 'Raw Legionnaries',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears',
+      traits: ['shield overlap', 'wall of spears'],
       cost: 14,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -331,7 +340,7 @@ const lists = {
     samnite: {
       displayName: 'Samnite Allies',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, guerrilla, allies',
+      traits: ['shield overlap', 'wall of spears', 'guerrilla', 'allies'],
       cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -346,7 +355,7 @@ const lists = {
     hastati: {
       displayName: 'Hastati',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, impulsum, drilled',
+      traits: ['shield overlap', 'wall of spears', 'impulsum', 'drilled'],
       cost: 20,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -361,7 +370,7 @@ const lists = {
     principes: {
       displayName: 'Principes',
       availability: 'milites',
-      traits: 'shield overlap, wall of spears, impulsum, drilled',
+      traits: ['shield overlap', 'wall of spears', 'impulsum', 'drilled'],
       cost: 25,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -376,7 +385,7 @@ const lists = {
     tirarii: {
       displayName: 'tirarii',
       availability: 'rare',
-      traits: 'shield overlap, wall of spears, offensive spear, fidelis, drilled',
+      traits: ['shield overlap', 'wall of spears', 'offensive spear', 'fidelis', 'drilled'],
       cost: 24,
       options: [],
       defaultWeapon: THRUSTING,
@@ -389,7 +398,7 @@ const lists = {
     extraordinarii: {
       displayName: 'Italian Extraordinarii',
       availability: 'rare',
-      traits: 'shield overlap, wall of spears, guerilla tactics, allies',
+      traits: ['shield overlap', 'wall of spears', 'guerilla tactics', 'allies'],
       cost: 24,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -404,7 +413,7 @@ const lists = {
     equites: {
       displayName: 'Equites or Alae',
       availability: 'rare',
-      traits: 'mounted, impetus',
+      traits: ['mounted', 'impetus'],
       cost: 23,
       options: [
         OPT_UPGRADE_CAVALRY_JAVELIN,
@@ -419,7 +428,7 @@ const lists = {
     cretan: {
       displayName: 'Cretan Archers',
       availability: 'rare',
-      traits: 'skirmish specialist, aimed shot, allies',
+      traits: ['skirmish specialist', 'aimed shot', 'allies'],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -439,6 +448,7 @@ const lists = {
       availability: 'leader',
       cost: 155,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -446,7 +456,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(3), wounds(3), Iron Will',
+      traits: ['attacks(3)', 'wounds(3)', 'Iron Will'],
     },
     lvl4: {
       isCharacter: true,
@@ -454,6 +464,7 @@ const lists = {
       availability: 'leader',
       cost: 125,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -461,7 +472,7 @@ const lists = {
       commandPoints: 4,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(3), Iron Will',
+      traits: ['attacks(2)', 'wounds(3)', 'Iron Will'],
     },
     lvl3: {
       isCharacter: true,
@@ -469,6 +480,7 @@ const lists = {
       availability: 'leader',
       cost: 95,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -476,7 +488,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'attacks(2), wounds(2), Iron Will',
+      traits: ['attacks(2)', 'wounds(2)', 'Iron Will'],
     },
     lv2: {
       isCharacter: true,
@@ -484,6 +496,7 @@ const lists = {
       availability: 'leader',
       cost: 65,
       options: characterOptions,
+      defaultWeapon: SWORD,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -491,7 +504,7 @@ const lists = {
       commandPoints: 5,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: 'wounds(2), Iron Will',
+      traits: ['wounds(2)', 'Iron Will'],
     },
     soothsayer: {
       isCharacter: true,
@@ -506,12 +519,12 @@ const lists = {
       commandPoints: 0,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: 'luck',
+      traits: ['luck'],
     },
     javelinmen: {
       displayName: 'Javelin men',
       availability: 'civis',
-      traits: 'skirmish specialist',
+      traits: ['skirmish specialist'],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -526,7 +539,7 @@ const lists = {
     citizen: {
       displayName: 'Punic Citizens Levy',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, offensive spear',
+      traits: ['shield overlap', 'wall of spears', 'offensive spear'],
       cost: 13,
       options: [
         OPT_DOWN_HEAVY_SHIELD,
@@ -541,7 +554,7 @@ const lists = {
     infantry: {
       displayName: 'Punic Infantry',
       availability: 'civis',
-      traits: 'shield overlap, wall of spears, offensive spear, drilled',
+      traits: ['shield overlap', 'wall of spears', 'offensive spear', 'drilled'],
       cost: 18,
       options: [
       ],
@@ -555,7 +568,7 @@ const lists = {
     scutarii: {
       displayName: 'Iberian Scutarii',
       availability: 'civis',
-      traits: 'wall of spears, guerrilla , impulsum, determined, allies',
+      traits: ['wall of spears', 'guerrilla ', 'impulsum', 'determined', 'allies'],
       cost: 18,
       options: [
       ],
@@ -569,7 +582,7 @@ const lists = {
     veteran: {
       displayName: 'Veteran Punic Infantry',
       availability: 'milites',
-      traits: 'shield overlap, wall of spears, offensive spear, drilled',
+      traits: ['shield overlap', 'wall of spears', 'offensive spear', 'drilled'],
       cost: 23,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -584,7 +597,7 @@ const lists = {
     romanised: {
       displayName: 'Romanized Veteran Infantry',
       availability: 'milites',
-      traits: 'shield overlap, wall of spears, drilled',
+      traits: ['shield overlap', 'wall of spears', 'drilled'],
       cost: 24,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -599,7 +612,7 @@ const lists = {
     numidian: {
       displayName: 'Numidian light cavalry',
       availability: 'milites',
-      traits: 'mounted, marauders',
+      traits: ['mounted', 'marauders'],
       cost: 17,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -614,7 +627,7 @@ const lists = {
     iberianCav: {
       displayName: 'Iberian noble cavalry',
       availability: 'milites',
-      traits: 'mounted, impetus, allies, extra equipment-(javelin)',
+      traits: ['mounted', 'impetus', 'allies', 'extra equipment-(javelin)'],
       cost: 25,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -629,7 +642,7 @@ const lists = {
     balearic: {
       displayName: 'Balearic slingers',
       availability: 'rare',
-      traits: 'skirmish specialist, sling specialist, allies',
+      traits: ['skirmish specialist', 'sling specialist', 'allies'],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -644,7 +657,7 @@ const lists = {
     punicCav: {
       displayName: 'Punic cavalry',
       availability: 'rare',
-      traits: 'mounted, impetus, extra equipment-(javelin)',
+      traits: ['mounted', 'impetus', 'extra equipment-(javelin)'],
       cost: 26,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,

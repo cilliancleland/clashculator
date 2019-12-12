@@ -18,11 +18,12 @@ export default {
 
 <style lang="scss">
     body {
-      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-family:'verdana';
       position: relative;
     }
     input, select{
-      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-family: 'verdana';
+      font-weight: bold;
     }
     textarea:focus,select:focus, input:focus{
       outline: none;
@@ -44,6 +45,7 @@ export default {
     h2.army-title span {
       display: block;
       font-size: 80%;
+      font-weight: normal;
     }
     .unit-row {
       border-bottom: 1px solid #505050;
@@ -66,13 +68,13 @@ export default {
       font-weight: bold;
     }
     .unit-cell-wide {
-      width: 20%;
+      width: 25%;
     }
     .unit-cell-medium {
       width: 19%;
     }
     .unit-cell-small {
-      width: 3%;
+      width: 4%;
     }
     .unit-cell-full-on-mob {
       width: 20%;
@@ -91,10 +93,24 @@ export default {
     }
 
     /* buttons */
-    unit-option-remove
+    .unit-option-remove,
     .adjust-figure{
       font-size: 16px;
       cursor: pointer;
+    }
+    .unit-option-remove i {
+      background: #505050;
+      color: white;
+      line-height: 20px;
+      margin-left: -5px;
+      padding: 0 3px;
+      border-radius: 3px 0 0 3px;
+    }
+    .unit-option-remove {
+      border-radius: 3px;
+      border: 1px solid #505050;
+      background: white;
+      margin-right: 5px;
     }
     .unit-down,
     .unit-up{
@@ -113,8 +129,8 @@ export default {
       top: 8px;
       cursor: pointer;
       line-height: 26px;
-      right: 16px;
-      font-size: 20px;
+      right: 0;
+      font-size: 16px;
     }
     .top-button{
       position: relative;
