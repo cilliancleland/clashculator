@@ -24,6 +24,7 @@ export default {
     input, select{
       font-family: 'verdana';
       font-weight: bold;
+      max-width: 300px;
     }
     textarea:focus,select:focus, input:focus{
       outline: none;

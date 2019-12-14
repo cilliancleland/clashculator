@@ -23,7 +23,9 @@
           v-on:delete-locally="deleteLocally"
           v-on:add-unit="addUnit"
         ></header-section>
-        <title-row></title-row>
+        <title-row
+          v-on:army-sort="armySort"
+          ></title-row>
         <unit-row v-for="(row, index) in armyContents"
           v-bind:key="row.id"
           v-bind:row="row"
@@ -157,6 +159,7 @@ export default {
       Vue.set(newEntry, 'upgradedArmour', '');
       Vue.set(newEntry, 'upgradedShield', '');
       Vue.set(newEntry, 'upgradedWeapon', '');
+      Vue.set(newEntry, 'type', unitToAdd);
       this.armyContents.push(newEntry);
       this.unitToAdd = '';
     },
@@ -180,6 +183,14 @@ export default {
       const tmp = this.armyContents[idx];
       this.armyContents.splice(idx, 1);
       this.armyContents.splice(idx + 1, 0, tmp);
+    },
+    armySort: function armySort() {
+      this.armyContents.sort((a, b) => {
+        const list = this.lists[this.selectedNation];
+        const orderA = Object.keys(list).indexOf(a.type);
+        const orderB = Object.keys(list).indexOf(b.type);
+        return orderA - orderB;
+      });
     },
     updateArmyName: function updateArmyName(armyName) {
       this.armyName = armyName;
