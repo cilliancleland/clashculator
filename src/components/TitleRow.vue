@@ -46,16 +46,15 @@ export default {
       min-height: 30px;
       padding-left:32px;
       position: relative;
-    }
-    .button-sort {
-      position: absolute;
-      left: -3px;
-      line-height: 20px;
-      cursor: pointer;
-    }
-    .unit-row {
       border-bottom: 1px solid #505050;
       padding-bottom: 0.5rem;
       position:relative;
+    }
+    .button-sort {
+      position: absolute;
+      left: 1px;
+      line-height: 20px;
+      cursor: pointer;
+      width: 28px;
     }
 </style>

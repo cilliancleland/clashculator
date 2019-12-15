@@ -19,6 +19,7 @@ export default {
 <style lang="scss">
     body {
       font-family:'verdana';
+      font-size: 14px;
       position: relative;
     }
     input, select{
