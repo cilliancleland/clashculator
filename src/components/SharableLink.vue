@@ -36,6 +36,10 @@ export default {
       cursor: pointer;
       margin-top: 20px;
     }
+    .sharable-link label {
+      cursor:pointer;
+    }
+
     .input-flag {
       background: darkslategrey;
       color: white;
@@ -50,5 +54,6 @@ export default {
       display: inline-block;
       box-sizing: border-box;
       vertical-align: top;
+      cursor: pointer;
     }
 </style>

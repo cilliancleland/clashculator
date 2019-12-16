@@ -13,6 +13,7 @@ const JAVELIN = 'javelin';
 const CAVALRY_JAVELIN = 'cavalry spear & javelin';
 const SLING = 'sling';
 const BOW = 'bow';
+const HIDE_OPTION = 'hideoption';
 
 const OPT_BUCKLER = {
   name: 'Add buckler (+1pts/model)',
@@ -25,6 +26,14 @@ const OPT_BUCKLER = {
 const OPT_DOWN_NO_ARMOUR = {
   name: 'downgrade to no armour',
   cost: -2,
+  upgradeWeapon: '',
+  upgradeArmour: NO_ARMOUR,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_DOWN_FULL_TO_NO_ARMOUR = {
+  name: 'downgrade to no armour',
+  cost: -3,
   upgradeWeapon: '',
   upgradeArmour: NO_ARMOUR,
   upgradeShield: '',
@@ -70,6 +79,14 @@ const OPT_DOWN_HEAVY_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
+const OPT_UP_HEAVY_SHIELD = {
+  name: 'upgrade to heavy shield ( +1 pts)',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: HEAVY_SHIELD,
+  upgradeTraits: [],
+};
 const OPT_CHARGING = {
   name: 'upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
   cost: 3,
@@ -78,6 +95,27 @@ const OPT_CHARGING = {
   upgradeShield: '',
   upgradeTraits: ['impetus'],
 };
+
+const elephantOptions = [
+  {
+    name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
+  },
+  {
+    name: 'change javelin to bow ( free)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: BOW, upgradeTraits: [],
+  },
+  {
+    name: 'upgrade to full armor (2ps)', cost: 1, upgradeArmour: FULL, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
+  },
+  {
+    name: 'downgrade to no armor (-4pts)', cost: -2, upgradeArmour: NO_ARMOUR, upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
+  },
+  {
+    name: 'add shields (+2pts)', cost: 1, upgradeArmour: '', upgradeShield: SHIELD, upgradeWeapon: '', upgradeTraits: [],
+  },
+  {
+    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: ['howda'],
+  },
+];
 
 
 const characterOptions = [
@@ -96,12 +134,8 @@ const characterOptions = [
   {
     name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, upgradeTraits: ['mounted'],
   },
-  {
-    name: 'Downgrade to no armor', cost: -3, upgradeArmour: NO_ARMOUR, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
-  },
-  {
-    name: 'Downgrade to partial armor', cost: -1, upgradeArmour: PARTIAL, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
-  },
+  OPT_DOWN_FULL_TO_NO_ARMOUR,
+  OPT_DOWN_PARTIAL_ARMOUR,
   {
     name: 'Downgrade to no shield', cost: -1, upgradeArmour: '', upgradeShield: NO_SHIELD, upgradeWeapon: '', upgradeTraits: [],
   },
@@ -111,6 +145,7 @@ const characterOptions = [
 ];
 
 export {
+  HIDE_OPTION,
   NO_SHIELD,
   NO_ARMOUR,
   FULL,
@@ -131,8 +166,11 @@ export {
   OPT_DOWN_PARTIAL_ARMOUR,
   OPT_UP_PARTIAL_ARMOUR,
   OPT_UP_FULL_ARMOUR,
+  OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_UPGRADE_CAVALRY_JAVELIN,
   OPT_DOWN_HEAVY_SHIELD,
+  OPT_UP_HEAVY_SHIELD,
   OPT_CHARGING,
   characterOptions,
+  elephantOptions,
 };

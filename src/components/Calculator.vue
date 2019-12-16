@@ -153,7 +153,7 @@ export default {
     addUnit: function addUnit(unitToAdd) {
       const newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry, 'id', Date.now());
-      Vue.set(newEntry, 'size', newEntry.isCharacter ? 1 : 6);
+      Vue.set(newEntry, 'size', newEntry.fixedFigures ? newEntry.fixedFigures : 6);
       Vue.set(newEntry, 'selectedOptions', []);
       Vue.set(newEntry, 'excludedOptions', []);
       Vue.set(newEntry, 'upgradedArmour', '');

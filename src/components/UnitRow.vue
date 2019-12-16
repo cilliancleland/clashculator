@@ -30,15 +30,15 @@
           {{calculateSave}}+
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait">
+          <span class="unit-trait"  v-if="row.defaultShield != 'HIDE_OPTION'">
             {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait">
+          <span class="unit-trait" v-if="row.defaultShield != 'HIDE_OPTION'">
             {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
           </span>
-          <span class="unit-trait">
+          <span class="unit-trait" v-if="row.defaultShield != 'HIDE_OPTION'">
             {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
           </span>
         </div>
@@ -61,14 +61,14 @@
         <div class="unit-cell unit-cell-full-on-mob">
           <button v-on:click="removeFigure"
             title="Remove figure"
-            v-if="row.availability != 'leader'"
+            v-if="!row.fixedFigures"
             class="adjust-figure">
             <i class="fa fa-minus"></i>
           </button>
           {{row.size}} figures
           <button v-on:click="addFigure"
             title="Add figure"
-            v-if="row.availability != 'leader'"
+            v-if="!row.fixedFigures"
             class="adjust-figure">
             <i class="fa fa-plus"></i>
           </button>
@@ -121,14 +121,6 @@ export default {
   },
   props: ['row', 'index', 'num-units'],
   computed: {
-    availableOptions: function availableOptions() {
-      return this.row.options.reduce((arr, val, index) => {
-        if (this.excludedOptions.indexOf(index) < 0) {
-          arr.push(index);
-        }
-        return arr;
-      }, []);
-    },
     upgradedTraits: function upgradedTraits() {
       const traits = [];
       this.row.selectedOptions.forEach((key) => {
@@ -173,12 +165,23 @@ export default {
       });
       return exclusions;
     },
+    availableOptions: function availableOptions() {
+      return this.row.options.reduce((arr, val, index) => {
+        if (this.excludedOptions.indexOf(index) < 0) {
+          arr.push(index);
+        }
+        return arr;
+      }, []);
+    },
     optionsCostPerFigure: function optionsCostPerFigure() {
       return this.row.selectedOptions.reduce((total, selectedOption) => {
         return (total + this.row.options[selectedOption].cost);
       }, 0);
     },
     calculateSave: function calculateSave() {
+      if (this.row.fixedSave) {
+        return this.row.fixedSave;
+      }
       let save = 7;
       const mods = {};
       mods[NO_ARMOUR] = 0;
