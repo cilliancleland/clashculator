@@ -70,7 +70,7 @@ export default {
       lists,
       selectedNation: '',
       armyContents: [],
-      onDiskArmy: [],
+      onDiskArmy: '',
       savedArmyName: [],
       unitToAdd: '',
       armyName: 'Unknown soldiers',
@@ -81,23 +81,36 @@ export default {
     };
   },
   computed: {
+    armyDetails: function armyDetails() {
+      return this.armyContents.reduce((acc, unit) => {
+        acc.push({
+          size: unit.size,
+          selectedOptions: unit.selectedOptions,
+          type: unit.type,
+        });
+        return acc;
+      }, []);
+    },
     armyChanged: function armyChanged() {
-      return (JSON.stringify(this.armyContents) === JSON.stringify(this.onDiskArmy))
+      return (JSON.stringify(this.armyDetails) === JSON.stringify(this.onDiskArmy))
               && (this.armyName === this.savedArmyName);
     },
     sharable: function sharable() {
       const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-      return `${loc}?a=${JSON.stringify({ sa: this.selectedNation, ac: this.armyContents, an: this.armyName })}`;
+      const army = {
+        an: this.armyName,
+        sa: this.selectedNation,
+        ac: this.armyDetails,
+      };
+      return `${loc}?a=${JSON.stringify(army)}`;
     },
   },
   created: function created() {
     let objStr = decodeURI(document.location.search);
     if (objStr.substr(0, 3) === '?a=') {
       objStr = objStr.substr(3);
-      const obj = JSON.parse(objStr);
-      this.selectedNation = obj.sa;
-      this.armyContents = obj.ac;
-      this.armyName = obj.an;
+      const savedArmy = JSON.parse(objStr);
+      this.hydrateArmy(savedArmy);
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
   },
@@ -105,12 +118,19 @@ export default {
     loadArmy: function loadArmy(savedName) {
       const savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
       const savedArmy = savedArmies[savedName];
-      this.selectedNation = savedArmy.selectedNation;
-      this.armyContents = JSON.parse(JSON.stringify(savedArmy.armyContents));
-      this.onDiskArmy = savedArmy.armyContents;
-      this.armyName = savedName;
+      this.hydrateArmy(savedArmy);
       this.savedArmyName = savedName;
       this.savedName = '';
+      this.onDiskArmy = JSON.parse(JSON.stringify(this.armyDetails));
+    },
+    hydrateArmy: function hydrateArmy(savedObj) {
+      this.selectedNation = savedObj.sa;
+      this.armyName = savedObj.an;
+      savedObj.ac.forEach((unit) => {
+        const newUnit = this.addUnit(unit.type);
+        newUnit.size = unit.size;
+        newUnit.selectedOptions = unit.selectedOptions;
+      });
     },
     selectNation: function selectNation(selectedNation) {
       this.selectedNation = selectedNation;
@@ -123,12 +143,13 @@ export default {
           armyNames.push(this.armyName);
         }
         armies[this.armyName] = {
-          selectedNation: this.selectedNation,
-          armyContents: this.armyContents,
+          an: this.armyName,
+          sa: this.selectedNation,
+          ac: this.armyDetails,
         };
         localStorage.setItem('armyNames', JSON.stringify(armyNames));
         localStorage.setItem('armies', JSON.stringify(armies));
-        this.onDiskArmy = JSON.parse(JSON.stringify(this.armyContents));
+        this.onDiskArmy = JSON.parse(JSON.stringify(this.armyDetails));
         this.savedArmyName = this.armyName;
         this.showToastr('Your army has been saved to this device');
       }
@@ -152,7 +173,7 @@ export default {
     },
     addUnit: function addUnit(unitToAdd) {
       const newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
-      Vue.set(newEntry, 'id', Date.now());
+      Vue.set(newEntry, 'id', Math.random());
       Vue.set(newEntry, 'size', newEntry.fixedFigures ? newEntry.fixedFigures : 6);
       Vue.set(newEntry, 'selectedOptions', []);
       Vue.set(newEntry, 'excludedOptions', []);
@@ -162,6 +183,7 @@ export default {
       Vue.set(newEntry, 'type', unitToAdd);
       this.armyContents.push(newEntry);
       this.unitToAdd = '';
+      return newEntry;
     },
     removeUnit: function removeUnit(idx) {
       this.armyContents.splice(idx, 1);
