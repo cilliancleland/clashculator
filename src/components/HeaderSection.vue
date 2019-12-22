@@ -78,34 +78,34 @@ export default {
     },
     totalFiguresCount: function totalFiguresCount() {
       return this.armyContents.reduce((total, unit) => {
-        return total + (unit.size);
+        return total + (unit.unitSize());
       }, 0);
     },
     leadersCount: function leadersCount() {
       return this.armyContents.reduce((total, unit) => {
         return unit.availability === 'leader'
-          ? total + (unit.size)
+          ? total + (unit.unitSize())
           : total;
       }, 0);
     },
     civisCount: function civisCount() {
       return this.armyContents.reduce((total, unit) => {
         return unit.availability === 'civis'
-          ? total + (unit.size)
+          ? total + (unit.unitSize())
           : total;
       }, 0);
     },
     militesCount: function militesCount() {
       return this.armyContents.reduce((total, unit) => {
         return unit.availability === 'milites'
-          ? total + (unit.size)
+          ? total + (unit.unitSize())
           : total;
       }, 0);
     },
     rareCount: function rareCount() {
       return this.armyContents.reduce((total, unit) => {
         return unit.availability === 'rare'
-          ? total + (unit.size)
+          ? total + (unit.unitSize())
           : total;
       }, 0);
     },

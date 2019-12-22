@@ -172,15 +172,21 @@ export default {
       }, 3000);
     },
     addUnit: function addUnit(unitToAdd) {
+      function unitSize() {
+        return this.traits.indexOf('feral') > -1
+          ? this.size + 1
+          : this.size;
+      }
       const newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry, 'id', Math.random());
-      Vue.set(newEntry, 'size', newEntry.fixedFigures ? newEntry.fixedFigures : 6);
+      Vue.set(newEntry, 'size', newEntry.fixedFigures !== undefined ? newEntry.fixedFigures : 6);
       Vue.set(newEntry, 'selectedOptions', []);
       Vue.set(newEntry, 'excludedOptions', []);
       Vue.set(newEntry, 'upgradedArmour', '');
       Vue.set(newEntry, 'upgradedShield', '');
       Vue.set(newEntry, 'upgradedWeapon', '');
       Vue.set(newEntry, 'type', unitToAdd);
+      newEntry.unitSize = unitSize.bind(newEntry);
       this.armyContents.push(newEntry);
       this.unitToAdd = '';
       return newEntry;

@@ -15,6 +15,8 @@ const CAVALRY_JAVELIN = 'cavalry spear & javelin';
 const SLING = 'sling';
 const BOW = 'bow';
 const AX = 'double handed axe';
+const PIKE = 'pike';
+const XYSTON = 'xtston';
 const HIDE_OPTION = 'hideoption';
 
 const OPT_BUCKLER = {
@@ -96,6 +98,14 @@ const OPT_UP_HEAVY_SHIELD = {
   upgradeArmour: '',
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [],
+};
+const OPT_DOWN_BUCKLER = {
+  name: 'Downgrade to buckler ( -1 pts)',
+  cost: -1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: BUCKLER,
+  upgradeTraits: ['buckler'],
 };
 const OPT_CHARGING = {
   name: 'Upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
@@ -187,6 +197,8 @@ export {
   BOW,
   SWORD,
   AX,
+  PIKE,
+  XYSTON,
   JAVELIN_THRUSTING,
   OPT_BUCKLER,
   OPT_SHIELD,
@@ -197,6 +209,7 @@ export {
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_UPGRADE_CAVALRY_JAVELIN,
   OPT_DOWN_HEAVY_SHIELD,
+  OPT_DOWN_BUCKLER,
   OPT_UP_HEAVY_SHIELD,
   OPT_CHARGING,
   OPT_UP_CHARIOT,

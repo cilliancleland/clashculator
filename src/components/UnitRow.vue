@@ -61,14 +61,17 @@
         <div class="unit-cell unit-cell-full-on-mob">
           <button v-on:click="removeFigure"
             title="Remove figure"
-            v-if="!row.fixedFigures"
+            v-if="row.fixedFigures === undefined"
             class="adjust-figure">
             <i class="fa fa-minus"></i>
           </button>
           {{row.size}} figures
+          <span v-if="row.traits.indexOf('feral') > -1">
+            (+1)
+          </span>
           <button v-on:click="addFigure"
             title="Add figure"
-            v-if="!row.fixedFigures"
+            v-if="row.fixedFigures === undefined"
             class="adjust-figure">
             <i class="fa fa-plus"></i>
           </button>
