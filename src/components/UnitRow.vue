@@ -27,7 +27,7 @@
           {{row.grit}}+
         </div>
         <div class="unit-cell unit-cell-small larger-text">
-          {{calculateSave}}+
+          {{calculateSave}}
         </div>
         <div class="unit-cell unit-cell-medium">
           <span class="unit-trait"  v-if="row.defaultShield != 'HIDE_OPTION'">
@@ -50,7 +50,7 @@
             <span class="unit-trait">{{trait}}</span>
           </span>
           <span v-if="row.commandPoints">
-            <span class="unit-trait">{{row.commandPoints}} cmd @ {{row.commandRange}}&quot;</span>
+            <span class="unit-trait">{{row.commandPoints}} CP @ {{row.commandRange}}&quot;</span>
           </span>
         </div>
         <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
@@ -88,7 +88,7 @@
         class="unit-option-remove"
         v-bind:key="index">
           <i class="fa fa-times"></i>
-          {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add/g, '')}}
+          {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add|Attach a/g, '')}}
       </button>
       <select v-if="row.options.length && row.options.length > excludedOptions.length"
             v-model="optionToAdd" v-on:change="addOption(index)" class="unit-option">
@@ -108,8 +108,10 @@ import {
   NO_SHIELD,
   FULL,
   PARTIAL,
+  BUCKLER,
   SHIELD,
   HEAVY_SHIELD,
+  OPT_BUCKLER,
 } from '../helpers/constants';
 
 export default {
@@ -146,7 +148,8 @@ export default {
         if (this.row.options[key].upgradeShield) {
           excludeShieldOptions = true;
         }
-        if (this.row.options[key].name === 'Upgrade to Horse') {
+        if (this.row.options[key].name === 'Upgrade to Horse'
+          || this.row.options[key].name === 'Upgrade to Chariot') {
           isMounted = true;
         }
       });
@@ -159,6 +162,7 @@ export default {
           || (excludeArmourOptions && option.upgradeArmour)
           || (isMounted && option.unlessMounted)
           || (!isMounted && option.requiresMounted)
+          || (this.row.selectedOptions.indexOf(idx) > -1)
         ) {
           exclusions.push(idx);
         }
@@ -182,10 +186,12 @@ export default {
       if (this.row.fixedSave) {
         return this.row.fixedSave;
       }
+      let symbol = '+';
       let save = 7;
       const mods = {};
       mods[NO_ARMOUR] = 0;
       mods[NO_SHIELD] = 0;
+      mods[BUCKLER] = 0;
       mods[FULL] = 2;
       mods[PARTIAL] = 1;
       mods[SHIELD] = 1;
@@ -198,7 +204,10 @@ export default {
       if (shield) {
         save -= mods[shield];
       }
-      return save;
+      if (shield === OPT_BUCKLER) {
+        symbol = '*';
+      }
+      return save + symbol;
     },
   },
   methods: {
