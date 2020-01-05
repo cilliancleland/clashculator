@@ -102,13 +102,13 @@ export default {
         sa: this.selectedNation,
         ac: this.armyDetails,
       };
-      return `${loc}?a=${JSON.stringify(army)}`;
+      return `${loc}?a=${btoa(JSON.stringify(army))}`;
     },
   },
   created: function created() {
     let objStr = decodeURI(document.location.search);
     if (objStr.substr(0, 3) === '?a=') {
-      objStr = objStr.substr(3);
+      objStr = atob(objStr.substr(3));
       const savedArmy = JSON.parse(objStr);
       this.hydrateArmy(savedArmy);
     }

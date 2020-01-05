@@ -3,7 +3,7 @@
     <h2 class="army-title">
       {{selectedNation}} ({{totalCost}} points)
       <span>
-        ({{totalFiguresCount}} figures in {{armyContents.length}} units)
+        {{warbandType}} warband of {{totalFiguresCount}} figures in {{armyContents.length}} units
       </span>
     </h2>
     <div class="top-buttons">
@@ -45,8 +45,9 @@
       </div>
       <div>Leaders: {{leadersCount}}</div>
       <div>Civis: {{civisCount}}</div>
-      <div>Milites{{militesCount}}</div>
+      <div>Milites: {{militesCount}}</div>
       <div>Rare: {{rareCount}}</div>
+      <div>Break point every {{breakPointThreshold}} figures</div>
     </div>
   </div>
 </template>
@@ -80,6 +81,21 @@ export default {
       return this.armyContents.reduce((total, unit) => {
         return total + (unit.unitSize());
       }, 0);
+    },
+    nonCharacterFiguresCount: function nonCharacterFiguresCount() {
+      return this.armyContents.reduce((total, unit) => {
+        return total + (unit.isCharacter ? 0 : unit.unitSize());
+      }, 0);
+    },
+    breakPointThreshold: function breakPointThreshold() {
+      return Math.floor(this.nonCharacterFiguresCount / 6);
+    },
+    warbandType: function warbandType() {
+      return this.isMuster ? 'Muster' : 'Ad Hoc';
+    },
+    isMuster: function isMuster() {
+      return (this.civisCount >= (this.militesCount + this.rareCount))
+        && (this.militesCount >= this.rareCount);
     },
     leadersCount: function leadersCount() {
       return this.armyContents.reduce((total, unit) => {
