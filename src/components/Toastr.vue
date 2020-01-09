@@ -28,22 +28,21 @@ export default {
       width: 100%;
       left: 0;
       background: green;
-      display: none;
       opacity:0;
       transition: opacity 0.5s;
       animation: hidetoastr 4s;
     }
     @keyframes hidetoastr {
-      0% {display: block}
-      100% {display: none}
+      0% {height: 50px}
+      99% {height: 50px}
+      100% {height: 0}
     }
     .toastr.toastr-visible{
-      display:block;
       opacity:1;
       transition: opacity 0.3s;
+      height: 100px;
     }
     .toastr-message{
-      display: block;
       width: 500px;
       height: 100px;
       padding-top: 20px;

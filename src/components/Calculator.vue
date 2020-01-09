@@ -102,13 +102,15 @@ export default {
         sa: this.selectedNation,
         ac: this.armyDetails,
       };
-      return `${loc}?a=${btoa(JSON.stringify(army))}`;
+      return `${loc}?a=${encodeURIComponent(btoa(JSON.stringify(army)))}`;
     },
   },
   created: function created() {
     let objStr = decodeURI(document.location.search);
     if (objStr.substr(0, 3) === '?a=') {
-      objStr = atob(objStr.substr(3));
+      // just the first arg, FB or something might have added other params
+      objStr = objStr.split('&')[0].substr(3);
+      objStr = atob(decodeURIComponent(objStr));
       const savedArmy = JSON.parse(objStr);
       this.hydrateArmy(savedArmy);
     }
@@ -138,7 +140,9 @@ export default {
     saveLocally: function saveLocally() {
       const armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
       const armies = JSON.parse(localStorage.getItem('armies')) || {};
-      if (((armyNames.indexOf(this.armyName) > -1 && confirm('Click ok to overwrite!')) || armyNames.indexOf(this.armyName) < 0)) {
+      const confirmMessage = 'An army by this name already exists locally.\n\nClick ok to overwrite!';
+      // eslint-disable-next-line
+      if (((armyNames.indexOf(this.armyName) > -1 && confirm(confirmMessage)) || armyNames.indexOf(this.armyName) < 0)) {
         if (armyNames.indexOf(this.armyName) < 0) {
           armyNames.push(this.armyName);
         }
