@@ -1,3 +1,14 @@
+
+import {
+  TRAIT_BUCKLER,
+  TRAIT_CHARIOT,
+  TRAIT_HOWDA,
+  TRAIT_MUSICIAN,
+  TRAIT_STANDARD,
+  TRAIT_MOUNTED,
+  TRAIT_IMPETUS,
+} from './traits';
+
 const NO_SHIELD = 'no shield';
 const NO_ARMOUR = 'no armour';
 const FULL = 'full armour';
@@ -25,7 +36,7 @@ const OPT_BUCKLER = {
   upgradeWeapon: '',
   upgradeArmour: '',
   upgradeShield: 'buckler',
-  upgradeTraits: ['Buckler'],
+  upgradeTraits: [TRAIT_BUCKLER],
 };
 const OPT_SHIELD = {
   name: 'Add shield (+1pts/model)',
@@ -105,7 +116,7 @@ const OPT_DOWN_BUCKLER = {
   upgradeWeapon: '',
   upgradeArmour: '',
   upgradeShield: BUCKLER,
-  upgradeTraits: ['buckler'],
+  upgradeTraits: [TRAIT_BUCKLER],
 };
 const OPT_CHARGING = {
   name: 'Upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
@@ -113,7 +124,7 @@ const OPT_CHARGING = {
   upgradeWeapon: CAVALRY_SPEAR,
   upgradeArmour: '',
   upgradeShield: '',
-  upgradeTraits: ['impetus'],
+  upgradeTraits: [TRAIT_IMPETUS],
 };
 const OPT_UP_CHARIOT = {
   name: 'Upgrade to Chariot',
@@ -122,7 +133,7 @@ const OPT_UP_CHARIOT = {
   upgradeShield: '',
   upgradeWeapon: '',
   unlessMounted: true,
-  upgradeTraits: ['chariot'],
+  upgradeTraits: [TRAIT_CHARIOT],
 };
 
 const elephantOptions = [
@@ -142,7 +153,7 @@ const elephantOptions = [
     name: 'add shields (+2pts)', cost: 1, upgradeArmour: '', upgradeShield: SHIELD, upgradeWeapon: '', upgradeTraits: [],
   },
   {
-    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: ['howda'],
+    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [TRAIT_HOWDA],
   },
 ];
 
@@ -161,7 +172,7 @@ const characterOptions = [
     name: 'Upgrade to Javelin', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: JAVELIN, upgradeTraits: [],
   },
   {
-    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, upgradeTraits: ['mounted'],
+    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, upgradeTraits: [TRAIT_MOUNTED],
   },
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
@@ -172,10 +183,10 @@ const characterOptions = [
     name: 'Upgrade to heavy shield', cost: 1, upgradeArmour: '', upgradeShield: HEAVY_SHIELD, upgradeWeapon: '', unlessMounted: true, upgradeTraits: [],
   },
   {
-    name: 'Attach a musician', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: ['musician'],
+    name: 'Attach a musician', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [TRAIT_MUSICIAN],
   },
   {
-    name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: ['standard-bearer'],
+    name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [TRAIT_STANDARD],
   },
 ];
 

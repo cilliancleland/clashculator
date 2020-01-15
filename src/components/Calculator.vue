@@ -39,6 +39,13 @@
           v-bind:sharable="sharable"
           v-on:show-toastr="showToastr"
         ></sharable-link>
+        <h2>Trait descriptions</h2>
+        <table>
+          <traits-list v-for="(trait) in mostTraits"
+            v-bind:key="trait"
+            v-bind:trait="trait"
+          ></traits-list>
+        </table>
       </div>
       <toastr v-bind:message="toastrMessage"></toastr>
     </div>
@@ -53,6 +60,7 @@ import SharableLink from './SharableLink.vue';
 import TitleRow from './TitleRow.vue';
 import Toastr from './Toastr.vue';
 import UnitRow from './UnitRow.vue';
+import TraitsList from './TraitsList.vue';
 
 export default {
   name: 'Calculator',
@@ -63,6 +71,7 @@ export default {
     'title-row': TitleRow,
     toastr: Toastr,
     'unit-row': UnitRow,
+    'traits-list': TraitsList,
   },
   data: function data() {
     return {
@@ -81,6 +90,21 @@ export default {
     };
   },
   computed: {
+    mostTraits: function mostTraits() {
+      const allTraits = this.armyContents.reduce((acc, unit) => {
+        const upgradedTraits = [];
+        unit.selectedOptions.forEach((key) => {
+          upgradedTraits.push(...unit.options[key].upgradeTraits);
+        });
+        return [...new Set(acc.concat(unit.traits, upgradedTraits))];
+      }, []).sort();
+      return allTraits.reduce((acc, val) => {
+        if (val.substring(0, 5) !== 'wound' && val.substring(0, 6) !== 'attack') {
+          acc.push(val);
+        }
+        return acc;
+      }, []);
+    },
     armyDetails: function armyDetails() {
       return this.armyContents.reduce((acc, unit) => {
         acc.push({

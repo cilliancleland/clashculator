@@ -44,10 +44,10 @@
         </div>
         <div class="unit-cell unit-cell-medium">
           <span v-for="(trait) in row.traits" v-bind:key="trait">
-            <span class="unit-trait">{{trait}}</span>
+            <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
           </span>
           <span v-for="(trait) in upgradedTraits" v-bind:key="trait">
-            <span class="unit-trait">{{trait}}</span>
+            <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
           </span>
           <span v-if="row.commandPoints">
             <span class="unit-trait">{{row.commandPoints}} CP @ {{row.commandRange}}&quot;</span>
@@ -116,12 +116,14 @@ import {
   HEAVY_SHIELD,
   OPT_BUCKLER,
 } from '../helpers/constants';
+import { TRAIT_DESCRIPTIONS } from '../helpers/traits';
 
 export default {
   name: 'UnitRow',
   data: () => {
     return {
       optionToAdd: -1,
+      TRAIT_DESCRIPTIONS,
     };
   },
   props: ['row', 'index', 'num-units'],
@@ -214,6 +216,10 @@ export default {
     },
   },
   methods: {
+    traitTitle: function traitTitle(trait) {
+      const desc = this.TRAIT_DESCRIPTIONS[trait] || ['', ''];
+      return `${desc[0]}\n${desc[1]}`;
+    },
     removeOption: function removeOption(optionIndex) {
       const option = this.row.options[optionIndex];
       if (option.upgradeWeapon) {

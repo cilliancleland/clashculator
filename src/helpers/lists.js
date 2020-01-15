@@ -36,37 +36,37 @@ import {
   elephantOptions,
 } from './constants';
 
+import {
+  TRAIT_IRON_WILL,
+  TRAIT_SHIELD_OVERLAP,
+  TRAIT_SKIRMISH_SPECIALIST,
+  TRAIT_WALL_OF_SPEARS,
+  TRAIT_OFFENSIVE_SPEAR,
+  TRAIT_DRILLED,
+  TRAIT_GUERRILLA,
+  TRAIT_FUROR,
+  TRAIT_ALLIES,
+  TRAIT_MOUNTED,
+  TRAIT_IMPETUS,
+  TRAIT_IRA,
+  TRAIT_FIDELIS,
+  TRAIT_FERAL,
+  TRAIT_EXTRA_JAVELIN,
+  TRAIT_DETERMINED,
+  TRAIT_IMPULSUM,
+  TRAIT_AIM,
+  TRAIT_OMENS,
+  TRAIT_MACEDONIAN,
+  TRAIT_ENDURANCE,
+  TRAIT_MARAUDERS,
+  TRAIT_ELEPHANT,
+  TRAIT_CHARGE,
+  TRAIT_SLING,
+} from './traits';
+
 const MILITES = 'milites';
 const CIVIS = 'civis';
 const RARE = 'rare';
-
-const TRAIT_IRON_WILL = 'Iron Will';
-const TRAIT_SHIELD_OVERLAP = 'shield overlap';
-const TRAIT_SKIRMISH_SPECIALIST = 'skirmish specialist';
-const TRAIT_WALL_OF_SPEARS = 'wall of spears';
-const TRAIT_OFFENSIVE_SPEAR = 'offensive spear';
-const TRAIT_DRILLED = 'drilled';
-const TRAIT_GUERRILLA = 'guerrilla';
-const TRAIT_FUROR = 'furor';
-const TRAIT_ALLIES = 'allies';
-const TRAIT_MOUNTED = 'mounted';
-const TRAIT_IMPETUS = 'impetus';
-const TRAIT_IRA = 'Ira';
-const TRAIT_FIDELIS = 'fidelis';
-const TRAIT_FERAL = 'feral';
-const TRAIT_EXTRA_JAVELIN = 'extra equipment-(javelin)';
-const TRAIT_DETERMINED = 'determined';
-const TRAIT_IMPULSUM = 'impulsum';
-const TRAIT_AIM = 'aimed shot';
-const TRAIT_OMENS = 'omens re-roll';
-const TRAIT_MACEDONIAN = 'macedonian drill';
-const TRAIT_ENDURANCE = 'endurance';
-const TRAIT_MARAUDERS = 'marauders';
-const TRAIT_ELEPHANT = 'elephant';
-const TRAIT_CHARGE = 'massed charge';
-const TRAIT_SLING = 'sling specialist';
-// const TRAIT_ = ;
-// const TRAIT_ = ;
 
 const characters = {
   lvl5: {
