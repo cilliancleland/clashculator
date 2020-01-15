@@ -196,6 +196,10 @@ export default {
   button.unit-option-remove{
     display:inline-block;
   }
+  span.unit-trait{
+    color:black !important;
+    background-color:white !important;
+  }
 }
 
 
