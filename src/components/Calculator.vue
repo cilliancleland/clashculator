@@ -10,17 +10,19 @@
         v-on:select-nation="selectNation"
       ></intro-screen>
       <div v-if="selectedNation" >
-        <header-section
+        <top-buttons
           v-bind:army-changed="armyChanged"
+          v-on:reset="reset"
+          v-on:save-locally="saveLocally"
+          v-on:delete-locally="deleteLocally"
+        ></top-buttons>
+        <header-section
           v-bind:army-contents="armyContents"
           v-bind:selected-nation="selectedNation"
           v-bind:army-name="armyName"
           v-bind:lists="lists"
           v-bind:unit-to-add="unitToAdd"
           v-on:update-army-name="updateArmyName"
-          v-on:reset="reset"
-          v-on:save-locally="saveLocally"
-          v-on:delete-locally="deleteLocally"
           v-on:add-unit="addUnit"
         ></header-section>
         <title-row
@@ -54,6 +56,7 @@
 <script>
 import Vue from 'vue';
 import lists from '../helpers/lists';
+import TopButtons from './TopButtons.vue';
 import HeaderSection from './HeaderSection.vue';
 import IntroScreen from './IntroScreen.vue';
 import SharableLink from './SharableLink.vue';
@@ -65,6 +68,7 @@ import TraitsList from './TraitsList.vue';
 export default {
   name: 'Calculator',
   components: {
+    'top-buttons': TopButtons,
     'header-section': HeaderSection,
     'intro-screen': IntroScreen,
     'sharable-link': SharableLink,

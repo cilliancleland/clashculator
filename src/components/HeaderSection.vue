@@ -1,40 +1,29 @@
 <template>
-  <div>
+  <div class="header-container">
+    <div class="header-left">
+
     <h2 class="army-title">
       {{selectedNation}} ({{totalCost}} points)
       <span>
         {{warbandType}} warband of {{totalFiguresCount}} figures in {{armyContents.length}} units
       </span>
     </h2>
-    <div class="top-buttons">
-      <button
-        title="Reset"
-        v-on:click="$emit('reset')"
-        class="top-button">
-        <i class="fa fa-undo top-button-icon"></i> Reset
-      </button>
-      <button
-        title="Save locally"
-        v-on:click="$emit('save-locally')"
-        :disabled="armyChanged"
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyChanged }">
-        <i class="fa fa-floppy-o top-button-icon"></i> Save
-      </button>
-      <button
-        title="Delete army from device"
-        v-on:click="$emit('delete-locally')"
-        :disabled="!armyChanged"
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
-        <i class="fa fa-trash top-button-icon"></i> Delete
-      </button>
-    </div>
-    <div class="army-breakup">
+    <div>
       <label >
         Army name
         <input v-bind:value="armyName"
           v-on:keyup="$emit('update-army-name', $event.target.value)" class="army-name" />
       </label>
-      <div class="button-bar">
+    </div>
+    </div>
+    <div class="header-middle">
+        <div>Leaders: {{leadersCount}}</div>
+        <div>Civis: {{civisCount}}</div>
+        <div>Milites: {{militesCount}}</div>
+        <div>Rare: {{rareCount}}</div>
+        <div>Break point every {{breakPointThreshold}} figures</div>
+    </div>
+    <div class="header-right">
         <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
           v-on:change="$emit('add-unit', $event.target.value)">
           <option value="">Add a unit</option>
@@ -42,12 +31,6 @@
             {{ value.displayName }}
           </option>
         </select>
-      </div>
-      <div>Leaders: {{leadersCount}}</div>
-      <div>Civis: {{civisCount}}</div>
-      <div>Milites: {{militesCount}}</div>
-      <div>Rare: {{rareCount}}</div>
-      <div>Break point every {{breakPointThreshold}} figures</div>
     </div>
   </div>
 </template>
@@ -62,9 +45,6 @@ export default {
     'lists',
     'unitToAdd',
     'armyChanged',
-    'reset',
-    'saveLocally',
-    'deleteLocally',
     'addUnit',
     'updateArmyName',
   ],
@@ -129,9 +109,26 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+
     .add-unit {
       border-radius: 10px;
       padding: 1rem;
       font-size: 16px;
+      width:220px;
+    }
+    .header-container{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header-right {
+        flex: 1 0 150px;
+    }
+    .header-left {
+        flex: 1 0 400px;
+    }
+    .header-middle {
+        flex: 1 0 220px;
     }
 </style>

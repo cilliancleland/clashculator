@@ -84,11 +84,6 @@ export default {
     .row-reposition{
       position:absolute;
     }
-    .button-bar {
-      float:right;
-      margin: 1em;
-    }
-
     .unit-option{
       border-radius: 5px;
       padding: 3px;
@@ -137,7 +132,7 @@ export default {
     .top-button{
       position: relative;
       padding-top: 22px;
-      margin-right: 2em;
+      margin-left: 2em;
     }
     .top-button-icon{
       position: absolute;
@@ -146,11 +141,9 @@ export default {
       margin-left: -0.4em;
       font-size: 20px;
     }
-
     .top-buttons {
-      display: inline-block;
-      text-align: center;
-      width: 500px;
+      float: right;
+      margin-top: -55px;
     }
     @media only screen and (max-width: 890px) {
       #app{
@@ -183,7 +176,7 @@ export default {
       }
 
       .top-buttons {
-        width: 300px;
+        width: 232px;
       }
     }
 
