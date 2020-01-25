@@ -20,6 +20,12 @@
         v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
         <i class="fa fa-trash top-button-icon"></i> Delete
       </button>
+      <button
+        title="Print"
+        v-on:click="print"
+        v-bind:class="{ 'top-button': 1 }">
+        <i class="fa fa-print top-button-icon"></i> Print
+      </button>
     </div>
 
 </template>
@@ -33,6 +39,11 @@ export default {
     'saveLocally',
     'deleteLocally',
   ],
+  methods: {
+    print() {
+      window.print();
+    },
+  },
 };
 </script>
 <style scoped lang="scss">

@@ -54,7 +54,7 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_CHARIOT]: ['affects everything', 'see chariot special rules'],
   [TRAIT_MUSICIAN]: ['affects command range', 'increases command range for activations only'],
   [TRAIT_STANDARD]: ['affects rally', 'may re-roll 1s'],
-  [TRAIT_BUCKLER]: ['affects melee', 'adds +1 to melee save only, ifnored by shooting and fatigue'],
+  [TRAIT_BUCKLER]: ['affects melee', 'adds +1 to melee save only, ignored by shooting and fatigue'],
   [TRAIT_DETERMINED]: ['affects grit tests', 'ignore fatigue for grit tests'],
   [TRAIT_FERAL]: ['affects animals', 'see feral special rules'],
   [TRAIT_MACEDONIAN]: ['requires pike and close order, affects save', 'can claim shield for ranged save'],

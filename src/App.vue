@@ -176,7 +176,7 @@ export default {
       }
 
       .top-buttons {
-        width: 232px;
+        width: 302px;
       }
     }
 
