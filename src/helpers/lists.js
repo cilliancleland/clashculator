@@ -563,7 +563,7 @@ const lists = {
       ],
     },
     warriors: {
-      displayName: 'warriors',
+      displayName: 'Warriors',
       availability: CIVIS,
       combat: 4,
       ranged: 5,
@@ -698,7 +698,7 @@ const lists = {
       ],
     },
     warriors: {
-      displayName: 'warriors',
+      displayName: 'Warriors',
       availability: CIVIS,
       combat: 4,
       ranged: 5,
@@ -1038,7 +1038,7 @@ const lists = {
       ],
     },
     veteran: {
-      displayName: 'Celt-Iberian Veteran Scutarii',
+      displayName: 'Iberian Veteran Scutarii',
       availability: MILITES,
       combat: 3,
       ranged: 5,
