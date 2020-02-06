@@ -7,6 +7,7 @@ import {
   TRAIT_STANDARD,
   TRAIT_MOUNTED,
   TRAIT_IMPETUS,
+  TRAIT_EXTRA_JAVELIN,
 } from './traits';
 
 const NO_SHIELD = 'no shield';
@@ -92,7 +93,7 @@ const OPT_UPGRADE_CAVALRY_JAVELIN = {
   upgradeWeapon: 'javelin and extra equipment javelin',
   upgradeArmour: '',
   upgradeShield: '',
-  upgradeTraits: ['(extra equipment- (javelin)'],
+  upgradeTraits: [TRAIT_EXTRA_JAVELIN],
 };
 const OPT_DOWN_HEAVY_SHIELD = {
   name: 'downgrade heavy shield to shield ( -1 pts)',

@@ -182,9 +182,9 @@ const greeks = {
   archers: {
     displayName: 'Archers',
     availability: CIVIS,
-    combat: 4,
+    combat: 5,
     ranged: 5,
-    grit: 4,
+    grit: 5,
     defaultWeapon: BOW,
     defaultShield: NO_SHIELD,
     defaultBody: NO_ARMOUR,
@@ -256,13 +256,13 @@ const greeks = {
   thureophoroi: {
     displayName: 'Thureophoroi',
     availability: MILITES,
-    combat: 3,
+    combat: 4,
     ranged: 5,
     grit: 4,
     defaultWeapon: JAVELIN_THRUSTING,
     defaultShield: SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+    traits: [TRAIT_EXTRA_JAVELIN, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
     cost: 16,
     options: [
     ],
@@ -810,7 +810,7 @@ const lists = {
     ...greeks,
     tarantine: {
       displayName: 'Tarantine Nobles',
-      availability: RARE,
+      availability: MILITES,
       combat: 4,
       ranged: 4,
       grit: 3,
@@ -1306,7 +1306,7 @@ const lists = {
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
       traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
-      cost: 18,
+      cost: 23,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
       ],
@@ -1385,7 +1385,7 @@ const lists = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
+      traits: [TRAIT_DRILLED, TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
       cost: 18,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1397,7 +1397,7 @@ const lists = {
       combat: 4,
       ranged: 5,
       grit: 5,
-      defaultWeapon: THRUSTING,
+      defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
       traits: [''],
@@ -1701,7 +1701,7 @@ const lists = {
       combat: 4,
       ranged: 5,
       grit: 4,
-      defaultWeapon: THRUSTING,
+      defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
       traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ENDURANCE],
@@ -1825,10 +1825,11 @@ const lists = {
       grit: 5,
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
-      defaultBody: PARTIAL,
+      defaultBody: NO_ARMOUR,
       traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
       cost: 18,
       options: [
+        OPT_UP_PARTIAL_ARMOUR
       ],
     },
     hoplites: {
@@ -1840,7 +1841,7 @@ const lists = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+      traits: [TRAIT_DRILLED, TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
       cost: 18,
       options: [
       ],
