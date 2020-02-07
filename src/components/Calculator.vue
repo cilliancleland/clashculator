@@ -9,7 +9,7 @@
         v-on:load-army="loadArmy"
         v-on:select-nation="selectNation"
       ></intro-screen>
-      <div v-if="selectedNation" >{{armyDetailsCompact}}
+      <div v-if="selectedNation" >
         <top-buttons
           v-bind:army-changed="armyChanged"
           v-on:reset="reset"
@@ -211,7 +211,7 @@ export default {
         newUnit.size = parseInt(size, 32);
         for (let i = 1; i < 15; i += 1) {
           if (optsBin.substr(i, 1) === '1') {
-            optsArr.push(i);
+            optsArr.push(i - 1);
           }
         }
         newUnit.selectedOptions = optsArr;
