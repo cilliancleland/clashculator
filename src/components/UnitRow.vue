@@ -249,10 +249,10 @@ export default {
       this.optionToAdd = -1;
     },
     addFigure: function addFigure() {
-      this.row.size = this.row.size + 1;
+      this.row.size = Math.min(this.row.size + 1, 15);
     },
     removeFigure: function removeFigure() {
-      this.row.size = this.row.size - 1;
+      this.row.size = Math.max(this.row.size - 1, 0);
     },
   },
 };

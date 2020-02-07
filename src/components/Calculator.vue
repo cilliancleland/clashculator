@@ -9,7 +9,7 @@
         v-on:load-army="loadArmy"
         v-on:select-nation="selectNation"
       ></intro-screen>
-      <div v-if="selectedNation" >
+      <div v-if="selectedNation" >{{armyDetailsCompact}}
         <top-buttons
           v-bind:army-changed="armyChanged"
           v-on:reset="reset"
@@ -119,18 +119,32 @@ export default {
         return acc;
       }, []);
     },
+    armyDetailsCompact: function armyDetailsCompact() {
+      let ad = Object.keys(this.lists).indexOf(this.selectedNation).toString(32);
+      ad += this.armyContents.reduce((acc, unit) => {
+        let ret = unit.size.toString(32);
+        ret += Object.keys(this.lists[this.selectedNation]).indexOf(unit.type).toString(32);
+        let optionsBin = '1';
+        for (let i = 0; i < 14; i += 1) {
+          if (unit.selectedOptions.indexOf(i) > -1) {
+            optionsBin += '1';
+          } else {
+            optionsBin += '0';
+          }
+        }
+        ret += parseInt(optionsBin, 2).toString(32);
+        return acc + ret;
+      }, '');
+      ad += `_${this.armyName}`;
+      return ad;
+    },
     armyChanged: function armyChanged() {
       return (JSON.stringify(this.armyDetails) === JSON.stringify(this.onDiskArmy))
               && (this.armyName === this.savedArmyName);
     },
     sharable: function sharable() {
       const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-      const army = {
-        an: this.armyName,
-        sa: this.selectedNation,
-        ac: this.armyDetails,
-      };
-      return `${loc}?a=${encodeURIComponent(btoa(JSON.stringify(army)))}`;
+      return `${loc}?b=${encodeURIComponent(this.armyDetailsCompact)}`;
     },
   },
   created: function created() {
@@ -141,6 +155,9 @@ export default {
       objStr = atob(decodeURIComponent(objStr));
       const savedArmy = JSON.parse(objStr);
       this.hydrateArmy(savedArmy);
+    } else if (objStr.substr(0, 3) === '?b=') {
+      objStr = objStr.split('&')[0].substr(3);
+      this.hydrateCompactArmy(objStr);
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
   },
@@ -161,6 +178,45 @@ export default {
         newUnit.size = unit.size;
         newUnit.selectedOptions = unit.selectedOptions;
       });
+    },
+    hydrateCompactArmy: function hydrateCompactArmy(str) {
+      //       let ad = Object.keys(this.lists).indexOf(this.selectedNation).toString(32);
+      // ad += this.armyContents.reduce((acc, unit) => {
+      //   let ret = unit.size.toString(32);
+      //   ret += Object.keys(this.lists[this.selectedNation]).indexOf(unit.type).toString(32);
+      //   let optionsBin = '1';
+      //   for (let i = 0; i < 14; i += 1) {
+      //     if (unit.selectedOptions.indexOf(i) > -1) {
+      //       optionsBin += '1';
+      //     } else {
+      //       optionsBin += '0';
+      //     }
+      //   }
+      //   ret += parseInt(optionsBin, 2).toString(32);
+      //   return acc + ret;
+      // }, '');
+      // ad += `_${this.armyName}`;
+      // return ad;
+      const pos = str.indexOf('_');
+      this.armyName = str.substr(pos + 1);
+      this.selectedNation = Object.keys(this.lists)[parseInt(str.substr(0, 1), 32)];
+      let nums = str.substr(1, pos);
+      while (nums.length > 4) {
+        const size = parseInt(nums.substr(0, 1), 32);
+        const type = parseInt(nums.substr(1, 1), 32);
+        const opts = parseInt(nums.substr(2, 3), 32);
+        const optsBin = opts.toString(2);
+        const optsArr = [];
+        const newUnit = this.addUnit(Object.keys(this.lists[this.selectedNation])[type]);
+        newUnit.size = parseInt(size, 32);
+        for (let i = 1; i < 15; i += 1) {
+          if (optsBin.substr(i, 1) === '1') {
+            optsArr.push(i);
+          }
+        }
+        newUnit.selectedOptions = optsArr;
+        nums = nums.substr(5);
+      }
     },
     selectNation: function selectNation(selectedNation) {
       this.selectedNation = selectedNation;

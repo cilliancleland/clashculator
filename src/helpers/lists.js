@@ -1385,7 +1385,13 @@ const lists = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_DRILLED, TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
+      traits: [
+        TRAIT_DRILLED,
+        TRAIT_SHIELD_OVERLAP,
+        TRAIT_WALL_OF_SPEARS,
+        TRAIT_OFFENSIVE_SPEAR,
+        TRAIT_ALLIES,
+      ],
       cost: 18,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1829,7 +1835,7 @@ const lists = {
       traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
       cost: 18,
       options: [
-        OPT_UP_PARTIAL_ARMOUR
+        OPT_UP_PARTIAL_ARMOUR,
       ],
     },
     hoplites: {
