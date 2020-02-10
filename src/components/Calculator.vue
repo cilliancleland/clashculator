@@ -132,7 +132,7 @@ export default {
             optionsBin += '0';
           }
         }
-        ret += parseInt(optionsBin, 2).toString(32);
+        ret += parseInt(optionsBin, 2).toString(32).replace(/g00/g, '-').replace(/o00/g, '~');
         return acc + ret;
       }, '');
       ad += `_${this.armyName}`;
@@ -180,27 +180,10 @@ export default {
       });
     },
     hydrateCompactArmy: function hydrateCompactArmy(str) {
-      //       let ad = Object.keys(this.lists).indexOf(this.selectedNation).toString(32);
-      // ad += this.armyContents.reduce((acc, unit) => {
-      //   let ret = unit.size.toString(32);
-      //   ret += Object.keys(this.lists[this.selectedNation]).indexOf(unit.type).toString(32);
-      //   let optionsBin = '1';
-      //   for (let i = 0; i < 14; i += 1) {
-      //     if (unit.selectedOptions.indexOf(i) > -1) {
-      //       optionsBin += '1';
-      //     } else {
-      //       optionsBin += '0';
-      //     }
-      //   }
-      //   ret += parseInt(optionsBin, 2).toString(32);
-      //   return acc + ret;
-      // }, '');
-      // ad += `_${this.armyName}`;
-      // return ad;
       const pos = str.indexOf('_');
       this.armyName = str.substr(pos + 1);
       this.selectedNation = Object.keys(this.lists)[parseInt(str.substr(0, 1), 32)];
-      let nums = str.substr(1, pos);
+      let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
       while (nums.length > 4) {
         const size = parseInt(nums.substr(0, 1), 32);
         const type = parseInt(nums.substr(1, 1), 32);
@@ -208,7 +191,7 @@ export default {
         const optsBin = opts.toString(2);
         const optsArr = [];
         const newUnit = this.addUnit(Object.keys(this.lists[this.selectedNation])[type]);
-        newUnit.size = parseInt(size, 32);
+        newUnit.size = size;
         for (let i = 1; i < 15; i += 1) {
           if (optsBin.substr(i, 1) === '1') {
             optsArr.push(i - 1);
