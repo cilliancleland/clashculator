@@ -8,6 +8,7 @@ import {
   TRAIT_MOUNTED,
   TRAIT_IMPETUS,
   TRAIT_EXTRA_JAVELIN,
+  TRAIT_EXTRA_CAVALRY,
 } from './traits';
 
 const NO_SHIELD = 'no shield';
@@ -122,10 +123,10 @@ const OPT_DOWN_BUCKLER = {
 const OPT_CHARGING = {
   name: 'Upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
   cost: 3,
-  upgradeWeapon: CAVALRY_SPEAR,
+  upgradeWeapon: '',
   upgradeArmour: '',
   upgradeShield: '',
-  upgradeTraits: [TRAIT_IMPETUS],
+  upgradeTraits: [TRAIT_IMPETUS, TRAIT_EXTRA_CAVALRY],
 };
 const OPT_UP_CHARIOT = {
   name: 'Upgrade to Chariot',

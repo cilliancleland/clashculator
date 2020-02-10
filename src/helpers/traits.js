@@ -13,6 +13,7 @@ const TRAIT_IMPETUS = 'impetus';
 const TRAIT_IRA = 'ira';
 const TRAIT_FIDELIS = 'fidelis';
 const TRAIT_FERAL = 'feral';
+const TRAIT_EXTRA_CAVALRY = 'extra equipment-(cavalry spear)';
 const TRAIT_EXTRA_JAVELIN = 'extra equipment-(javelin)';
 const TRAIT_DETERMINED = 'determined';
 const TRAIT_IMPULSUM = 'impulsum';
@@ -45,6 +46,7 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_IRA]: ['delays wound effects', 'models do not receive wounds until the end phase'],
   [TRAIT_FIDELIS]: ['affects morale tests', 'may re-roll failed dice during morale tests'],
   [TRAIT_EXTRA_JAVELIN]: ['may use ready to swap weapon to javelin', ''],
+  [TRAIT_EXTRA_CAVALRY]: ['may use ready to swap weapon to cvalry spear', ''],
   [TRAIT_IMPULSUM]: ['requires throwing spear, affects throw', '+1 d6 if enemy tests morale'],
   [TRAIT_AIM]: ['bow & loose order, affects shooting', 'May use ready to re-roll misses'],
   [TRAIT_OMENS]: ['affects pre-game', 'may re-roll the omens test'],
@@ -79,6 +81,7 @@ export {
   TRAIT_IRA,
   TRAIT_FIDELIS,
   TRAIT_FERAL,
+  TRAIT_EXTRA_CAVALRY,
   TRAIT_EXTRA_JAVELIN,
   TRAIT_DETERMINED,
   TRAIT_IMPULSUM,
