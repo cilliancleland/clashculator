@@ -46,7 +46,7 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_IRA]: ['delays wound effects', 'models do not receive wounds until the end phase'],
   [TRAIT_FIDELIS]: ['affects morale tests', 'may re-roll failed dice during morale tests'],
   [TRAIT_EXTRA_JAVELIN]: ['may use ready to swap weapon to javelin', ''],
-  [TRAIT_EXTRA_CAVALRY]: ['may use ready to swap weapon to cvalry spear', ''],
+  [TRAIT_EXTRA_CAVALRY]: ['may use ready to swap weapon to cavalry spear', ''],
   [TRAIT_IMPULSUM]: ['requires throwing spear, affects throw', '+1 d6 if enemy tests morale'],
   [TRAIT_AIM]: ['bow & loose order, affects shooting', 'May use ready to re-roll misses'],
   [TRAIT_OMENS]: ['affects pre-game', 'may re-roll the omens test'],

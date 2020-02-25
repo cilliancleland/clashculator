@@ -24,7 +24,6 @@ const SWORD = 'sword';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
 const JAVELIN = 'javelin';
-const CAVALRY_JAVELIN = 'cavalry spear & javelin';
 const SLING = 'sling';
 const BOW = 'bow';
 const AX = 'double handed axe';
@@ -205,7 +204,6 @@ export {
   THRUSTING,
   CAVALRY_SPEAR,
   JAVELIN,
-  CAVALRY_JAVELIN,
   SLING,
   BOW,
   SWORD,

@@ -272,6 +272,7 @@ export default {
       this.onDiskArmy = '';
       this.savedArmyName = '';
       this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
+      window.history.pushState('', '', `${window.location.protocol}\\\\${window.location.host}${window.location.pathname}`);
     },
     reposUp: function reposUp(idx) {
       const tmp = this.armyContents[idx];
