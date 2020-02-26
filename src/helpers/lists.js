@@ -1832,7 +1832,7 @@ const lists = {
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
       traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
-      cost: 18,
+      cost: 13,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
       ],
