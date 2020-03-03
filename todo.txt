@@ -1,0 +1,13 @@
+
+settings - 7 figs
+print cards
+random unit numbers on print??
+
+include deployment fatigue and terrain charts option
+
+
+multi periods
+default period store in localstorage
+explain buckler, plate in traits?
+
+no wardogs for the irish

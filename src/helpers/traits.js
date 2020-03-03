@@ -1,4 +1,3 @@
-
 const TRAIT_IRON_WILL = 'iron Will';
 const TRAIT_SHIELD_OVERLAP = 'shield overlap';
 const TRAIT_SKIRMISH_SPECIALIST = 'skirmish specialist';
@@ -30,6 +29,19 @@ const TRAIT_CHARIOT = 'chariot';
 const TRAIT_HOWDA = 'howda';
 const TRAIT_MUSICIAN = 'musician';
 const TRAIT_STANDARD = 'standard-bearer';
+const TRAIT_OVERHEAD = 'overhead shooting';
+const TRAIT_STALWART = 'stalwart';
+const TRAIT_BREAKER = 'shield breaker';
+const TRAIT_PLATE = 'plate armour';
+const TRAIT_DOUBLE = 'double hander';
+const TRAIT_WARHORSE = 'war horse';
+const TRAIT_SHIELDBREAKER = 'shield breaker';
+const TRAIT_HUNTER = 'hunter';
+const TRAIT_THRUST = 'thrust';
+const TRAIT_ELUSIVE = 'elusive';
+const TRAIT_COMBINED_ARMS = 'combined arms';
+const TRAIT_CUTTHROAT = 'cut-throat';
+const TRAIT_RAIN = 'rain of blows';
 
 const TRAIT_DESCRIPTIONS = {
   [TRAIT_IRON_WILL]: ['affects fatigue effects', 'do not remove if fatigue is twice model count'],
@@ -61,8 +73,21 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_FERAL]: ['affects animals', 'see feral special rules'],
   [TRAIT_MACEDONIAN]: ['requires pike and close order, affects save', 'can claim shield for ranged save'],
   [TRAIT_ENDURANCE]: ['requires loose order, affects movement and fatigue', '3rd move is 6" and does not generate fatigue'],
-  [TRAIT_CHARGE]: ['requires lcose order and long weapon, affecst attack', 'charge further, -1/-2 to enemy save, extra d6 for enemy morale test, only surviving enemies counterattack '],
+  [TRAIT_CHARGE]: ['requires lcose order and long weapon, affects attack', 'charge further, -1/-2 to enemy save, extra d6 for enemy morale test, only surviving enemies counterattack '],
   [TRAIT_HOWDA]: ['affects save', '+2 to save'],
+  [TRAIT_OVERHEAD]: ['close order, affects shoot action', 'Can shoot over friends in 4", counts as long range'],
+  [TRAIT_STALWART]: ['affects morale tests', 'may re-roll failed dice during morale tests'],
+  [TRAIT_BREAKER]: ['requires loose order and double handed weapon, affects melee', 'Additional d6 to enemy morale test'],
+  [TRAIT_PLATE]: ['affects save', 're-roll ones'],
+  [TRAIT_DOUBLE]: ['affects melee', '-2 to enemy save, must use shields like special equipment'],
+  [TRAIT_WARHORSE]: ['affects attack action', 're-roll 1s to hit vs infantry'],
+  [TRAIT_SHIELDBREAKER]: ['requires double hander and loose order, affects enemy morale', 'Additional d6 to enemy morale test'],
+  [TRAIT_HUNTER]: ['affects shoot action', 're-roll 1s to hit when shoot is first action'],
+  [TRAIT_THRUST]: ['requires spear or pike and loose order, affects atack', 'enemy may not couter-attack, but gain +1 to morale, attacker always retreats, 3"'],
+  [TRAIT_ELUSIVE]: ['requires loose order, affects defend', 'When selecting defend as combat response the unit may re-roll any ones rolled'],
+  [TRAIT_COMBINED_ARMS]: ['requires mixed hand weapons and loose order, affects Attack', 'When executing an attack action, troops with this characteristic can re-roll any ones and twos they got on their to hit roll'],
+  [TRAIT_CUTTHROAT]: ['affects morale', 'enemy roll an extra d6 for morale tests'],
+  [TRAIT_RAIN]: ['requires loose order and additional hand weapon, affects all-out attack', 're-roll 1s to hit'],
 };
 
 export {
@@ -98,4 +123,17 @@ export {
   TRAIT_HOWDA,
   TRAIT_MUSICIAN,
   TRAIT_STANDARD,
+  TRAIT_OVERHEAD,
+  TRAIT_BREAKER,
+  TRAIT_PLATE,
+  TRAIT_DOUBLE,
+  TRAIT_WARHORSE,
+  TRAIT_STALWART,
+  TRAIT_SHIELDBREAKER,
+  TRAIT_HUNTER,
+  TRAIT_THRUST,
+  TRAIT_ELUSIVE,
+  TRAIT_COMBINED_ARMS,
+  TRAIT_CUTTHROAT,
+  TRAIT_RAIN,
 };

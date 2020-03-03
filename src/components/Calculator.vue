@@ -3,11 +3,14 @@
       <h1>{{ title }}</h1>
       <intro-screen  v-if="!selectedNation"
         v-bind:selected-army="selectedNation"
-        v-bind:lists="lists"
+        v-bind:lists="periodLists"
+        v-bind:periods="periods"
         v-bind:local-saves="localSaves"
         v-bind:saved-name="savedName"
+        v-bind:selected-period="selectedPeriod"
         v-on:load-army="loadArmy"
         v-on:select-nation="selectNation"
+        v-on:select-period="selectPeriod"
       ></intro-screen>
       <div v-if="selectedNation" >
         <top-buttons
@@ -20,7 +23,7 @@
           v-bind:army-contents="armyContents"
           v-bind:selected-nation="selectedNation"
           v-bind:army-name="armyName"
-          v-bind:lists="lists"
+          v-bind:lists="periodLists"
           v-bind:unit-to-add="unitToAdd"
           v-on:update-army-name="updateArmyName"
           v-on:add-unit="addUnit"
@@ -55,7 +58,7 @@
 
 <script>
 import Vue from 'vue';
-import lists from '../helpers/lists';
+import allLists from '../helpers/lists';
 import TopButtons from './TopButtons.vue';
 import HeaderSection from './HeaderSection.vue';
 import IntroScreen from './IntroScreen.vue';
@@ -80,7 +83,8 @@ export default {
   data: function data() {
     return {
       title: 'Clashculator',
-      lists,
+      allLists,
+      selectedPeriod: 'punic',
       selectedNation: '',
       armyContents: [],
       onDiskArmy: '',
@@ -94,6 +98,12 @@ export default {
     };
   },
   computed: {
+    periods: function periods() {
+      return Object.keys(this.allLists);
+    },
+    periodLists: function periodLists() {
+      return this.allLists[this.selectedPeriod];
+    },
     mostTraits: function mostTraits() {
       const allTraits = this.armyContents.reduce((acc, unit) => {
         const upgradedTraits = [];
@@ -120,10 +130,10 @@ export default {
       }, []);
     },
     armyDetailsCompact: function armyDetailsCompact() {
-      let ad = Object.keys(this.lists).indexOf(this.selectedNation).toString(32);
+      let ad = Object.keys(this.periodLists).indexOf(this.selectedNation).toString(32);
       ad += this.armyContents.reduce((acc, unit) => {
         let ret = unit.size.toString(32);
-        ret += Object.keys(this.lists[this.selectedNation]).indexOf(unit.type).toString(32);
+        ret += Object.keys(this.periodLists[this.selectedNation]).indexOf(unit.type).toString(32);
         let optionsBin = '1';
         for (let i = 0; i < 14; i += 1) {
           if (unit.selectedOptions.indexOf(i) > -1) {
@@ -182,7 +192,7 @@ export default {
     hydrateCompactArmy: function hydrateCompactArmy(str) {
       const pos = str.indexOf('_');
       this.armyName = str.substr(pos + 1);
-      this.selectedNation = Object.keys(this.lists)[parseInt(str.substr(0, 1), 32)];
+      this.selectedNation = Object.keys(this.periodLists)[parseInt(str.substr(0, 1), 32)];
       let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
       while (nums.length > 4) {
         const size = parseInt(nums.substr(0, 1), 32);
@@ -190,7 +200,7 @@ export default {
         const opts = parseInt(nums.substr(2, 3), 32);
         const optsBin = opts.toString(2);
         const optsArr = [];
-        const newUnit = this.addUnit(Object.keys(this.lists[this.selectedNation])[type]);
+        const newUnit = this.addUnit(Object.keys(this.periodLists[this.selectedNation])[type]);
         newUnit.size = size;
         for (let i = 1; i < 15; i += 1) {
           if (optsBin.substr(i, 1) === '1') {
@@ -203,6 +213,9 @@ export default {
     },
     selectNation: function selectNation(selectedNation) {
       this.selectedNation = selectedNation;
+    },
+    selectPeriod: function selectPeriod(selectedPeriod) {
+      this.selectedPeriod = selectedPeriod;
     },
     saveLocally: function saveLocally() {
       const armyNames = JSON.parse(localStorage.getItem('armyNames')) || [];
@@ -248,7 +261,7 @@ export default {
           ? this.size + 1
           : this.size;
       }
-      const newEntry = { ...this.lists[this.selectedNation][unitToAdd] };
+      const newEntry = { ...this.periodLists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry, 'id', Math.random());
       Vue.set(newEntry, 'size', newEntry.fixedFigures !== undefined ? newEntry.fixedFigures : 6);
       Vue.set(newEntry, 'selectedOptions', []);
@@ -256,6 +269,7 @@ export default {
       Vue.set(newEntry, 'upgradedArmour', '');
       Vue.set(newEntry, 'upgradedShield', '');
       Vue.set(newEntry, 'upgradedWeapon', '');
+      Vue.set(newEntry, 'upgradedBarding', '');
       Vue.set(newEntry, 'type', unitToAdd);
       newEntry.unitSize = unitSize.bind(newEntry);
       this.armyContents.push(newEntry);
@@ -286,7 +300,7 @@ export default {
     },
     armySort: function armySort() {
       this.armyContents.sort((a, b) => {
-        const list = this.lists[this.selectedNation];
+        const list = this.periodLists[this.selectedNation];
         const orderA = Object.keys(list).indexOf(a.type);
         const orderB = Object.keys(list).indexOf(b.type);
         return orderA - orderB;

@@ -41,6 +41,9 @@
           <span class="unit-trait" v-if="row.defaultShield != 'HIDE_OPTION'">
             {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
           </span>
+          <span class="unit-trait" v-if="row.defaultBarding || row.upgradedBarding">
+            {{row.upgradedBarding ? row.upgradedBarding : row.defaultBarding}}
+          </span>
         </div>
         <div class="unit-cell unit-cell-medium">
           <span v-for="(trait) in row.traits" v-bind:key="trait">
@@ -110,9 +113,12 @@ import {
   NO_ARMOUR,
   NO_SHIELD,
   FULL,
+  PLATE,
   PARTIAL,
   BUCKLER,
   SHIELD,
+  BARDING,
+  HALF_BARDING,
   HEAVY_SHIELD,
   OPT_BUCKLER,
 } from '../helpers/constants';
@@ -198,18 +204,25 @@ export default {
       mods[NO_SHIELD] = 0;
       mods[BUCKLER] = 0;
       mods[FULL] = 2;
+      mods[PLATE] = 2;
       mods[PARTIAL] = 1;
       mods[SHIELD] = 1;
       mods[HEAVY_SHIELD] = 2;
+      mods[BARDING] = 1;
+      mods[HALF_BARDING] = 0;
       const armour = this.row.upgradedArmour ? this.row.upgradedArmour : this.row.defaultBody;
       const shield = this.row.upgradedShield ? this.row.upgradedShield : this.row.defaultShield;
+      const barding = this.row.upgradedBarding ? this.row.upgradedBarding : this.row.defaultBarding;
       if (armour) {
         save -= mods[armour];
       }
       if (shield) {
         save -= mods[shield];
       }
-      if (shield === OPT_BUCKLER) {
+      if (barding) {
+        save -= mods[barding];
+      }
+      if (shield === OPT_BUCKLER || barding === HALF_BARDING) {
         symbol = '*';
       }
       return save + symbol;
@@ -231,9 +244,13 @@ export default {
       if (option.upgradeShield) {
         this.row.upgradedShield = '';
       }
+      if (option.upgradeBarding) {
+        this.row.upgradedBarding = '';
+      }
       this.row.selectedOptions.splice(this.row.selectedOptions.indexOf(optionIndex), 1);
     },
     addOption: function addOption() {
+      debugger;
       const optionKey = this.availableOptions[this.optionToAdd];
       const option = this.row.options[optionKey];
       this.row.selectedOptions.push(optionKey);
@@ -245,6 +262,9 @@ export default {
       }
       if (option.upgradeShield) {
         this.row.upgradedShield = option.upgradeShield;
+      }
+      if (option.upgradeBarding) {
+        this.row.upgradedBarding = option.upgradeBarding;
       }
       this.optionToAdd = -1;
     },
