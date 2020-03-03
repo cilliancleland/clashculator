@@ -154,20 +154,28 @@ export default {
     },
     sharable: function sharable() {
       const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-      return `${loc}?b=${encodeURIComponent(this.armyDetailsCompact)}`;
+      return `${loc}?${this.selectedPeriod}=${encodeURIComponent(this.armyDetailsCompact)}`;
     },
   },
   created: function created() {
     let objStr = decodeURI(document.location.search);
+    // just the first arg, FB or something might have added other params
     if (objStr.substr(0, 3) === '?a=') {
-      // just the first arg, FB or something might have added other params
+      // legacy from shitty sharing url
       objStr = objStr.split('&')[0].substr(3);
       objStr = atob(decodeURIComponent(objStr));
       const savedArmy = JSON.parse(objStr);
       this.hydrateArmy(savedArmy);
     } else if (objStr.substr(0, 3) === '?b=') {
+      // legacy from before we had multi armies
       objStr = objStr.split('&')[0].substr(3);
-      this.hydrateCompactArmy(objStr);
+      this.hydrateCompactArmy(objStr, 'punic');
+    } else if (objStr.substr(0, 7) === '?punic=') {
+      objStr = objStr.split('&')[0].substr(7);
+      this.hydrateCompactArmy(objStr, 'punic');
+    } else if (objStr.substr(0, 9) === '?darkAge=') {
+      objStr = objStr.split('&')[0].substr(9);
+      this.hydrateCompactArmy(objStr, 'darkAge');
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
   },
@@ -181,6 +189,7 @@ export default {
       this.onDiskArmy = JSON.parse(JSON.stringify(this.armyDetails));
     },
     hydrateArmy: function hydrateArmy(savedObj) {
+      this.selectedPeriod = savedObj.sp || 'punic';
       this.selectedNation = savedObj.sa;
       this.armyName = savedObj.an;
       savedObj.ac.forEach((unit) => {
@@ -189,8 +198,9 @@ export default {
         newUnit.selectedOptions = unit.selectedOptions;
       });
     },
-    hydrateCompactArmy: function hydrateCompactArmy(str) {
+    hydrateCompactArmy: function hydrateCompactArmy(str, sp) {
       const pos = str.indexOf('_');
+      this.selectedPeriod = sp;
       this.armyName = str.substr(pos + 1);
       this.selectedNation = Object.keys(this.periodLists)[parseInt(str.substr(0, 1), 32)];
       let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
@@ -229,6 +239,7 @@ export default {
         armies[this.armyName] = {
           an: this.armyName,
           sa: this.selectedNation,
+          sp: this.selectedPeriod,
           ac: this.armyDetails,
         };
         localStorage.setItem('armyNames', JSON.stringify(armyNames));
