@@ -1,6 +1,15 @@
 
 <template>
   <div>
+    <div class="period-selector">
+      <period-selector
+        v-for="(period) in periods"
+        v-bind:key="period"
+        v-bind:period="period"
+        v-bind:selected-period = "selectedPeriod"
+        v-on="$listeners"
+      ></period-selector>
+    </div>
     <select id="armySelect"
             v-bind:value="selectedNation"
             class="add-unit"
@@ -26,15 +35,23 @@
 </template>
 
 <script>
+import PeriodSelector from './PeriodSelector.vue';
+
 export default {
   name: 'IntroScreen',
+  components: {
+    'period-selector': PeriodSelector,
+  },
   props: [
     'selectedNation',
+    'selectedPeriod',
+    'periods',
     'lists',
     'localSaves',
     'savedName',
     'loadArmy',
     'selectNation',
+    'selectPeriod',
   ],
 };
 </script>
@@ -44,5 +61,8 @@ export default {
       padding: 1rem;
       font-size: 16px;
       max-width: 100%;
+    }
+    .period-selector {
+      padding: 0.5rem;
     }
 </style>

@@ -7,25 +7,37 @@ import {
   TRAIT_STANDARD,
   TRAIT_MOUNTED,
   TRAIT_IMPETUS,
+  TRAIT_DRILLED,
   TRAIT_EXTRA_JAVELIN,
   TRAIT_EXTRA_CAVALRY,
+  TRAIT_HUNTER,
 } from './traits';
+
+const MILITES = 'milites';
+const CIVIS = 'civis';
+const RARE = 'rare';
 
 const NO_SHIELD = 'no shield';
 const NO_ARMOUR = 'no armour';
+const PLATE = 'full plate armour';
 const FULL = 'full armour';
 const PARTIAL = 'partial armour';
+const BARDING = 'barding';
+const HALF_BARDING = 'half barding';
 const BUCKLER = 'buckler';
 const SHIELD = 'shield';
 const HEAVY_SHIELD = 'heavy shield';
 const THROWING = 'throwing spear';
 const THRUSTING = 'thrusting spear';
 const SWORD = 'sword';
+const LANCE = 'lance';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
 const JAVELIN = 'javelin';
 const SLING = 'sling';
+const MIXED = 'mixed hand weapons';
 const BOW = 'bow';
+const XBOW = 'crossbow';
 const AX = 'double handed axe';
 const PIKE = 'pike';
 const XYSTON = 'xtston';
@@ -38,6 +50,32 @@ const OPT_BUCKLER = {
   upgradeArmour: '',
   upgradeShield: 'buckler',
   upgradeTraits: [TRAIT_BUCKLER],
+};
+const OPT_BARDING = {
+  name: 'Add barding (+1pts/model)',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: BARDING,
+  upgradeTraits: [],
+};
+const OPT_HALF_BARDING = {
+  name: 'Add half barding (+1pts/model)',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: HALF_BARDING,
+  upgradeTraits: [],
+};
+const OPT_DRILLED = {
+  name: 'Add drilled (+1pts/model)',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [TRAIT_DRILLED],
 };
 const OPT_SHIELD = {
   name: 'Add shield (+1pts/model)',
@@ -61,6 +99,14 @@ const OPT_DOWN_FULL_TO_NO_ARMOUR = {
   upgradeWeapon: '',
   upgradeArmour: NO_ARMOUR,
   upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_UP_NO_TO_HEAVY_SHIELD = {
+  name: 'Upgrade to heavy shield',
+  cost: 2,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [],
 };
 const OPT_DOWN_PARTIAL_ARMOUR = {
@@ -136,7 +182,15 @@ const OPT_UP_CHARIOT = {
   unlessMounted: true,
   upgradeTraits: [TRAIT_CHARIOT],
 };
-
+const OPT_HUNTER = {
+  name: 'Upgrade to hunter',
+  cost: 1,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  unlessMounted: true,
+  upgradeTraits: [TRAIT_HUNTER],
+};
 const elephantOptions = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
@@ -192,6 +246,13 @@ const characterOptions = [
 ];
 
 export {
+  MILITES,
+  CIVIS,
+  RARE,
+  LANCE,
+  PLATE,
+  BARDING,
+  HALF_BARDING,
   HIDE_OPTION,
   NO_SHIELD,
   NO_ARMOUR,
@@ -199,6 +260,7 @@ export {
   PARTIAL,
   BUCKLER,
   SHIELD,
+  XBOW,
   HEAVY_SHIELD,
   THROWING,
   THRUSTING,
@@ -208,11 +270,15 @@ export {
   BOW,
   SWORD,
   AX,
+  MIXED,
   PIKE,
   XYSTON,
   JAVELIN_THRUSTING,
   OPT_BUCKLER,
+  OPT_BARDING,
   OPT_SHIELD,
+  OPT_DRILLED,
+  OPT_UP_NO_TO_HEAVY_SHIELD,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
   OPT_UP_PARTIAL_ARMOUR,
@@ -224,6 +290,8 @@ export {
   OPT_UP_HEAVY_SHIELD,
   OPT_CHARGING,
   OPT_UP_CHARIOT,
+  OPT_HALF_BARDING,
+  OPT_HUNTER,
   characterOptions,
   elephantOptions,
 };
