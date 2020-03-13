@@ -1,6 +1,6 @@
 <template>
     <tr >
-      <th>{{trait}}</th>
+      <th>{{trait}}<span>({{traitPage}})</span></th>
       <td>
         <span class="conditions">
           {{traitConditions}}
@@ -18,13 +18,17 @@ export default {
   name: 'TraitsList',
   props: ['trait'],
   computed: {
+    desc: function desc() {
+      return TRAIT_DESCRIPTIONS[this.trait] || ['', '', ''];
+    },
     traitConditions: function traitConditions() {
-      const desc = TRAIT_DESCRIPTIONS[this.trait] || ['', ''];
-      return desc[0];
+      return this.desc[0];
     },
     traitText: function traitText() {
-      const desc = TRAIT_DESCRIPTIONS[this.trait] || ['', ''];
-      return desc[1];
+      return this.desc[1];
+    },
+    traitPage: function traitText() {
+      return this.desc[2];
     },
   },
 };
@@ -35,11 +39,15 @@ export default {
     text-transform: capitalize;
     text-align: left;
     padding-right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 18px;
+  }
+  th span {
+    font-size: 80%;
   }
   span {
     font-style: italic;
     display: block;
+    font-weight: normal;
   }
   td, th {
     border-bottom: solid grey 1px;

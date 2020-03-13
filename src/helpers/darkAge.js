@@ -61,6 +61,7 @@ import {
   TRAIT_CUTTHROAT,
   TRAIT_RAIN,
   TRAIT_COMBINED_ARMS,
+  TRAIT_DOUBLE,
 } from './traits';
 
 const darkAge = {
@@ -229,7 +230,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_BREAKER, TRAIT_STALWART],
+      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_BREAKER, TRAIT_STALWART, TRAIT_DOUBLE],
       cost: 23,
       options: [
       ],
@@ -486,7 +487,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [TRAIT_GUERRILLA, TRAIT_FUROR, TRAIT_DOUBLE],
       cost: 17,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -590,7 +591,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT],
+      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT, TRAIT_DOUBLE],
       cost: 22,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -605,7 +606,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_IRA, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT],
+      traits: [TRAIT_FUROR, TRAIT_IRA, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT, TRAIT_DOUBLE],
       cost: 19,
       options: [
         OPT_UP_NO_TO_HEAVY_SHIELD,
@@ -821,11 +822,11 @@ const darkAge = {
       availability: MILITES,
       combat: 3,
       ranged: 5,
-      grit: 4,
+      grit: 3,
       defaultWeapon: AX,
       defaultBody: FULL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_SHIELDBREAKER, TRAIT_SHIELD_OVERLAP, TRAIT_DETERMINED],
+      traits: [TRAIT_SHIELDBREAKER, TRAIT_SHIELD_OVERLAP, TRAIT_DETERMINED, TRAIT_DOUBLE],
       cost: 23,
       options: [
       ],
