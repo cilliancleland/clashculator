@@ -227,7 +227,7 @@ const characterOptions = [
     name: 'Upgrade to Javelin', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: JAVELIN, upgradeTraits: [],
   },
   {
-    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, upgradeTraits: [TRAIT_MOUNTED],
+    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [TRAIT_MOUNTED],
   },
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,

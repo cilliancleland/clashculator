@@ -73,7 +73,7 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_FERAL]: ['affects animals', 'see feral special rules', 'p.72'],
   [TRAIT_MACEDONIAN]: ['requires pike and close order, affects save', 'can claim shield for ranged save', 'p.68'],
   [TRAIT_ENDURANCE]: ['requires loose order, affects movement and fatigue', '3rd move is 6" and does not generate fatigue', 'p.72'],
-  [TRAIT_CHARGE]: ['requires lcose order and long weapon, affects attack', 'charge further, -1/-2 to enemy save, extra d6 for enemy morale test, only surviving enemies counterattack ', 'p.68'],
+  [TRAIT_CHARGE]: ['requires close order and long weapon, affects attack', 'charge further, -1/-2 to enemy save, extra d6 for enemy morale test, only surviving enemies counterattack ', 'p.68'],
   [TRAIT_HOWDA]: ['affects save', '+2 to save', 'p.80'],
   [TRAIT_OVERHEAD]: ['close order, affects shoot action', 'Can shoot over friends in 4", counts as long range', 'playtest'],
   [TRAIT_STALWART]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'playtest'],

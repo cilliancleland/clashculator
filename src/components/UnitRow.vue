@@ -30,19 +30,19 @@
           {{calculateSave}}
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait"  v-if="row.defaultShield != 'HIDE_OPTION'">
-            {{row.upgradedWeapon ? row.upgradedWeapon : row.defaultWeapon}}
+          <span class="unit-trait"  v-if="row.defaultShield != HIDE_OPTION">
+            {{upgradedWeapon ? upgradedWeapon : row.defaultWeapon}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait" v-if="row.defaultShield != 'HIDE_OPTION'">
-            {{row.upgradedShield ? row.upgradedShield : row.defaultShield}}
+          <span class="unit-trait" v-if="row.defaultShield != HIDE_OPTION">
+            {{upgradedShield ? upgradedShield : row.defaultShield}}
           </span>
-          <span class="unit-trait" v-if="row.defaultShield != 'HIDE_OPTION'">
-            {{row.upgradedArmour ? row.upgradedArmour : row.defaultBody}}
+          <span class="unit-trait" v-if="row.defaultShield != HIDE_OPTION">
+            {{upgradedArmour ? upgradedArmour : row.defaultBody}}
           </span>
           <span class="unit-trait" v-if="row.defaultBarding || row.upgradedBarding">
-            {{row.upgradedBarding ? row.upgradedBarding : row.defaultBarding}}
+            {{upgradedBarding ? upgradedBarding : row.defaultBarding}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
@@ -141,6 +141,42 @@ export default {
       });
       return traits;
     },
+    upgradedWeapon: function ungradedWeapon() {
+      let ret = '';
+      this.row.selectedOptions.forEach((key) => {
+        if (this.row.options[key].upgradeWeapon) {
+          ret = this.row.options[key].upgradeWeapon;
+        }
+      });
+      return ret;
+    },
+    upgradedArmour: function ungradedArmour() {
+      let ret = '';
+      this.row.selectedOptions.forEach((key) => {
+        if (this.row.options[key].upgradeArmour) {
+          ret = this.row.options[key].upgradeArmour;
+        }
+      });
+      return ret;
+    },
+    upgradedShield: function upgradedShield() {
+      let ret = '';
+      this.row.selectedOptions.forEach((key) => {
+        if (this.row.options[key].upgradeShield) {
+          ret = this.row.options[key].upgradeShield;
+        }
+      });
+      return ret;
+    },
+    upgradedBarding: function upgradedBarding() {
+      let ret = '';
+      this.row.selectedOptions.forEach((key) => {
+        if (this.row.options[key].upgradeBarding) {
+          ret = this.row.options[key].upgradeBarding;
+        }
+      });
+      return ret;
+    },
     excludedOptions: function excludedOptions() {
       // loop through selected options
       //   for each selected option, record if it mods armour,shield or weapon
@@ -149,6 +185,7 @@ export default {
       let excludeShieldOptions = false;
       const exclusions = [];
       let isMounted = false;
+      let isHeavyShield = false;
       this.row.selectedOptions.forEach((key) => {
         if (this.row.options[key].upgradeArmour) {
           excludeArmourOptions = true;
@@ -163,6 +200,9 @@ export default {
           || this.row.options[key].name === 'Upgrade to Chariot') {
           isMounted = true;
         }
+        if (this.row.options[key].name === 'Upgrade to heavy shield') {
+          isHeavyShield = true;
+        }
       });
       // loop through all options,
       // if that option has shield or armour or weapon
@@ -171,6 +211,7 @@ export default {
         if ((excludeShieldOptions && option.upgradeShield)
           || (excludeWeaponOptions && option.upgradeWeapon)
           || (excludeArmourOptions && option.upgradeArmour)
+          || (isHeavyShield && option.unlessHeavyShield)
           || (isMounted && option.unlessMounted)
           || (!isMounted && option.requiresMounted)
           || (this.row.selectedOptions.indexOf(idx) > -1)
@@ -210,9 +251,9 @@ export default {
       mods[HEAVY_SHIELD] = 2;
       mods[BARDING] = 1;
       mods[HALF_BARDING] = 0;
-      const armour = this.row.upgradedArmour ? this.row.upgradedArmour : this.row.defaultBody;
-      const shield = this.row.upgradedShield ? this.row.upgradedShield : this.row.defaultShield;
-      const barding = this.row.upgradedBarding ? this.row.upgradedBarding : this.row.defaultBarding;
+      const armour = this.upgradedArmour ? this.upgradedArmour : this.row.defaultBody;
+      const shield = this.upgradedShield ? this.upgradedShield : this.row.defaultShield;
+      const barding = this.upgradedBarding ? this.upgradedBarding : this.row.defaultBarding;
       if (armour) {
         save -= mods[armour];
       }
@@ -234,37 +275,11 @@ export default {
       return `${desc[0]}\n${desc[1]}`;
     },
     removeOption: function removeOption(optionIndex) {
-      const option = this.row.options[optionIndex];
-      if (option.upgradeWeapon) {
-        this.row.upgradedWeapon = '';
-      }
-      if (option.upgradeArmour) {
-        this.row.upgradedArmour = '';
-      }
-      if (option.upgradeShield) {
-        this.row.upgradedShield = '';
-      }
-      if (option.upgradeBarding) {
-        this.row.upgradedBarding = '';
-      }
       this.row.selectedOptions.splice(this.row.selectedOptions.indexOf(optionIndex), 1);
     },
     addOption: function addOption() {
       const optionKey = this.availableOptions[this.optionToAdd];
-      const option = this.row.options[optionKey];
       this.row.selectedOptions.push(optionKey);
-      if (option.upgradeWeapon) {
-        this.row.upgradedWeapon = option.upgradeWeapon;
-      }
-      if (option.upgradeArmour) {
-        this.row.upgradedArmour = option.upgradeArmour;
-      }
-      if (option.upgradeShield) {
-        this.row.upgradedShield = option.upgradeShield;
-      }
-      if (option.upgradeBarding) {
-        this.row.upgradedBarding = option.upgradeBarding;
-      }
       this.optionToAdd = -1;
     },
     addFigure: function addFigure() {
