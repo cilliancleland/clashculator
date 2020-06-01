@@ -13,44 +13,51 @@
         v-on:select-period="selectPeriod"
       ></intro-screen>
       <div v-if="selectedNation" >
-        <top-buttons
-          v-bind:army-changed="armyChanged"
-          v-on:reset="reset"
-          v-on:save-locally="saveLocally"
-          v-on:delete-locally="deleteLocally"
-        ></top-buttons>
-        <header-section
-          v-bind:army-contents="armyContents"
-          v-bind:selected-nation="selectedNation"
-          v-bind:army-name="armyName"
-          v-bind:lists="periodLists"
-          v-bind:unit-to-add="unitToAdd"
-          v-on:update-army-name="updateArmyName"
-          v-on:add-unit="addUnit"
-        ></header-section>
-        <title-row
-          v-on:army-sort="armySort"
-          ></title-row>
-        <unit-row v-for="(row, index) in armyContents"
-          v-bind:key="row.id"
-          v-bind:row="row"
-          v-bind:index="index"
-          v-bind:num-units="armyContents.length"
-          v-on:remove-unit="removeUnit"
-          v-on:repos-up="reposUp"
-          v-on:repos-down="reposDown"
-        ></unit-row>
-        <sharable-link
-          v-bind:sharable="sharable"
-          v-on:show-toastr="showToastr"
-        ></sharable-link>
-        <h2>Trait descriptions</h2>
-        <table>
-          <traits-list v-for="(trait) in mostTraits"
-            v-bind:key="trait"
-            v-bind:trait="trait"
-          ></traits-list>
-        </table>
+        <faq-me v-if="faqIsVisible"
+          v-on:no-faq="noFaq"
+        >
+        </faq-me>
+        <div  v-if="!faqIsVisible">
+          <top-buttons
+            v-bind:army-changed="armyChanged"
+            v-on:show-faq="showFaq"
+            v-on:reset="reset"
+            v-on:save-locally="saveLocally"
+            v-on:delete-locally="deleteLocally"
+          ></top-buttons>
+          <header-section
+            v-bind:army-contents="armyContents"
+            v-bind:selected-nation="selectedNation"
+            v-bind:army-name="armyName"
+            v-bind:lists="periodLists"
+            v-bind:unit-to-add="unitToAdd"
+            v-on:update-army-name="updateArmyName"
+            v-on:add-unit="addUnit"
+          ></header-section>
+          <title-row
+            v-on:army-sort="armySort"
+            ></title-row>
+          <unit-row v-for="(row, index) in armyContents"
+            v-bind:key="row.id"
+            v-bind:row="row"
+            v-bind:index="index"
+            v-bind:num-units="armyContents.length"
+            v-on:remove-unit="removeUnit"
+            v-on:repos-up="reposUp"
+            v-on:repos-down="reposDown"
+          ></unit-row>
+          <sharable-link
+            v-bind:sharable="sharable"
+            v-on:show-toastr="showToastr"
+          ></sharable-link>
+          <h2>Trait descriptions</h2>
+          <table>
+            <traits-list v-for="(trait) in mostTraits"
+              v-bind:key="trait"
+              v-bind:trait="trait"
+            ></traits-list>
+          </table>
+        </div>
       </div>
       <toastr v-bind:message="toastrMessage"></toastr>
     </div>
@@ -67,6 +74,7 @@ import TitleRow from './TitleRow.vue';
 import Toastr from './Toastr.vue';
 import UnitRow from './UnitRow.vue';
 import TraitsList from './TraitsList.vue';
+import FaqMe from './FaqMe.vue';
 
 export default {
   name: 'Calculator',
@@ -79,6 +87,7 @@ export default {
     toastr: Toastr,
     'unit-row': UnitRow,
     'traits-list': TraitsList,
+    'faq-me': FaqMe,
   },
   data: function data() {
     return {
@@ -95,6 +104,7 @@ export default {
       savedName: '',
       toastrMessage: '',
       toastrTimeout: 0,
+      faqIsVisible: false,
     };
   },
   computed: {
@@ -289,6 +299,12 @@ export default {
     },
     removeUnit: function removeUnit(idx) {
       this.armyContents.splice(idx, 1);
+    },
+    showFaq: function showFaq() {
+      this.faqIsVisible = true;
+    },
+    noFaq: function faq() {
+      this.faqIsVisible = false;
     },
     reset: function reset() {
       this.selectedNation = '';

@@ -176,7 +176,9 @@ export default {
       }
 
       .top-buttons {
-        width: 302px;
+        position: relative;
+        float: none;
+        margin-top: auto;
       }
     }
 

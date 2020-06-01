@@ -1,6 +1,12 @@
 <template>
     <div class="top-buttons">
       <button
+        title="FAQ"
+        v-on:click="$emit('show-faq')"
+        class="top-button">
+        <i class="fa fa-question top-button-icon"></i> FAQ
+      </button>
+      <button
         title="Reset"
         v-on:click="$emit('reset')"
         class="top-button">
@@ -35,6 +41,7 @@ export default {
   name: 'TopButtons',
   props: [
     'armyChanged',
+    'showFaq',
     'reset',
     'saveLocally',
     'deleteLocally',
