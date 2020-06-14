@@ -217,7 +217,7 @@ export default {
     // see if any options are set
     this.sorting = localStorage.getItem('sorting') || this.sorting;
     this.autoNumber = localStorage.getItem('autoNumber') || this.autoNumber;
-    this.defaultNumber = parseInt(10, localStorage.getItem('defaultNumber')) || this.defaultNumber;
+    this.defaultNumber = parseInt(localStorage.getItem('defaultNumber'), 10) || this.defaultNumber;
     this.showDeployTable = localStorage.getItem('showDeployTable') || this.showDeployTable;
   },
   methods: {
