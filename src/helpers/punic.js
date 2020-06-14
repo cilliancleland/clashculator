@@ -740,7 +740,7 @@ const punic = {
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
       traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
-      cost: 15,
+      cost: 14,
       options: [
       ],
     },
@@ -877,7 +877,7 @@ const punic = {
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
       traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
-      cost: 15,
+      cost: 14,
       options: [
       ],
     },
@@ -1014,7 +1014,7 @@ const punic = {
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
       traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
-      cost: 15,
+      cost: 14,
       options: [
       ],
     },

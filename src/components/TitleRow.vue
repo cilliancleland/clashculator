@@ -35,6 +35,9 @@
 <script>
 export default {
   name: 'TitleRow',
+  props: [
+    'sorting',
+  ],
 };
 </script>
 <style scoped lang="scss">

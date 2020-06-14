@@ -13,14 +13,22 @@
         v-on:select-period="selectPeriod"
       ></intro-screen>
       <div v-if="selectedNation" >
-        <faq-me v-if="faqIsVisible"
+        <faq-me v-if="showScreen=='faq'"
           v-on:no-faq="noFaq"
-        >
-        </faq-me>
-        <div  v-if="!faqIsVisible">
+        ></faq-me>
+        <options-screen v-if="showScreen=='options'"
+          v-on:no-options="noOptions"
+          v-on:set-option="setOption"
+          v-bind:sorting="sorting"
+          v-bind:auto-number="autoNumber"
+          v-bind:default-number="defaultNumber"
+          v-bind:show-deploy-table="showDeployTable"
+        ></options-screen>
+        <div v-if="showScreen=='main'">
           <top-buttons
             v-bind:army-changed="armyChanged"
             v-on:show-faq="showFaq"
+            v-on:show-options="showOptions"
             v-on:reset="reset"
             v-on:save-locally="saveLocally"
             v-on:delete-locally="deleteLocally"
@@ -36,8 +44,12 @@
           ></header-section>
           <title-row
             v-on:army-sort="armySort"
+            v-bind:sorting="sorting"
             ></title-row>
           <unit-row v-for="(row, index) in armyContents"
+            v-bind:auto-number="autoNumber"
+            v-bind:deployment-numbers="deploymentNumbers"
+            v-bind:sorting="sorting"
             v-bind:key="row.id"
             v-bind:row="row"
             v-bind:index="index"
@@ -57,6 +69,8 @@
               v-bind:trait="trait"
             ></traits-list>
           </table>
+          <deployment-table v-if="showDeployTable==true">
+          </deployment-table>
         </div>
       </div>
       <toastr v-bind:message="toastrMessage"></toastr>
@@ -74,7 +88,10 @@ import TitleRow from './TitleRow.vue';
 import Toastr from './Toastr.vue';
 import UnitRow from './UnitRow.vue';
 import TraitsList from './TraitsList.vue';
+import DeploymentTable from './DeploymentTable.vue';
 import FaqMe from './FaqMe.vue';
+import OptionsScreen from './OptionsScreen.vue';
+import shuffle from '../helpers/helpers';
 
 export default {
   name: 'Calculator',
@@ -84,10 +101,12 @@ export default {
     'intro-screen': IntroScreen,
     'sharable-link': SharableLink,
     'title-row': TitleRow,
+    'deployment-table': DeploymentTable,
     toastr: Toastr,
     'unit-row': UnitRow,
     'traits-list': TraitsList,
     'faq-me': FaqMe,
+    'options-screen': OptionsScreen,
   },
   data: function data() {
     return {
@@ -104,10 +123,17 @@ export default {
       savedName: '',
       toastrMessage: '',
       toastrTimeout: 0,
-      faqIsVisible: false,
+      showScreen: 'main',
+      sorting: 'manual',
+      autoNumber: false,
+      defaultNumber: 6,
+      showDeployTable: 'false',
     };
   },
   computed: {
+    deploymentNumbers: function deploymentNumbers() {
+      return shuffle([...Array(this.armyContents.length).keys()]);
+    },
     periods: function periods() {
       return Object.keys(this.allLists);
     },
@@ -188,6 +214,11 @@ export default {
       this.hydrateCompactArmy(objStr, 'darkAge');
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
+    // see if any options are set
+    this.sorting = localStorage.getItem('sorting') || this.sorting;
+    this.autoNumber = localStorage.getItem('autoNumber') || this.autoNumber;
+    this.defaultNumber = parseInt(10, localStorage.getItem('defaultNumber')) || this.defaultNumber;
+    this.showDeployTable = localStorage.getItem('showDeployTable') || this.showDeployTable;
   },
   methods: {
     loadArmy: function loadArmy(savedName) {
@@ -284,7 +315,7 @@ export default {
       }
       const newEntry = { ...this.periodLists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry, 'id', Math.random());
-      Vue.set(newEntry, 'size', newEntry.fixedFigures !== undefined ? newEntry.fixedFigures : 6);
+      Vue.set(newEntry, 'size', newEntry.fixedFigures !== undefined ? newEntry.fixedFigures : this.defaultNumber);
       Vue.set(newEntry, 'selectedOptions', []);
       Vue.set(newEntry, 'excludedOptions', []);
       Vue.set(newEntry, 'upgradedArmour', '');
@@ -295,16 +326,27 @@ export default {
       newEntry.unitSize = unitSize.bind(newEntry);
       this.armyContents.push(newEntry);
       this.unitToAdd = '';
+      if (this.sorting === 'auto') this.armySort();
       return newEntry;
     },
     removeUnit: function removeUnit(idx) {
       this.armyContents.splice(idx, 1);
     },
     showFaq: function showFaq() {
-      this.faqIsVisible = true;
+      this.showScreen = 'faq';
     },
-    noFaq: function faq() {
-      this.faqIsVisible = false;
+    noFaq: function noFaq() {
+      this.showScreen = 'main';
+    },
+    showOptions: function showOptions() {
+      this.showScreen = 'options';
+    },
+    noOptions: function noOptions() {
+      this.showScreen = 'main';
+    },
+    setOption: function setOption(name, value) {
+      this[name] = value;
+      localStorage.setItem(name, value);
     },
     reset: function reset() {
       this.selectedNation = '';

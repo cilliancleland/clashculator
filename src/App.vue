@@ -49,6 +49,9 @@ export default {
       font-size: 80%;
       font-weight: normal;
     }
+    .deployment-number {
+      display: none;
+    }
     .unit-row {
       border-bottom: 1px solid #505050;
       padding-bottom: 0.5rem;
@@ -175,6 +178,9 @@ export default {
           font-size: 15px;
       }
 
+      .top-button {
+        margin-left: 1em;
+      }
       .top-buttons {
         position: relative;
         float: none;
@@ -194,6 +200,15 @@ export default {
   span.unit-trait{
     color:black !important;
     background-color:white !important;
+  }
+  .deployment-number {
+    display: block;
+    float: left;
+    margin-left: -32px;
+    margin-top: 10px;
+    border: solid grey 1px;
+    border-radius: 50%;
+    padding: 6px;
   }
 }
 

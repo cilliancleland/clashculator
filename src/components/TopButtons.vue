@@ -7,6 +7,12 @@
         <i class="fa fa-question top-button-icon"></i> FAQ
       </button>
       <button
+        title="Options"
+        v-on:click="$emit('show-options')"
+        class="top-button">
+        <i class="fa fa-cog top-button-icon"></i> Options
+      </button>
+      <button
         title="Reset"
         v-on:click="$emit('reset')"
         class="top-button">
@@ -42,6 +48,7 @@ export default {
   props: [
     'armyChanged',
     'showFaq',
+    'showOptions',
     'reset',
     'saveLocally',
     'deleteLocally',

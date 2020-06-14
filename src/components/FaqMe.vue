@@ -20,7 +20,7 @@
             </li>
         </ul>
         <button
-            title="Reset"
+            title="Close"
             v-on:click="$emit('no-faq')" >
                 close
         </button>
@@ -46,7 +46,7 @@
         <p>
             Clicking the Save button will save the army to your device.
             It is saved to local storage, a bit like a cookie, and won't
-            be available anywhere else. Next time you koad the page, or
+            be available anywhere else. Next time you load the page, or
             after you reset, you should see the option to load this army.
         </p>
         <p>
@@ -60,13 +60,17 @@
             arrow in that row. To sort a list into book order you can click the double
             arrow icon at the left of the title row.
         </p>
+        <p>
+            In the options section there is an option to autosort. This will sort the units
+            into book order each time you add a unit.
+        </p>
         <a name="share" />
         <h2>How do I share?</h2>
         <p>
             Beneath the army list, but above the Trait Descriptions, there is a text
             box labelled 'Share this list'. Clicking here will copy a link to your clipboard.
-            You can paste this link into an email or text to send it to someone or to share between
-            devices.
+            You can paste this link into an email or text to send it to someone or use it to share
+            between devices.
         </p>
         <button
             title="Reset"

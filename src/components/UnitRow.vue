@@ -2,18 +2,22 @@
 <template>
   <div class="unit-row">
     <div class="row-reposition">
-    <button title="Move up" v-if="index != 0" v-on:click="$emit('repos-up',index)" class="unit-up">
+    <button title="Move up" v-if="index != 0 && sorting=='manual'"
+      v-on:click="$emit('repos-up',index)" class="unit-up">
       <i class="fa fa-arrow-up"></i>
     </button>
     <button
       title="Move down"
-      v-if="numUnits -1 != index"
+      v-if="numUnits -1 != index && sorting=='manual'"
       v-on:click="$emit('repos-down',index)" class="unit-down">
       <i class="fa fa-arrow-down"></i>
     </button>
     </div>
     <div style="margin-left:32px;">
       <div class="unit-row-stats">
+        <div class="deployment-number" v-if="autoNumber==true">
+          {{deploymentNumbers[index]+1}}
+        </div>
         <div class="unit-cell unit-cell-wide">
           <strong>{{row.displayName}}</strong> ({{row.availability}})
         </div>
@@ -30,15 +34,15 @@
           {{calculateSave}}
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait"  v-if="row.defaultShield != HIDE_OPTION">
+          <span class="unit-trait"  v-if="showWeapon">
             {{upgradedWeapon ? upgradedWeapon : row.defaultWeapon}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait" v-if="row.defaultShield != HIDE_OPTION">
+          <span class="unit-trait" v-if="showShield">
             {{upgradedShield ? upgradedShield : row.defaultShield}}
           </span>
-          <span class="unit-trait" v-if="row.defaultShield != HIDE_OPTION">
+          <span class="unit-trait" v-if="showBody">
             {{upgradedArmour ? upgradedArmour : row.defaultBody}}
           </span>
           <span class="unit-trait" v-if="row.defaultBarding || row.upgradedBarding">
@@ -121,6 +125,7 @@ import {
   HALF_BARDING,
   HEAVY_SHIELD,
   OPT_BUCKLER,
+  HIDE_OPTION,
 } from '../helpers/constants';
 import { TRAIT_DESCRIPTIONS } from '../helpers/traits';
 
@@ -132,8 +137,23 @@ export default {
       TRAIT_DESCRIPTIONS,
     };
   },
-  props: ['row', 'index', 'num-units'],
+  props: [
+    'row',
+    'index',
+    'num-units',
+    'sorting',
+    'deployment-numbers',
+    'auto-number'],
   computed: {
+    showWeapon: function showWeapon() {
+      return this.row.defaultWeapon !== HIDE_OPTION;
+    },
+    showBody: function showBody() {
+      return this.row.defaultBody !== HIDE_OPTION;
+    },
+    showShield: function showShield() {
+      return this.row.defaultShield !== HIDE_OPTION;
+    },
     upgradedTraits: function upgradedTraits() {
       const traits = [];
       this.row.selectedOptions.forEach((key) => {
