@@ -817,6 +817,7 @@ const punic = {
       traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_IMPULSUM, TRAIT_DETERMINED],
       cost: 24,
       options: [
+        OPT_UP_FULL_ARMOUR,
       ],
     },
     nobles: {
