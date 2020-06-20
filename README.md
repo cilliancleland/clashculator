@@ -13,9 +13,11 @@ Calculator for Clash of Spears
     - option for default number in a unit
     - option to print deploy fatigue table under traits
 - fix cost for caetrati
+- fix savve for elephant
 
 ## In the pipeline
 - async load period lists
 - Duplicate unit button
 - Buckler trait help
 - bow trait help
+- auto calculate points

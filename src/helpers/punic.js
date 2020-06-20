@@ -382,7 +382,7 @@ const punic = {
       combat: 3,
       ranged: 7,
       grit: 4,
-      fixedSave: 4,
+      fixedSave: '3+',
       traits: ['attacks(3)', 'wounds(4)', TRAIT_ELEPHANT],
       cost: 16.5,
       options: [
@@ -1629,7 +1629,7 @@ const punic = {
       combat: 3,
       ranged: 7,
       grit: 4,
-      fixedSave: 3,
+      fixedSave: '3+',
       traits: ['attacks(3)', 'wounds(4)', TRAIT_ELEPHANT],
       cost: 16.5,
       options: [
@@ -1826,7 +1826,7 @@ const punic = {
       combat: 3,
       ranged: 7,
       grit: 4,
-      fixedSave: 3,
+      fixedSave: '3+',
       traits: ['attacks(3)', 'wounds(5)', TRAIT_ELEPHANT],
       cost: 14.4,
       options: [
