@@ -1673,9 +1673,9 @@ const punic = {
     archers: {
       displayName: 'Archers',
       availability: CIVIS,
-      combat: 4,
+      combat: 5,
       ranged: 5,
-      grit: 4,
+      grit: 5,
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
@@ -1782,7 +1782,7 @@ const punic = {
       defaultShield: SHIELD,
       defaultBody: FULL,
       traits: [TRAIT_MOUNTED],
-      cost: 22,
+      cost: 23,
       options: [
         OPT_CHARGING,
         OPT_DOWN_PARTIAL_ARMOUR,
