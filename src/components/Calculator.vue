@@ -310,8 +310,8 @@ export default {
     addUnit: function addUnit(unitToAdd) {
       function unitSize() {
         return this.traits.indexOf('feral') > -1
-          ? this.size + 1
-          : this.size;
+          ? parseInt(this.size, 10) + 1
+          : parseInt(this.size, 10);
       }
       const newEntry = { ...this.periodLists[this.selectedNation][unitToAdd] };
       Vue.set(newEntry, 'id', Math.random());
