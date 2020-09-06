@@ -101,6 +101,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+    h3 {
+        display: none;
+    }
     table {
         width: 100%;
         display: none;
@@ -117,5 +120,8 @@ export default {
         table {
             display: table;
         }
+    h3 {
+        display: block;
+    }
     }
 </style>

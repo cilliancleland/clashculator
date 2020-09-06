@@ -21,7 +21,7 @@
       SV
     </div>
     <div class="unit-cell unit-cell-medium">
-      Weapon
+      Weapon (initiative)
     </div>
     <div class="unit-cell unit-cell-medium">
       Armour

@@ -15,8 +15,12 @@
     </div>
     <div style="margin-left:32px;">
       <div class="unit-row-stats">
-        <div class="deployment-number" v-if="autoNumber==true">
-          {{deploymentNumbers[index]+1}}
+        <div class="deployment-numbers" v-if="autoNumber==true">
+          <div class="deployment-number"
+                v-for="(num,index) in deploymentNumbers[index]"
+                v-bind:key="index">
+            {{num}}
+          </div>
         </div>
         <div class="unit-cell unit-cell-wide">
           <strong>{{row.displayName}}</strong> ({{row.availability}})
@@ -35,7 +39,7 @@
         </div>
         <div class="unit-cell unit-cell-medium">
           <span class="unit-trait"  v-if="showWeapon">
-            {{upgradedWeapon ? upgradedWeapon : row.defaultWeapon}}
+            {{displayWeapon}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
@@ -114,20 +118,14 @@
 
 <script>
 import {
-  NO_ARMOUR,
-  NO_SHIELD,
-  FULL,
-  PLATE,
-  PARTIAL,
-  BUCKLER,
-  SHIELD,
-  BARDING,
-  HALF_BARDING,
-  HEAVY_SHIELD,
-  OPT_BUCKLER,
   HIDE_OPTION,
+  SAVE_MODS,
+  HALF_BARDING,
+  OPT_BUCKLER,
+  WEAPON_INITIATIVES,
 } from '../helpers/constants';
-import { TRAIT_DESCRIPTIONS } from '../helpers/traits';
+// import { calcSaveNumber, calcSaveSymbol } from '../helpers/helpers';
+import { TRAIT_DESCRIPTIONS, TRAIT_MOUNTED } from '../helpers/traits';
 
 export default {
   name: 'UnitRow',
@@ -135,6 +133,7 @@ export default {
     return {
       optionToAdd: -1,
       TRAIT_DESCRIPTIONS,
+      TRAIT_MOUNTED,
     };
   },
   props: [
@@ -145,6 +144,10 @@ export default {
     'deployment-numbers',
     'auto-number'],
   computed: {
+    displayWeapon() {
+      const weap = this.upgradedWeapon ? this.upgradedWeapon : this.row.defaultWeapon;
+      return `${weap} ${WEAPON_INITIATIVES[weap]}`;
+    },
     showWeapon: function showWeapon() {
       return this.row.defaultWeapon !== HIDE_OPTION;
     },
@@ -258,35 +261,44 @@ export default {
       if (this.row.fixedSave) {
         return this.row.fixedSave;
       }
-      let symbol = '+';
       let save = 7;
-      const mods = {};
-      mods[NO_ARMOUR] = 0;
-      mods[NO_SHIELD] = 0;
-      mods[BUCKLER] = 0;
-      mods[FULL] = 2;
-      mods[PLATE] = 2;
-      mods[PARTIAL] = 1;
-      mods[SHIELD] = 1;
-      mods[HEAVY_SHIELD] = 2;
-      mods[BARDING] = 1;
-      mods[HALF_BARDING] = 0;
-      const armour = this.upgradedArmour ? this.upgradedArmour : this.row.defaultBody;
+      let symbol = '+';
       const shield = this.upgradedShield ? this.upgradedShield : this.row.defaultShield;
       const barding = this.upgradedBarding ? this.upgradedBarding : this.row.defaultBarding;
+      const armour = this.upgradedArmour ? this.upgradedArmour : this.row.defaultBody;
       if (armour) {
-        save -= mods[armour];
+        save -= SAVE_MODS[armour];
       }
       if (shield) {
-        save -= mods[shield];
+        save -= SAVE_MODS[shield];
       }
       if (barding) {
-        save -= mods[barding];
+        save -= SAVE_MODS[barding];
       }
       if (shield === OPT_BUCKLER || barding === HALF_BARDING) {
         symbol = '*';
       }
       return save + symbol;
+    },
+  },
+  watch: {
+    calculateSave: { // set the number of deployment tokens
+      immediate: true,
+      handler(a) {
+        let tokens = 0;
+        if (this.row.availability === 'leader') {
+          tokens = 0;
+        } else {
+          const save = a.substr(0, 1);
+          const mounted = this.row.traits.indexOf(this.TRAIT_MOUNTED) > -1;
+          if ((save > 4 && mounted) || save > 5) {
+            tokens = 2;
+          } else {
+            tokens = 1;
+          }
+        }
+        this.row.numTokens = tokens;
+      },
     },
   },
   methods: {

@@ -17,6 +17,7 @@ const MILITES = 'milites';
 const CIVIS = 'civis';
 const RARE = 'rare';
 
+// armour
 const NO_SHIELD = 'no shield';
 const NO_ARMOUR = 'no armour';
 const PLATE = 'full plate armour';
@@ -24,24 +25,44 @@ const FULL = 'full armour';
 const PARTIAL = 'partial armour';
 const BARDING = 'barding';
 const HALF_BARDING = 'half barding';
+// shields
 const BUCKLER = 'buckler';
 const SHIELD = 'shield';
 const HEAVY_SHIELD = 'heavy shield';
+// weapon
+const JAVELIN = 'javelin';
+const SLING = 'sling';
+const BOW = 'bow';
+const XBOW = 'crossbow';
 const THROWING = 'throwing spear';
 const THRUSTING = 'thrusting spear';
 const SWORD = 'sword';
 const LANCE = 'lance';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
-const JAVELIN = 'javelin';
-const SLING = 'sling';
 const MIXED = 'mixed hand weapons';
-const BOW = 'bow';
-const XBOW = 'crossbow';
 const AX = 'double handed axe';
 const PIKE = 'pike';
 const XYSTON = 'xtston';
+// other
 const HIDE_OPTION = 'hideoption';
+
+const WEAPON_INITIATIVES = {
+  [JAVELIN]: '',
+  [SLING]: '',
+  [BOW]: '',
+  [XBOW]: '',
+  [THROWING]: '(2)',
+  [THRUSTING]: '(3)',
+  [SWORD]: '(1)',
+  [LANCE]: '(2)',
+  [JAVELIN_THRUSTING]: '(3)',
+  [CAVALRY_SPEAR]: '(2)',
+  [MIXED]: '(1)',
+  [AX]: '(1)',
+  [PIKE]: '(4)',
+  [XYSTON]: '(3)',
+};
 
 const OPT_BUCKLER = {
   name: 'Add buckler (+1pts/model)',
@@ -245,7 +266,20 @@ const characterOptions = [
   },
 ];
 
+const SAVE_MODS = {};
+SAVE_MODS[NO_ARMOUR] = 0;
+SAVE_MODS[NO_SHIELD] = 0;
+SAVE_MODS[BUCKLER] = 0;
+SAVE_MODS[FULL] = 2;
+SAVE_MODS[PLATE] = 2;
+SAVE_MODS[PARTIAL] = 1;
+SAVE_MODS[SHIELD] = 1;
+SAVE_MODS[HEAVY_SHIELD] = 2;
+SAVE_MODS[BARDING] = 1;
+SAVE_MODS[HALF_BARDING] = 0;
+
 export {
+  SAVE_MODS,
   MILITES,
   CIVIS,
   RARE,
@@ -294,4 +328,5 @@ export {
   OPT_HUNTER,
   characterOptions,
   elephantOptions,
+  WEAPON_INITIATIVES,
 };

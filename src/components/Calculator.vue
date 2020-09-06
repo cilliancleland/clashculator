@@ -91,7 +91,7 @@ import TraitsList from './TraitsList.vue';
 import DeploymentTable from './DeploymentTable.vue';
 import FaqMe from './FaqMe.vue';
 import OptionsScreen from './OptionsScreen.vue';
-import shuffle from '../helpers/helpers';
+import { shuffle } from '../helpers/helpers';
 
 export default {
   name: 'Calculator',
@@ -132,7 +132,14 @@ export default {
   },
   computed: {
     deploymentNumbers: function deploymentNumbers() {
-      return shuffle([...Array(this.armyContents.length).keys()]);
+      const numCounters = this.armyContents.reduce((total, unit) => {
+        return total + unit.numTokens;
+      }, 0);
+      const shuffled = shuffle([...Array(numCounters).keys()]);
+      const sorted = this.armyContents.map((unit) => {
+        return shuffled.splice(0, unit.numTokens);
+      }, []);
+      return sorted; // sorted.map((x) => { return x + 1; });
     },
     periods: function periods() {
       return Object.keys(this.allLists);
@@ -215,12 +222,16 @@ export default {
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
     // see if any options are set
+    debugger;
     this.sorting = localStorage.getItem('sorting') || this.sorting;
-    this.autoNumber = localStorage.getItem('autoNumber') || this.autoNumber;
+    this.autoNumber = localStorage.getItem('autoNumber') === 'true' || this.autoNumber;
     this.defaultNumber = parseInt(localStorage.getItem('defaultNumber'), 10) || this.defaultNumber;
-    this.showDeployTable = localStorage.getItem('showDeployTable') || this.showDeployTable;
+    this.showDeployTable = (localStorage.getItem('showDeployTable') === 'true') || this.showDeployTable;
   },
   methods: {
+    // setUnitSave: function setUnitSave(index, save) {
+    //   this.armyContents[index].calcSave = save;
+    // },
     loadArmy: function loadArmy(savedName) {
       const savedArmies = JSON.parse(localStorage.getItem('armies')) || {};
       const savedArmy = savedArmies[savedName];
@@ -323,6 +334,7 @@ export default {
       Vue.set(newEntry, 'upgradedWeapon', '');
       Vue.set(newEntry, 'upgradedBarding', '');
       Vue.set(newEntry, 'type', unitToAdd);
+      Vue.set(newEntry, 'numTokens', 0);
       newEntry.unitSize = unitSize.bind(newEntry);
       this.armyContents.push(newEntry);
       this.unitToAdd = '';

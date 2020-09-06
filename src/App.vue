@@ -49,8 +49,20 @@ export default {
       font-size: 80%;
       font-weight: normal;
     }
-    .deployment-number {
+    .deployment-numbers {
       display: none;
+      display: inline-block;
+      margin-left: -35px;
+      width: 35px;
+    }
+    .deployment-number {
+      border: solid grey 1px;
+      border-radius: 50%;
+      padding: 6px;
+      display: inline-block;
+      height: 10px;
+      line-height: 10px;
+
     }
     .unit-row {
       border-bottom: 1px solid #505050;
@@ -201,14 +213,8 @@ export default {
     color:black !important;
     background-color:white !important;
   }
-  .deployment-number {
-    display: block;
-    float: left;
-    margin-left: -32px;
-    margin-top: 10px;
-    border: solid grey 1px;
-    border-radius: 50%;
-    padding: 6px;
+  .deployment-numbers {
+      display: inline-block;
   }
 }
 

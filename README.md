@@ -13,9 +13,12 @@ Calculator for Clash of Spears
     - option for default number in a unit
     - option to print deploy fatigue table under traits
 - fix cost for caetrati
-- fix savve for elephant
+- fix save for elephant
+- Fix deployment numbers, none for leaders 2 for lights
+- weapon initiatives
 
 ## In the pipeline
+- fix settings save
 - async load period lists
 - Duplicate unit button
 - Buckler trait help

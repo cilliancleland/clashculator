@@ -1,3 +1,10 @@
+import {
+  SAVE_MODS,
+  HALF_BARDING,
+  OPT_BUCKLER,
+} from './constants';
+import { TRAIT_MOUNTED } from './traits';
+
 function shuffle(inArray) {
   const array = inArray;
   let currentIndex = array.length;
@@ -15,4 +22,50 @@ function shuffle(inArray) {
   }
   return array;
 }
-export default shuffle;
+
+function calcSaveNumber(unit) {
+  let save = 7;
+  const shield = unit.upgradedShield ? unit.upgradedShield : unit.defaultShield;
+  const barding = unit.upgradedBarding ? unit.upgradedBarding : unit.defaultBarding;
+  const armour = unit.upgradedArmour ? unit.upgradedArmour : unit.defaultBody;
+  if (armour) {
+    save -= SAVE_MODS[armour];
+  }
+  if (shield) {
+    save -= SAVE_MODS[shield];
+  }
+  if (barding) {
+    save -= SAVE_MODS[barding];
+  }
+  return save;
+}
+
+function calcSaveSymbol(unit) {
+  const shield = unit.upgradedShield ? unit.upgradedShield : unit.defaultShield;
+  const barding = unit.upgradedBarding ? unit.upgradedBarding : unit.defaultBarding;
+  let symbol = '+';
+  if (shield === OPT_BUCKLER || barding === HALF_BARDING) {
+    symbol = '*';
+  }
+  return symbol;
+}
+
+function numDeploymentCounters(unit) {
+  if (unit.availability === 'leader') {
+    return 0;
+  }
+  const save = calcSaveNumber(unit);
+  const mounted = unit.traits.indexOf(TRAIT_MOUNTED) > 1;
+
+  if ((save > 4 && mounted) || save > 5) {
+    return 2;
+  }
+  return 1;
+}
+
+export {
+  shuffle,
+  calcSaveNumber,
+  calcSaveSymbol,
+  numDeploymentCounters,
+};
