@@ -20,6 +20,10 @@ import {
   TRAIT_COMMAND_PYRRHIC,
   TRAIT_COMMAND_NUMIDIAN,
   TRAIT_COMMAND_GREEK,
+  // TRAIT_WALL_OF_SPEARS,
+  TRAIT_SHIELD_OVERLAP,
+  TRAIT_EXTRA_BOW,
+  TRAIT_OFFENSIVE_SPEAR,
 } from './traits';
 
 const MILITES = 'milites';
@@ -39,6 +43,7 @@ const BUCKLER = 'buckler';
 const SHIELD = 'shield';
 const HEAVY_SHIELD = 'heavy shield';
 // weapon
+const STONES = 'stones';
 const JAVELIN = 'javelin';
 const SLING = 'sling';
 const BOW = 'bow';
@@ -50,7 +55,7 @@ const LANCE = 'lance';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
 const MIXED = 'mixed hand weapons';
-const AX = 'double handed axe';
+const AX = 'double handed weapon';
 const PIKE = 'pike';
 const XYSTON = 'xtston';
 // other
@@ -60,6 +65,7 @@ const WEAPON_INITIATIVES = {
   [JAVELIN]: '',
   [SLING]: '',
   [BOW]: '',
+  [STONES]: '',
   [XBOW]: '',
   [THROWING]: '(2)',
   [THRUSTING]: '(3)',
@@ -88,6 +94,33 @@ const OPT_BARDING = {
   upgradeArmour: '',
   upgradeShield: '',
   upgradeBarding: BARDING,
+  upgradeTraits: [],
+};
+const OPT_JAVELIN_SHIELD = {
+  name: 'upgrade to shield and extra equipmnent javelin (+3)',
+  cost: 3,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: SHIELD,
+  upgradeBarding: '',
+  upgradeTraits: [TRAIT_EXTRA_JAVELIN],
+};
+const OPT_THROWING_OFFENSIVE = {
+  name: 'upgrade to throwing spears and offensive spear (+4)',
+  cost: 4,
+  upgradeWeapon: THROWING,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [TRAIT_OFFENSIVE_SPEAR],
+};
+const OPT_UP_THROWING = {
+  name: 'upgrade to throwing spears',
+  cost: 0,
+  upgradeWeapon: THROWING,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
   upgradeTraits: [],
 };
 const OPT_HALF_BARDING = {
@@ -187,6 +220,14 @@ const OPT_UP_HEAVY_SHIELD = {
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [],
 };
+const OPT_UP_SHIELD_AND_OVERLAP = {
+  name: 'Upgrade to heavy shield and shield overlap ( +2 pts)',
+  cost: 2,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: HEAVY_SHIELD,
+  upgradeTraits: [TRAIT_SHIELD_OVERLAP],
+};
 const OPT_DOWN_BUCKLER = {
   name: 'Downgrade to buckler ( -1 pts)',
   cost: -1,
@@ -194,6 +235,14 @@ const OPT_DOWN_BUCKLER = {
   upgradeArmour: '',
   upgradeShield: BUCKLER,
   upgradeTraits: [TRAIT_BUCKLER],
+};
+const OPT_UP_EXTRA_BOW = {
+  name: 'upgrade to extra equipment bow (+3)',
+  cost: 3,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [TRAIT_EXTRA_BOW],
 };
 const OPT_CHARGING = {
   name: 'Upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
@@ -302,14 +351,20 @@ const OPT_COMMAND_PUNIC = {
   upgradeCommand: TRAIT_COMMAND_PUNIC,
   upgradeTraits: [TRAIT_COMMAND_PUNIC],
 };
+const OPT_JAV_TO_BOW = {
+  name: 'change javelin to bow (free)',
+  cost: 0,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: BOW,
+  upgradeTraits: [],
+};
 
 const elephantOptions = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
-  {
-    name: 'change javelin to bow ( free)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: BOW, upgradeTraits: [],
-  },
+  OPT_JAV_TO_BOW,
   {
     name: 'Upgrade to full armor (2ps)', cost: 1, upgradeArmour: FULL, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
   },
@@ -323,7 +378,21 @@ const elephantOptions = [
     name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [TRAIT_HOWDA],
   },
 ];
-
+const indianElephantOptions = [
+  {
+    name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
+  },
+  OPT_JAV_TO_BOW,
+  {
+    name: 'Upgrade to partial armor (2ps)', cost: 1, upgradeArmour: PARTIAL, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
+  },
+  {
+    name: 'add shields (+2pts)', cost: 1, upgradeArmour: '', upgradeShield: SHIELD, upgradeWeapon: '', upgradeTraits: [],
+  },
+  {
+    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [TRAIT_HOWDA],
+  },
+];
 
 const characterOptions = [
   {
@@ -390,6 +459,7 @@ export {
   THROWING,
   THRUSTING,
   CAVALRY_SPEAR,
+  STONES,
   JAVELIN,
   SLING,
   BOW,
@@ -404,6 +474,7 @@ export {
   OPT_SHIELD,
   OPT_DRILLED,
   OPT_UP_NO_TO_HEAVY_SHIELD,
+  OPT_UP_SHIELD_AND_OVERLAP,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
   OPT_UP_PARTIAL_ARMOUR,
@@ -416,6 +487,9 @@ export {
   OPT_CHARGING,
   OPT_UP_CHARIOT,
   OPT_HALF_BARDING,
+  OPT_JAV_TO_BOW,
+  OPT_THROWING_OFFENSIVE,
+  OPT_UP_THROWING,
   OPT_HUNTER,
   OPT_COMMAND_ALL,
   OPT_COMMAND_NUMIDIAN,
@@ -426,7 +500,10 @@ export {
   OPT_COMMAND_GREEK,
   OPT_COMMAND_GALLIC,
   OPT_COMMAND_PUNIC,
+  OPT_UP_EXTRA_BOW,
+  OPT_JAVELIN_SHIELD,
   characterOptions,
   elephantOptions,
+  indianElephantOptions,
   WEAPON_INITIATIVES,
 };

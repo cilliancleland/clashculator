@@ -18,13 +18,17 @@ Calculator for Clash of Spears
 - weapon initiatives
 - Fixed soothsayer bug
 - added command abilities
-
-
-## In the pipeline
 - what's new
 - fix settings save
+- soothsayer points and undefined bug
+- alexandrian lists
+
+## In the pipeline
+- fix for elephant crew deployment tokens
+- hide deployment tokens unless printing
 - async load period lists
 - Duplicate unit button
 - Buckler trait help
 - bow trait help
 - auto calculate points
+- fix elephant options

@@ -51,8 +51,19 @@ const TRAIT_COMMAND_PYRRHIC = 'Resolute Commander';
 const TRAIT_COMMAND_NUMIDIAN = 'At an Easy Trot';
 const TRAIT_COMMAND_GREEK = 'One of Us';
 const TRAIT_COMMAND_PUNIC = 'Multicultural';
+const TRAIT_EXTRA_BOW = 'extra equipment bow';
+const TRAIT_EXTRA_TWO = 'extra equipment two handed weapon';
+const TRAIT_SPARABARA = 'sparabara';
 
 const TRAIT_DESCRIPTIONS = {
+  [TRAIT_SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
+  front rank is depicted as sparabara armed spearmen. While in close formation any figure not in the
+  front rank may fire bows and they gain the unit gains the shield overlap rule. When in loose formation
+  there are not a sufficient number of shields to afford protection to the unit and they are treated as
+  having armor 7. All figures may fire bows when in lose formation. Their formation determines their
+  armor for the purpose of fatigue.`],
+  [TRAIT_EXTRA_BOW]: ['affects shooting', 'can switch to bow for an action'],
+  [TRAIT_EXTRA_TWO]: ['affects melee', 'can switch to two handed weapon for an action'],
   [TRAIT_IRON_WILL]: ['affects fatigue effects', 'do not remove if fatigue is twice model count', 'p.73'],
   [TRAIT_SHIELD_OVERLAP]: ['requires heavy shield and close order, affects enemy to hit', 'melee or shooting attacks are -1 to hit', 'p.70'],
   [TRAIT_SKIRMISH_SPECIALIST]: ['requires loose order, affects save, grit, reaction', '+1 to save from missles, free reaction at 4", worse morale in melee unless fighting skirmishers', 'p.70'],
@@ -123,6 +134,8 @@ export {
   TRAIT_SHIELD_OVERLAP,
   TRAIT_SKIRMISH_SPECIALIST,
   TRAIT_WALL_OF_SPEARS,
+  TRAIT_EXTRA_BOW,
+  TRAIT_EXTRA_TWO,
   TRAIT_OFFENSIVE_SPEAR,
   TRAIT_DRILLED,
   TRAIT_GUERRILLA,
@@ -163,4 +176,5 @@ export {
   TRAIT_COMBINED_ARMS,
   TRAIT_CUTTHROAT,
   TRAIT_RAIN,
+  TRAIT_SPARABARA,
 };

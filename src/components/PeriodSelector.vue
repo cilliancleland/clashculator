@@ -26,6 +26,7 @@ export default {
       periodLabels: {
         punic: 'Punic Wars',
         darkAge: 'Dark Ages (beta)',
+        alex: 'Alexandrian (beta)',
       },
     };
   },

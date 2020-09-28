@@ -10,9 +10,7 @@ import {
   FULL,
   SHIELD,
   HEAVY_SHIELD,
-  // THROWING,
   THRUSTING,
-  // CAVALRY_SPEAR,
   JAVELIN,
   SLING,
   BOW,
@@ -20,31 +18,23 @@ import {
   STONES,
   SWORD,
   PIKE,
-  // XYSTON,
-  // JAVELIN_THRUSTING,
   OPT_BUCKLER,
   OPT_SHIELD,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
   OPT_UP_PARTIAL_ARMOUR,
-  // OPT_UP_FULL_ARMOUR,
-  // OPT_UPGRADE_CAVALRY_JAVELIN,
-  // OPT_DOWN_HEAVY_SHIELD,
-  // OPT_DOWN_BUCKLER,
-  // OPT_UP_HEAVY_SHIELD,
-  // OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_THROWING_OFFENSIVE,
   OPT_UP_THROWING,
   OPT_CHARGING,
   OPT_UP_SHIELD_AND_OVERLAP,
   OPT_UP_EXTRA_BOW,
   OPT_JAV_TO_BOW,
-  elephantOptions,
+  indianElephantOptions,
   CAVALRY_SPEAR,
   OPT_UP_FULL_ARMOUR,
   BUCKLER,
   OPT_JAVELIN_SHIELD,
-  XYSTON,, OPT_UPGRADE_CAVALRY_JAVELIN
+  XYSTON,
 } from './constants';
 
 
@@ -60,16 +50,9 @@ import {
   TRAIT_ALLIES,
   TRAIT_MOUNTED,
   TRAIT_SPARABARA,
-  // TRAIT_IMPETUS,
   TRAIT_IRA,
   TRAIT_FIDELIS,
-  // TRAIT_FERAL,
-  // TRAIT_EXTRA_JAVELIN,
-  // TRAIT_DETERMINED,
-  // TRAIT_IMPULSUM,
   TRAIT_AIM,
-  // TRAIT_MACEDONIAN,
-  // TRAIT_ENDURANCE,
   TRAIT_MARAUDERS,
   TRAIT_ELEPHANT,
   TRAIT_CHARGE,
@@ -182,7 +165,7 @@ const thraciansAndGetae = {
     ],
   },
   mounted: {
-    displayName: 'Mounted Warrior',
+    displayName: 'Mounted Warriors',
     availability: CIVIS,
     combat: 4,
     ranged: 5,
@@ -423,7 +406,7 @@ const galgamala = {
     ranged: 5,
     grit: 5,
     defaultWeapon: PIKE,
-    defaultBody: PARTIAL_ARMOUR,
+    defaultBody: PARTIAL,
     defaultShield: SHIELD,
     traits: [
       TRAIT_DRILLED,
@@ -444,7 +427,7 @@ const galgamala = {
     ranged: 5,
     grit: 4,
     defaultWeapon: JAVELIN,
-    defaultBody: PARTIAL_ARMOUR,
+    defaultBody: PARTIAL,
     defaultShield: SHIELD,
     traits: [
       TRAIT_MOUNTED,
@@ -457,7 +440,7 @@ const galgamala = {
     ],
   },
   iranianHorse: {
-    displayName: 'Iranian Cavalry',
+    displayName: 'Iranian Horse Archers',
     availability: RARE,
     combat: 4,
     ranged: 5,
@@ -477,47 +460,99 @@ const galgamala = {
   },
 };
 const indus = {
-
+  elephant: {
+    displayName: 'Indian War Elephant',
+    availability: RARE,
+    fixedFigures: 4,
+    combat: 3,
+    ranged: 7,
+    grit: 4,
+    fixedSave: '3+',
+    traits: ['attacks(3)', 'wounds(5)', TRAIT_ELEPHANT],
+    cost: 18,
+    options: [
+    ],
+    defaultWeapon: HIDE_OPTION,
+    defaultShield: HIDE_OPTION,
+    defaultBody: HIDE_OPTION,
+  },
+  elephantCrew: {
+    displayName: 'Elephant Crew',
+    fixedFigures: 2,
+    availability: RARE,
+    traits: [TRAIT_IRON_WILL],
+    cost: 16,
+    options: indianElephantOptions,
+    defaultWeapon: JAVELIN,
+    combat: 4,
+    ranged: 4,
+    grit: 3,
+    defaultShield: NO_SHIELD,
+    defaultBody: NO_ARMOUR,
+  },
+  argyraspids: {
+    displayName: 'Silver Shields',
+    availability: RARE,
+    combat: 3,
+    ranged: 5,
+    grit: 3,
+    defaultWeapon: THRUSTING,
+    defaultBody: PARTIAL,
+    defaultShield: HEAVY_SHIELD,
+    traits: [
+      TRAIT_DRILLED,
+      TRAIT_WALL_OF_SPEARS,
+      TRAIT_OFFENSIVE_SPEAR,
+      TRAIT_SHIELD_OVERLAP,
+      TRAIT_DETERMINED,
+    ],
+    cost: 23,
+    options: [
+      OPT_UP_FULL_ARMOUR,
+    ],
+  },
 };
 
-// After the start of the campaign in the Indus River Valley
-// Indian War
-// Elephant rare 3 0 4 3
-// attack
-// (3),
-// wounds
-// (5) 72
-// add two crew for 32 points
-// extra crew 4 4 3 7 javelin none iron will 32
-// swap javelins for bows (free). Add shields (+2), add hawda for crew (+8), upgrade partial armor
-// (+4), upgrade to thrusting
-// spears (+2).
-// Silver Shields rare 3 5 3 4
-// thrusting
-// spear
-// heavy
-// shields,
-// partial
-// armor
-// drilled, wall of spears,
-// offensive spear, shield
-// overlap, determined 23
-// upgrade to full armor (+1)
-
-
-// Wars of the Successors
-// Thureophoroi rare 4 5 4 6
-// javelin
-// thrusting
-// spear Shield
-// wall of spears, offensive
-// spear, extra equipment
-// thrusting spear 16
-// upgrade to thorakatai and add partial armor (+2)
-
+const successors = {
+  thureophoroi: {
+    displayName: 'Thureophoroi',
+    availability: RARE,
+    combat: 4,
+    ranged: 5,
+    grit: 4,
+    defaultWeapon: THRUSTING,
+    defaultBody: PARTIAL,
+    defaultShield: SHIELD,
+    traits: [
+      TRAIT_WALL_OF_SPEARS,
+      TRAIT_SHIELD_OVERLAP,
+      TRAIT_DETERMINED,
+      TRAIT_EXTRA_JAVELIN,
+    ],
+    cost: 23,
+    options: [
+      OPT_UP_PARTIAL_ARMOUR,
+    ],
+  },
+};
 
 const alex = {
-  macedonians,
+  Macedonian: macedonians,
+  'Alexander after Galgamala': {
+    ...macedonians,
+    ...galgamala,
+  },
+  'Alexander after Indus': {
+    ...macedonians,
+    ...galgamala,
+    ...indus,
+  },
+  'Alexandrian successor': {
+    ...macedonians,
+    ...galgamala,
+    ...indus,
+    ...successors,
+  },
   Getae: {
     ...thraciansAndGetae,
     flaxman: {
@@ -809,7 +844,9 @@ const alex = {
         TRAIT_WALL_OF_SPEARS,
         TRAIT_OFFENSIVE_SPEAR,
         TRAIT_DRILLED,
-        TRAIT_FIDELIS],
+        TRAIT_FIDELIS,
+        TRAIT_ALLIES,
+      ],
       cost: 19,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -970,7 +1007,7 @@ const alex = {
         TRAIT_OFFENSIVE_SPEAR,
         TRAIT_DRILLED,
         TRAIT_FIDELIS],
-      cost: 18,
+      cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
       ],
@@ -1006,7 +1043,6 @@ const alex = {
       traits: [
         TRAIT_FUROR,
         TRAIT_IRA,
-        TRAIT_OFFENSIVE_SPEAR,
         TRAIT_EXTRA_TWO,
         TRAIT_DOUBLE,
         TRAIT_ALLIES],
@@ -1220,8 +1256,8 @@ const alex = {
       grit: 4,
       defaultWeapon: BOW,
       defaultShield: BUCKLER,
-      defaultBody: PARTIAL,
-      traits: [TRAIT_MOUNTED, TRAIT_SKIRMISH_SPECIALIST, TRAIT_ALLIES],
+      defaultBody: NO_ARMOUR,
+      traits: [TRAIT_MOUNTED, TRAIT_MARAUDERS, TRAIT_SKIRMISH_SPECIALIST, TRAIT_ALLIES],
       cost: 18,
       options: [
         OPT_CHARGING,
@@ -1340,7 +1376,7 @@ const alex = {
       displayName: 'Lancers',
       availability: RARE,
       combat: 3,
-      ranged: 4,
+      ranged: 5,
       grit: 3,
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: FULL,
@@ -1514,10 +1550,8 @@ const alex = {
       defaultBody: PARTIAL,
       traits: [TRAIT_IRON_WILL],
       cost: 18,
-      options: elephantOptions,
+      options: indianElephantOptions,
     },
-    // swap javelins for bows (free). Add shields (+2), add hawda for crew (+8),
-    // upgrade partial armor (+4), upgrade to thrusting spears (+2).
   },
 
 };
