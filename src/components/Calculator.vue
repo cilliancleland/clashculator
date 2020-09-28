@@ -222,7 +222,6 @@ export default {
     }
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
     // see if any options are set
-    debugger;
     this.sorting = localStorage.getItem('sorting') || this.sorting;
     this.autoNumber = localStorage.getItem('autoNumber') === 'true' || this.autoNumber;
     this.defaultNumber = parseInt(localStorage.getItem('defaultNumber'), 10) || this.defaultNumber;

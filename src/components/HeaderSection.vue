@@ -54,7 +54,8 @@ export default {
         const optionsCost = unit.selectedOptions.reduce((unitTotal, selectedOption) => {
           return unitTotal + unit.options[selectedOption].cost;
         }, 0);
-        return total + (unit.size * (unit.cost + optionsCost));
+        const thisUnitCost = unit.size ? (unit.size * (unit.cost + optionsCost)) : unit.cost;
+        return total + thisUnitCost;
       }, 0);
     },
     totalFiguresCount: function totalFiguresCount() {

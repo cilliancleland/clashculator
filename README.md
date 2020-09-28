@@ -16,8 +16,12 @@ Calculator for Clash of Spears
 - fix save for elephant
 - Fix deployment numbers, none for leaders 2 for lights
 - weapon initiatives
+- Fixed soothsayer bug
+- added command abilities
+
 
 ## In the pipeline
+- what's new
 - fix settings save
 - async load period lists
 - Duplicate unit button

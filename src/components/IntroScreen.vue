@@ -31,6 +31,22 @@
           </option>
       </select>
     </span>
+    <h3>What's new</h3>
+      <ul>
+        <li>Fixed soothsayer bug (please report any bugs on
+          <a href="https://www.facebook.com/groups/TheWargameSpot/" target="_blank">
+          Facebook</a>.
+          Bug reports are always welcome)</li>
+        <li>Added command abilitties from the excellent new supplement
+          <a href="https://www.wargamevault.com/product/310813/FIELDS-of-BLOOD"  target="_blank">
+          <b>FIELDS of <span  style="color:red">BLOOD</span></b>
+          </a>
+        </li>
+        <li>Options button. Set default unit size, auto sorting and print options</li>
+      </ul>
+    <p>
+
+    </p>
   </div>
 </template>
 

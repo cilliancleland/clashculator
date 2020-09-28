@@ -11,6 +11,15 @@ import {
   TRAIT_EXTRA_JAVELIN,
   TRAIT_EXTRA_CAVALRY,
   TRAIT_HUNTER,
+  TRAIT_COMMAND_ALL,
+  TRAIT_COMMAND_GALLIC,
+  TRAIT_COMMAND_PUNIC,
+  TRAIT_COMMAND_ROMAN,
+  TRAIT_COMMAND_ITALIAN,
+  TRAIT_COMMAND_SPANISH,
+  TRAIT_COMMAND_PYRRHIC,
+  TRAIT_COMMAND_NUMIDIAN,
+  TRAIT_COMMAND_GREEK,
 } from './traits';
 
 const MILITES = 'milites';
@@ -209,9 +218,91 @@ const OPT_HUNTER = {
   upgradeArmour: '',
   upgradeShield: '',
   upgradeWeapon: '',
-  unlessMounted: true,
   upgradeTraits: [TRAIT_HUNTER],
 };
+
+const OPT_COMMAND_ALL = {
+  name: TRAIT_COMMAND_ALL,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_ALL,
+  upgradeTraits: [TRAIT_COMMAND_ALL],
+};
+const OPT_COMMAND_NUMIDIAN = {
+  name: TRAIT_COMMAND_NUMIDIAN,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_NUMIDIAN,
+  upgradeTraits: [TRAIT_COMMAND_NUMIDIAN],
+};
+const OPT_COMMAND_PYRRHIC = {
+  name: TRAIT_COMMAND_PYRRHIC,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_PYRRHIC,
+  upgradeTraits: [TRAIT_COMMAND_PYRRHIC],
+};
+const OPT_COMMAND_SPANISH = {
+  name: TRAIT_COMMAND_SPANISH,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_SPANISH,
+  upgradeTraits: [TRAIT_COMMAND_SPANISH],
+};
+const OPT_COMMAND_ITALIAN = {
+  name: TRAIT_COMMAND_ITALIAN,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_ITALIAN,
+  upgradeTraits: [TRAIT_COMMAND_ITALIAN],
+};
+const OPT_COMMAND_ROMAN = {
+  name: TRAIT_COMMAND_ROMAN,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_ROMAN,
+  upgradeTraits: [TRAIT_COMMAND_ROMAN],
+};
+const OPT_COMMAND_GREEK = {
+  name: TRAIT_COMMAND_GREEK,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_GREEK,
+  upgradeTraits: [TRAIT_COMMAND_GREEK],
+};
+const OPT_COMMAND_GALLIC = {
+  name: TRAIT_COMMAND_GALLIC,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_GALLIC,
+  upgradeTraits: [TRAIT_COMMAND_GALLIC],
+};
+const OPT_COMMAND_PUNIC = {
+  name: TRAIT_COMMAND_PUNIC,
+  cost: 15,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeCommand: TRAIT_COMMAND_PUNIC,
+  upgradeTraits: [TRAIT_COMMAND_PUNIC],
+};
+
 const elephantOptions = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
@@ -326,6 +417,15 @@ export {
   OPT_UP_CHARIOT,
   OPT_HALF_BARDING,
   OPT_HUNTER,
+  OPT_COMMAND_ALL,
+  OPT_COMMAND_NUMIDIAN,
+  OPT_COMMAND_PYRRHIC,
+  OPT_COMMAND_SPANISH,
+  OPT_COMMAND_ITALIAN,
+  OPT_COMMAND_ROMAN,
+  OPT_COMMAND_GREEK,
+  OPT_COMMAND_GALLIC,
+  OPT_COMMAND_PUNIC,
   characterOptions,
   elephantOptions,
   WEAPON_INITIATIVES,

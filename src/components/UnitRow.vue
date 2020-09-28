@@ -19,7 +19,7 @@
           <div class="deployment-number"
                 v-for="(num,index) in deploymentNumbers[index]"
                 v-bind:key="index">
-            {{num}}
+            {{num + 1}}
           </div>
         </div>
         <div class="unit-cell unit-cell-wide">
@@ -94,7 +94,7 @@
           points each
         </div>
         <div class="unit-cell unit-cell-wide">
-          Total unit cost:  {{row.size * (row.cost + optionsCostPerFigure)}}
+          Total unit cost:  {{row.size ? (row.size * (row.cost + optionsCostPerFigure)) : row.cost}}
         </div>
       </div>
       <button v-for="(value, index) in row.selectedOptions"
@@ -206,6 +206,7 @@ export default {
       let excludeWeaponOptions = false;
       let excludeArmourOptions = false;
       let excludeShieldOptions = false;
+      let excludeCommandOptions = false;
       const exclusions = [];
       let isMounted = false;
       let isHeavyShield = false;
@@ -218,6 +219,9 @@ export default {
         }
         if (this.row.options[key].upgradeShield) {
           excludeShieldOptions = true;
+        }
+        if (this.row.options[key].upgradeCommand) {
+          excludeCommandOptions = true;
         }
         if (this.row.options[key].name === 'Upgrade to Horse'
           || this.row.options[key].name === 'Upgrade to Chariot') {
@@ -234,6 +238,7 @@ export default {
         if ((excludeShieldOptions && option.upgradeShield)
           || (excludeWeaponOptions && option.upgradeWeapon)
           || (excludeArmourOptions && option.upgradeArmour)
+          || (excludeCommandOptions && option.upgradeCommand)
           || (isHeavyShield && option.unlessHeavyShield)
           || (isMounted && option.unlessMounted)
           || (!isMounted && option.requiresMounted)

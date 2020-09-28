@@ -64,12 +64,12 @@ import {
 } from './traits';
 
 import {
-  characters,
+  charactersWithAbilities,
   charactersWithChariots,
 } from './characters';
 
 const greeks = {
-  ...characters,
+  ...charactersWithAbilities('greek'),
   psiloi: {
     displayName: 'Psiloi',
     availability: CIVIS,
@@ -223,7 +223,7 @@ const greeks = {
 
 const punic = {
   Carthaginian: { // as book
-    ...characters,
+    ...charactersWithAbilities('punic'),
     javelinmen: {
       displayName: 'Javelin men',
       availability: CIVIS,
@@ -407,7 +407,7 @@ const punic = {
     },
   },
   'Lowland Gallic': { // as book
-    ...charactersWithChariots(),
+    ...charactersWithChariots('gallic'),
     juves: {
       displayName: 'Juves',
       availability: CIVIS,
@@ -541,7 +541,7 @@ const punic = {
     },
   },
   Ligurian: { // as book
-    ...charactersWithChariots(),
+    ...charactersWithChariots('gallic'),
     juves: {
       displayName: 'Juves',
       availability: CIVIS,
@@ -729,7 +729,7 @@ const punic = {
     },
   },
   'Celt-Iberian': { // as book
-    ...characters,
+    ...charactersWithAbilities('spanish'),
     caetrati: {
       displayName: 'Caetrati',
       availability: CIVIS,
@@ -867,7 +867,7 @@ const punic = {
     },
   },
   Iberian: { // as book
-    ...characters,
+    ...charactersWithAbilities('punic'),
     caetrati: {
       displayName: 'Caetrati',
       availability: CIVIS,
@@ -1004,7 +1004,7 @@ const punic = {
     },
   },
   Lusitanian: { // as book
-    ...characters,
+    ...charactersWithAbilities('punic'),
     caetrati: {
       displayName: 'Caetrati',
       availability: CIVIS,
@@ -1142,7 +1142,7 @@ const punic = {
     },
   },
   'Etruscan or Campanian': { // as book
-    ...charactersWithChariots(),
+    ...charactersWithChariots('italian'),
     javelinmen: {
       displayName: 'Javelin men',
       availability: CIVIS,
@@ -1266,7 +1266,7 @@ const punic = {
     },
   },
   Samnite: { // as book
-    ...characters,
+    ...charactersWithAbilities('italian'),
     javelinmen: {
       displayName: 'Javelin men',
       availability: CIVIS,
@@ -1380,7 +1380,7 @@ const punic = {
     },
   },
   Roman: {
-    ...characters,
+    ...charactersWithAbilities('roman'),
     leves: {
       displayName: 'Leves',
       availability: CIVIS,
@@ -1533,7 +1533,7 @@ const punic = {
     },
   },
   Numidian: {
-    ...characters,
+    ...charactersWithAbilities('numidian'),
     javelinmen: {
       displayName: 'Javelin men',
       availability: CIVIS,
@@ -1654,7 +1654,7 @@ const punic = {
     },
   },
   Phyrrus: {
-    ...characters,
+    ...charactersWithAbilities('pyrrhic'),
     psiloi: {
       displayName: 'Psiloi',
       availability: CIVIS,

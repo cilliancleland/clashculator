@@ -42,6 +42,15 @@ const TRAIT_ELUSIVE = 'elusive';
 const TRAIT_COMBINED_ARMS = 'combined arms';
 const TRAIT_CUTTHROAT = 'cut-throat';
 const TRAIT_RAIN = 'rain of blows';
+const TRAIT_COMMAND_ALL = 'Battle Line Commander';
+const TRAIT_COMMAND_GALLIC = 'Headhunter';
+const TRAIT_COMMAND_ROMAN = 'Tactical Coordination';
+const TRAIT_COMMAND_ITALIAN = 'Zealot';
+const TRAIT_COMMAND_SPANISH = 'Pathfinder';
+const TRAIT_COMMAND_PYRRHIC = 'Resolute Commander';
+const TRAIT_COMMAND_NUMIDIAN = 'At an Easy Trot';
+const TRAIT_COMMAND_GREEK = 'One of Us';
+const TRAIT_COMMAND_PUNIC = 'Multicultural';
 
 const TRAIT_DESCRIPTIONS = {
   [TRAIT_IRON_WILL]: ['affects fatigue effects', 'do not remove if fatigue is twice model count', 'p.73'],
@@ -88,9 +97,27 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_COMBINED_ARMS]: ['requires mixed hand weapons and loose order, affects Attack', 'When executing an attack action, troops with this characteristic can re-roll any ones and twos they got on their to hit roll', 'playtest'],
   [TRAIT_CUTTHROAT]: ['affects morale', 'enemy roll an extra d6 for morale tests', 'playtest'],
   [TRAIT_RAIN]: ['requires loose order and additional hand weapon, affects all-out attack', 're-roll 1s to hit', 'playtest'],
+  [TRAIT_COMMAND_ALL]: ['Command Ability', 'Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_GALLIC]: ['Command Ability', 'Generic Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_ROMAN]: ['Command Ability', 'Roman Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_ITALIAN]: ['Command Ability', 'Italian Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_SPANISH]: ['Command Ability', 'Iberian Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_PYRRHIC]: ['Command Ability', 'Pyrrhic Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_NUMIDIAN]: ['Command Ability', 'Numidian Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_GREEK]: ['Command Ability', 'Greek Command Ability', 'Fields of Blood'],
+  [TRAIT_COMMAND_PUNIC]: ['Command Ability', 'Carthaginian Command Ability', 'Fields of Blood'],
 };
 
 export {
+  TRAIT_COMMAND_ALL,
+  TRAIT_COMMAND_GALLIC,
+  TRAIT_COMMAND_ROMAN,
+  TRAIT_COMMAND_ITALIAN,
+  TRAIT_COMMAND_SPANISH,
+  TRAIT_COMMAND_PYRRHIC,
+  TRAIT_COMMAND_NUMIDIAN,
+  TRAIT_COMMAND_GREEK,
+  TRAIT_COMMAND_PUNIC,
   TRAIT_DESCRIPTIONS,
   TRAIT_IRON_WILL,
   TRAIT_SHIELD_OVERLAP,

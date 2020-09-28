@@ -6,6 +6,16 @@ import {
   SWORD,
   OPT_UP_CHARIOT,
   characterOptions,
+  HIDE_OPTION,
+  OPT_COMMAND_ALL,
+  OPT_COMMAND_NUMIDIAN,
+  OPT_COMMAND_PYRRHIC,
+  OPT_COMMAND_PUNIC,
+  OPT_COMMAND_SPANISH,
+  OPT_COMMAND_ITALIAN,
+  OPT_COMMAND_ROMAN,
+  OPT_COMMAND_GREEK,
+  OPT_COMMAND_GALLIC,
 } from './constants';
 
 import {
@@ -89,6 +99,7 @@ const characters = {
     availability: 'leader',
     cost: 15,
     options: [],
+    defaultWeapon: HIDE_OPTION,
     combat: 0,
     ranged: 0,
     grit: 0,
@@ -100,8 +111,29 @@ const characters = {
   },
 };
 
-function charactersWithChariots() {
+function charactersWithAbilities(nation) {
   const ret = JSON.parse(JSON.stringify(characters));
+  const nationalOptions = {
+    numidian: OPT_COMMAND_NUMIDIAN,
+    pyrric: OPT_COMMAND_PYRRHIC,
+    punic: OPT_COMMAND_PUNIC,
+    spanish: OPT_COMMAND_SPANISH,
+    italian: OPT_COMMAND_ITALIAN,
+    roman: OPT_COMMAND_ROMAN,
+    greek: OPT_COMMAND_GREEK,
+    gallic: OPT_COMMAND_GALLIC,
+  };
+  ret.lvl5.options = [...ret.lvl5.options, OPT_COMMAND_ALL, nationalOptions[nation]];
+  ret.lvl4.options = [...ret.lvl4.options, OPT_COMMAND_ALL, nationalOptions[nation]];
+  ret.lvl3.options = [...ret.lvl3.options, OPT_COMMAND_ALL, nationalOptions[nation]];
+  ret.lvl2.options = [...ret.lvl2.options, OPT_COMMAND_ALL, nationalOptions[nation]];
+  return ret;
+}
+
+function charactersWithChariots(nation) {
+  const ret = nation
+    ? JSON.parse(JSON.stringify(charactersWithAbilities(nation)))
+    : JSON.parse(JSON.stringify(characters));
   ret.lvl5.options = [...ret.lvl5.options, OPT_UP_CHARIOT];
   ret.lvl4.options = [...ret.lvl4.options, OPT_UP_CHARIOT];
   ret.lvl3.options = [...ret.lvl3.options, OPT_UP_CHARIOT];
@@ -111,5 +143,6 @@ function charactersWithChariots() {
 
 export {
   characters,
+  charactersWithAbilities,
   charactersWithChariots,
 };
