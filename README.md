@@ -24,6 +24,7 @@ Calculator for Clash of Spears
 - alexandrian lists
 
 ## In the pipeline
+- update command options
 - fix for elephant crew deployment tokens
 - hide deployment tokens unless printing
 - async load period lists

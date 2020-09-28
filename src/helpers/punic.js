@@ -867,7 +867,7 @@ const punic = {
     },
   },
   Iberian: { // as book
-    ...charactersWithAbilities('punic'),
+    ...charactersWithAbilities('spanish'),
     caetrati: {
       displayName: 'Caetrati',
       availability: CIVIS,
@@ -1004,7 +1004,7 @@ const punic = {
     },
   },
   Lusitanian: { // as book
-    ...charactersWithAbilities('punic'),
+    ...charactersWithAbilities('spanish'),
     caetrati: {
       displayName: 'Caetrati',
       availability: CIVIS,
@@ -1204,7 +1204,7 @@ const punic = {
     },
     '1st': {
       displayName: '1st Class Citizens',
-      availability: CIVIS,
+      availability: MILITES,
       combat: 3,
       ranged: 5,
       grit: 3,
@@ -1654,7 +1654,7 @@ const punic = {
     },
   },
   Phyrrus: {
-    ...charactersWithAbilities('pyrrhic'),
+    ...charactersWithAbilities('pyrric'),
     psiloi: {
       displayName: 'Psiloi',
       availability: CIVIS,
