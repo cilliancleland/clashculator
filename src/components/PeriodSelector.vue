@@ -25,6 +25,7 @@ export default {
     return {
       periodLabels: {
         punic: 'Punic Wars',
+        samurai: 'Samurai (beta)',
         darkAge: 'Dark Ages (beta)',
         alex: 'Alexandrian (beta)',
       },

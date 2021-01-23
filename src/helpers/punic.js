@@ -28,7 +28,6 @@ import {
   OPT_UP_FULL_ARMOUR,
   OPT_UPGRADE_CAVALRY_JAVELIN,
   OPT_DOWN_HEAVY_SHIELD,
-  OPT_DOWN_BUCKLER,
   OPT_UP_HEAVY_SHIELD,
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_CHARGING,
@@ -1561,7 +1560,7 @@ const punic = {
       traits: [TRAIT_WALL_OF_SPEARS],
       cost: 13,
       options: [
-        OPT_DOWN_BUCKLER,
+        OPT_DOWN_HEAVY_SHIELD,
       ],
     },
     warriors: {
@@ -1570,13 +1569,13 @@ const punic = {
       combat: 4,
       ranged: 5,
       grit: 4,
-      defaultWeapon: THRUSTING,
+      defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
       traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ENDURANCE],
       cost: 17,
       options: [
-        OPT_DOWN_BUCKLER,
+        OPT_DOWN_HEAVY_SHIELD,
       ],
     },
     cavalry: {
@@ -1609,7 +1608,7 @@ const punic = {
     },
     legionaires: {
       displayName: 'Immitation Legionaires',
-      availability: RARE,
+      availability: MILITES,
       combat: 4,
       ranged: 5,
       grit: 4,

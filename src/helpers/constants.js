@@ -34,6 +34,7 @@ const RARE = 'rare';
 const NO_SHIELD = 'no shield';
 const NO_ARMOUR = 'no armour';
 const PLATE = 'full plate armour';
+const ENCLOSED = 'enclosed armour';
 const FULL = 'full armour';
 const PARTIAL = 'partial armour';
 const BARDING = 'barding';
@@ -58,6 +59,12 @@ const MIXED = 'mixed hand weapons';
 const AX = 'double handed weapon';
 const PIKE = 'pike';
 const XYSTON = 'xtston';
+const YARI = 'yari';
+const YUMI = 'yumi';
+const TEPPO = 'teppo';
+const NAGINATA = 'naginata';
+const NAGAE = 'nagae yari';
+const CAVALRY_YARI = 'cavalry yari';
 // other
 const HIDE_OPTION = 'hideoption';
 
@@ -77,6 +84,12 @@ const WEAPON_INITIATIVES = {
   [AX]: '(1)',
   [PIKE]: '(4)',
   [XYSTON]: '(3)',
+  [YARI]: '(3)',
+  [YUMI]: '',
+  [TEPPO]: '',
+  [NAGINATA]: '(2)',
+  [NAGAE]: '(4)',
+  [CAVALRY_YARI]: '(3)',
 };
 
 const OPT_BUCKLER = {
@@ -432,6 +445,7 @@ SAVE_MODS[NO_SHIELD] = 0;
 SAVE_MODS[BUCKLER] = 0;
 SAVE_MODS[FULL] = 2;
 SAVE_MODS[PLATE] = 2;
+SAVE_MODS[ENCLOSED] = 3;
 SAVE_MODS[PARTIAL] = 1;
 SAVE_MODS[SHIELD] = 1;
 SAVE_MODS[HEAVY_SHIELD] = 2;
@@ -445,6 +459,7 @@ export {
   RARE,
   LANCE,
   PLATE,
+  ENCLOSED,
   BARDING,
   HALF_BARDING,
   HIDE_OPTION,
@@ -469,6 +484,12 @@ export {
   PIKE,
   XYSTON,
   JAVELIN_THRUSTING,
+  YARI,
+  YUMI,
+  TEPPO,
+  NAGINATA,
+  NAGAE,
+  CAVALRY_YARI,
   OPT_BUCKLER,
   OPT_BARDING,
   OPT_SHIELD,

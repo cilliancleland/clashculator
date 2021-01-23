@@ -33,6 +33,9 @@
     </span>
     <h3>What's new</h3>
       <ul>
+        <li>
+          Fixed a couple of options for Numidians.
+        </li>
         <li>Fixed soothsayer bug (please report any bugs on
           <a href="https://www.facebook.com/groups/TheWargameSpot/" target="_blank">
           Facebook</a>.

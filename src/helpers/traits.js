@@ -54,6 +54,13 @@ const TRAIT_COMMAND_PUNIC = 'Multicultural';
 const TRAIT_EXTRA_BOW = 'extra equipment bow';
 const TRAIT_EXTRA_TWO = 'extra equipment two handed weapon';
 const TRAIT_SPARABARA = 'sparabara';
+const TRAIT_VOLLEY = 'volley';
+const TRAIT_KAKOMU = 'kakomu';
+const TRAIT_HARINEZUM = 'harinezumi';
+const TRAIT_FUREKAESHI = 'furekaeshi';
+const TRAIT_KURIDASHI = 'kuridashi';
+const TRAIT_NAGINATA = 'naginata';
+
 
 const TRAIT_DESCRIPTIONS = {
   [TRAIT_SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
@@ -117,6 +124,12 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_COMMAND_NUMIDIAN]: ['Command Ability', 'Numidian Command Ability', 'Fields of Blood'],
   [TRAIT_COMMAND_GREEK]: ['Command Ability', 'Greek Command Ability', 'Fields of Blood'],
   [TRAIT_COMMAND_PUNIC]: ['Command Ability', 'Carthaginian Command Ability', 'Fields of Blood'],
+  [TRAIT_VOLLEY]: ['requires close order, affects shooting', 'When doing a shoot action while in close order or when lined up against a defended obstacle and shooting over it, if the enemy has to  test morale they add an additional D6 to the test', 'samurai'],
+  [TRAIT_KAKOMU]: ['requires loose order, affects melee', 'when executing an attack in which they don\'t need to move more than 2" and the attacking unit has more models than the defending units then attacker may re-roll 1s on the to hit roll and the enemy adds 1D6 to morale test from combat', 'samurai'],
+  [TRAIT_HARINEZUM]: ['requires close order, affects melee', 'when selecting counter attack with a weapon with higher initiative than enemy, all models in unit may roll D6 to counter attack and they get to attack before the attack ing unit does, so any casualties don\'t get to attack', 'samurai'],
+  [TRAIT_FUREKAESHI]: ['requires loose order, affects melee', 'when doing attack with a weapon with higher weapon initiative, if enemy selects counter-attack they suffer -1 to hit', 'samurai'],
+  [TRAIT_KURIDASHI]: ['', 'when doing defend they can choose to use this skill instead of rolling to cancel hits, the enemy must pass a grit test to attack, if they fail they retreat and they only gain fatigue as if they had executed a move action. If they pass they attack with -1 to hit and any 1s rolled are hits inflicted on the attacking units (these hits don\'t cause morale test)', 'samurai'],
+  [TRAIT_NAGINATA]: ['affects melee', '-1 to enemy save', 'samurai'],
 };
 
 export {
@@ -177,4 +190,10 @@ export {
   TRAIT_CUTTHROAT,
   TRAIT_RAIN,
   TRAIT_SPARABARA,
+  TRAIT_VOLLEY,
+  TRAIT_KAKOMU,
+  TRAIT_HARINEZUM,
+  TRAIT_FUREKAESHI,
+  TRAIT_KURIDASHI,
+  TRAIT_NAGINATA,
 };
