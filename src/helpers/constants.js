@@ -24,6 +24,7 @@ import {
   TRAIT_SHIELD_OVERLAP,
   TRAIT_EXTRA_BOW,
   TRAIT_OFFENSIVE_SPEAR,
+  TRAIT_NAGINATA,
 } from './traits';
 
 const MILITES = 'milites';
@@ -62,7 +63,7 @@ const XYSTON = 'xtston';
 const YARI = 'yari';
 const YUMI = 'yumi';
 const TEPPO = 'teppo';
-const NAGINATA = 'naginata';
+const NAGINATA = 'long weapon';
 const NAGAE = 'nagae yari';
 const CAVALRY_YARI = 'cavalry yari';
 // other
@@ -159,6 +160,14 @@ const OPT_SHIELD = {
   upgradeWeapon: '',
   upgradeArmour: '',
   upgradeShield: SHIELD,
+  upgradeTraits: [],
+};
+const OPT_UP_FULL_TO_ENCLOSED_ARMOUR = {
+  name: 'Upgrade to enclosed armour',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: ENCLOSED,
+  upgradeShield: '',
   upgradeTraits: [],
 };
 const OPT_DOWN_NO_ARMOUR = {
@@ -438,6 +447,26 @@ const characterOptions = [
     name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [TRAIT_STANDARD],
   },
 ];
+const samuraiCharacterOptions = [
+  {
+    name: 'Upgrade to Cavalry Spear(must be mounted)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: CAVALRY_SPEAR, requiresMounted: true, upgradeTraits: [],
+  },
+  {
+    name: 'Upgrade to long weapon', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: NAGINATA, upgradeTraits: [TRAIT_NAGINATA],
+  },
+  {
+    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [TRAIT_MOUNTED],
+  },
+  OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
+  OPT_DOWN_FULL_TO_NO_ARMOUR,
+  OPT_DOWN_PARTIAL_ARMOUR,
+  {
+    name: 'Attach a musician', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [TRAIT_MUSICIAN],
+  },
+  {
+    name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [TRAIT_STANDARD],
+  },
+];
 
 const SAVE_MODS = {};
 SAVE_MODS[NO_ARMOUR] = 0;
@@ -524,6 +553,7 @@ export {
   OPT_UP_EXTRA_BOW,
   OPT_JAVELIN_SHIELD,
   characterOptions,
+  samuraiCharacterOptions,
   elephantOptions,
   indianElephantOptions,
   WEAPON_INITIATIVES,

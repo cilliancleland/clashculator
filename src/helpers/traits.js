@@ -60,6 +60,7 @@ const TRAIT_HARINEZUM = 'harinezumi';
 const TRAIT_FUREKAESHI = 'furekaeshi';
 const TRAIT_KURIDASHI = 'kuridashi';
 const TRAIT_NAGINATA = 'naginata';
+const TRAIT_GAUCHE = 'main gauche';
 
 
 const TRAIT_DESCRIPTIONS = {
@@ -130,6 +131,7 @@ const TRAIT_DESCRIPTIONS = {
   [TRAIT_FUREKAESHI]: ['requires loose order, affects melee', 'when doing attack with a weapon with higher weapon initiative, if enemy selects counter-attack they suffer -1 to hit', 'samurai'],
   [TRAIT_KURIDASHI]: ['', 'when doing defend they can choose to use this skill instead of rolling to cancel hits, the enemy must pass a grit test to attack, if they fail they retreat and they only gain fatigue as if they had executed a move action. If they pass they attack with -1 to hit and any 1s rolled are hits inflicted on the attacking units (these hits don\'t cause morale test)', 'samurai'],
   [TRAIT_NAGINATA]: ['affects melee', '-1 to enemy save', 'samurai'],
+  [TRAIT_GAUCHE]: ['affects melee, requires loose order', ' When selecting defend as their combat response these troops may re-roll any failed attempts to cancel hits.', 'samurai'],
 };
 
 export {
@@ -196,4 +198,5 @@ export {
   TRAIT_FUREKAESHI,
   TRAIT_KURIDASHI,
   TRAIT_NAGINATA,
+  TRAIT_GAUCHE,
 };

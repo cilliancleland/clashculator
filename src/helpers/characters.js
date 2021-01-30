@@ -6,6 +6,7 @@ import {
   SWORD,
   OPT_UP_CHARIOT,
   characterOptions,
+  samuraiCharacterOptions,
   HIDE_OPTION,
   OPT_COMMAND_ALL,
   OPT_COMMAND_NUMIDIAN,
@@ -130,6 +131,17 @@ function charactersWithAbilities(nation) {
   return ret;
 }
 
+function samuraiCharacters() {
+  const ret = JSON.parse(JSON.stringify(characters));
+  delete ret.soothsayer;
+  Object.getOwnPropertyNames(ret).forEach((key) => {
+    // console.log(`${key}:${obj[key]}`);
+    ret[key].defaultShield = NO_SHIELD;
+    ret[key].options = samuraiCharacterOptions;
+  });
+  return ret;
+}
+
 function charactersWithChariots(nation) {
   const ret = nation
     ? JSON.parse(JSON.stringify(charactersWithAbilities(nation)))
@@ -145,4 +157,5 @@ export {
   characters,
   charactersWithAbilities,
   charactersWithChariots,
+  samuraiCharacters,
 };

@@ -1,5 +1,5 @@
 import {
-  characters,
+  samuraiCharacters,
 } from './characters';
 
 import {
@@ -15,6 +15,10 @@ import {
   NAGAE,
   YARI,
   TEPPO,
+  OPT_UP_PARTIAL_ARMOUR,
+  BOW,
+  OPT_DOWN_PARTIAL_ARMOUR,
+  NO_ARMOUR,
 } from './constants';
 
 import {
@@ -31,44 +35,79 @@ import {
   TRAIT_FUREKAESHI,
   TRAIT_KURIDASHI,
   TRAIT_NAGINATA,
+  TRAIT_CUTTHROAT,
+  TRAIT_GUERRILLA,
+  TRAIT_RAIN,
+  TRAIT_MARAUDERS,
+  TRAIT_GAUCHE,
+  TRAIT_THRUST,
 } from './traits';
 
 const samurai = {
   Sengoku: {
-    ...characters,
-    yumi: {
-      displayName: 'Yumi Ashigaru',
+    ...samuraiCharacters(),
+    peasants: {
+      displayName: 'Peasants',
+      availability: MILITES,
+      combat: 5,
+      ranged: 5,
+      grit: 5,
+      defaultWeapon: NAGINATA,
+      defaultBody: NO_ARMOUR,
+      defaultShield: NO_SHIELD,
+      traits: [
+      ],
+      cost: 7,
+      options: [
+      ],
+    },
+    bandits_teppo: {
+      displayName: 'Bandits with teppo',
       availability: MILITES,
       combat: 4,
       ranged: 5,
-      grit: 4,
-      defaultWeapon: YUMI,
-      defaultBody: PARTIAL,
+      grit: 5,
+      defaultWeapon: TEPPO,
+      defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [
         TRAIT_SKIRMISH_SPECIALIST,
       ],
-      cost: 16,
+      cost: 11,
       options: [
-        OPT_DOWN_NO_ARMOUR,
       ],
     },
-    teppo: {
-      displayName: 'Teppo Ashigaru',
+    bandits: {
+      displayName: 'Bandits',
       availability: MILITES,
       combat: 4,
       ranged: 5,
       grit: 4,
-      defaultWeapon: TEPPO,
+      defaultWeapon: YARI,
+      defaultBody: NO_ARMOUR,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_THRUST,
+      ],
+      cost: 11,
+      options: [
+        OPT_UP_PARTIAL_ARMOUR,
+      ],
+    },
+    veteran_bandits: {
+      displayName: 'Veteran bandits',
+      availability: MILITES,
+      combat: 4,
+      ranged: 5,
+      grit: 3,
+      defaultWeapon: NAGINATA,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_VOLLEY,
-        TRAIT_DRILLED,
+        TRAIT_CUTTHROAT,
       ],
-      cost: 17,
+      cost: 16,
       options: [
-        OPT_DOWN_NO_ARMOUR,
       ],
     },
     untrained: {
@@ -78,14 +117,48 @@ const samurai = {
       ranged: 5,
       grit: 5,
       defaultWeapon: YARI,
-      defaultBody: PARTIAL,
+      defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [
         TRAIT_KAKOMU,
       ],
       cost: 11,
       options: [
-        OPT_DOWN_NO_ARMOUR,
+      ],
+    },
+    yumi: {
+      displayName: 'Yumi Ashigaru',
+      availability: MILITES,
+      combat: 4,
+      ranged: 5,
+      grit: 4,
+      defaultWeapon: YUMI,
+      defaultBody: FULL,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_SKIRMISH_SPECIALIST,
+      ],
+      cost: 16,
+      options: [
+        OPT_DOWN_PARTIAL_ARMOUR,
+      ],
+    },
+    teppo: {
+      displayName: 'Teppo Ashigaru',
+      availability: MILITES,
+      combat: 4,
+      ranged: 5,
+      grit: 4,
+      defaultWeapon: TEPPO,
+      defaultBody: FULL,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_VOLLEY,
+        TRAIT_DRILLED,
+      ],
+      cost: 17,
+      options: [
+        OPT_DOWN_PARTIAL_ARMOUR,
       ],
     },
     yari: {
@@ -104,6 +177,7 @@ const samurai = {
       ],
       cost: 16,
       options: [
+        OPT_DOWN_PARTIAL_ARMOUR,
       ],
     },
     nagae: {
@@ -122,10 +196,46 @@ const samurai = {
       ],
       cost: 16,
       options: [
+        OPT_DOWN_PARTIAL_ARMOUR,
+      ],
+    },
+    bushi: {
+      displayName: 'Onna Bushi',
+      availability: MILITES,
+      combat: 4,
+      ranged: 5,
+      grit: 3,
+      defaultWeapon: NAGINATA,
+      defaultBody: PARTIAL,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_FUREKAESHI,
+        TRAIT_KURIDASHI,
+      ],
+      cost: 17,
+      options: [
+      ],
+    },
+    sohei: {
+      displayName: 'Sohei monks',
+      availability: MILITES,
+      combat: 4,
+      ranged: 5,
+      grit: 3,
+      defaultWeapon: NAGINATA,
+      defaultBody: PARTIAL,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_KURIDASHI,
+        TRAIT_GUERRILLA,
+      ],
+      cost: 17,
+      options: [
+        OPT_DOWN_NO_ARMOUR,
       ],
     },
     naganita: {
-      displayName: 'Naginata Samurai',
+      displayName: 'Samurai with long weapons',
       availability: MILITES,
       combat: 3,
       ranged: 5,
@@ -142,20 +252,21 @@ const samurai = {
       options: [
       ],
     },
-    mounted: {
-      displayName: 'Mounted Samurai',
+    katana: {
+      displayName: 'Samurai with Katana and Wakisash',
       availability: MILITES,
       combat: 3,
       ranged: 5,
       grit: 3,
-      defaultWeapon: CAVALRY_YARI,
+      defaultWeapon: NAGINATA,
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_MOUNTED,
-        TRAIT_CHARGE,
+        TRAIT_GAUCHE,
+        TRAIT_RAIN,
+        TRAIT_NAGINATA,
       ],
-      cost: 25,
+      cost: 20,
       options: [
       ],
     },
@@ -172,6 +283,40 @@ const samurai = {
         TRAIT_AIM,
       ],
       cost: 22,
+      options: [
+      ],
+    },
+    mounted: {
+      displayName: 'Mounted Samurai with yari',
+      availability: MILITES,
+      combat: 3,
+      ranged: 5,
+      grit: 3,
+      defaultWeapon: CAVALRY_YARI,
+      defaultBody: ENCLOSED,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_MOUNTED,
+        TRAIT_CHARGE,
+      ],
+      cost: 24,
+      options: [
+      ],
+    },
+    mounted_bow: {
+      displayName: 'Mounted Samurai with bow',
+      availability: MILITES,
+      combat: 3,
+      ranged: 5,
+      grit: 3,
+      defaultWeapon: BOW,
+      defaultBody: ENCLOSED,
+      defaultShield: NO_SHIELD,
+      traits: [
+        TRAIT_MOUNTED,
+        TRAIT_MARAUDERS,
+      ],
+      cost: 25,
       options: [
       ],
     },
