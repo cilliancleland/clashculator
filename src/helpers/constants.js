@@ -20,12 +20,18 @@ import {
   TRAIT_COMMAND_PYRRHIC,
   TRAIT_COMMAND_NUMIDIAN,
   TRAIT_COMMAND_GREEK,
-  // TRAIT_WALL_OF_SPEARS,
   TRAIT_SHIELD_OVERLAP,
   TRAIT_EXTRA_BOW,
   TRAIT_OFFENSIVE_SPEAR,
   TRAIT_NAGINATA,
 } from './traits';
+
+const PERIODS = {
+  punic: 'Punic Wars',
+  samurai: 'Samurai (beta)',
+  darkAge: 'Dark Ages (beta)',
+  alex: 'Alexandrian (beta)',
+};
 
 const MILITES = 'milites';
 const CIVIS = 'civis';
@@ -44,6 +50,7 @@ const HALF_BARDING = 'half barding';
 const BUCKLER = 'buckler';
 const SHIELD = 'shield';
 const HEAVY_SHIELD = 'heavy shield';
+const SHIELD_HOWDA = 'howda';
 // weapon
 const STONES = 'stones';
 const JAVELIN = 'javelin';
@@ -391,13 +398,13 @@ const elephantOptions = [
     name: 'Upgrade to full armor (2ps)', cost: 1, upgradeArmour: FULL, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
   },
   {
-    name: 'Downgrade to no armor (-4pts)', cost: -2, upgradeArmour: NO_ARMOUR, upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
+    name: 'Downgrade to no armor (-4pts)', cost: -2, upgradeArmour: NO_ARMOUR, upgradeShield: '', upgradeWeapon: '', upgradeTraits: [],
   },
   {
     name: 'add shields (+2pts)', cost: 1, upgradeArmour: '', upgradeShield: SHIELD, upgradeWeapon: '', upgradeTraits: [],
   },
   {
-    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [TRAIT_HOWDA],
+    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: SHIELD_HOWDA, upgradeWeapon: '', upgradeTraits: [TRAIT_HOWDA],
   },
 ];
 const indianElephantOptions = [
@@ -412,7 +419,7 @@ const indianElephantOptions = [
     name: 'add shields (+2pts)', cost: 1, upgradeArmour: '', upgradeShield: SHIELD, upgradeWeapon: '', upgradeTraits: [],
   },
   {
-    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [TRAIT_HOWDA],
+    name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: SHIELD_HOWDA, upgradeWeapon: '', upgradeTraits: [TRAIT_HOWDA],
   },
 ];
 
@@ -478,6 +485,7 @@ SAVE_MODS[ENCLOSED] = 3;
 SAVE_MODS[PARTIAL] = 1;
 SAVE_MODS[SHIELD] = 1;
 SAVE_MODS[HEAVY_SHIELD] = 2;
+SAVE_MODS[SHIELD_HOWDA] = 2;
 SAVE_MODS[BARDING] = 1;
 SAVE_MODS[HALF_BARDING] = 0;
 
@@ -557,4 +565,5 @@ export {
   elephantOptions,
   indianElephantOptions,
   WEAPON_INITIATIVES,
+  PERIODS,
 };

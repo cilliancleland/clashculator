@@ -13,6 +13,7 @@
 
 
 <script>
+import { PERIODS } from '../helpers/constants';
 
 export default {
   name: 'PeriodSelector',
@@ -23,12 +24,7 @@ export default {
   ],
   data: function data() {
     return {
-      periodLabels: {
-        punic: 'Punic Wars',
-        samurai: 'Samurai (beta)',
-        darkAge: 'Dark Ages (beta)',
-        alex: 'Alexandrian (beta)',
-      },
+      periodLabels: PERIODS,
     };
   },
 };

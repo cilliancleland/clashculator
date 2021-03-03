@@ -80,6 +80,7 @@
 <script>
 import Vue from 'vue';
 import allLists from '../helpers/lists';
+import { PERIODS } from '../helpers/constants';
 import TopButtons from './TopButtons.vue';
 import HeaderSection from './HeaderSection.vue';
 import IntroScreen from './IntroScreen.vue';
@@ -202,24 +203,23 @@ export default {
   },
   created: function created() {
     let objStr = decodeURI(document.location.search);
+    const army = objStr.split('=')[0].slice(1);
     // just the first arg, FB or something might have added other params
-    if (objStr.substr(0, 3) === '?a=') {
+    if (army === 'a') {
       // legacy from shitty sharing url
       objStr = objStr.split('&')[0].substr(3);
       objStr = atob(decodeURIComponent(objStr));
       const savedArmy = JSON.parse(objStr);
       this.hydrateArmy(savedArmy);
-    } else if (objStr.substr(0, 3) === '?b=') {
+    } else if (army === 'b') {
       // legacy from before we had multi armies
       objStr = objStr.split('&')[0].substr(3);
       this.hydrateCompactArmy(objStr, 'punic');
-    } else if (objStr.substr(0, 7) === '?punic=') {
-      objStr = objStr.split('&')[0].substr(7);
-      this.hydrateCompactArmy(objStr, 'punic');
-    } else if (objStr.substr(0, 9) === '?darkAge=') {
-      objStr = objStr.split('&')[0].substr(9);
-      this.hydrateCompactArmy(objStr, 'darkAge');
+    } else if (Object.keys(PERIODS).indexOf(army) > -1) {
+      objStr = objStr.split('&')[0].substr(army.length + 2);
+      this.hydrateCompactArmy(objStr, army);
     }
+
     this.localSaves = JSON.parse(localStorage.getItem('armyNames')) || [];
     // see if any options are set
     this.sorting = localStorage.getItem('sorting') || this.sorting;

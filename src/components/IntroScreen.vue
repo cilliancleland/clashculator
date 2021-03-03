@@ -34,6 +34,9 @@
     <h3>What's new</h3>
       <ul>
         <li>
+          Added Samurai beta lists.
+        </li>
+        <li>
           Fixed a couple of options for Numidians.
         </li>
         <li>Fixed soothsayer bug (please report any bugs on

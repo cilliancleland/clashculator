@@ -2,6 +2,9 @@
 Calculator for Clash of Spears
 
 ## Recent changes
+- fix gallic mounted nobles
+- fix elephant howda being weapon not shield 
+- Fix sharing bug for samurai and alexander lists
 - Fix Heavy shield cav leader bug
 - Fix massed charge typo
 - Fix save being calculated on load of saved army list does not pay attention to shield upgrade

@@ -521,7 +521,7 @@ const punic = {
       traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
       cost: 26,
       options: [
-        OPT_DOWN_NO_ARMOUR,
+        OPT_DOWN_FULL_TO_NO_ARMOUR,
       ],
     },
     gaesatae: {
