@@ -15,6 +15,7 @@ import {
   NAGAE,
   YARI,
   TEPPO,
+  SWORD,
   OPT_UP_PARTIAL_ARMOUR,
   BOW,
   OPT_DOWN_PARTIAL_ARMOUR,
@@ -258,13 +259,12 @@ const samurai = {
       combat: 3,
       ranged: 5,
       grit: 3,
-      defaultWeapon: NAGINATA,
+      defaultWeapon: SWORD,
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
         TRAIT_GAUCHE,
         TRAIT_RAIN,
-        TRAIT_NAGINATA,
       ],
       cost: 20,
       options: [
