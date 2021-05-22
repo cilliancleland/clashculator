@@ -1,7 +1,6 @@
 <template>
   <div class="header-container">
     <div class="header-left">
-
     <h2 class="army-title">
       {{selectedNation}} ({{totalCost}} points)
       <span>
@@ -63,13 +62,13 @@ export default {
         return total + (unit.unitSize());
       }, 0);
     },
-    nonCharacterFiguresCount: function nonCharacterFiguresCount() {
+    figureCountForBreak: function figureCountForBreak() {
       return this.armyContents.reduce((total, unit) => {
-        return total + (unit.isCharacter ? 0 : unit.unitSize());
+        return total + (unit.dontCountForBreak ? 0 : unit.unitSize());
       }, 0);
     },
     breakPointThreshold: function breakPointThreshold() {
-      return Math.floor(this.nonCharacterFiguresCount / 6);
+      return Math.floor(this.figureCountForBreak / 6);
     },
     warbandType: function warbandType() {
       return this.isMuster ? 'Muster' : 'Ad Hoc';

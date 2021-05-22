@@ -461,6 +461,7 @@ const galgamala = {
 };
 const indus = {
   elephant: {
+    dontCountForBreak: true,
     displayName: 'Indian War Elephant',
     availability: RARE,
     fixedFigures: 4,
@@ -477,6 +478,7 @@ const indus = {
     defaultBody: HIDE_OPTION,
   },
   elephantCrew: {
+    dontCountForBreak: true,
     displayName: 'Elephant Crew',
     fixedFigures: 2,
     availability: RARE,
@@ -1523,6 +1525,7 @@ const alex = {
       ],
     },
     elephant: {
+      dontCountForBreak: true,
       displayName: 'Indian War Elephant',
       availability: RARE,
       fixedFigures: 5,
@@ -1539,6 +1542,7 @@ const alex = {
       defaultBody: HIDE_OPTION,
     },
     elephantCrew: {
+      dontCountForBreak: true,
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,

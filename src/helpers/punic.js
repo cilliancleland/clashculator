@@ -375,6 +375,7 @@ const punic = {
       ],
     },
     elephant: {
+      dontCountForBreak: true,
       displayName: 'African Forest Elephant',
       availability: RARE,
       fixedFigures: 4,
@@ -382,7 +383,7 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(3)', 'wounds(4)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(4)', TRAIT_ELEPHANT],
       cost: 16.5,
       options: [
       ],
@@ -391,6 +392,7 @@ const punic = {
       defaultBody: HIDE_OPTION,
     },
     elephantCrew: {
+      dontCountForBreak: true,
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,
@@ -1622,6 +1624,7 @@ const punic = {
       ],
     },
     elephant: {
+      dontCountForBreak: true,
       displayName: 'African Forest Elephant',
       availability: RARE,
       fixedFigures: 4,
@@ -1629,7 +1632,7 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(3)', 'wounds(4)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(4)', TRAIT_ELEPHANT],
       cost: 16.5,
       options: [
       ],
@@ -1638,6 +1641,7 @@ const punic = {
       defaultBody: HIDE_OPTION,
     },
     elephantCrew: {
+      dontCountForBreak: true,
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,
@@ -1819,6 +1823,7 @@ const punic = {
       ],
     },
     elephant: {
+      dontCountForBreak: true,
       displayName: 'Asian Elephant',
       availability: RARE,
       fixedFigures: 5,
@@ -1826,7 +1831,7 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(3)', 'wounds(5)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(5)', TRAIT_ELEPHANT],
       cost: 14.4,
       options: [
       ],
@@ -1835,6 +1840,7 @@ const punic = {
       defaultBody: HIDE_OPTION,
     },
     elephantCrew: {
+      dontCountForBreak: true,
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,

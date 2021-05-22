@@ -26,6 +26,7 @@ import {
 
 const characters = {
   lvl5: {
+    dontCountForBreak: true,
     isCharacter: true,
     fixedFigures: 1,
     displayName: 'Level V leader',
@@ -43,6 +44,7 @@ const characters = {
     traits: ['attacks(3)', 'wounds(3)', TRAIT_IRON_WILL],
   },
   lvl4: {
+    dontCountForBreak: true,
     isCharacter: true,
     fixedFigures: 1,
     displayName: 'Level IV leader',
@@ -60,6 +62,7 @@ const characters = {
     traits: ['attacks(2)', 'wounds(3)', TRAIT_IRON_WILL],
   },
   lvl3: {
+    dontCountForBreak: true,
     isCharacter: true,
     fixedFigures: 1,
     displayName: 'Level III leader',
@@ -77,6 +80,7 @@ const characters = {
     traits: ['attacks(2)', 'wounds(2)', TRAIT_IRON_WILL],
   },
   lvl2: {
+    dontCountForBreak: true,
     isCharacter: true,
     fixedFigures: 1,
     displayName: 'Level II leader',
