@@ -22,27 +22,7 @@ import {
   NO_ARMOUR,
 } from './constants';
 
-import {
-  TRAIT_CHARGE,
-  TRAIT_MOUNTED,
-  TRAIT_AIM,
-  TRAIT_SKIRMISH_SPECIALIST,
-  TRAIT_VOLLEY,
-  TRAIT_DRILLED,
-  TRAIT_KAKOMU,
-  TRAIT_HARINEZUM,
-  TRAIT_WALL_OF_SPEARS,
-  TRAIT_OFFENSIVE_SPEAR,
-  TRAIT_FUREKAESHI,
-  TRAIT_KURIDASHI,
-  TRAIT_NAGINATA,
-  TRAIT_CUTTHROAT,
-  TRAIT_GUERRILLA,
-  TRAIT_RAIN,
-  TRAIT_MARAUDERS,
-  TRAIT_GAUCHE,
-  TRAIT_THRUST,
-} from './traits';
+import traits from './traits';
 
 const samurai = {
   Sengoku: {
@@ -72,7 +52,7 @@ const samurai = {
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_SKIRMISH_SPECIALIST,
+        traits.SKIRMISH_SPECIALIST,
       ],
       cost: 11,
       options: [
@@ -88,7 +68,7 @@ const samurai = {
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_THRUST,
+        traits.THRUST,
       ],
       cost: 11,
       options: [
@@ -105,7 +85,7 @@ const samurai = {
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_CUTTHROAT,
+        traits.CUTTHROAT,
       ],
       cost: 16,
       options: [
@@ -121,7 +101,7 @@ const samurai = {
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_KAKOMU,
+        traits.KAKOMU,
       ],
       cost: 11,
       options: [
@@ -137,7 +117,7 @@ const samurai = {
       defaultBody: FULL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_SKIRMISH_SPECIALIST,
+        traits.SKIRMISH_SPECIALIST,
       ],
       cost: 16,
       options: [
@@ -154,8 +134,8 @@ const samurai = {
       defaultBody: FULL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_VOLLEY,
-        TRAIT_DRILLED,
+        traits.VOLLEY,
+        traits.DRILLED,
       ],
       cost: 17,
       options: [
@@ -172,9 +152,9 @@ const samurai = {
       defaultBody: FULL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_KAKOMU,
-        TRAIT_HARINEZUM,
-        TRAIT_DRILLED,
+        traits.KAKOMU,
+        traits.HARINEZUM,
+        traits.DRILLED,
       ],
       cost: 16,
       options: [
@@ -191,9 +171,9 @@ const samurai = {
       defaultBody: FULL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_WALL_OF_SPEARS,
-        TRAIT_OFFENSIVE_SPEAR,
-        TRAIT_DRILLED,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED,
       ],
       cost: 16,
       options: [
@@ -210,8 +190,8 @@ const samurai = {
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_FUREKAESHI,
-        TRAIT_KURIDASHI,
+        traits.FUREKAESHI,
+        traits.KURIDASHI,
       ],
       cost: 17,
       options: [
@@ -227,8 +207,8 @@ const samurai = {
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_KURIDASHI,
-        TRAIT_GUERRILLA,
+        traits.KURIDASHI,
+        traits.GUERRILLA,
       ],
       cost: 17,
       options: [
@@ -245,9 +225,9 @@ const samurai = {
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_FUREKAESHI,
-        TRAIT_KURIDASHI,
-        TRAIT_NAGINATA,
+        traits.FUREKAESHI,
+        traits.KURIDASHI,
+        traits.NAGINATA,
       ],
       cost: 22,
       options: [
@@ -263,8 +243,8 @@ const samurai = {
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_GAUCHE,
-        TRAIT_RAIN,
+        traits.GAUCHE,
+        traits.RAIN,
       ],
       cost: 20,
       options: [
@@ -280,7 +260,7 @@ const samurai = {
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_AIM,
+        traits.AIM,
       ],
       cost: 22,
       options: [
@@ -296,8 +276,8 @@ const samurai = {
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_MOUNTED,
-        TRAIT_CHARGE,
+        traits.MOUNTED,
+        traits.CHARGE,
       ],
       cost: 24,
       options: [
@@ -313,8 +293,8 @@ const samurai = {
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
       traits: [
-        TRAIT_MOUNTED,
-        TRAIT_MARAUDERS,
+        traits.MOUNTED,
+        traits.MARAUDERS,
       ],
       cost: 25,
       options: [

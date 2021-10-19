@@ -35,6 +35,10 @@
 </template>
 
 <script>
+const warPartyNations = {
+  'Early Imperial Roman': 1,
+  'Late Republican Roman': 1,
+};
 export default {
   name: 'HeaderSection',
   props: [
@@ -71,11 +75,20 @@ export default {
       return Math.floor(this.figureCountForBreak / 6);
     },
     warbandType: function warbandType() {
+      if (warPartyNations[this.selectedNation]) {
+        return this.isWarParty
+          ? 'War-party'
+          : 'Ad Hoc';
+      }
       return this.isMuster ? 'Muster' : 'Ad Hoc';
     },
     isMuster: function isMuster() {
       return (this.civisCount >= (this.militesCount + this.rareCount))
         && (this.militesCount >= this.rareCount);
+    },
+    isWarParty: function isWarParty() {
+      return (this.militesCount >= this.civisCount)
+        && (this.militesCount >= (2 * this.rareCount));
     },
     leadersCount: function leadersCount() {
       return this.armyContents.reduce((total, unit) => {

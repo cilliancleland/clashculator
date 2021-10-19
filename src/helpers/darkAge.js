@@ -34,34 +34,7 @@ import {
   THRUSTING,
 } from './constants';
 
-import {
-  TRAIT_FERAL,
-  TRAIT_SHIELD_OVERLAP,
-  TRAIT_WALL_OF_SPEARS,
-  TRAIT_DRILLED,
-  TRAIT_FUROR,
-  TRAIT_MOUNTED,
-  TRAIT_WARHORSE,
-  TRAIT_CHARGE,
-  TRAIT_IMPETUS,
-  TRAIT_SKIRMISH_SPECIALIST,
-  TRAIT_OVERHEAD,
-  TRAIT_STALWART,
-  TRAIT_BREAKER,
-  TRAIT_SLING,
-  TRAIT_EXTRA_JAVELIN,
-  TRAIT_GUERRILLA,
-  TRAIT_DETERMINED,
-  TRAIT_EXTRA_CAVALRY,
-  TRAIT_SHIELDBREAKER,
-  TRAIT_THRUST,
-  TRAIT_ELUSIVE,
-  TRAIT_IRA,
-  TRAIT_CUTTHROAT,
-  TRAIT_RAIN,
-  TRAIT_COMBINED_ARMS,
-  TRAIT_DOUBLE,
-} from './traits';
+import traits from './traits';
 
 const darkAge = {
   Byzantine: {
@@ -75,7 +48,7 @@ const darkAge = {
       defaultWeapon: LANCE,
       defaultBody: ENCLOSED,
       defaultShield: BUCKLER,
-      traits: [TRAIT_MOUNTED, TRAIT_CHARGE, TRAIT_DRILLED],
+      traits: [traits.MOUNTED, traits.CHARGE, traits.DRILLED],
       cost: 27,
       options: [
         OPT_BARDING,
@@ -91,7 +64,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: ENCLOSED,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [traits.MOUNTED],
       cost: 23,
       options: [
         OPT_BARDING,
@@ -107,7 +80,7 @@ const darkAge = {
       defaultWeapon: LANCE,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_CHARGE, TRAIT_DRILLED, TRAIT_IMPETUS],
+      traits: [traits.MOUNTED, traits.CHARGE, traits.DRILLED, traits.IMPETUS],
       cost: 26,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -122,7 +95,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [traits.MOUNTED],
       cost: 21,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -138,7 +111,7 @@ const darkAge = {
       defaultWeapon: LANCE,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS],
+      traits: [traits.MOUNTED, traits.IMPETUS],
       cost: 19,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -153,7 +126,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [traits.MOUNTED],
       cost: 21,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -168,7 +141,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.MOUNTED, traits.SKIRMISH_SPECIALIST],
       cost: 17,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -183,7 +156,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS],
+      traits: [traits.SHIELD_OVERLAP, traits.WALL_OF_SPEARS],
       cost: 16,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -198,7 +171,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS],
+      traits: [traits.SHIELD_OVERLAP, traits.WALL_OF_SPEARS],
       cost: 20,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -213,7 +186,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_OVERHEAD],
+      traits: [traits.OVERHEAD],
       cost: 12,
       options: [
         OPT_BUCKLER,
@@ -229,7 +202,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_BREAKER, TRAIT_STALWART, TRAIT_DOUBLE],
+      traits: [traits.SHIELD_OVERLAP, traits.BREAKER, traits.STALWART, traits.DOUBLE],
       cost: 23,
       options: [
       ],
@@ -243,7 +216,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -257,7 +230,7 @@ const darkAge = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -275,7 +248,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: BUCKLER,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -289,7 +262,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -303,7 +276,7 @@ const darkAge = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_SLING],
+      traits: [traits.SKIRMISH_SPECIALIST, traits.SLING],
       cost: 9,
       options: [
       ],
@@ -317,7 +290,7 @@ const darkAge = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS],
+      traits: [traits.MOUNTED, traits.IMPETUS],
       cost: 16,
       options: [
       ],
@@ -331,7 +304,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_EXTRA_JAVELIN],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP, traits.EXTRA_JAVELIN],
       cost: 19,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -372,7 +345,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: FULL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 23,
       options: [],
     },
@@ -385,7 +358,7 @@ const darkAge = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: FULL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_EXTRA_JAVELIN, TRAIT_WARHORSE],
+      traits: [traits.MOUNTED, traits.EXTRA_JAVELIN, traits.WARHORSE],
       cost: 26,
       options: [],
     },
@@ -398,7 +371,7 @@ const darkAge = {
       defaultWeapon: LANCE,
       defaultBody: FULL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_CHARGE, TRAIT_WARHORSE],
+      traits: [traits.MOUNTED, traits.CHARGE, traits.WARHORSE],
       cost: 26,
       options: [],
     },
@@ -414,7 +387,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -428,7 +401,7 @@ const darkAge = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -442,7 +415,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_GUERRILLA],
+      traits: [traits.FUROR, traits.GUERRILLA],
       cost: 14,
       options: [
       ],
@@ -456,7 +429,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_GUERRILLA],
+      traits: [traits.FUROR, traits.GUERRILLA],
       cost: 18,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -471,7 +444,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP, traits.FUROR],
       cost: 21,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -486,7 +459,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_GUERRILLA, TRAIT_FUROR, TRAIT_DOUBLE],
+      traits: [traits.GUERRILLA, traits.FUROR, traits.DOUBLE],
       cost: 17,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -501,7 +474,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_FUROR],
+      traits: [traits.MOUNTED, traits.FUROR],
       cost: 21,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -516,7 +489,7 @@ const darkAge = {
       defaultWeapon: '',
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_FERAL],
+      traits: [traits.FERAL],
       cost: 10,
       options: [
       ],
@@ -533,7 +506,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -547,7 +520,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 16,
       options: [
       ],
@@ -561,7 +534,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 12,
       options: [
       ],
@@ -575,7 +548,7 @@ const darkAge = {
       defaultWeapon: MIXED,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_COMBINED_ARMS, TRAIT_CUTTHROAT],
+      traits: [traits.SHIELD_OVERLAP, traits.COMBINED_ARMS, traits.CUTTHROAT],
       cost: 21,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -590,7 +563,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT, TRAIT_DOUBLE],
+      traits: [traits.SHIELD_OVERLAP, traits.SHIELDBREAKER, traits.CUTTHROAT, traits.DOUBLE],
       cost: 22,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -605,7 +578,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_IRA, TRAIT_SHIELDBREAKER, TRAIT_CUTTHROAT, TRAIT_DOUBLE],
+      traits: [traits.FUROR, traits.IRA, traits.SHIELDBREAKER, traits.CUTTHROAT, traits.DOUBLE],
       cost: 19,
       options: [
         OPT_UP_NO_TO_HEAVY_SHIELD,
@@ -620,7 +593,7 @@ const darkAge = {
       defaultWeapon: MIXED,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_IRA, TRAIT_RAIN, TRAIT_CUTTHROAT],
+      traits: [traits.FUROR, traits.IRA, traits.RAIN, traits.CUTTHROAT],
       cost: 18,
       options: [
         OPT_UP_NO_TO_HEAVY_SHIELD,
@@ -638,7 +611,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -652,7 +625,7 @@ const darkAge = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -666,7 +639,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -680,7 +653,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 12,
       options: [
       ],
@@ -694,7 +667,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 16,
       options: [
       ],
@@ -708,7 +681,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 18,
       options: [
       ],
@@ -722,7 +695,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 22,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -737,7 +710,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_CAVALRY],
+      traits: [traits.MOUNTED, traits.IMPETUS, traits.EXTRA_CAVALRY],
       cost: 25,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -755,7 +728,7 @@ const darkAge = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -769,7 +742,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -783,7 +756,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 16,
       options: [
       ],
@@ -797,7 +770,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP],
       cost: 18,
       options: [
       ],
@@ -811,7 +784,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: FULL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_DETERMINED],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP, traits.DETERMINED],
       cost: 24,
       options: [
       ],
@@ -825,7 +798,7 @@ const darkAge = {
       defaultWeapon: AX,
       defaultBody: FULL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_SHIELDBREAKER, TRAIT_SHIELD_OVERLAP, TRAIT_DETERMINED, TRAIT_DOUBLE],
+      traits: [traits.SHIELDBREAKER, traits.SHIELD_OVERLAP, traits.DETERMINED, traits.DOUBLE],
       cost: 23,
       options: [
       ],
@@ -839,7 +812,7 @@ const darkAge = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [traits.MOUNTED, traits.IMPETUS, traits.EXTRA_JAVELIN],
       cost: 25,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -857,7 +830,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -872,7 +845,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -887,7 +860,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_GUERRILLA],
+      traits: [traits.FUROR, traits.GUERRILLA],
       cost: 14,
       options: [
       ],
@@ -901,7 +874,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_GUERRILLA],
+      traits: [traits.FUROR, traits.GUERRILLA],
       cost: 13,
       options: [
       ],
@@ -915,7 +888,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA],
+      traits: [traits.WALL_OF_SPEARS, traits.GUERRILLA],
       cost: 15,
       options: [
       ],
@@ -929,7 +902,7 @@ const darkAge = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [traits.WALL_OF_SPEARS, traits.GUERRILLA, traits.FUROR],
       cost: 20,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -944,7 +917,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [traits.GUERRILLA, traits.FUROR],
       cost: 18,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -959,7 +932,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_GUERRILLA, TRAIT_FUROR, TRAIT_MOUNTED],
+      traits: [traits.GUERRILLA, traits.FUROR, traits.MOUNTED],
       cost: 20,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -977,7 +950,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -992,7 +965,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_GUERRILLA],
+      traits: [traits.FUROR, traits.GUERRILLA],
       cost: 14,
       options: [
       ],
@@ -1006,7 +979,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [traits.MOUNTED],
       cost: 16,
       options: [
       ],
@@ -1020,7 +993,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [traits.GUERRILLA, traits.FUROR],
       cost: 18,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1035,7 +1008,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_FUROR, TRAIT_MOUNTED],
+      traits: [traits.FUROR, traits.MOUNTED],
       cost: 21,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1053,7 +1026,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: BUCKLER,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 9,
       options: [
       ],
@@ -1067,7 +1040,7 @@ const darkAge = {
       defaultWeapon: BOW,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_HUNTER,
@@ -1082,7 +1055,7 @@ const darkAge = {
       defaultWeapon: THRUSTING,
       defaultBody: NO_ARMOUR,
       defaultShield: BUCKLER,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_THRUST],
+      traits: [traits.WALL_OF_SPEARS, traits.THRUST],
       cost: 13,
       options: [
       ],
@@ -1096,7 +1069,7 @@ const darkAge = {
       defaultWeapon: THRUSTING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP, traits.FUROR],
       cost: 15,
       options: [
       ],
@@ -1110,7 +1083,7 @@ const darkAge = {
       defaultWeapon: THRUSTING,
       defaultBody: NO_ARMOUR,
       defaultShield: BUCKLER,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_FUROR, TRAIT_ELUSIVE],
+      traits: [traits.WALL_OF_SPEARS, traits.FUROR, traits.ELUSIVE],
       cost: 18,
       options: [
       ],
@@ -1124,7 +1097,7 @@ const darkAge = {
       defaultWeapon: THRUSTING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR],
+      traits: [traits.WALL_OF_SPEARS, traits.SHIELD_OVERLAP, traits.FUROR],
       cost: 19,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1139,7 +1112,7 @@ const darkAge = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_FUROR],
+      traits: [traits.MOUNTED, traits.FUROR],
       cost: 21,
       options: [
         OPT_UP_PARTIAL_ARMOUR,

@@ -54,12 +54,10 @@
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span v-for="(trait) in row.traits" v-bind:key="trait">
+          <span v-for="(trait) in filteredTraits" v-bind:key="trait">
             <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
           </span>
-          <span v-for="(trait) in upgradedTraits" v-bind:key="trait">
-            <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
-          </span>
+
           <span v-if="row.commandPoints">
             <span class="unit-trait">{{row.commandPoints}} CP @ {{row.commandRange}}&quot;</span>
           </span>
@@ -123,17 +121,18 @@ import {
   HALF_BARDING,
   OPT_BUCKLER,
   WEAPON_INITIATIVES,
+  FULL_IMPROVED,
+  PARTIAL_IMPROVED,
 } from '../helpers/constants';
 // import { calcSaveNumber, calcSaveSymbol } from '../helpers/helpers';
-import { TRAIT_DESCRIPTIONS, TRAIT_MOUNTED } from '../helpers/traits';
+import traits from '../helpers/traits';
 
 export default {
   name: 'UnitRow',
   data: () => {
     return {
       optionToAdd: -1,
-      TRAIT_DESCRIPTIONS,
-      TRAIT_MOUNTED,
+      traits,
     };
   },
   props: [
@@ -158,11 +157,28 @@ export default {
       return this.row.defaultShield !== HIDE_OPTION;
     },
     upgradedTraits: function upgradedTraits() {
-      const traits = [];
+      const myTraits = [];
       this.row.selectedOptions.forEach((key) => {
-        traits.push(...this.row.options[key].upgradeTraits);
+        myTraits.push(...this.row.options[key].upgradeTraits);
       });
-      return traits;
+      return myTraits;
+    },
+    reducingTraits: function upgradedTraits() {
+      const myTraits = [];
+      this.row.selectedOptions.forEach((key) => {
+        return this.row.options[key].removeTraits
+          && myTraits.push(...this.row.options[key].removeTraits);
+      });
+      return myTraits;
+    },
+    filteredTraits: function filteredTraits() {
+      let allTraits = [...this.row.traits, ...this.upgradedTraits];
+      allTraits = allTraits.reduce((acc, el) => {
+        return this.reducingTraits.includes(el)
+          ? acc
+          : [...acc, el];
+      }, []);
+      return allTraits;
     },
     upgradedWeapon: function ungradedWeapon() {
       let ret = '';
@@ -280,8 +296,13 @@ export default {
       if (barding) {
         save -= SAVE_MODS[barding];
       }
-      if (shield === OPT_BUCKLER || barding === HALF_BARDING) {
-        symbol = '*';
+      if (
+        shield === OPT_BUCKLER
+        || barding === HALF_BARDING
+        || armour === FULL_IMPROVED
+        || armour === PARTIAL_IMPROVED
+      ) {
+        symbol = '+*';
       }
       return save + symbol;
     },
@@ -295,7 +316,7 @@ export default {
           tokens = 0;
         } else {
           const save = a.substr(0, 1);
-          const mounted = this.row.traits.indexOf(this.TRAIT_MOUNTED) > -1;
+          const mounted = this.row.traits.indexOf(this.traits.MOUNTED) > -1;
           if ((save > 4 && mounted) || save > 5) {
             tokens = 2;
           } else {
@@ -308,7 +329,7 @@ export default {
   },
   methods: {
     traitTitle: function traitTitle(trait) {
-      const desc = this.TRAIT_DESCRIPTIONS[trait] || ['', ''];
+      const desc = this.traits.descriptions[trait] || ['', ''];
       return `${desc[0]}\n${desc[1]}`;
     },
     removeOption: function removeOption(optionIndex) {

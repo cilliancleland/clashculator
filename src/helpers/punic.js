@@ -34,33 +34,7 @@ import {
   elephantOptions,
 } from './constants';
 
-import {
-  TRAIT_IRON_WILL,
-  TRAIT_SHIELD_OVERLAP,
-  TRAIT_SKIRMISH_SPECIALIST,
-  TRAIT_WALL_OF_SPEARS,
-  TRAIT_OFFENSIVE_SPEAR,
-  TRAIT_DRILLED,
-  TRAIT_GUERRILLA,
-  TRAIT_FUROR,
-  TRAIT_ALLIES,
-  TRAIT_MOUNTED,
-  TRAIT_IMPETUS,
-  TRAIT_IRA,
-  TRAIT_FIDELIS,
-  TRAIT_FERAL,
-  TRAIT_EXTRA_JAVELIN,
-  TRAIT_DETERMINED,
-  TRAIT_IMPULSUM,
-  TRAIT_AIM,
-  TRAIT_MACEDONIAN,
-  TRAIT_ENDURANCE,
-  TRAIT_MARAUDERS,
-  TRAIT_ELEPHANT,
-  TRAIT_CHARGE,
-  TRAIT_SLING,
-  TRAIT_DOUBLE,
-} from './traits';
+import traits from './traits';
 
 import {
   charactersWithAbilities,
@@ -78,7 +52,8 @@ const greeks = {
     defaultWeapon: JAVELIN,
     defaultBody: NO_ARMOUR,
     defaultShield: NO_SHIELD,
-    traits: [TRAIT_SKIRMISH_SPECIALIST],
+    traits: [
+      traits.SKIRMISH_SPECIALIST],
     cost: 8,
     options: [
     ],
@@ -92,7 +67,8 @@ const greeks = {
     defaultWeapon: BOW,
     defaultShield: NO_SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SKIRMISH_SPECIALIST],
+    traits: [
+      traits.SKIRMISH_SPECIALIST],
     cost: 8,
     options: [
       OPT_BUCKLER,
@@ -107,7 +83,8 @@ const greeks = {
     defaultWeapon: SLING,
     defaultShield: NO_SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SKIRMISH_SPECIALIST],
+    traits: [
+      traits.SKIRMISH_SPECIALIST],
     cost: 8,
     options: [
       OPT_BUCKLER,
@@ -122,7 +99,8 @@ const greeks = {
     defaultWeapon: JAVELIN,
     defaultShield: SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SKIRMISH_SPECIALIST],
+    traits: [
+      traits.SKIRMISH_SPECIALIST],
     cost: 13,
     options: [
     ],
@@ -136,7 +114,10 @@ const greeks = {
     defaultWeapon: THRUSTING,
     defaultShield: HEAVY_SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+    traits: [
+      traits.SHIELD_OVERLAP,
+      traits.WALL_OF_SPEARS,
+      traits.OFFENSIVE_SPEAR],
     cost: 13,
     options: [
       OPT_UP_PARTIAL_ARMOUR,
@@ -151,7 +132,11 @@ const greeks = {
     defaultWeapon: THRUSTING,
     defaultShield: HEAVY_SHIELD,
     defaultBody: PARTIAL,
-    traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+    traits: [
+      traits.SHIELD_OVERLAP,
+      traits.WALL_OF_SPEARS,
+      traits.OFFENSIVE_SPEAR,
+      traits.DRILLED],
     cost: 18,
     options: [
       OPT_DOWN_NO_ARMOUR,
@@ -166,7 +151,10 @@ const greeks = {
     defaultWeapon: JAVELIN_THRUSTING,
     defaultShield: SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_EXTRA_JAVELIN, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+    traits: [
+      traits.EXTRA_JAVELIN,
+      traits.WALL_OF_SPEARS,
+      traits.OFFENSIVE_SPEAR],
     cost: 16,
     options: [
     ],
@@ -180,7 +168,11 @@ const greeks = {
     defaultWeapon: THRUSTING,
     defaultShield: HEAVY_SHIELD,
     defaultBody: PARTIAL,
-    traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+    traits: [
+      traits.SHIELD_OVERLAP,
+      traits.WALL_OF_SPEARS,
+      traits.OFFENSIVE_SPEAR,
+      traits.DRILLED],
     cost: 22,
     options: [
       OPT_DOWN_NO_ARMOUR,
@@ -195,7 +187,10 @@ const greeks = {
     defaultWeapon: BOW,
     defaultShield: NO_SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_AIM, TRAIT_ALLIES],
+    traits: [
+      traits.SKIRMISH_SPECIALIST,
+      traits.AIM,
+      traits.ALLIES],
     cost: 17,
     options: [
       OPT_BUCKLER,
@@ -210,7 +205,8 @@ const greeks = {
     defaultWeapon: JAVELIN,
     defaultShield: SHIELD,
     defaultBody: FULL,
-    traits: [TRAIT_MOUNTED],
+    traits: [
+      traits.MOUNTED],
     cost: 23,
     options: [
       OPT_DOWN_PARTIAL_ARMOUR,
@@ -232,7 +228,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_SHIELD,
@@ -247,7 +244,9 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR],
       cost: 13,
       options: [
         OPT_DOWN_HEAVY_SHIELD,
@@ -262,7 +261,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED],
       cost: 18,
       options: [
       ],
@@ -276,11 +279,12 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS,
-        TRAIT_GUERRILLA,
-        TRAIT_IMPULSUM,
-        TRAIT_DETERMINED,
-        TRAIT_ALLIES],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED,
+        traits.ALLIES],
       cost: 18,
       options: [
       ],
@@ -295,7 +299,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED],
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
       ],
@@ -309,7 +317,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.DRILLED],
       cost: 24,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -324,7 +335,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_MOUNTED, TRAIT_MARAUDERS],
+      traits: [
+        traits.MOUNTED,
+        traits.MARAUDERS],
       cost: 17,
       options: [
       ],
@@ -338,7 +351,11 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_ALLIES, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.ALLIES,
+        traits.EXTRA_JAVELIN],
       cost: 25,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -353,7 +370,10 @@ const punic = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_SLING, TRAIT_ALLIES],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.SLING,
+        traits.ALLIES],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -368,7 +388,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 26,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -383,7 +406,8 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(4)', 'wounds(4)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(4)',
+        traits.ELEPHANT],
       cost: 16.5,
       options: [
       ],
@@ -396,7 +420,8 @@ const punic = {
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,
-      traits: [TRAIT_IRON_WILL],
+      traits: [
+        traits.IRON_WILL],
       cost: 18,
       options: elephantOptions,
       defaultWeapon: JAVELIN,
@@ -418,7 +443,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_SHIELD,
@@ -433,7 +459,8 @@ const punic = {
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -448,7 +475,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -463,7 +491,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 13,
       options: [
       ],
@@ -477,7 +506,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.FUROR],
       cost: 17,
       options: [
       ],
@@ -491,7 +523,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_GUERRILLA, TRAIT_WALL_OF_SPEARS, TRAIT_FUROR, TRAIT_ALLIES],
+      traits: [
+        traits.GUERRILLA,
+        traits.WALL_OF_SPEARS,
+        traits.FUROR,
+        traits.ALLIES],
       cost: 17,
       options: [
       ],
@@ -505,7 +541,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.FUROR],
       cost: 23,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -520,7 +559,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 26,
       options: [
         OPT_DOWN_FULL_TO_NO_ARMOUR,
@@ -535,7 +577,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_FUROR, TRAIT_IRA],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.FUROR,
+        traits.IRA],
       cost: 20,
       options: [
       ],
@@ -552,7 +598,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_SHIELD,
@@ -567,7 +614,8 @@ const punic = {
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -582,7 +630,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -597,7 +646,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 12,
       options: [
         OPT_UP_HEAVY_SHIELD,
@@ -612,7 +662,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.FUROR],
       cost: 17,
       options: [
       ],
@@ -623,7 +676,11 @@ const punic = {
       combat: 4,
       ranged: 5,
       grit: 4,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_FUROR, TRAIT_ALLIES],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.FUROR,
+        traits.ALLIES],
       cost: 17,
       options: [
       ],
@@ -640,7 +697,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_FUROR],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.FUROR],
       cost: 23,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -655,7 +715,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 26,
       options: [
         OPT_DOWN_FULL_TO_NO_ARMOUR,
@@ -670,7 +733,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_FUROR, TRAIT_IRA],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.FUROR,
+        traits.IRA],
       cost: 20,
       options: [
       ],
@@ -684,7 +751,8 @@ const punic = {
       defaultWeapon: '',
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_FERAL],
+      traits: [
+        traits.FERAL],
       cost: 10,
       options: [
       ],
@@ -701,11 +769,12 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP,
-        TRAIT_WALL_OF_SPEARS,
-        TRAIT_OFFENSIVE_SPEAR,
-        TRAIT_DRILLED,
-        TRAIT_FIDELIS],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED,
+        traits.FIDELIS],
       cost: 24,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -723,7 +792,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_MOUNTED, TRAIT_MARAUDERS],
+      traits: [
+        traits.MOUNTED,
+        traits.MARAUDERS],
       cost: 21,
       options: [
       ],
@@ -740,7 +811,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.DETERMINED],
       cost: 14,
       options: [
       ],
@@ -754,7 +827,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 13,
       options: [
       ],
@@ -768,7 +842,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 18,
       options: [
       ],
@@ -782,11 +860,12 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS,
-        TRAIT_GUERRILLA,
-        TRAIT_IMPULSUM,
-        TRAIT_DETERMINED,
-        TRAIT_ALLIES],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED,
+        traits.ALLIES],
       cost: 18,
       options: [
       ],
@@ -800,7 +879,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 16,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -815,7 +895,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_SHIELD_OVERLAP, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 24,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -830,7 +914,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 25,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -845,7 +932,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -860,7 +948,10 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_SLING, TRAIT_ALLIES],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.SLING,
+        traits.ALLIES],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -878,7 +969,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.DETERMINED],
       cost: 14,
       options: [
       ],
@@ -892,7 +985,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 13,
       options: [
       ],
@@ -906,7 +1000,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 18,
       options: [
       ],
@@ -920,11 +1018,12 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS,
-        TRAIT_SHIELD_OVERLAP,
-        TRAIT_IMPULSUM,
-        TRAIT_DETERMINED,
-        TRAIT_ALLIES],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.IMPULSUM,
+        traits.DETERMINED,
+        traits.ALLIES],
       cost: 18,
       options: [
       ],
@@ -938,7 +1037,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 16,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -953,7 +1053,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: PARTIAL,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 24,
       options: [
       ],
@@ -967,7 +1071,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 25,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -982,7 +1089,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -997,7 +1105,10 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_SLING, TRAIT_ALLIES],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.SLING,
+        traits.ALLIES],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -1015,7 +1126,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DETERMINED],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.DETERMINED],
       cost: 14,
       options: [
       ],
@@ -1029,7 +1142,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 13,
       options: [
       ],
@@ -1043,7 +1157,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 17,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1058,11 +1176,12 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
       defaultShield: HEAVY_SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS,
-        TRAIT_SHIELD_OVERLAP,
-        TRAIT_IMPULSUM,
-        TRAIT_DETERMINED,
-        TRAIT_ALLIES],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.SHIELD_OVERLAP,
+        traits.IMPULSUM,
+        traits.DETERMINED,
+        traits.ALLIES],
       cost: 18,
       options: [
       ],
@@ -1076,7 +1195,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 16,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1091,7 +1211,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_IMPULSUM, TRAIT_DETERMINED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.IMPULSUM,
+        traits.DETERMINED],
       cost: 24,
       options: [
       ],
@@ -1105,7 +1229,10 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultBody: PARTIAL,
       defaultShield: SHIELD,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS, TRAIT_EXTRA_JAVELIN],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS,
+        traits.EXTRA_JAVELIN],
       cost: 25,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1120,7 +1247,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1135,7 +1263,10 @@ const punic = {
       defaultWeapon: SLING,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_SLING, TRAIT_ALLIES],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.SLING,
+        traits.ALLIES],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -1153,7 +1284,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1168,7 +1300,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ALLIES],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.ALLIES],
       cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1183,7 +1319,10 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR],
       cost: 13,
       options: [
       ],
@@ -1197,7 +1336,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED],
       cost: 18,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1212,7 +1355,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED],
       cost: 23,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -1221,7 +1368,8 @@ const punic = {
     slingers: {
       displayName: 'Slingers',
       availability: MILITES,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1242,7 +1390,9 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS],
       cost: 23,
       options: [
         OPT_UPGRADE_CAVALRY_JAVELIN,
@@ -1259,7 +1409,9 @@ const punic = {
       defaultWeapon: AX,
       defaultShield: NO_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_DOUBLE],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.DOUBLE],
       cost: 14,
       options: [
 
@@ -1277,7 +1429,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1293,11 +1446,11 @@ const punic = {
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
       traits: [
-        TRAIT_DRILLED,
-        TRAIT_SHIELD_OVERLAP,
-        TRAIT_WALL_OF_SPEARS,
-        TRAIT_OFFENSIVE_SPEAR,
-        TRAIT_ALLIES,
+        traits.DRILLED,
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.ALLIES,
       ],
       cost: 18,
       options: [
@@ -1327,7 +1480,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA],
       cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1342,7 +1498,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA],
       cost: 23,
       options: [
         OPT_UP_FULL_ARMOUR,
@@ -1357,7 +1516,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1372,7 +1532,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 23,
       options: [
         OPT_CHARGING,
@@ -1391,7 +1552,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
       ],
@@ -1405,7 +1567,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 13,
       options: [
       ],
@@ -1419,7 +1582,9 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS],
       cost: 14,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1434,7 +1599,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ALLIES],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.ALLIES],
       cost: 19,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1449,7 +1618,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_IMPULSUM, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.IMPULSUM,
+        traits.DRILLED],
       cost: 20,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1464,7 +1637,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_IMPULSUM, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.IMPULSUM,
+        traits.DRILLED],
       cost: 25,
       options: [
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -1479,11 +1656,12 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_SHIELD_OVERLAP,
-        TRAIT_WALL_OF_SPEARS,
-        TRAIT_OFFENSIVE_SPEAR,
-        TRAIT_FIDELIS,
-        TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.FIDELIS,
+        traits.DRILLED],
       cost: 24,
       options: [],
     },
@@ -1496,7 +1674,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ALLIES],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.ALLIES],
       cost: 24,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1511,7 +1693,9 @@ const punic = {
       defaultWeapon: CAVALRY_SPEAR,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED, TRAIT_IMPETUS],
+      traits: [
+        traits.MOUNTED,
+        traits.IMPETUS],
       cost: 23,
       options: [
         OPT_UPGRADE_CAVALRY_JAVELIN,
@@ -1526,7 +1710,10 @@ const punic = {
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST, TRAIT_AIM, TRAIT_ALLIES],
+      traits: [
+        traits.SKIRMISH_SPECIALIST,
+        traits.AIM,
+        traits.ALLIES],
       cost: 17,
       options: [
         OPT_BUCKLER,
@@ -1544,7 +1731,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_SHIELD,
@@ -1559,7 +1747,8 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS],
+      traits: [
+        traits.WALL_OF_SPEARS],
       cost: 13,
       options: [
         OPT_DOWN_HEAVY_SHIELD,
@@ -1574,7 +1763,10 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ENDURANCE],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.ENDURANCE],
       cost: 17,
       options: [
         OPT_DOWN_HEAVY_SHIELD,
@@ -1589,7 +1781,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_MOUNTED, TRAIT_MARAUDERS],
+      traits: [
+        traits.MOUNTED,
+        traits.MARAUDERS],
       cost: 17,
       options: [
       ],
@@ -1603,7 +1797,9 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_MOUNTED, TRAIT_MARAUDERS],
+      traits: [
+        traits.MOUNTED,
+        traits.MARAUDERS],
       cost: 21,
       options: [
       ],
@@ -1617,7 +1813,11 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_GUERRILLA, TRAIT_ENDURANCE],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.GUERRILLA,
+        traits.ENDURANCE],
       cost: 20,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1632,7 +1832,8 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(4)', 'wounds(4)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(4)',
+        traits.ELEPHANT],
       cost: 16.5,
       options: [
       ],
@@ -1645,7 +1846,8 @@ const punic = {
       displayName: 'Elephant Crew',
       fixedFigures: 2,
       availability: RARE,
-      traits: [TRAIT_IRON_WILL],
+      traits: [
+        traits.IRON_WILL],
       cost: 18,
       options: elephantOptions,
       defaultWeapon: JAVELIN,
@@ -1667,7 +1869,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1682,7 +1885,8 @@ const punic = {
       defaultWeapon: BOW,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1697,7 +1901,8 @@ const punic = {
       defaultWeapon: SLING,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SKIRMISH_SPECIALIST],
+      traits: [
+        traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
         OPT_BUCKLER,
@@ -1726,7 +1931,11 @@ const punic = {
       defaultWeapon: PIKE,
       defaultShield: SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_MACEDONIAN, TRAIT_DRILLED],
+      traits: [
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.MACEDONIAN,
+        traits.DRILLED],
       cost: 17,
       options: [
         OPT_DOWN_NO_ARMOUR,
@@ -1741,7 +1950,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_ALLIES],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.ALLIES],
       cost: 13,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
@@ -1756,7 +1969,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_DRILLED, TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR],
+      traits: [
+        traits.DRILLED,
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR],
       cost: 18,
       options: [
       ],
@@ -1770,7 +1987,11 @@ const punic = {
       defaultWeapon: THRUSTING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_SHIELD_OVERLAP, TRAIT_WALL_OF_SPEARS, TRAIT_OFFENSIVE_SPEAR, TRAIT_DRILLED],
+      traits: [
+        traits.SHIELD_OVERLAP,
+        traits.WALL_OF_SPEARS,
+        traits.OFFENSIVE_SPEAR,
+        traits.DRILLED],
       cost: 22,
       options: [
       ],
@@ -1784,7 +2005,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 23,
       options: [
         OPT_CHARGING,
@@ -1800,7 +2022,10 @@ const punic = {
       defaultWeapon: XYSTON,
       defaultShield: NO_SHIELD,
       defaultBody: FULL,
-      traits: [TRAIT_CHARGE, TRAIT_DRILLED, TRAIT_MOUNTED],
+      traits: [
+        traits.CHARGE,
+        traits.DRILLED,
+        traits.MOUNTED],
       cost: 22,
       options: [
         OPT_CHARGING,
@@ -1816,10 +2041,10 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [TRAIT_MOUNTED],
+      traits: [
+        traits.MOUNTED],
       cost: 15,
       options: [
-        OPT_DOWN_NO_ARMOUR,
       ],
     },
     elephant: {
@@ -1831,7 +2056,8 @@ const punic = {
       ranged: 7,
       grit: 4,
       fixedSave: '3+',
-      traits: ['attacks(4)', 'wounds(5)', TRAIT_ELEPHANT],
+      traits: ['attacks(4)', 'wounds(5)',
+        traits.ELEPHANT],
       cost: 14.4,
       options: [
       ],
@@ -1850,7 +2076,8 @@ const punic = {
       defaultWeapon: JAVELIN,
       defaultShield: NO_SHIELD,
       defaultBody: PARTIAL,
-      traits: [TRAIT_IRON_WILL],
+      traits: [
+        traits.IRON_WILL],
       cost: 18,
       options: elephantOptions,
     },

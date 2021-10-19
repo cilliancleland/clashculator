@@ -3,7 +3,7 @@ import {
   HALF_BARDING,
   OPT_BUCKLER,
 } from './constants';
-import { TRAIT_MOUNTED } from './traits';
+import traits from './traits';
 
 function shuffle(inArray) {
   const array = inArray;
@@ -55,7 +55,7 @@ function numDeploymentCounters(unit) {
     return 0;
   }
   const save = calcSaveNumber(unit);
-  const mounted = unit.traits.indexOf(TRAIT_MOUNTED) > 1;
+  const mounted = unit.traits.indexOf(traits.MOUNTED) > 1;
 
   if ((save > 4 && mounted) || save > 5) {
     return 2;

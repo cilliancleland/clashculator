@@ -4,6 +4,7 @@ import {
   FULL,
   SHIELD,
   SWORD,
+  JAVELIN,
   OPT_UP_CHARIOT,
   characterOptions,
   samuraiCharacterOptions,
@@ -17,12 +18,11 @@ import {
   OPT_COMMAND_ROMAN,
   OPT_COMMAND_GREEK,
   OPT_COMMAND_GALLIC,
+  ENCLOSED,
+  OPT_DOWN_ENCLOSED_TO_FULL,
 } from './constants';
 
-import {
-  TRAIT_IRON_WILL,
-  TRAIT_OMENS,
-} from './traits';
+import traits from './traits';
 
 const characters = {
   lvl5: {
@@ -41,7 +41,7 @@ const characters = {
     commandPoints: 5,
     defaultShield: SHIELD,
     defaultBody: FULL,
-    traits: ['attacks(3)', 'wounds(3)', TRAIT_IRON_WILL],
+    traits: ['attacks(3)', 'wounds(3)', traits.IRON_WILL],
   },
   lvl4: {
     dontCountForBreak: true,
@@ -59,7 +59,7 @@ const characters = {
     commandPoints: 4,
     defaultShield: SHIELD,
     defaultBody: FULL,
-    traits: ['attacks(2)', 'wounds(3)', TRAIT_IRON_WILL],
+    traits: ['attacks(2)', 'wounds(3)', traits.IRON_WILL],
   },
   lvl3: {
     dontCountForBreak: true,
@@ -77,7 +77,7 @@ const characters = {
     commandPoints: 3,
     defaultShield: SHIELD,
     defaultBody: FULL,
-    traits: ['attacks(2)', 'wounds(2)', TRAIT_IRON_WILL],
+    traits: ['attacks(2)', 'wounds(2)', traits.IRON_WILL],
   },
   lvl2: {
     dontCountForBreak: true,
@@ -95,7 +95,7 @@ const characters = {
     commandPoints: 2,
     defaultShield: SHIELD,
     defaultBody: FULL,
-    traits: ['wounds(2)', TRAIT_IRON_WILL],
+    traits: ['wounds(2)', traits.IRON_WILL],
   },
   soothsayer: {
     isCharacter: true,
@@ -112,8 +112,68 @@ const characters = {
     commandPoints: 0,
     defaultShield: NO_SHIELD,
     defaultBody: NO_ARMOUR,
-    traits: [TRAIT_OMENS],
+    traits: [traits.OMENS],
   },
+};
+
+const families = {
+  isCharacter: true,
+  fixedFigures: 0,
+  displayName: 'Supporting Families',
+  availability: 'leader',
+  cost: 15,
+  options: [],
+  defaultWeapon: HIDE_OPTION,
+  combat: 0,
+  ranged: 0,
+  grit: 0,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [traits.FAMILY],
+};
+
+const chariotRider = {
+  dontCountForBreak: true,
+  isCharacter: true,
+  fixedFigures: 1,
+  displayName: 'Chariot Rider',
+  availability: 'leader',
+  cost: 52,
+  options: characterOptions,
+  defaultWeapon: JAVELIN,
+  combat: 4,
+  ranged: 4,
+  grit: 3,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: SHIELD,
+  defaultBody: FULL,
+  traits: [
+    'wounds(2)',
+    traits.IRON_WILL,
+    traits.INDEPENDENT,
+    traits.CHARIOT,
+  ],
+};
+const charioteer = {
+  dontCountForBreak: true,
+  isCharacter: true,
+  fixedFigures: 1,
+  displayName: 'Charioteer',
+  availability: 'leader',
+  cost: 52,
+  options: [OPT_DOWN_ENCLOSED_TO_FULL],
+  defaultWeapon: JAVELIN,
+  combat: 4,
+  ranged: 4,
+  grit: 3,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: SHIELD,
+  defaultBody: ENCLOSED,
+  traits: ['wounds(2)', traits.IRON_WILL, traits.INDEPENDENT],
 };
 
 function charactersWithAbilities(nation) {
@@ -157,9 +217,19 @@ function charactersWithChariots(nation) {
   return ret;
 }
 
+function charactersWithFamilies() {
+  const ret = JSON.parse(JSON.stringify(characters));
+  delete ret.soothsayer;
+  ret.families = families;
+  return ret;
+}
+
 export {
   characters,
   charactersWithAbilities,
   charactersWithChariots,
+  charactersWithFamilies,
   samuraiCharacters,
+  chariotRider,
+  charioteer,
 };
