@@ -46,7 +46,8 @@ const MIXED = 'mixed hand weapons';
 const AX = 'double handed weapon';
 const SCORPIO = 'Scorpio';
 const PIKE = 'pike';
-const XYSTON = 'xtston';
+const KONTOS = 'kontos';
+const XYSTON = 'xyston';
 const YARI = 'yari';
 const YUMI = 'yumi';
 const TEPPO = 'teppo';
@@ -81,6 +82,7 @@ const WEAPON_INITIATIVES = {
   [CAVALRY_YARI]: '(3)',
   [SCORPIO]: '',
   [ADDITIONAL]: '(1)',
+  [KONTOS]: '(3)',
 };
 const OPT_NOT_POORLY = {
   name: 'remove pooly equipped',
@@ -585,6 +587,7 @@ export {
   MIXED,
   PIKE,
   XYSTON,
+  KONTOS,
   JAVELIN_THRUSTING,
   YARI,
   YUMI,

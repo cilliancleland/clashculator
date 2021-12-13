@@ -18,8 +18,7 @@
         <div class="deployment-numbers" v-if="autoNumber==true">
           <div class="deployment-number"
                 v-for="(num,index) in deploymentNumbers[index]"
-                v-bind:key="index">
-            {{num + 1}}
+                v-bind:key="index">{{num + 1}}<span v-if="index > 0">s</span>
           </div>
         </div>
         <div class="unit-cell unit-cell-wide">
