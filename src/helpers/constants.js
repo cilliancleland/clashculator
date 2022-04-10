@@ -214,7 +214,7 @@ const OPT_DOWN_FULL_TO_NO_ARMOUR = {
 };
 const OPT_DOWN_ENCLOSED_TO_FULL = {
   name: 'Downgrade to full armour',
-  cost: -1,
+  cost: -2,
   upgradeWeapon: '',
   upgradeArmour: FULL,
   upgradeShield: '',

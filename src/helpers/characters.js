@@ -163,7 +163,7 @@ const charioteer = {
   fixedFigures: 1,
   displayName: 'Charioteer',
   availability: 'leader',
-  cost: 52,
+  cost: 75,
   options: [OPT_DOWN_ENCLOSED_TO_FULL],
   defaultWeapon: JAVELIN,
   combat: 4,
