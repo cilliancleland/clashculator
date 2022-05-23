@@ -1187,7 +1187,7 @@ const eagles = {
       defaultWeapon: KONTOS,
       defaultBody: ENCLOSED,
       defaultBarding: BARDING,
-      defaultShield: SHIELD,
+      defaultShield: NO_SHIELD,
       traits: [
         traits.MOUNTED,
         traits.CHARGE,
