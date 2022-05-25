@@ -221,6 +221,7 @@ export default {
       let excludeWeaponOptions = false;
       let excludeArmourOptions = false;
       let excludeShieldOptions = false;
+      let excludeBardingOptions = false;
       let excludeCommandOptions = false;
       const exclusions = [];
       let isMounted = false;
@@ -238,6 +239,9 @@ export default {
         if (this.row.options[key].upgradeCommand) {
           excludeCommandOptions = true;
         }
+        if (this.row.options[key].upgradeBarding) {
+          excludeBardingOptions = true;
+        }
         if (this.row.options[key].name === 'Upgrade to Horse'
           || this.row.options[key].name === 'Upgrade to Chariot') {
           isMounted = true;
@@ -254,6 +258,7 @@ export default {
           || (excludeWeaponOptions && option.upgradeWeapon)
           || (excludeArmourOptions && option.upgradeArmour)
           || (excludeCommandOptions && option.upgradeCommand)
+          || (excludeBardingOptions && option.upgradeBarding)
           || (isHeavyShield && option.unlessHeavyShield)
           || (isMounted && option.unlessMounted)
           || (!isMounted && option.requiresMounted)
