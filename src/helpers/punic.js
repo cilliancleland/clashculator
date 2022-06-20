@@ -747,7 +747,7 @@ const punic = {
       availability: RARE,
       combat: 4,
       ranged: 5,
-      grit: 3,
+      grit: 5,
       defaultWeapon: '',
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
@@ -1141,10 +1141,10 @@ const punic = {
       grit: 5,
       defaultWeapon: THROWING,
       defaultBody: NO_ARMOUR,
-      defaultShield: HEAVY_SHIELD,
+      defaultShield: SHIELD,
       traits: [
         traits.WALL_OF_SPEARS],
-      cost: 13,
+      cost: 12,
       options: [
       ],
     },
@@ -1816,9 +1816,8 @@ const punic = {
       traits: [
         traits.SHIELD_OVERLAP,
         traits.WALL_OF_SPEARS,
-        traits.GUERRILLA,
-        traits.ENDURANCE],
-      cost: 20,
+      ],
+      cost: 18,
       options: [
         OPT_DOWN_NO_ARMOUR,
       ],
