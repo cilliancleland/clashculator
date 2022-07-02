@@ -33,6 +33,8 @@
     </span>
     <h3>What's new</h3>
       <ul>
+        <li>Clash of Katanas!!
+        </li>
         <li>Added lists from the new expansion
           <a href="https://www.wargamevault.com/product/373720/RISE-of-Eagles"  target="_blank">
           <b>Rise of Eagles</b>
