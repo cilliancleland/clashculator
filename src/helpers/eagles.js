@@ -44,7 +44,7 @@ import {
   OPT_UP_PARTIAL_ARMOUR,
   OPT_NOT_POORLY,
   OPT_UP_SHIELD,
-  OPT_DOWN_ENCLOSED_TO_FULL,
+  OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
   OPT_UP_SHIELD_EXTRA,
 } from './constants';
 
@@ -1194,7 +1194,7 @@ const eagles = {
       ],
       cost: 26,
       options: [
-        OPT_DOWN_ENCLOSED_TO_FULL,
+        OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
       ],
     },
     militia: {

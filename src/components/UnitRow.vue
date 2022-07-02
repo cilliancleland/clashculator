@@ -91,7 +91,7 @@
           points each
         </div>
         <div class="unit-cell unit-cell-wide">
-          Total unit cost:  {{row.size ? (row.size * (row.cost + optionsCostPerFigure)) : row.cost}}
+          Total unit cost:  {{rowCost}}
         </div>
       </div>
       <button v-for="(value, index) in row.selectedOptions"
@@ -122,6 +122,7 @@ import {
   WEAPON_INITIATIVES,
   FULL_IMPROVED,
   PARTIAL_IMPROVED,
+  ENCLOSED_IMPROVED,
 } from '../helpers/constants';
 // import { calcSaveNumber, calcSaveSymbol } from '../helpers/helpers';
 import traits from '../helpers/traits';
@@ -142,6 +143,10 @@ export default {
     'deployment-numbers',
     'auto-number'],
   computed: {
+    rowCost() {
+      const { row } = this;
+      return Math.round(row.size ? (row.size * (row.cost + this.optionsCostPerFigure)) : row.cost);
+    },
     displayWeapon() {
       const weap = this.upgradedWeapon ? this.upgradedWeapon : this.row.defaultWeapon;
       return `${weap} ${WEAPON_INITIATIVES[weap]}`;
@@ -305,6 +310,7 @@ export default {
         || barding === HALF_BARDING
         || armour === FULL_IMPROVED
         || armour === PARTIAL_IMPROVED
+        || armour === ENCLOSED_IMPROVED
       ) {
         symbol = '+*';
       }

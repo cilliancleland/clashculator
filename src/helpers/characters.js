@@ -8,6 +8,7 @@ import {
   OPT_UP_CHARIOT,
   characterOptions,
   samuraiCharacterOptions,
+  katanaCharacterOptions,
   HIDE_OPTION,
   OPT_COMMAND_ALL,
   OPT_COMMAND_NUMIDIAN,
@@ -19,10 +20,29 @@ import {
   OPT_COMMAND_GREEK,
   OPT_COMMAND_GALLIC,
   ENCLOSED,
-  OPT_DOWN_ENCLOSED_TO_FULL,
+  OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
+  ADDITIONAL,
 } from './constants';
 
 import traits from './traits';
+
+const soothsayer = {
+  isCharacter: true,
+  fixedFigures: 0,
+  displayName: 'Soothsayer',
+  availability: 'leader',
+  cost: 15,
+  options: [],
+  defaultWeapon: HIDE_OPTION,
+  combat: 0,
+  ranged: 0,
+  grit: 0,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [traits.OMENS],
+};
 
 const characters = {
   lvl5: {
@@ -97,25 +117,108 @@ const characters = {
     defaultBody: FULL,
     traits: ['wounds(2)', traits.IRON_WILL],
   },
-  soothsayer: {
-    isCharacter: true,
-    fixedFigures: 0,
-    displayName: 'Soothsayer',
-    availability: 'leader',
-    cost: 15,
-    options: [],
-    defaultWeapon: HIDE_OPTION,
-    combat: 0,
-    ranged: 0,
-    grit: 0,
-    commandRange: 0,
-    commandPoints: 0,
-    defaultShield: NO_SHIELD,
-    defaultBody: NO_ARMOUR,
-    traits: [traits.OMENS],
-  },
+  soothsayer,
 };
-
+const sake = {
+  isCharacter: true,
+  fixedFigures: 0,
+  displayName: 'Sake Rations',
+  availability: 'leader',
+  cost: 10,
+  options: [],
+  defaultWeapon: HIDE_OPTION,
+  combat: 0,
+  ranged: 0,
+  grit: 0,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [traits.SAKE],
+};
+const geisha = {
+  isCharacter: true,
+  fixedFigures: 0,
+  displayName: 'Geisha',
+  availability: 'leader',
+  cost: 15,
+  options: [],
+  defaultWeapon: HIDE_OPTION,
+  combat: 0,
+  ranged: 0,
+  grit: 0,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [traits.GEISHA],
+};
+const assassin = {
+  isCharacter: true,
+  fixedFigures: 1,
+  displayName: 'Assassin',
+  availability: 'leader',
+  cost: 59,
+  options: [],
+  defaultWeapon: ADDITIONAL,
+  combat: 3,
+  ranged: 5,
+  grit: 3,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [
+    'attacks(2)',
+    traits.INDEPENDENT,
+    traits.PARRY_OFF,
+    traits.ASSASSIN,
+    traits.YOJI,
+    traits.DEADLY_STRIKE,
+  ],
+};
+const masterAss = {
+  isCharacter: true,
+  fixedFigures: 1,
+  displayName: 'Master Assassin',
+  availability: 'leader',
+  cost: 89,
+  options: [],
+  defaultWeapon: ADDITIONAL,
+  combat: 3,
+  ranged: 5,
+  grit: 3,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [
+    'attacks(3)',
+    'wounds(2)',
+    traits.INDEPENDENT,
+    traits.PARRY_OFF,
+    traits.ASSASSIN,
+    traits.YOJI,
+    traits.DEADLY_STRIKE,
+  ],
+};
+const shrine = {
+  isCharacter: true,
+  fixedFigures: 0,
+  displayName: 'Buddhist Shrine',
+  availability: 'leader',
+  cost: 10,
+  options: [],
+  defaultWeapon: HIDE_OPTION,
+  combat: 0,
+  ranged: 0,
+  grit: 0,
+  commandRange: 0,
+  commandPoints: 0,
+  defaultShield: NO_SHIELD,
+  defaultBody: NO_ARMOUR,
+  traits: [traits.SHRINE],
+};
 const families = {
   isCharacter: true,
   fixedFigures: 0,
@@ -164,7 +267,7 @@ const charioteer = {
   displayName: 'Charioteer',
   availability: 'leader',
   cost: 75,
-  options: [OPT_DOWN_ENCLOSED_TO_FULL],
+  options: [OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR],
   defaultWeapon: JAVELIN,
   combat: 4,
   ranged: 4,
@@ -196,13 +299,38 @@ function charactersWithAbilities(nation) {
 }
 
 function samuraiCharacters() {
-  const ret = JSON.parse(JSON.stringify(characters));
-  delete ret.soothsayer;
+  let ret = JSON.parse(JSON.stringify(characters));
   Object.getOwnPropertyNames(ret).forEach((key) => {
-    // console.log(`${key}:${obj[key]}`);
     ret[key].defaultShield = NO_SHIELD;
+    ret[key].defaultArmour = ENCLOSED;
+    ret[key].traits.push(traits.HONOURABLE);
+    ret[key].traits.push(traits.OLD_WAYS);
     ret[key].options = samuraiCharacterOptions;
   });
+  ret = {
+    ...ret,
+    geisha,
+    shrine,
+    sake,
+    assassin,
+  };
+  return ret;
+}
+
+function katanaCharacters() {
+  let ret = JSON.parse(JSON.stringify(characters));
+  Object.getOwnPropertyNames(ret).forEach((key) => {
+    ret[key].defaultShield = NO_SHIELD;
+    ret[key].defaultArmour = FULL;
+    ret[key].options = katanaCharacterOptions;
+  });
+  ret = {
+    ...ret,
+    geisha,
+    assassin,
+    shrine,
+    sake,
+  };
   return ret;
 }
 
@@ -229,7 +357,9 @@ export {
   charactersWithAbilities,
   charactersWithChariots,
   charactersWithFamilies,
+  katanaCharacters,
   samuraiCharacters,
+  masterAss,
   chariotRider,
   charioteer,
 };

@@ -16,6 +16,7 @@ traits.FIDELIS = 'fidelis';
 traits.FERAL = 'feral';
 traits.EXTRA_CAVALRY = 'extra equipment-(cavalry spear)';
 traits.EXTRA_JAVELIN = 'extra equipment-(javelin)';
+traits.EXTRA_WAR_BOW = 'extra equipment-(war bow)';
 traits.DETERMINED = 'determined';
 traits.IMPULSUM = 'impulsum';
 traits.AIM = 'aimed shot';
@@ -33,7 +34,7 @@ traits.HEAVY_CHARIOT = 'heavy chariot';
 traits.HOWDA = 'howda';
 traits.MUSICIAN = 'musician';
 traits.STANDARD = 'standard-bearer';
-traits.OVERHEAD = 'overhead shooting';
+traits.OVERHEAD = 'overhead shot';
 traits.STALWART = 'stalwart';
 traits.BREAKER = 'shield breaker';
 traits.PLATE = 'plate armour';
@@ -60,8 +61,9 @@ traits.EXTRA_TWO = 'extra equipment two handed weapon';
 traits.SPARABARA = 'sparabara';
 traits.VOLLEY = 'volley';
 traits.KAKOMU = 'kakomu';
-traits.HARINEZUM = 'harinezumi';
+traits.HARINEZUMI = 'harinezumi';
 traits.FUREKAESHI = 'furekaeshi';
+traits.HONOURABLE = 'honourable';
 traits.KURIDASHI = 'kuridashi';
 traits.NAGINATA = 'naginata';
 traits.GAUCHE = 'main gauche';
@@ -77,7 +79,39 @@ traits.OVERWHELM = 'overwhelm';
 traits.PARRY = 'parry reposte';
 traits.GUARDED = 'guarded attack';
 traits.EXTRA_SHIELD = 'extra equipment - shield';
-
+traits.OVERWHELM = 'overwhelm';
+traits.UTEYA = 'uteya';
+traits.PARRY_OFF = 'off hand parry';
+traits.PARRY_RIPOSTE = 'parry riposte';
+traits.FORM_UP = 'form up';
+traits.DUTY = 'duty bound';
+traits.PAVAIS = 'pavais';
+traits.SAKE = 'Sake ration';
+traits.GEISHA = 'Geisha';
+traits.ASSASSIN = 'Assassin';
+traits.MASTER_ASSASSIN = 'Master Assassin';
+traits.SHRINE = 'Protable Buddish Shrine';
+traits.ASHIGARU = 'ashigaru drill';
+traits.RUTHLESS = 'ruthless';
+traits.FICKLE = 'fickle';
+traits.MOUNTED_GUNNERY = 'mounted gunnery';
+traits.ROTATIONAL_FIRE = 'rotational fire';
+traits.BROTHERHOOD = 'brotherhood';
+traits.EXTENDED_NAGAE = 'extended nagae-yari';
+traits.HEAVY_STRIKE = 'heavy strike';
+traits.NORIKUZISHI = 'norikuzishi';
+traits.TATE = 'tate specialist';
+traits.SISTERHOOD = 'sisterhood';
+traits.SISTERHOOD = 'sisterhood';
+traits.SHARPSHOOTER = 'sharpshooter';
+traits.SHIELDS_UP = 'Shields Up!';
+traits.MOMENTUM = 'momentum';
+traits.EXTRA_POLEARM = 'extra equipment polearm';
+traits.MANDARIN = 'mandarin duck';
+traits.YOJI = 'yoji-gakure';
+traits.DEADLY_STRIKE = 'deadly strike';
+traits.OLD_WAYS = 'the old ways';
+traits.EXTRA = 'extra equipment';
 
 traits.descriptions = {
   [traits.SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
@@ -101,6 +135,7 @@ traits.descriptions = {
   [traits.IMPETUS]: ['requires cavalry spear, lance or kontos/xyston and loose order, affects attack, higher weapon initiative', '-1/-2 to save', 'p.67'],
   [traits.IRA]: ['delays wound effects', 'models do not receive wounds until the end phase', 'p.73'],
   [traits.FIDELIS]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'p.73'],
+  [traits.EXTRA_WAR_BOW]: ['may use ready to swap weapon to war bow', '', 'p.66'],
   [traits.EXTRA_JAVELIN]: ['may use ready to swap weapon to javelin', '', 'p.66'],
   [traits.EXTRA_CAVALRY]: ['may use ready to swap weapon to cavalry spear', '', 'p.66'],
   [traits.IMPULSUM]: ['requires throwing spear, affects throw', '+1 d6 if enemy tests morale', 'p.68'],
@@ -141,17 +176,11 @@ traits.descriptions = {
   [traits.COMMAND_NUMIDIAN]: ['Command Ability', 'Numidian Command Ability', 'Fields of Blood'],
   [traits.COMMAND_GREEK]: ['Command Ability', 'Greek Command Ability', 'Fields of Blood'],
   [traits.COMMAND_PUNIC]: ['Command Ability', 'Carthaginian Command Ability', 'Fields of Blood'],
-  [traits.VOLLEY]: ['requires close order, affects shooting', 'When doing a shoot action while in close order or when lined up against a defended obstacle and shooting over it, if the enemy has to  test morale they add an additional D6 to the test', 'samurai'],
-  [traits.KAKOMU]: ['requires loose order, affects melee', 'when executing an attack in which they don\'t need to move more than 2" and the attacking unit has more models than the defending units then attacker may re-roll 1s on the to hit roll and the enemy adds 1D6 to morale test from combat', 'samurai'],
-  [traits.HARINEZUM]: ['requires close order, affects melee', 'when selecting counter attack with a weapon with higher initiative than enemy, all models in unit may roll D6 to counter attack and they get to attack before the attack ing unit does, so any casualties don\'t get to attack', 'samurai'],
-  [traits.FUREKAESHI]: ['requires loose order, affects melee', 'when doing attack with a weapon with higher weapon initiative, if enemy selects counter-attack they suffer -1 to hit', 'samurai'],
-  [traits.KURIDASHI]: ['', 'when doing defend they can choose to use this skill instead of rolling to cancel hits, the enemy must pass a grit test to attack, if they fail they retreat and they only gain fatigue as if they had executed a move action. If they pass they attack with -1 to hit and any 1s rolled are hits inflicted on the attacking units (these hits don\'t cause morale test)', 'samurai'],
-  [traits.NAGINATA]: ['affects melee', '-1 to enemy save', 'samurai'],
   [traits.GAUCHE]: ['affects melee, requires loose order', ' When selecting defend as their combat response these troops may re-roll any failed attempts to cancel hits.', 'samurai'],
   [traits.GRIZZLED]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.INDEPENDENT]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.POORLY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.BUSHMASTER]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
+  [traits.BUSHMASTER]: ['', 'See Rise of Eagles/Clash of Katanas expansion', 'Rise of Eagles/Clash of Katanas'],
   [traits.VICIOUS]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.LINE_BREAKER]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.ROBUR]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
@@ -162,5 +191,40 @@ traits.descriptions = {
   [traits.FAMILY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.HEAVY_CHARIOT]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.EXTRA_SHIELD]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
+  [traits.OVERWHELM]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.UTEYA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.PARRY]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.FORM_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.DUTY]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.PAVAIS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.SAKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.GEISHA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.ASSASSIN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.MASTER_ASSASSIN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.SHRINE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.VOLLEY]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.KAKOMU]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.HARINEZUM]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.FUREKAESHI]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.KURIDASHI]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.NAGINATA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.HONOURABLE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.MOMENTUM]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.EXTRA_POLEARM]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.MANDARIN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.YOJI]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.DEADLY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.OLD_WAYS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.EXTRA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.PARRY_OFF]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.RUTHLESS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.FICKLE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.HARINEZUMI]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.ASHIGARU]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.ROTATIONAL_FIRE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.BROTHERHOOD]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.EXTENDED_NAGAE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.HEAVY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.SHIELDS_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
 };
 export default traits;

@@ -4,7 +4,7 @@ import traits from './traits';
 const PERIODS = {
   punic: 'Punic Wars',
   eagles: 'Rise of Eagles',
-  samurai: 'Samurai (beta)',
+  katanas: 'Clash of Katanas',
   darkAge: 'Dark Ages (beta)',
   alex: 'Alexandrian (beta)',
 };
@@ -18,6 +18,7 @@ const NO_SHIELD = 'no shield';
 const NO_ARMOUR = 'no armour';
 const PLATE = 'full plate armour';
 const ENCLOSED = 'enclosed armour';
+const ENCLOSED_IMPROVED = 'improved enclosed armour';
 const FULL = 'full armour';
 const PARTIAL = 'partial armour';
 const FULL_IMPROVED = 'improved full armour';
@@ -36,12 +37,16 @@ const JAVELIN = 'javelin';
 const SLING = 'sling';
 const BOW = 'bow';
 const XBOW = 'crossbow';
+const REPEATING_XBOW = 'repeating crossbow';
+const GRENADES = 'grenades';
+const EARLY_FIREARMS = 'early firearms';
 const THROWING = 'throwing spear';
 const THRUSTING = 'thrusting spear';
 const SWORD = 'sword';
 const LANCE = 'lance';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
+const CAVALRY_SPEAR_LONG = 'cavalry spear long';
 const MIXED = 'mixed hand weapons';
 const AX = 'double handed weapon';
 const SCORPIO = 'Scorpio';
@@ -50,6 +55,12 @@ const KONTOS = 'kontos';
 const XYSTON = 'xyston';
 const YARI = 'yari';
 const YUMI = 'yumi';
+const LIGHT_CANNON = 'light cannon';
+const HWACHA = 'hwacha';
+const ARQUEBUS = 'arquebus';
+const WAR_BOW = 'war bow';
+const POLEARMS = 'polearm';
+const HEAVY_WPN = 'heavy weapon';
 const TEPPO = 'teppo';
 const NAGINATA = 'long weapon';
 const NAGAE = 'nagae yari';
@@ -64,12 +75,20 @@ const WEAPON_INITIATIVES = {
   [BOW]: '',
   [STONES]: '',
   [XBOW]: '',
+  [REPEATING_XBOW]: '',
+  [ARQUEBUS]: '',
+  [GRENADES]: '',
+  [WAR_BOW]: '',
+  [LIGHT_CANNON]: '',
+  [EARLY_FIREARMS]: '',
+  [HEAVY_WPN]: '(2)',
   [THROWING]: '(2)',
   [THRUSTING]: '(3)',
   [SWORD]: '(1)',
   [LANCE]: '(2)',
   [JAVELIN_THRUSTING]: '(3)',
   [CAVALRY_SPEAR]: '(2)',
+  [CAVALRY_SPEAR_LONG]: '(3)',
   [MIXED]: '(1)',
   [AX]: '(1)',
   [PIKE]: '(4)',
@@ -77,6 +96,7 @@ const WEAPON_INITIATIVES = {
   [YARI]: '(3)',
   [YUMI]: '',
   [TEPPO]: '',
+  [POLEARMS]: '',
   [NAGINATA]: '(2)',
   [NAGAE]: '(4)',
   [CAVALRY_YARI]: '(3)',
@@ -92,6 +112,22 @@ const OPT_NOT_POORLY = {
   upgradeShield: '',
   upgradeTraits: [],
   removeTraits: [traits.POORLY],
+};
+const OPT_DOWN_FULL_TO_PARTIAL_ARMOUR = {
+  name: 'downgrade to partial armour',
+  cost: -1,
+  upgradeWeapon: '',
+  upgradeArmour: 'PARTIAL',
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_MIXED = {
+  name: 'Upgrade to mixed weapons (+1pts/model)',
+  cost: 1,
+  upgradeWeapon: MIXED,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [],
 };
 const OPT_BUCKLER = {
   name: 'Add buckler (+1pts/model)',
@@ -137,6 +173,24 @@ const OPT_JAVELIN_SHIELD = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_JAVELIN],
 };
+const OPT_EXTRA_WAR_BOW = {
+  name: 'add War Bow and Extra Equipment (War Bow) (+ 4 pts)',
+  cost: 4,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [traits.EXTRA_WAR_BOW],
+};
+const OPT_EXTRA_ARQUEBUS = {
+  name: 'add arquebus and Extra Equipment (arquebus) (+ 4 pts)',
+  cost: 4,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [traits.EXTRA_ARQUEBUS],
+};
 const OPT_THROWING_OFFENSIVE = {
   name: 'upgrade to throwing spears and offensive spear (+4)',
   cost: 4,
@@ -180,11 +234,43 @@ const OPT_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
+const OPT_PAVAIS = {
+  name: 'Add pavais (+2pts/model)',
+  cost: 2,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [traits.PAVAIS],
+};
+const OPT_PAVAIS_TATE = {
+  name: 'Add pavais and tate (+3pts/model)',
+  cost: 3,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [traits.PAVAIS, traits.TATE],
+};
+const OPT_UP_ADD_SHIELD = {
+  name: 'replace shield with additional hand weapon and gain rain of blows (free)',
+  cost: 0,
+  upgradeWeapon: ADDITIONAL,
+  upgradeArmour: '',
+  upgradeShield: NO_SHIELD,
+  upgradeTraits: [traits.RAIN],
+};
 const OPT_UP_FULL_TO_ENCLOSED_ARMOUR = {
   name: 'Upgrade to enclosed armour',
   cost: 1,
   upgradeWeapon: '',
   upgradeArmour: ENCLOSED,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR = {
+  name: 'Upgrade to improved enclosed armour',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: FULL_IMPROVED,
   upgradeShield: '',
   upgradeTraits: [],
 };
@@ -204,6 +290,22 @@ const OPT_DOWN_NO_SHIELD = {
   upgradeShield: NO_SHIELD,
   upgradeTraits: [],
 };
+const OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR = {
+  name: 'Downgrade to partial armour(-3pts)',
+  cost: -3,
+  upgradeWeapon: '',
+  upgradeArmour: PARTIAL,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_DOWN_ENCLOSED_TO_NO_ARMOUR = {
+  name: 'Downgrade to no armour(-5pts)',
+  cost: -5,
+  upgradeWeapon: '',
+  upgradeArmour: NO_ARMOUR,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
 const OPT_DOWN_FULL_TO_NO_ARMOUR = {
   name: 'Downgrade to no armour',
   cost: -3,
@@ -212,7 +314,7 @@ const OPT_DOWN_FULL_TO_NO_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_ENCLOSED_TO_FULL = {
+const OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR = {
   name: 'Downgrade to full armour',
   cost: -2,
   upgradeWeapon: '',
@@ -233,6 +335,22 @@ const OPT_DOWN_PARTIAL_ARMOUR = {
   cost: -1,
   upgradeWeapon: '',
   upgradeArmour: PARTIAL,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_DOWN_IMPROVED_PARTIAL_TO_NO_ARMOUR = {
+  name: 'Remove armour',
+  cost: -3,
+  upgradeWeapon: '',
+  upgradeArmour: NO_ARMOUR,
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_UP_ENCLOSED_TO_IMP_ENCLOSED = {
+  name: 'upgrade to Improved Enclosed Armor (+1 pts)',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: ENCLOSED_IMPROVED,
   upgradeShield: '',
   upgradeTraits: [],
 };
@@ -276,7 +394,14 @@ const OPT_UPGRADE_EXTRA_BOW = {
   upgradeShield: '',
   upgradeTraits: [traits.EXTRA_BOW],
 };
-
+const OPT_UPGRADE_POLEARM_MOMENTUM = {
+  name: 'add Polearms + Extra Equipment(polearms) and Momentum (+4pts)',
+  cost: 4,
+  upgradeWeapon: POLEARMS,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [traits.MOMENTUM, traits.EXTRA_POLEARM],
+};
 const OPT_DOWN_HEAVY_SHIELD = {
   name: 'downgrade heavy shield to shield ( -1 pts)',
   cost: -1,
@@ -300,6 +425,14 @@ const OPT_UP_SHIELD_AND_OVERLAP = {
   upgradeArmour: '',
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [traits.SHIELD_OVERLAP],
+};
+const OPT_ADDITIONAL_AND_PARRY = {
+  name: 'replace shield with additional hand weapon and gain rain of blows (free)',
+  cost: 0,
+  upgradeArmour: '',
+  upgradeShield: NO_SHIELD,
+  upgradeWeapon: ADDITIONAL,
+  upgradeTraits: [traits.RAIN],
 };
 const OPT_UP_SHIELD = {
   name: 'Add shield',
@@ -358,7 +491,14 @@ const OPT_HUNTER = {
   upgradeWeapon: '',
   upgradeTraits: [traits.HUNTER],
 };
-
+const OPT_POLE_FOR_WAR_BOW = {
+  name: 'Replace polearms for War Bow (mounted) (+1pts)',
+  cost: 1,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: WAR_BOW,
+  upgradeTraits: [],
+};
 const OPT_COMMAND_ALL = {
   name: traits.COMMAND_ALL,
   cost: 15,
@@ -514,19 +654,70 @@ const characterOptions = [
     name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.STANDARD],
   },
 ];
+
 const samuraiCharacterOptions = [
+  OPT_DOWN_ENCLOSED_TO_NO_ARMOUR,
+  OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR,
+  OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
+  OPT_UP_ENCLOSED_TO_IMP_ENCLOSED,
   {
-    name: 'Upgrade to Cavalry Spear(must be mounted)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: CAVALRY_SPEAR, requiresMounted: true, upgradeTraits: [],
+    name: 'Long Spear (+1 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
   {
-    name: 'Upgrade to long weapon', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: NAGINATA, upgradeTraits: [traits.NAGINATA],
+    name: 'Polearm (+2 pts)', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: POLEARMS, upgradeTraits: [],
   },
   {
-    name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [traits.MOUNTED],
+    name: 'Heavy weapon (+2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: HEAVY_WPN, upgradeTraits: [],
   },
-  OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
+  {
+    name: 'Additional hand weapon and off-hand parry trait (+1pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: ADDITIONAL, upgradeTraits: [traits.PARRY_OFF],
+  },
+  {
+    name: 'Arquebus (+3 pts)', cost: 3, upgradeArmour: '', upgradeShield: '', upgradeWeapon: ARQUEBUS, upgradeTraits: [],
+  },
+  {
+    name: 'Warbow (+3pts)', cost: 3, upgradeArmour: '', upgradeShield: '', upgradeWeapon: WAR_BOW, upgradeTraits: [],
+  },
+  OPT_EXTRA_WAR_BOW,
+  OPT_EXTRA_ARQUEBUS,
+  {
+    name: 'Upgrade to Mounted', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [traits.MOUNTED],
+  },
+  {
+    name: 'Attach a musician', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.MUSICIAN],
+  },
+  {
+    name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.STANDARD],
+  },
+];
+const katanaCharacterOptions = [
   OPT_DOWN_FULL_TO_NO_ARMOUR,
-  OPT_DOWN_PARTIAL_ARMOUR,
+  OPT_DOWN_FULL_TO_PARTIAL_ARMOUR,
+  OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
+  OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR,
+  {
+    name: 'Long Spear (+1 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
+  },
+  {
+    name: 'Polearm (+2 pts)', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: POLEARMS, upgradeTraits: [],
+  },
+  {
+    name: 'Heavy weapon (+2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: HEAVY_WPN, upgradeTraits: [],
+  },
+  {
+    name: 'Additional hand weapon and off-hand parry trait (+1pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: ADDITIONAL, upgradeTraits: [traits.PARRY_OFF],
+  },
+  {
+    name: 'Arquebus (+3 pts)', cost: 3, upgradeArmour: '', upgradeShield: '', upgradeWeapon: ARQUEBUS, upgradeTraits: [],
+  },
+  {
+    name: 'Warbow (+3pts)', cost: 3, upgradeArmour: '', upgradeShield: '', upgradeWeapon: WAR_BOW, upgradeTraits: [],
+  },
+  OPT_EXTRA_WAR_BOW,
+  OPT_EXTRA_ARQUEBUS,
+  {
+    name: 'Upgrade to Mounted', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [traits.MOUNTED],
+  },
   {
     name: 'Attach a musician', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.MUSICIAN],
   },
@@ -535,23 +726,24 @@ const samuraiCharacterOptions = [
   },
 ];
 
-const SAVE_MODS = {};
-SAVE_MODS[NO_ARMOUR] = 0;
-SAVE_MODS[NO_SHIELD] = 0;
-SAVE_MODS[BUCKLER] = 0;
-SAVE_MODS[FULL] = 2;
-SAVE_MODS[FULL_IMPROVED] = 2;
-SAVE_MODS[PLATE] = 3;
-SAVE_MODS[ENCLOSED] = 3;
-SAVE_MODS[PARTIAL] = 1;
-SAVE_MODS[PARTIAL_IMPROVED] = 1;
-SAVE_MODS[SHIELD] = 1;
-SAVE_MODS[HEAVY_SHIELD] = 2;
-SAVE_MODS[SHIELD_HOWDA] = 2;
-SAVE_MODS[BARDING] = 1;
-SAVE_MODS[HALF_BARDING] = 0;
-SAVE_MODS[NO_BARDING] = 0;
-
+const SAVE_MODS = {
+  [NO_ARMOUR]: 0,
+  [NO_SHIELD]: 0,
+  [BUCKLER]: 0,
+  [FULL]: 2,
+  [FULL_IMPROVED]: 2,
+  [PLATE]: 3,
+  [ENCLOSED]: 3,
+  [ENCLOSED_IMPROVED]: 3,
+  [PARTIAL]: 1,
+  [PARTIAL_IMPROVED]: 1,
+  [SHIELD]: 1,
+  [HEAVY_SHIELD]: 2,
+  [SHIELD_HOWDA]: 2,
+  [BARDING]: 1,
+  [HALF_BARDING]: 0,
+  [NO_BARDING]: 0,
+};
 export {
   SAVE_MODS,
   MILITES,
@@ -560,6 +752,7 @@ export {
   LANCE,
   PLATE,
   ENCLOSED,
+  ENCLOSED_IMPROVED,
   BARDING,
   HALF_BARDING,
   HIDE_OPTION,
@@ -572,13 +765,20 @@ export {
   BUCKLER,
   SHIELD,
   XBOW,
+  REPEATING_XBOW,
   HEAVY_SHIELD,
+  HEAVY_WPN,
+  LIGHT_CANNON,
+  HWACHA,
+  EARLY_FIREARMS,
   THROWING,
   THRUSTING,
   ADDITIONAL,
   CAVALRY_SPEAR,
+  CAVALRY_SPEAR_LONG,
   STONES,
   JAVELIN,
+  GRENADES,
   SCORPIO,
   SLING,
   BOW,
@@ -594,11 +794,19 @@ export {
   TEPPO,
   NAGINATA,
   NAGAE,
+  ARQUEBUS,
+  WAR_BOW,
+  POLEARMS,
   CAVALRY_YARI,
+  OPT_PAVAIS_TATE,
   OPT_BUCKLER,
+  OPT_MIXED,
   OPT_BARDING,
   OPT_SHIELD,
+  OPT_PAVAIS,
   OPT_DRILLED,
+  OPT_UP_ADD_SHIELD,
+  OPT_ADDITIONAL_AND_PARRY,
   OPT_UP_NO_TO_HEAVY_SHIELD,
   OPT_UP_SHIELD_AND_OVERLAP,
   OPT_UP_SHIELD,
@@ -608,7 +816,11 @@ export {
   OPT_UP_PARTIAL_ARMOUR,
   OPT_UP_FULL_ARMOUR,
   OPT_DOWN_FULL_TO_NO_ARMOUR,
+  OPT_DOWN_ENCLOSED_TO_NO_ARMOUR,
+  OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR,
   OPT_UPGRADE_CAVALRY_JAVELIN,
+  OPT_UPGRADE_POLEARM_MOMENTUM,
+  OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
   OPT_DOWN_HEAVY_SHIELD,
   OPT_UP_IMPROVED_FULL_ARMOUR,
   OPT_DOWN_BUCKLER,
@@ -634,11 +846,17 @@ export {
   OPT_JAVELIN_SHIELD,
   OPT_DOWN_HALF_BARDING,
   OPT_DOWN_FULL_TO_NO_BARDING,
-  OPT_DOWN_ENCLOSED_TO_FULL,
+  OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
+  OPT_DOWN_IMPROVED_PARTIAL_TO_NO_ARMOUR,
+  OPT_UP_ENCLOSED_TO_IMP_ENCLOSED,
+  OPT_EXTRA_WAR_BOW,
+  OPT_EXTRA_ARQUEBUS,
+  OPT_POLE_FOR_WAR_BOW,
   OPT_NOT_POORLY,
   OPT_UP_SHIELD_EXTRA,
   characterOptions,
   samuraiCharacterOptions,
+  katanaCharacterOptions,
   elephantOptions,
   indianElephantOptions,
   WEAPON_INITIATIVES,

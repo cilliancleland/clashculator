@@ -1466,7 +1466,7 @@ const punic = {
       defaultWeapon: THROWING,
       defaultShield: HEAVY_SHIELD,
       defaultBody: NO_ARMOUR,
-      traits: [''],
+      traits: [],
       cost: 12,
       options: [
       ],

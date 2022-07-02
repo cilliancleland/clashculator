@@ -198,7 +198,10 @@ export default {
     },
     sharable: function sharable() {
       const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-      return `${loc}?${this.selectedPeriod}=${encodeURIComponent(this.armyDetailsCompact)}`;
+      const uri = `${loc}?${this.selectedPeriod}=${encodeURIComponent(this.armyDetailsCompact)}`;
+      // side effect alert!!
+      window.history.pushState({}, 'Clashculator', uri);
+      return uri;
     },
   },
   created: function created() {
