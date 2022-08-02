@@ -114,10 +114,10 @@ const OPT_NOT_POORLY = {
   removeTraits: [traits.POORLY],
 };
 const OPT_DOWN_FULL_TO_PARTIAL_ARMOUR = {
-  name: 'downgrade to partial armour',
+  name: 'Downgrade to partial armour',
   cost: -1,
   upgradeWeapon: '',
-  upgradeArmour: 'PARTIAL',
+  upgradeArmour: PARTIAL,
   upgradeShield: '',
   upgradeTraits: [],
 };
@@ -260,14 +260,14 @@ const OPT_UP_ADD_SHIELD = {
 };
 const OPT_UP_FULL_TO_ENCLOSED_ARMOUR = {
   name: 'Upgrade to enclosed armour',
-  cost: 1,
+  cost: 2,
   upgradeWeapon: '',
   upgradeArmour: ENCLOSED,
   upgradeShield: '',
   upgradeTraits: [],
 };
 const OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR = {
-  name: 'Upgrade to improved enclosed armour',
+  name: 'Upgrade to improved full armour',
   cost: 1,
   upgradeWeapon: '',
   upgradeArmour: FULL_IMPROVED,

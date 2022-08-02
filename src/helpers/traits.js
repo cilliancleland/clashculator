@@ -164,7 +164,7 @@ traits.descriptions = {
   [traits.HUNTER]: ['affects shoot action', 're-roll 1s to hit when shoot is first action', 'playtest'],
   [traits.THRUST]: ['requires spear or pike and loose order, affects atack', 'enemy may not couter-attack, but gain +1 to morale, attacker always retreats, 3"', 'playtest'],
   [traits.ELUSIVE]: ['requires loose order, affects defend', 'When selecting defend as combat response the unit may re-roll any ones rolled', 'playtest'],
-  [traits.COMBINED_ARMS]: ['requires mixed hand weapons and loose order, affects Attack', 'When executing an attack action, troops with this characteristic can re-roll any ones and twos they got on their to hit roll', 'playtest'],
+  [traits.COMBINED_ARMS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.CUTTHROAT]: ['affects morale', 'enemy roll an extra d6 for morale tests', 'playtest'],
   [traits.RAIN]: ['requires loose order and additional hand weapon, affects all-out attack', 're-roll 1s to hit', 'playtest'],
   [traits.COMMAND_ALL]: ['Command Ability', 'Command Ability', 'Fields of Blood'],

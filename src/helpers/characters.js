@@ -311,7 +311,6 @@ function samuraiCharacters() {
     ...ret,
     geisha,
     shrine,
-    sake,
     assassin,
   };
   return ret;
@@ -329,7 +328,6 @@ function katanaCharacters() {
     geisha,
     assassin,
     shrine,
-    sake,
   };
   return ret;
 }
@@ -362,4 +360,5 @@ export {
   masterAss,
   chariotRider,
   charioteer,
+  sake,
 };

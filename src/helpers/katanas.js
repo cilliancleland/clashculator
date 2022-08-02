@@ -2,6 +2,7 @@ import {
   samuraiCharacters,
   katanaCharacters,
   masterAss,
+  sake,
 } from './characters';
 
 import {
@@ -2821,6 +2822,7 @@ const katanas = {
   },
   Wako: { // as book
     ...katanaCharacters(),
+    sake,
     rabble: {
       displayName: 'Rabble',
       availability: CIVIS,
