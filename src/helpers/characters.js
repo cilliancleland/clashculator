@@ -22,6 +22,7 @@ import {
   ENCLOSED,
   OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
   ADDITIONAL,
+  OPT_TSUKAIBAN,
 } from './constants';
 
 import traits from './traits';
@@ -302,15 +303,14 @@ function samuraiCharacters() {
   let ret = JSON.parse(JSON.stringify(characters));
   Object.getOwnPropertyNames(ret).forEach((key) => {
     ret[key].defaultShield = NO_SHIELD;
-    ret[key].defaultArmour = ENCLOSED;
+    ret[key].defaultBody = ENCLOSED;
     ret[key].traits.push(traits.HONOURABLE);
     ret[key].traits.push(traits.OLD_WAYS);
     ret[key].options = samuraiCharacterOptions;
+    ret[key].cost += 3;
   });
   ret = {
     ...ret,
-    geisha,
-    shrine,
     assassin,
   };
   return ret;
@@ -320,14 +320,13 @@ function katanaCharacters() {
   let ret = JSON.parse(JSON.stringify(characters));
   Object.getOwnPropertyNames(ret).forEach((key) => {
     ret[key].defaultShield = NO_SHIELD;
-    ret[key].defaultArmour = FULL;
+    ret[key].defaultBody = FULL;
     ret[key].options = katanaCharacterOptions;
+    ret[key].cost -= 1;
   });
   ret = {
     ...ret,
-    geisha,
     assassin,
-    shrine,
   };
   return ret;
 }
@@ -350,6 +349,13 @@ function charactersWithFamilies() {
   return ret;
 }
 
+function addTsukaiban(japanCharacters) {
+  const ret = JSON.parse(JSON.stringify(japanCharacters));
+  ret.lvl5.options = [...ret.lvl5.options, OPT_TSUKAIBAN];
+  ret.lvl4.options = [...ret.lvl4.options, OPT_TSUKAIBAN];
+  return ret;
+}
+
 export {
   characters,
   charactersWithAbilities,
@@ -357,8 +363,11 @@ export {
   charactersWithFamilies,
   katanaCharacters,
   samuraiCharacters,
+  addTsukaiban,
   masterAss,
   chariotRider,
   charioteer,
   sake,
+  geisha,
+  shrine,
 };

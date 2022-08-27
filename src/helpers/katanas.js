@@ -1,8 +1,11 @@
 import {
   samuraiCharacters,
   katanaCharacters,
+  addTsukaiban,
   masterAss,
   sake,
+  geisha,
+  shrine,
 } from './characters';
 
 import {
@@ -56,13 +59,9 @@ import {
 
 import traits from './traits';
 
-// add Tsukaiban as character option for lvl4 & 5
-// war bow mounted
-// save mod traits
-// display for all improved armour (improved partial already works)
-
 const odaToyotomiTokugawa = {
-  ...samuraiCharacters(),
+  ...addTsukaiban(samuraiCharacters()),
+  geisha,
   supportAshigaru: {
     displayName: 'Support Ashigaru',
     availability: CIVIS,
@@ -316,8 +315,9 @@ const odaToyotomiTokugawa = {
   },
 };
 const katanas = {
-  Shimazu: { // as book
-    ...samuraiCharacters(),
+  Shimazu: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -569,8 +569,9 @@ const katanas = {
       ],
     },
   },
-  Otomo: { // as book
-    ...katanaCharacters(),
+  Otomo: {
+    ...addTsukaiban(katanaCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -824,8 +825,9 @@ const katanas = {
       ],
     },
   },
-  Chosokabe: { // as book
-    ...samuraiCharacters(),
+  Chosokabe: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -1081,8 +1083,9 @@ const katanas = {
       ],
     },
   },
-  Mori: { // as book
-    ...samuraiCharacters(),
+  Mori: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -1334,11 +1337,12 @@ const katanas = {
       ],
     },
   },
-  Oda: odaToyotomiTokugawa, // as book
-  Toyotomi: odaToyotomiTokugawa, // as book
-  Tokugawa: odaToyotomiTokugawa, // as book
-  Takeda: { // as book
-    ...samuraiCharacters(),
+  Oda: odaToyotomiTokugawa,
+  Toyotomi: odaToyotomiTokugawa,
+  Tokugawa: odaToyotomiTokugawa,
+  Takeda: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -1596,8 +1600,9 @@ const katanas = {
       ],
     },
   },
-  Uesugi: { // as book
-    ...samuraiCharacters(),
+  Uesugi: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -1853,8 +1858,9 @@ const katanas = {
       ],
     },
   },
-  Hojo: { // as book
-    ...samuraiCharacters(),
+  Hojo: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -2091,8 +2097,9 @@ const katanas = {
       ],
     },
   },
-  Date: { // as book
-    ...samuraiCharacters(),
+  Date: {
+    ...addTsukaiban(samuraiCharacters()),
+    geisha,
     supportAshigaru: {
       displayName: 'Support Ashigaru',
       availability: CIVIS,
@@ -2327,8 +2334,9 @@ const katanas = {
       ],
     },
   },
-  'Ikko Ikki': { // as book
+  'Ikko Ikki': {
     ...katanaCharacters(),
+    shrine,
     peasants: {
       displayName: 'Peasants',
       availability: CIVIS,
@@ -2593,7 +2601,7 @@ const katanas = {
       ],
     },
   },
-  Iga: { // as book
+  Iga: {
     ...katanaCharacters(),
     masterAss,
     scouts: {
@@ -2820,7 +2828,7 @@ const katanas = {
       ],
     },
   },
-  Wako: { // as book
+  Wako: {
     ...katanaCharacters(),
     sake,
     rabble: {
@@ -3042,6 +3050,7 @@ const katanas = {
     canon: {
       displayName: 'Light Cannon & two crew',
       fixedFigures: 2,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,
@@ -3062,6 +3071,7 @@ const katanas = {
     canon3: {
       displayName: 'Light Cannon & three crew',
       fixedFigures: 3,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,
@@ -3080,7 +3090,7 @@ const katanas = {
       ],
     },
   },
-  'Joseon Koreans': { // as book
+  'Joseon Koreans': {
     ...katanaCharacters(),
     guerrillas: {
       displayName: 'Guerrillas',
@@ -3307,6 +3317,7 @@ const katanas = {
     hwacha: {
       displayName: 'Hwacha and 2 crew',
       fixedFigures: 2,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,
@@ -3326,6 +3337,7 @@ const katanas = {
     hwacha3: {
       displayName: 'Hwacha and 3 crew',
       fixedFigures: 3,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,
@@ -3575,6 +3587,7 @@ const katanas = {
     tiger: {
       displayName: 'Crouching Tiger Cannon & two crew',
       fixedFigures: 2,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,
@@ -3595,6 +3608,7 @@ const katanas = {
     tiger3: {
       displayName: 'Crouching Tiger Cannon & three crew',
       fixedFigures: 3,
+      countsDouble: true,
       availability: RARE,
       combat: 4,
       ranged: 5,

@@ -34,6 +34,7 @@ traits.HEAVY_CHARIOT = 'heavy chariot';
 traits.HOWDA = 'howda';
 traits.MUSICIAN = 'musician';
 traits.STANDARD = 'standard-bearer';
+traits.TSUKAIBAN = 'tsukaiban';
 traits.OVERHEAD = 'overhead shot';
 traits.STALWART = 'stalwart';
 traits.BREAKER = 'shield breaker';
@@ -226,5 +227,6 @@ traits.descriptions = {
   [traits.EXTENDED_NAGAE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.HEAVY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.SHIELDS_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.TSUKAIBAN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
 };
 export default traits;

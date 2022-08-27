@@ -156,7 +156,7 @@ const OPT_DOWN_HALF_BARDING = {
   upgradeTraits: [],
 };
 const OPT_DOWN_FULL_TO_NO_BARDING = {
-  name: 'remove horse barding (-2pts/model)',
+  name: 'Remove horse barding (-2pts/model)',
   cost: -2,
   upgradeWeapon: '',
   upgradeArmour: '',
@@ -165,7 +165,7 @@ const OPT_DOWN_FULL_TO_NO_BARDING = {
   upgradeTraits: [],
 };
 const OPT_JAVELIN_SHIELD = {
-  name: 'upgrade to shield and extra equipmnent javelin (+3)',
+  name: 'Upgrade to shield and extra equipmnent javelin (+3)',
   cost: 3,
   upgradeWeapon: '',
   upgradeArmour: '',
@@ -174,7 +174,7 @@ const OPT_JAVELIN_SHIELD = {
   upgradeTraits: [traits.EXTRA_JAVELIN],
 };
 const OPT_EXTRA_WAR_BOW = {
-  name: 'add War Bow and Extra Equipment (War Bow) (+ 4 pts)',
+  name: 'Add War Bow and Extra Equipment (War Bow) (+ 4 pts)',
   cost: 4,
   upgradeWeapon: '',
   upgradeArmour: '',
@@ -183,7 +183,7 @@ const OPT_EXTRA_WAR_BOW = {
   upgradeTraits: [traits.EXTRA_WAR_BOW],
 };
 const OPT_EXTRA_ARQUEBUS = {
-  name: 'add arquebus and Extra Equipment (arquebus) (+ 4 pts)',
+  name: 'Add arquebus and Extra Equipment (arquebus) (+ 4 pts)',
   cost: 4,
   upgradeWeapon: '',
   upgradeArmour: '',
@@ -192,7 +192,7 @@ const OPT_EXTRA_ARQUEBUS = {
   upgradeTraits: [traits.EXTRA_ARQUEBUS],
 };
 const OPT_THROWING_OFFENSIVE = {
-  name: 'upgrade to throwing spears and offensive spear (+4)',
+  name: 'Upgrade to throwing spears and offensive spear (+4)',
   cost: 4,
   upgradeWeapon: THROWING,
   upgradeArmour: '',
@@ -201,7 +201,7 @@ const OPT_THROWING_OFFENSIVE = {
   upgradeTraits: [traits.OFFENSIVE_SPEAR],
 };
 const OPT_UP_THROWING = {
-  name: 'upgrade to throwing spears',
+  name: 'Upgrade to throwing spears',
   cost: 0,
   upgradeWeapon: THROWING,
   upgradeArmour: '',
@@ -251,7 +251,7 @@ const OPT_PAVAIS_TATE = {
   upgradeTraits: [traits.PAVAIS, traits.TATE],
 };
 const OPT_UP_ADD_SHIELD = {
-  name: 'replace shield with additional hand weapon and gain rain of blows (free)',
+  name: 'Replace shield with additional hand weapon and gain rain of blows (free)',
   cost: 0,
   upgradeWeapon: ADDITIONAL,
   upgradeArmour: '',
@@ -588,7 +588,14 @@ const OPT_JAV_TO_BOW = {
   upgradeWeapon: BOW,
   upgradeTraits: [],
 };
-
+const OPT_TSUKAIBAN = {
+  name: 'Attach a tsukaiban',
+  cost: 10,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeWeapon: '',
+  upgradeTraits: [traits.TSUKAIBAN],
+};
 const elephantOptions = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
@@ -854,6 +861,7 @@ export {
   OPT_POLE_FOR_WAR_BOW,
   OPT_NOT_POORLY,
   OPT_UP_SHIELD_EXTRA,
+  OPT_TSUKAIBAN,
   characterOptions,
   samuraiCharacterOptions,
   katanaCharacterOptions,

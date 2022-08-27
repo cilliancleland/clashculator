@@ -115,8 +115,11 @@ export default {
     },
     rareCount: function rareCount() {
       return this.armyContents.reduce((total, unit) => {
+        const size = unit.countsDouble
+          ? unit.unitSize() * 2
+          : unit.unitSize();
         return unit.availability === 'rare'
-          ? total + (unit.unitSize())
+          ? total + size
           : total;
       }, 0);
     },
