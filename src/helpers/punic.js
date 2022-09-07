@@ -1978,7 +1978,7 @@ const punic = {
       ],
     },
     veteran: {
-      displayName: 'Citizen Hoplites',
+      displayName: 'Veteran Hoplites',
       availability: MILITES,
       combat: 3,
       ranged: 5,
@@ -2006,7 +2006,7 @@ const punic = {
       defaultBody: FULL,
       traits: [
         traits.MOUNTED],
-      cost: 23,
+      cost: 22,
       options: [
         OPT_CHARGING,
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -2027,8 +2027,6 @@ const punic = {
         traits.MOUNTED],
       cost: 22,
       options: [
-        OPT_CHARGING,
-        OPT_DOWN_PARTIAL_ARMOUR,
       ],
     },
     mounted: {
