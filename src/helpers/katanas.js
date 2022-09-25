@@ -2192,7 +2192,7 @@ const katanas = {
       availability: MILITES,
       combat: 4,
       ranged: 5,
-      grit: 4,
+      grit: 5,
       defaultWeapon: WAR_BOW,
       defaultBody: FULL,
       defaultShield: NO_SHIELD,
@@ -2202,7 +2202,6 @@ const katanas = {
       ],
       cost: 15,
       options: [
-        OPT_UP_FULL_ARMOUR,
       ],
     },
     naginataSamurai: {
@@ -2296,7 +2295,7 @@ const katanas = {
     },
     mtdYariSamurai: {
       displayName: 'Mounted Yari Samurai',
-      availability: MILITES,
+      availability: RARE,
       combat: 3,
       ranged: 5,
       grit: 3,

@@ -427,12 +427,13 @@ const OPT_UP_SHIELD_AND_OVERLAP = {
   upgradeTraits: [traits.SHIELD_OVERLAP],
 };
 const OPT_ADDITIONAL_AND_PARRY = {
-  name: 'replace shield with additional hand weapon and gain rain of blows (free)',
-  cost: 0,
+  name: 'replace shield with additional hand weapon and gain rain of blows (-1)',
+  cost: -1,
   upgradeArmour: '',
   upgradeShield: NO_SHIELD,
   upgradeWeapon: ADDITIONAL,
   upgradeTraits: [traits.RAIN],
+  removeTraits: [traits.SHIELDS_UP],
 };
 const OPT_UP_SHIELD = {
   name: 'Add shield',
