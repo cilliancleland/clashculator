@@ -58,7 +58,7 @@ export default {
           return unitTotal + unit.options[selectedOption].cost;
         }, 0);
         const thisUnitCost = Math.round(
-          unit.size ? (unit.size * (unit.cost + optionsCost)) : unit.cost,
+          (unit.size || 1) * (unit.cost + optionsCost),
         );
         return total + thisUnitCost;
       }, 0);

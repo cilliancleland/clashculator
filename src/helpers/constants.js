@@ -33,6 +33,7 @@ const HEAVY_SHIELD = 'heavy shield';
 const SHIELD_HOWDA = 'howda';
 // weapon
 const STONES = 'stones';
+const TEETH = 'teeth';
 const JAVELIN = 'javelin';
 const SLING = 'sling';
 const BOW = 'bow';
@@ -70,6 +71,7 @@ const ADDITIONAL = 'Additional hand weapon';
 const HIDE_OPTION = 'hideoption';
 
 const WEAPON_INITIATIVES = {
+  [TEETH]: (0),
   [JAVELIN]: '',
   [SLING]: '',
   [BOW]: '',
@@ -103,6 +105,15 @@ const WEAPON_INITIATIVES = {
   [SCORPIO]: '',
   [ADDITIONAL]: '(1)',
   [KONTOS]: '(3)',
+};
+const OPT_UNPAINTED = {
+  name: 'unpainted',
+  cost: 5,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [],
+  removeTraits: [],
 };
 const OPT_NOT_POORLY = {
   name: 'remove pooly equipped',
@@ -785,6 +796,7 @@ export {
   CAVALRY_SPEAR,
   CAVALRY_SPEAR_LONG,
   STONES,
+  TEETH,
   JAVELIN,
   GRENADES,
   SCORPIO,
@@ -863,6 +875,7 @@ export {
   OPT_NOT_POORLY,
   OPT_UP_SHIELD_EXTRA,
   OPT_TSUKAIBAN,
+  OPT_UNPAINTED,
   characterOptions,
   samuraiCharacterOptions,
   katanaCharacterOptions,

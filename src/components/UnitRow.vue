@@ -145,7 +145,8 @@ export default {
   computed: {
     rowCost() {
       const { row } = this;
-      return Math.round(row.size ? (row.size * (row.cost + this.optionsCostPerFigure)) : row.cost);
+      const numFigs = row.size || 1;
+      return Math.round((numFigs * (row.cost + this.optionsCostPerFigure)));
     },
     displayWeapon() {
       const weap = this.upgradedWeapon ? this.upgradedWeapon : this.row.defaultWeapon;
@@ -322,7 +323,7 @@ export default {
       immediate: true,
       handler(a) {
         let tokens = 0;
-        if (this.row.availability === 'leader') {
+        if (this.row.availability === 'leader' || this.row.noDeployToken) {
           tokens = 0;
         } else {
           const save = a.substr(0, 1);

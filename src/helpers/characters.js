@@ -23,6 +23,7 @@ import {
   OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
   ADDITIONAL,
   OPT_TSUKAIBAN,
+  OPT_UNPAINTED,
 } from './constants';
 
 import traits from './traits';
@@ -33,7 +34,7 @@ const soothsayer = {
   displayName: 'Soothsayer',
   availability: 'leader',
   cost: 15,
-  options: [],
+  options: [OPT_UNPAINTED],
   defaultWeapon: HIDE_OPTION,
   combat: 0,
   ranged: 0,

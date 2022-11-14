@@ -14,6 +14,7 @@ import {
   THRUSTING,
   CAVALRY_SPEAR,
   JAVELIN,
+  TEETH,
   SLING,
   BOW,
   AX,
@@ -414,6 +415,7 @@ const punic = {
       defaultWeapon: HIDE_OPTION,
       defaultShield: HIDE_OPTION,
       defaultBody: HIDE_OPTION,
+      noDeployToken: true,
     },
     elephantCrew: {
       dontCountForBreak: true,
@@ -430,6 +432,7 @@ const punic = {
       grit: 3,
       defaultShield: NO_SHIELD,
       defaultBody: PARTIAL,
+      noDeployToken: true,
     },
   },
   'Lowland Gallic': { // as book
@@ -748,7 +751,7 @@ const punic = {
       combat: 4,
       ranged: 5,
       grit: 5,
-      defaultWeapon: '',
+      defaultWeapon: TEETH,
       defaultShield: NO_SHIELD,
       defaultBody: NO_ARMOUR,
       traits: [
@@ -1839,6 +1842,7 @@ const punic = {
       defaultWeapon: HIDE_OPTION,
       defaultShield: HIDE_OPTION,
       defaultBody: HIDE_OPTION,
+      noDeployToken: true,
     },
     elephantCrew: {
       dontCountForBreak: true,
@@ -1855,6 +1859,7 @@ const punic = {
       grit: 3,
       defaultShield: NO_SHIELD,
       defaultBody: PARTIAL,
+      noDeployToken: true,
     },
   },
   Phyrrus: {
@@ -1937,7 +1942,6 @@ const punic = {
         traits.DRILLED],
       cost: 17,
       options: [
-        OPT_DOWN_NO_ARMOUR,
       ],
     },
     allies: {
@@ -2061,6 +2065,7 @@ const punic = {
       defaultWeapon: HIDE_OPTION,
       defaultShield: HIDE_OPTION,
       defaultBody: HIDE_OPTION,
+      noDeployToken: true,
     },
     elephantCrew: {
       dontCountForBreak: true,
@@ -2077,6 +2082,7 @@ const punic = {
         traits.IRON_WILL],
       cost: 18,
       options: elephantOptions,
+      noDeployToken: true,
     },
   },
 };
