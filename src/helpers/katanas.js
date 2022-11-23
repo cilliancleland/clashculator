@@ -1491,7 +1491,7 @@ const katanas = {
     },
     yumiSamurai: {
       displayName: 'Yumi Samurai',
-      availability: MILITES,
+      availability: RARE,
       combat: 4,
       ranged: 4,
       grit: 3,
