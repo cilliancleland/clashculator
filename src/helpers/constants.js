@@ -91,7 +91,7 @@ const WEAPON_INITIATIVES = {
   [JAVELIN_THRUSTING]: '(3)',
   [CAVALRY_SPEAR]: '(2)',
   [CAVALRY_SPEAR_LONG]: '(3)',
-  [MIXED]: '(1)',
+  [MIXED]: '(2)',
   [AX]: '(1)',
   [PIKE]: '(4)',
   [XYSTON]: '(3)',
@@ -647,7 +647,7 @@ const characterOptions = [
     name: 'Upgrade to thrusting spear', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
   {
-    name: 'Upgrade to throwing spear', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THROWING, upgradeTraits: [],
+    name: 'Upgrade to throwing spear', cost: 3, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THROWING, upgradeTraits: [],
   },
   {
     name: 'Upgrade to Cavalry Spear(must be mounted)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: CAVALRY_SPEAR, requiresMounted: true, upgradeTraits: [],

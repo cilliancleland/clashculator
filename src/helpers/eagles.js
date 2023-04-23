@@ -286,7 +286,7 @@ const eagles = {
     },
     scorpio: {
       displayName: 'Scorpio',
-      fixedFigures: 2,
+      fixedFigures: 6,
       availability: RARE,
       combat: 4,
       ranged: 4,
@@ -299,7 +299,7 @@ const eagles = {
         traits.SKIRMISH_SPECIALIST,
         traits.IRON_WILL,
       ],
-      cost: 33,
+      cost: 11,
       options: [
       ],
     },
@@ -472,7 +472,7 @@ const eagles = {
     },
     scorpio: {
       displayName: 'Scorpio',
-      fixedFigures: 2,
+      fixedFigures: 6,
       availability: RARE,
       combat: 4,
       ranged: 4,
@@ -485,7 +485,7 @@ const eagles = {
         traits.SKIRMISH_SPECIALIST,
         traits.IRON_WILL,
       ],
-      cost: 34,
+      cost: 11.3,
       options: [
       ],
     },
@@ -788,7 +788,7 @@ const eagles = {
     },
     scorpio: {
       displayName: 'Scorpio',
-      fixedFigures: 2,
+      fixedFigures: 6,
       availability: RARE,
       combat: 4,
       ranged: 4,
@@ -801,7 +801,7 @@ const eagles = {
         traits.SKIRMISH_SPECIALIST,
         traits.IRON_WILL,
       ],
-      cost: 33,
+      cost: 11,
       options: [
       ],
     },
