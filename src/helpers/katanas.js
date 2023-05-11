@@ -2923,7 +2923,7 @@ const katanas = {
     },
     banditsArchers: {
       displayName: 'Bandit Archers',
-      availability: CIVIS,
+      availability: MILITES,
       combat: 4,
       ranged: 5,
       grit: 4,
@@ -3295,6 +3295,7 @@ const katanas = {
       cost: 22,
       options: [
         OPT_UPGRADE_POLEARM_MOMENTUM,
+        OPT_UP_FULL_ARMOUR,
       ],
     },
     guard: {
@@ -3311,6 +3312,7 @@ const katanas = {
       cost: 18,
       options: [
         OPT_UPGRADE_POLEARM_MOMENTUM,
+        OPT_UP_FULL_ARMOUR,
       ],
     },
     hwacha: {
