@@ -603,6 +603,7 @@ const arcane = {
       defaultWeapon: NATURAL_WEAPONS,
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
+      fixedFigures: 3,
       traits: [
         traits.UNDEAD,
         traits.LARGE_CREATURE,
@@ -612,7 +613,7 @@ const arcane = {
         'wounds(3)',
         'attacks(3)',
       ],
-      cost: 60,
+      cost: 20,
       options: [
       ],
     },
@@ -1211,7 +1212,7 @@ const arcane = {
       grit: 3,
       defaultWeapon: POLEARMS,
       defaultBody: FULL,
-      defaultShield: SHIELD,
+      defaultShield: NO_SHIELD,
       traits: [
         traits.CUTTHROAT,
         traits.STRIKE,
@@ -1452,7 +1453,8 @@ const arcane = {
         traits.SIMPLEMINDED,
         traits.NATURAL_ARMOUR_2,
       ],
-      cost: 63,
+      fixedFigures: 3,
+      cost: 21,
       options: [
       ],
     },
@@ -1669,7 +1671,8 @@ const arcane = {
         traits.SIMPLEMINDED,
         traits.NATURAL_ARMOUR_2,
       ],
-      cost: 63,
+      fixedFigures: 3,
+      cost: 21,
       options: [
       ],
     },

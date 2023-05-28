@@ -457,8 +457,6 @@ export const orcShaman = {
   combat: 4,
   ranged: 5,
   grit: 3,
-  commandRange: 10,
-  commandPoints: 5,
   defaultShield: NO_SHIELD,
   defaultBody: NO_ARMOUR,
   traits: ['wounds(2)', traits.IRON_WILL, traits.INDEPENDENT, traits.ARCHANIST_1],
