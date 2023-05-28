@@ -80,7 +80,6 @@ traits.OVERWHELM = 'overwhelm';
 traits.PARRY = 'parry reposte';
 traits.GUARDED = 'guarded attack';
 traits.EXTRA_SHIELD = 'extra equipment - shield';
-traits.OVERWHELM = 'overwhelm';
 traits.UTEYA = 'uteya';
 traits.PARRY_OFF = 'off hand parry';
 traits.PARRY_RIPOSTE = 'parry riposte';
@@ -113,6 +112,31 @@ traits.YOJI = 'yoji-gakure';
 traits.DEADLY_STRIKE = 'deadly strike';
 traits.OLD_WAYS = 'the old ways';
 traits.EXTRA = 'extra equipment';
+traits.ARCHANIST_3 = 'archanist(3)';
+traits.ARCHANIST_2 = 'archanist(2)';
+traits.ARCHANIST_1 = 'archanist(1)';
+traits.DVERGER = 'Dverger';
+traits.SHIELDWALL = 'Shieldwall';
+traits.SCHILTRON = 'Schiltron';
+traits.STRIKE = 'Strike';
+traits.SHIELDS_UP = 'Shields up';
+traits.UNDEAD = 'UNDEAD';
+traits.SELF_MOTIVATED = 'Self motivated';
+traits.IMPLACABLE = 'Implacable';
+traits.LARGE_CREATURE = 'Large creature';
+traits.BLITZ = 'Blitz';
+traits.SIMPLEMINDED = 'Simpleminded';
+traits.PRIDE = 'Pride';
+traits.BLADE_WAVE = 'Blade wave';
+traits.STUBBORN = 'Stubborn';
+traits.WAR_MOUNT = 'War mount';
+traits.PIKE_SPECIALIST = 'Pike Specialist';
+traits.NATURAL_ARMOUR_1 = 'Natural armour(1)';
+traits.NATURAL_ARMOUR_2 = 'Natural armour(2)';
+traits.NATURAL_ARMOUR_3 = 'Natural armour(3)';
+traits.NATURAL_ARMOUR_4 = 'Natural armour(4)';
+traits.DVERGR = 'Dvergr';
+traits.HACK = 'Hack';
 
 traits.descriptions = {
   [traits.SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
@@ -129,7 +153,7 @@ traits.descriptions = {
   [traits.WALL_OF_SPEARS]: ['requires any spear or pike and close order, higher weapon initiave, affects hold', 'Free defensive attack with up to 50% before enemy attack', 'p.71'],
   [traits.OFFENSIVE_SPEAR]: ['requires any type of spear or pike and close order, higher weapon initiative, affects attack', 'only surviving enemies get to counter-attack', 'p.70'],
   [traits.DRILLED]: ['requires close order, affects movement', 'May move 4" straight forward in close order, no fatigue when forming close order', 'p.66'],
-  [traits.GUERRILLA]: ['requires loose order, affects enemy morale', '+1 test to enemy if melee from high area terrain, terrain is one easier for move, shoot, melee', 'p.67'],
+  [traits.GUERRILLA]: ['requires loose order, affects enemy morale', '+1 test to enemy if melee from high area terrain, terrain is one easier for throw, shoot, melee', 'p.67'],
   [traits.FUROR]: ['requires loose order, affects All-Out Attack', 'addition d6 for enemy morale test triggered by all out attack', 'p.73'],
   [traits.ALLIES]: ['affects actions', 'one less action if any fails in a force break test', 'p.72'],
   [traits.MOUNTED]: ['affects moving, shooting, melee...', '...', 'p.69'],
@@ -155,7 +179,7 @@ traits.descriptions = {
   [traits.ENDURANCE]: ['requires loose order, affects movement and fatigue', '3rd move is 6" and does not generate fatigue', 'p.72'],
   [traits.CHARGE]: ['requires close order and long weapon, affects attack', 'charge further, -1/-2 to enemy save, extra d6 for enemy morale test, only surviving enemies counterattack ', 'p.68'],
   [traits.HOWDA]: ['affects save', '+2 to save', 'p.80'],
-  [traits.OVERHEAD]: ['close order, affects shoot action', 'Can shoot over friends in 4", counts as long range', 'playtest'],
+  [traits.OVERHEAD]: ['', 'Arcane Companion p19', 'Arcane Companion'],
   [traits.STALWART]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'playtest'],
   [traits.BREAKER]: ['requires loose order and double handed weapon, affects melee', 'Additional d6 to enemy morale test', 'playtest'],
   [traits.PLATE]: ['affects save', 're-roll ones', 'playtest'],
@@ -165,8 +189,8 @@ traits.descriptions = {
   [traits.HUNTER]: ['affects shoot action', 're-roll 1s to hit when shoot is first action', 'playtest'],
   [traits.THRUST]: ['requires spear or pike and loose order, affects atack', 'enemy may not couter-attack, but gain +1 to morale, attacker always retreats, 3"', 'playtest'],
   [traits.ELUSIVE]: ['requires loose order, affects defend', 'When selecting defend as combat response the unit may re-roll any ones rolled', 'playtest'],
-  [traits.COMBINED_ARMS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
-  [traits.CUTTHROAT]: ['affects morale', 'enemy roll an extra d6 for morale tests', 'playtest'],
+  [traits.COMBINED_ARMS]: ['', 'See Clash of Katanas expansion, Arcane companion p18', 'Clash of Katanas, Arcane Companion'],
+  [traits.CUTTHROAT]: ['affects morale', 'Arcane Companion p 19', 'Arcane Companion'],
   [traits.RAIN]: ['requires loose order and additional hand weapon, affects all-out attack', 're-roll 1s to hit', 'playtest'],
   [traits.COMMAND_ALL]: ['Command Ability', 'Command Ability', 'Fields of Blood'],
   [traits.COMMAND_GALLIC]: ['Command Ability', 'Generic Command Ability', 'Fields of Blood'],
@@ -181,18 +205,18 @@ traits.descriptions = {
   [traits.GRIZZLED]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.INDEPENDENT]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.POORLY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.BUSHMASTER]: ['', 'See Rise of Eagles/Clash of Katanas expansion', 'Rise of Eagles/Clash of Katanas'],
+  [traits.BUSHMASTER]: ['', 'See Rise of Eagles/Clash of Katanas expansion/Arcane Companion P 18', 'Rise of Eagles/Clash of Katanas/Arcane Companion'],
   [traits.VICIOUS]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.LINE_BREAKER]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.ROBUR]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.GUSHING]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
+  [traits.ROBUR]: ['', 'See Rise of Eagles expansion, Arcane Companion p 20', 'Rise of Eagles/Arcane Companion'],
+  [traits.GUSHING]: ['', 'See Rise of Eagles expansion, Arcane Companion p 20', 'Rise of Eagles/Arcane Companion'],
+  [traits.HACK]: ['', 'See Arcane Companion p 20', 'Arcane Companion'],
   [traits.PARRY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.GUARDED]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.OVERWHELM]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
+  [traits.OVERWHELM]: ['', 'See Rise of Eagles expansion, Arcane Companion p 19', 'Rise of Eagles/Arcane Companion'],
   [traits.FAMILY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.HEAVY_CHARIOT]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.EXTRA_SHIELD]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.OVERWHELM]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.UTEYA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.PARRY]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.FORM_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
@@ -217,7 +241,7 @@ traits.descriptions = {
   [traits.DEADLY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.OLD_WAYS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.EXTRA]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
-  [traits.PARRY_OFF]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.PARRY_OFF]: ['', 'See Clash of Katanas expansion/Arcane Companion p19', 'Clash of Katanas/Arcane Companion'],
   [traits.RUTHLESS]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.FICKLE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.HARINEZUMI]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
@@ -228,5 +252,31 @@ traits.descriptions = {
   [traits.HEAVY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.SHIELDS_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.TSUKAIBAN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
+  [traits.ARCANIST_3]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
+  [traits.ARCANIST_2]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
+  [traits.ARCANIST_1]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
+  [traits.DVERGER]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
+  [traits.SHIELDWALL]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.SCHILTRON]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.STRIKE]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.SHIELDS_UP]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.UNDEAD]: ['', 'See Arcane Companion, p. 11', 'Arcane Companion'],
+  [traits.SELF_MOTIVATED]: ['', 'See Arcane Companion, p. 22', 'Arcane Companion'],
+  [traits.IMPLACABLE]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
+  [traits.LARGE_CREATURE]: ['', 'See Arcane Companion, p. 19', 'Arcane Companion'],
+  [traits.BLITZ]: ['', 'See Arcane Companion, p. 18', 'Arcane Companion'],
+  [traits.SIMPLEMINDED]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.PRIDE]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.BLADE_WAVE]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.STUBBORN]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.WAR_MOUNT]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
+  [traits.PIKE_SPECIALIST]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_1]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_2]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_3]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_4]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.DVERGR]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
+  [traits.SHARPSHOOTER]: ['', 'See Arcane Companion, p. 22', 'Arcane Companion'],
+
 };
 export default traits;

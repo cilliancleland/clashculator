@@ -45,7 +45,6 @@ const soothsayer = {
   defaultBody: NO_ARMOUR,
   traits: [traits.OMENS],
 };
-
 const characters = {
   lvl5: {
     dontCountForBreak: true,

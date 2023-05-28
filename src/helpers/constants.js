@@ -7,11 +7,14 @@ const PERIODS = {
   katanas: 'Clash of Katanas',
   darkAge: 'Dark Ages (beta)',
   alex: 'Alexandrian (beta)',
+  arcane: 'Arcane Companion',
 };
 
 const MILITES = 'milites';
 const CIVIS = 'civis';
 const RARE = 'rare';
+const REANIMATED = 're-animated';
+const RETURNED = 'returned';
 
 // armour
 const NO_SHIELD = 'no shield';
@@ -67,11 +70,13 @@ const NAGINATA = 'long weapon';
 const NAGAE = 'nagae yari';
 const CAVALRY_YARI = 'cavalry yari';
 const ADDITIONAL = 'Additional hand weapon';
+const NATURAL_WEAPONS = 'Natural Weapons';
 // other
 const HIDE_OPTION = 'hideoption';
 
 const WEAPON_INITIATIVES = {
   [TEETH]: (0),
+  [NATURAL_WEAPONS]: (0),
   [JAVELIN]: '',
   [SLING]: '',
   [BOW]: '',
@@ -642,7 +647,7 @@ const indianElephantOptions = [
   },
 ];
 
-const characterOptions = [
+const mageOptions = [
   {
     name: 'Upgrade to thrusting spear', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
@@ -658,8 +663,6 @@ const characterOptions = [
   {
     name: 'Upgrade to Horse', cost: 4, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', unlessMounted: true, unlessHeavyShield: true, upgradeTraits: [traits.MOUNTED],
   },
-  OPT_DOWN_FULL_TO_NO_ARMOUR,
-  OPT_DOWN_PARTIAL_ARMOUR,
   {
     name: 'Downgrade to no shield', cost: -1, upgradeArmour: '', upgradeShield: NO_SHIELD, upgradeWeapon: '', upgradeTraits: [],
   },
@@ -672,6 +675,12 @@ const characterOptions = [
   {
     name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.STANDARD],
   },
+];
+
+const characterOptions = [
+  ...mageOptions,
+  OPT_DOWN_FULL_TO_NO_ARMOUR,
+  OPT_DOWN_PARTIAL_ARMOUR,
 ];
 
 const samuraiCharacterOptions = [
@@ -768,6 +777,8 @@ export {
   MILITES,
   CIVIS,
   RARE,
+  REANIMATED,
+  RETURNED,
   LANCE,
   PLATE,
   ENCLOSED,
@@ -797,6 +808,7 @@ export {
   CAVALRY_SPEAR_LONG,
   STONES,
   TEETH,
+  NATURAL_WEAPONS,
   JAVELIN,
   GRENADES,
   SCORPIO,
@@ -879,6 +891,7 @@ export {
   characterOptions,
   samuraiCharacterOptions,
   katanaCharacterOptions,
+  mageOptions,
   elephantOptions,
   indianElephantOptions,
   WEAPON_INITIATIVES,
