@@ -33,6 +33,8 @@
     </span>
     <h3>What's new</h3>
       <ul>
+        <li>Arcane Companion!!!
+        </li>
         <li>Clash of Katanas!!
         </li>
         <li>Added lists from the new expansion
