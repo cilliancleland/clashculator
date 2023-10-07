@@ -112,9 +112,9 @@ traits.YOJI = 'yoji-gakure';
 traits.DEADLY_STRIKE = 'deadly strike';
 traits.OLD_WAYS = 'the old ways';
 traits.EXTRA = 'extra equipment';
-traits.ARCHANIST_3 = 'archanist(3)';
-traits.ARCHANIST_2 = 'archanist(2)';
-traits.ARCHANIST_1 = 'archanist(1)';
+traits.ARCANIST_3 = 'arcanist(3)';
+traits.ARCANIST_2 = 'arcanist(2)';
+traits.ARCANIST_1 = 'arcanist(1)';
 traits.DVERGER = 'Dverger';
 traits.SHIELDWALL = 'Shieldwall';
 traits.SCHILTRON = 'Schiltron';
@@ -203,7 +203,7 @@ traits.descriptions = {
   [traits.COMMAND_PUNIC]: ['Command Ability', 'Carthaginian Command Ability', 'Fields of Blood'],
   [traits.GAUCHE]: ['affects melee, requires loose order', ' When selecting defend as their combat response these troops may re-roll any failed attempts to cancel hits.', 'samurai'],
   [traits.GRIZZLED]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
-  [traits.INDEPENDENT]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
+  [traits.INDEPENDENT]: ['', 'See Rise of Eagles expansion, Arcane Companion', 'Rise of Eagles/Arcane Companion p20'],
   [traits.POORLY]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
   [traits.BUSHMASTER]: ['', 'See Rise of Eagles/Clash of Katanas expansion/Arcane Companion P 18', 'Rise of Eagles/Clash of Katanas/Arcane Companion'],
   [traits.VICIOUS]: ['', 'See Rise of Eagles expansion', 'Rise of Eagles'],
@@ -252,31 +252,35 @@ traits.descriptions = {
   [traits.HEAVY_STRIKE]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.SHIELDS_UP]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
   [traits.TSUKAIBAN]: ['', 'See Clash of Katanas expansion', 'Clash of Katanas'],
-  [traits.ARCANIST_3]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
-  [traits.ARCANIST_2]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
-  [traits.ARCANIST_1]: ['', 'See Arcane Companion, p. 9', 'Arcane Companion'],
-  [traits.DVERGER]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
-  [traits.SHIELDWALL]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.SCHILTRON]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.STRIKE]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.SHIELDS_UP]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.UNDEAD]: ['', 'See Arcane Companion, p. 11', 'Arcane Companion'],
-  [traits.SELF_MOTIVATED]: ['', 'See Arcane Companion, p. 22', 'Arcane Companion'],
-  [traits.IMPLACABLE]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
-  [traits.LARGE_CREATURE]: ['', 'See Arcane Companion, p. 19', 'Arcane Companion'],
-  [traits.BLITZ]: ['', 'See Arcane Companion, p. 18', 'Arcane Companion'],
-  [traits.SIMPLEMINDED]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.PRIDE]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.BLADE_WAVE]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.STUBBORN]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.WAR_MOUNT]: ['', 'See Arcane Companion, p. 23', 'Arcane Companion'],
-  [traits.PIKE_SPECIALIST]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.NATURAL_ARMOUR_1]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.NATURAL_ARMOUR_2]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.NATURAL_ARMOUR_3]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
-  [traits.NATURAL_ARMOUR_4]: ['', 'See Arcane Companion, p. 21', 'Arcane Companion'],
+  [traits.ARCANIST_3]: ['', 'See Arcane Companion, p9', 'Arcane Companion'],
+  [traits.ARCANIST_2]: ['', 'See Arcane Companion, p9', 'Arcane Companion'],
+  [traits.ARCANIST_1]: ['', 'See Arcane Companion, p9', 'Arcane Companion'],
+  [traits.DVERGER]: ['', 'See Arcane Companion, p20', 'Arcane Companion'],
+  [traits.SHIELDWALL]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.SCHILTRON]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.STRIKE]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.SHIELDS_UP]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.UNDEAD]: ['', 'See Arcane Companion, p11', 'Arcane Companion'],
+  [traits.SELF_MOTIVATED]: ['', 'See Arcane Companion, p22', 'Arcane Companion'],
+  [traits.IMPLACABLE]: ['', 'See Arcane Companion, p20', 'Arcane Companion'],
+  [traits.LARGE_CREATURE]: ['', 'See Arcane Companion, p19', 'Arcane Companion'],
+  [traits.BLITZ]: ['', 'See Arcane Companion, p18', 'Arcane Companion'],
+  [traits.SIMPLEMINDED]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.PRIDE]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.BLADE_WAVE]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.STUBBORN]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.WAR_MOUNT]: ['', 'See Arcane Companion, p23', 'Arcane Companion'],
+  [traits.PIKE_SPECIALIST]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_1]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_2]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_3]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
+  [traits.NATURAL_ARMOUR_4]: ['', 'See Arcane Companion, p21', 'Arcane Companion'],
   [traits.DVERGR]: ['', 'See Arcane Companion, p. 20', 'Arcane Companion'],
   [traits.SHARPSHOOTER]: ['', 'See Arcane Companion, p. 22', 'Arcane Companion'],
+  [traits.ARCANIST_1]: ['', 'See Arcane Companion, p4', 'Arcane Companion'],
+  [traits.ARCANIST_2]: ['', 'See Arcane Companion, p4', 'Arcane Companion'],
+  [traits.ARCANIST_3]: ['', 'See Arcane Companion, p4', 'Arcane Companion'],
+  'Controller(10)': ['', 'See Arcane Companion, p17', 'Arcane Companion'],
 
 };
 export default traits;

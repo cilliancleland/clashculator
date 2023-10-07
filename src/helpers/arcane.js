@@ -1644,7 +1644,7 @@ const arcane = {
       ranged: 5,
       grit: 4,
       defaultWeapon: HEAVY_WPN,
-      defaultBody: FULL,
+      defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
       traits: [
         traits.ROBUR,

@@ -51,7 +51,7 @@ function calcSaveSymbol(unit) {
 }
 
 function numDeploymentCounters(unit) {
-  if (unit.availability === 'leader') {
+  if (unit.availability === 'character') {
     return 0;
   }
   const save = calcSaveNumber(unit);

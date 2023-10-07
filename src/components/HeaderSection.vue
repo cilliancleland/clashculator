@@ -16,7 +16,7 @@
     </div>
     </div>
     <div class="header-middle">
-        <div>Leaders: {{leadersCount}}</div>
+        <div>Leaders: {{charactersCount}}</div>
         <div>Civis: {{civisCount}}</div>
         <div>Milites: {{militesCount}}</div>
         <div>Rare: {{rareCount}}</div>
@@ -92,9 +92,9 @@ export default {
       return (this.militesCount >= this.civisCount)
         && (this.militesCount >= (2 * this.rareCount));
     },
-    leadersCount: function leadersCount() {
+    charactersCount: function charactersCount() {
       return this.armyContents.reduce((total, unit) => {
-        return unit.availability === 'leader'
+        return unit.availability === 'character'
           ? total + (unit.unitSize())
           : total;
       }, 0);

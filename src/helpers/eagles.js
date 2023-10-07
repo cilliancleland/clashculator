@@ -427,7 +427,7 @@ const eagles = {
       grit: 5,
       defaultWeapon: JAVELIN,
       defaultShield: SHIELD,
-      defaultBody: PARTIAL,
+      defaultBody: NONE,
       traits: [
         traits.SKIRMISH_SPECIALIST,
         traits.ALLIES,

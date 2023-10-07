@@ -323,7 +323,7 @@ export default {
       immediate: true,
       handler(a) {
         let tokens = 0;
-        if (this.row.availability === 'leader' || this.row.noDeployToken) {
+        if (this.row.availability === 'character' || this.row.noDeployToken) {
           tokens = 0;
         } else {
           const save = a.substr(0, 1);
