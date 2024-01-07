@@ -16,6 +16,8 @@ traits.FIDELIS = 'fidelis';
 traits.FERAL = 'feral';
 traits.EXTRA_CAVALRY = 'extra equipment-(cavalry spear)';
 traits.EXTRA_JAVELIN = 'extra equipment-(javelin)';
+traits.EXTRA_LIGHT_LANCE = 'extra equipment-(light lance)';
+traits.EXTRA_MACE = 'extra equipment-(mace)';
 traits.EXTRA_WAR_BOW = 'extra equipment-(war bow)';
 traits.DETERMINED = 'determined';
 traits.IMPULSUM = 'impulsum';
@@ -137,6 +139,19 @@ traits.NATURAL_ARMOUR_3 = 'Natural armour(3)';
 traits.NATURAL_ARMOUR_4 = 'Natural armour(4)';
 traits.DVERGR = 'Dvergr';
 traits.HACK = 'Hack';
+traits.HACK = 'Hack';
+traits.UNRELIABLE = 'Unreliable';
+traits.PIKE_ATTACK = 'Pike attack';
+traits.TEMPERED_STEEL = 'Tempered steel';
+traits.BAD_WAR = 'Bad war';
+traits.BRACE = 'Brace';
+traits.SWORDSMAN = 'Swordsman';
+traits.DESTRIER = 'Destrier';
+traits.MOUNTED_INFANTRY = 'Mounted infantry';
+traits.NOBLE_DISDAIN = 'Noble disdain';
+traits.NOBLE_BORN = 'Noble born';
+traits.ZWEIHANDER = 'Zweihander';
+traits.GOLD_NOT_GLORY = 'Gold not glory';
 
 traits.descriptions = {
   [traits.SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
@@ -162,6 +177,8 @@ traits.descriptions = {
   [traits.FIDELIS]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'p.73'],
   [traits.EXTRA_WAR_BOW]: ['may use ready to swap weapon to war bow', '', 'p.66'],
   [traits.EXTRA_JAVELIN]: ['may use ready to swap weapon to javelin', '', 'p.66'],
+  [traits.EXTRA_LIGHT_LANCE]: ['may use ready to swap weapon to light lance', '', 'p.66'],
+  [traits.EXTRA_MACE]: ['may use ready to swap weapon to mace', '', 'p.66'],
   [traits.EXTRA_CAVALRY]: ['may use ready to swap weapon to cavalry spear', '', 'p.66'],
   [traits.IMPULSUM]: ['requires throwing spear, affects throw', '+1 d6 if enemy tests morale', 'p.68'],
   [traits.AIM]: ['bow & loose order, affects shooting', 'May use ready to re-roll misses', 'p.66'],
@@ -281,6 +298,17 @@ traits.descriptions = {
   [traits.ARCANIST_2]: ['', 'See Arcane Companion, p4', 'Arcane Companion'],
   [traits.ARCANIST_3]: ['', 'See Arcane Companion, p4', 'Arcane Companion'],
   'Controller(10)': ['', 'See Arcane Companion, p17', 'Arcane Companion'],
-
+  [traits.UNRELIABLE]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.PIKE_ATTACK]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.TEMPERED_STEEL]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.BAD_WAR]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.BRACE]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.SWORDSMAN]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.DESTRIER]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.MOUNTED_INFANTRY]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.NOBLE_DISDAIN]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.NOBLE_BORN]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.ZWEIHANDER]: ['', 'See Clash of Condottieri', 'Condottieri'],
+  [traits.GOLD_NOT_GLORY]: ['', 'See Clash of Condottieri', 'Condottieri'],
 };
 export default traits;

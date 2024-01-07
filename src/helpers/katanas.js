@@ -108,8 +108,9 @@ const odaToyotomiTokugawa = {
       traits.HARINEZUMI,
       traits.UTEYA,
       traits.ASHIGARU,
+      traits.EXTENDED_NAGAE,
     ],
-    cost: 16,
+    cost: 17,
     options: [
       OPT_DOWN_PARTIAL_ARMOUR,
     ],

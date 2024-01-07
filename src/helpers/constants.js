@@ -7,6 +7,7 @@ const PERIODS = {
   katanas: 'Clash of Katanas',
   darkAge: 'Dark Ages (beta)',
   alex: 'Alexandrian (beta)',
+  condottieri: 'Condottieri (beta)',
   arcane: 'Arcane Companion',
 };
 
@@ -48,6 +49,9 @@ const THROWING = 'throwing spear';
 const THRUSTING = 'thrusting spear';
 const SWORD = 'sword';
 const LANCE = 'lance';
+const LIGHT_LANCE = 'light lance';
+const HEAVY_LANCE = 'heavy lance';
+const MACE = 'mace';
 const JAVELIN_THRUSTING = 'javelin and thrusting spear';
 const CAVALRY_SPEAR = 'cavalry spear';
 const CAVALRY_SPEAR_LONG = 'cavalry spear long';
@@ -93,6 +97,9 @@ const WEAPON_INITIATIVES = {
   [THRUSTING]: '(3)',
   [SWORD]: '(1)',
   [LANCE]: '(2)',
+  [LIGHT_LANCE]: '(2)',
+  [MACE]: '(1)',
+  [HEAVY_LANCE]: '(2)',
   [JAVELIN_THRUSTING]: '(3)',
   [CAVALRY_SPEAR]: '(2)',
   [CAVALRY_SPEAR_LONG]: '(3)',
@@ -171,6 +178,24 @@ const OPT_DOWN_HALF_BARDING = {
   upgradeBarding: HALF_BARDING,
   upgradeTraits: [],
 };
+const OPT_UP_HEAVY_WEAPON = {
+  name: 'upgrade to heavy weapon',
+  cost: 2,
+  upgradeWeapon: HEAVY_WPN,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [],
+};
+const OPT_UP_POLEARM = {
+  name: 'upgrade to polearm',
+  cost: 2,
+  upgradeWeapon: POLEARMS,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [],
+};
 const OPT_DOWN_FULL_TO_NO_BARDING = {
   name: 'Remove horse barding (-2pts/model)',
   cost: -2,
@@ -188,6 +213,33 @@ const OPT_JAVELIN_SHIELD = {
   upgradeShield: SHIELD,
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_JAVELIN],
+};
+const OPT_LIGHT_LANCE_EXTRA = {
+  name: 'Upgrade to light lance extra equipment (+2)',
+  cost: 3,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [traits.EXTRA_LIGHT_LANCE],
+};
+const OPT_UP_TEMPERED_STEEL = {
+  name: 'Upgrade to tempered steel',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [traits.TEMPERED_STEEL],
+};
+const OPT_EXTRA_MACE = {
+  name: 'Upgrade to mace extra equipment (+2)',
+  cost: 2,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeBarding: '',
+  upgradeTraits: [traits.EXTRA_MACE],
 };
 const OPT_EXTRA_WAR_BOW = {
   name: 'Add War Bow and Extra Equipment (War Bow) (+ 4 pts)',
@@ -459,6 +511,31 @@ const OPT_UP_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
+const OPT_UP_PIKE = {
+  name: 'Add pike',
+  cost: 1,
+  upgradeWeapon: PIKE,
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [],
+};
+const OPT_OP_ZWEIHANDER = {
+  name: 'Zweihander trait',
+  cost: 1,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [traits.ZWEIHANDER],
+};
+const OPT_OP_INDEPENDENT = {
+  name: 'Zweihander trait',
+  cost: 7,
+  upgradeWeapon: '',
+  upgradeArmour: '',
+  upgradeShield: '',
+  upgradeTraits: [traits.INDEPENDENT],
+};
+
 const OPT_UP_SHIELD_EXTRA = {
   name: 'Add shield and extra equipment shield',
   cost: 1,
@@ -695,7 +772,7 @@ const samuraiCharacterOptions = [
     name: 'Polearm (+2 pts)', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: POLEARMS, upgradeTraits: [],
   },
   {
-    name: 'Heavy weapon (+2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: HEAVY_WPN, upgradeTraits: [],
+    name: 'Heavy weapon (+2 pts)', cost: 2, upgradeArmour: '', upgradeShield: '', upgradeWeapon: HEAVY_WPN, upgradeTraits: [],
   },
   {
     name: 'Additional hand weapon and off-hand parry trait (+1pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: ADDITIONAL, upgradeTraits: [traits.PARRY_OFF],
@@ -780,6 +857,8 @@ export {
   REANIMATED,
   RETURNED,
   LANCE,
+  LIGHT_LANCE,
+  HEAVY_LANCE,
   PLATE,
   ENCLOSED,
   ENCLOSED_IMPROVED,
@@ -837,11 +916,15 @@ export {
   OPT_SHIELD,
   OPT_PAVAIS,
   OPT_DRILLED,
+  OPT_LIGHT_LANCE_EXTRA,
+  OPT_EXTRA_MACE,
+  OPT_UP_TEMPERED_STEEL,
   OPT_UP_ADD_SHIELD,
   OPT_ADDITIONAL_AND_PARRY,
   OPT_UP_NO_TO_HEAVY_SHIELD,
   OPT_UP_SHIELD_AND_OVERLAP,
   OPT_UP_SHIELD,
+  OPT_UP_PIKE,
   OPT_DOWN_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
   OPT_DOWN_NO_SHIELD,
@@ -888,6 +971,10 @@ export {
   OPT_UP_SHIELD_EXTRA,
   OPT_TSUKAIBAN,
   OPT_UNPAINTED,
+  OPT_UP_HEAVY_WEAPON,
+  OPT_UP_POLEARM,
+  OPT_OP_INDEPENDENT,
+  OPT_OP_ZWEIHANDER,
   characterOptions,
   samuraiCharacterOptions,
   katanaCharacterOptions,
