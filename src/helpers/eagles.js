@@ -2314,7 +2314,7 @@ const eagles = {
       defaultBody: NO_ARMOUR,
       defaultShield: NO_SHIELD,
       traits: [traits.GUSHING],
-      cost: 15,
+      cost: 16,
       options: [
         OPT_UP_PARTIAL_ARMOUR,
         OPT_UP_SHIELD_EXTRA,
