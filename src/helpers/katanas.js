@@ -1937,7 +1937,7 @@ const katanas = {
       availability: MILITES,
       combat: 4,
       ranged: 5,
-      grit: 4,
+      grit: 5,
       defaultWeapon: WAR_BOW,
       defaultBody: PARTIAL,
       defaultShield: NO_SHIELD,
