@@ -310,7 +310,7 @@ const odaToyotomiTokugawa = {
       traits.DUTY,
       traits.IRON_WILL,
     ],
-    cost: 26,
+    cost: 24,
     options: [
     ],
   },
