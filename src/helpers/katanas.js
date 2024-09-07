@@ -564,7 +564,7 @@ const katanas = {
       traits: [
         traits.HONOURABLE,
       ],
-      cost: 23,
+      cost: 22,
       options: [
         OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
       ],
