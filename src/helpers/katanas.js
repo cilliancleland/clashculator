@@ -312,6 +312,7 @@ const odaToyotomiTokugawa = {
     ],
     cost: 24,
     options: [
+      OPT_DOWN_ENCLOSED_TO_NO_ARMOUR,
     ],
   },
 };
@@ -822,7 +823,8 @@ const katanas = {
       ],
       cost: 23,
       options: [
-        OPT_UP_ENCLOSED_TO_IMP_ENCLOSED, // test trait
+        OPT_UP_ENCLOSED_TO_IMP_ENCLOSED,
+        OPT_DOWN_ENCLOSED_TO_NO_ARMOUR,
       ],
     },
   },
