@@ -200,7 +200,7 @@ traits.descriptions = {
   [traits.STALWART]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'playtest'],
   [traits.BREAKER]: ['requires loose order and double handed weapon, affects melee', 'Additional d6 to enemy morale test', 'playtest'],
   [traits.PLATE]: ['affects save', 're-roll ones', 'playtest'],
-  [traits.DOUBLE]: ['affects melee', '-2 to enemy save, must use shields like special equipment', 'playtest'],
+  [traits.DOUBLE]: ['affects melee', '-2 to enemy save, must use shields like extra equipment', 'playtest'],
   [traits.WARHORSE]: ['affects attack action', 're-roll 1s to hit vs infantry', 'playtest'],
   [traits.SHIELDBREAKER]: ['requires double hander and loose order, affects enemy morale', 'Additional d6 to enemy morale test', 'playtest'],
   [traits.HUNTER]: ['affects shoot action', 're-roll 1s to hit when shoot is first action', 'playtest'],
