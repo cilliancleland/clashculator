@@ -1291,7 +1291,7 @@ const punic = {
         traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
-        OPT_BUCKLER,
+        OPT_SHIELD,
       ],
     },
     samnite: {
@@ -1436,7 +1436,7 @@ const punic = {
         traits.SKIRMISH_SPECIALIST],
       cost: 8,
       options: [
-        OPT_BUCKLER,
+        OPT_SHIELD,
       ],
     },
     hoplites: {
@@ -2010,7 +2010,7 @@ const punic = {
       defaultBody: FULL,
       traits: [
         traits.MOUNTED],
-      cost: 22,
+      cost: 23,
       options: [
         OPT_CHARGING,
         OPT_DOWN_PARTIAL_ARMOUR,
@@ -2029,8 +2029,9 @@ const punic = {
         traits.CHARGE,
         traits.DRILLED,
         traits.MOUNTED],
-      cost: 22,
+      cost: 23,
       options: [
+        OPT_DOWN_PARTIAL_ARMOUR,
       ],
     },
     mounted: {
