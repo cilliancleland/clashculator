@@ -19,6 +19,7 @@ traits.EXTRA_JAVELIN = 'extra equipment-(javelin)';
 traits.EXTRA_LIGHT_LANCE = 'extra equipment-(light lance)';
 traits.EXTRA_MACE = 'extra equipment-(mace)';
 traits.EXTRA_WAR_BOW = 'extra equipment-(war bow)';
+traits.EXTRA_ARQUEBUS = 'extra equipment-(arquebus)';
 traits.DETERMINED = 'determined';
 traits.IMPULSUM = 'impulsum';
 traits.AIM = 'aimed shot';
@@ -176,6 +177,7 @@ traits.descriptions = {
   [traits.IRA]: ['delays wound effects', 'models do not receive wounds until the end phase', 'p.73'],
   [traits.FIDELIS]: ['affects morale tests', 'may re-roll failed dice during morale tests', 'p.73'],
   [traits.EXTRA_WAR_BOW]: ['may use ready to swap weapon to war bow', '', 'p.66'],
+  [traits.EXTRA_ARQUEBUSW]: ['may use ready to swap weapon to arequebus', '', 'p.66'],
   [traits.EXTRA_JAVELIN]: ['may use ready to swap weapon to javelin', '', 'p.66'],
   [traits.EXTRA_LIGHT_LANCE]: ['may use ready to swap weapon to light lance', '', 'p.66'],
   [traits.EXTRA_MACE]: ['may use ready to swap weapon to mace', '', 'p.66'],
