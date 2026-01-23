@@ -1,4 +1,3 @@
-
 <template>
   <div class="unit-row">
     <div class="row-reposition">
@@ -114,6 +113,8 @@
 </template>
 
 <script>
+/* xx-eslint-disable */
+// TODO - enable linting and fix the errors
 import {
   HIDE_OPTION,
   SAVE_MODS,
@@ -141,7 +142,9 @@ export default {
     'num-units',
     'sorting',
     'deployment-numbers',
-    'auto-number'],
+    'auto-number',
+    'updateRow',
+  ],
   computed: {
     rowCost() {
       const { row } = this;
@@ -334,7 +337,8 @@ export default {
             tokens = 1;
           }
         }
-        this.row.numTokens = tokens;
+        // this.row.numTokens = tokens; // fix mutation
+        this.updateRow(this.index, 'numTokens', tokens);
       },
     },
   },
@@ -344,18 +348,26 @@ export default {
       return `${desc[0]}\n${desc[1]}`;
     },
     removeOption: function removeOption(optionIndex) {
-      this.row.selectedOptions.splice(this.row.selectedOptions.indexOf(optionIndex), 1);
+      // this.row.selectedOptions.splice(
+      // this.row.selectedOptions.indexOf(optionIndex), 1); // fix mutation
+      const newSelectedOptions = this.row.selectedOptions.filter(
+        (val) => { return val !== optionIndex; },
+      );
+      this.updateRow(this.index, 'selectedOptions', newSelectedOptions);
     },
     addOption: function addOption() {
       const optionKey = this.availableOptions[this.optionToAdd];
-      this.row.selectedOptions.push(optionKey);
+      // this.row.selectedOptions.push(optionKey); // fix mutation
+      this.updateRow(this.index, 'selectedOptions', this.row.selectedOptions.concat([optionKey]));
       this.optionToAdd = -1;
     },
     addFigure: function addFigure() {
-      this.row.size = Math.min(this.row.size + 1, 15);
+      // this.row.size = Math.min(this.row.size + 1, 15); // fix mutation
+      this.updateRow(this.index, 'size', Math.min(this.row.size + 1, 15));
     },
     removeFigure: function removeFigure() {
-      this.row.size = Math.max(this.row.size - 1, 0);
+      // this.row.size = Math.max(this.row.size - 1, 0); // fix mutation
+      this.updateRow(this.index, 'size', Math.max(this.row.size - 1, 0));
     },
   },
 };

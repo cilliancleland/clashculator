@@ -57,6 +57,7 @@
             v-on:remove-unit="removeUnit"
             v-on:repos-up="reposUp"
             v-on:repos-down="reposDown"
+            :updateRow="updateRow"
           ></unit-row>
           <sharable-link
             v-bind:sharable="sharable"
@@ -388,6 +389,11 @@ export default {
         const orderB = Object.keys(list).indexOf(b.type);
         return orderA - orderB;
       });
+    },
+    updateRow: function updateRow(index, field, value) {
+      const newRow = { ...this.armyContents[index] };
+      Vue.set(newRow, field, value);
+      Vue.set(this.armyContents, index, newRow);
     },
     updateArmyName: function updateArmyName(armyName) {
       this.armyName = armyName;

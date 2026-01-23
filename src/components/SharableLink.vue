@@ -7,7 +7,7 @@
         </div>
         <input
               readonly
-              v-model="sharable"
+              :value="sharable"
               ref="sharableInput"
               v-on:click="copyToClip"
               class="sharable-input" />
