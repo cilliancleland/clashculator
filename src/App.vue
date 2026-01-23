@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Calculator from './components/Calculator.vue';
 
 export default {
