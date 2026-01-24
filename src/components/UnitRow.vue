@@ -126,7 +126,7 @@ import {
   ENCLOSED_IMPROVED,
 } from '../helpers/constants';
 // import { calcSaveNumber, calcSaveSymbol } from '../helpers/helpers';
-import traits from '../helpers/traits';
+import traits, { traitDescriptions } from '../helpers/traits';
 
 export default {
   name: 'UnitRow',
@@ -344,7 +344,7 @@ export default {
   },
   methods: {
     traitTitle: function traitTitle(trait) {
-      const desc = this.traits.descriptions[trait] || ['', ''];
+      const desc = traitDescriptions[trait] || ['', ''];
       return `${desc[0]}\n${desc[1]}`;
     },
     removeOption: function removeOption(optionIndex) {

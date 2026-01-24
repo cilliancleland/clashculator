@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import { LookupUnit, LookupArmy, LookupCharacter } from './types';
+
 import {
   MILITES,
   CIVIS,
@@ -42,8 +44,8 @@ import {
   charactersWithChariots,
 } from './characters';
 
-const greeks = {
-  ...charactersWithAbilities('greek'),
+const greeks: LookupUnit = {
+  ...charactersWithAbilities('greek') as LookupUnit,
   psiloi: {
     displayName: 'Psiloi',
     availability: CIVIS,
@@ -217,7 +219,7 @@ const greeks = {
 
 };
 
-const punic = {
+const punic: LookupArmy = {
   Carthaginian: { // as book
     ...charactersWithAbilities('punic'),
     javelinmen: {

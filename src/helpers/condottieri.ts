@@ -1,3 +1,5 @@
+import { LookupArmy } from './types';
+
 import {
   MILITES,
   CIVIS,
@@ -36,7 +38,7 @@ import {
   condCharacters,
 } from './characters';
 
-const condottieri = {
+const condottieri: LookupArmy = {
   Spanish: {
     ...condCharacters,
     xbow: {

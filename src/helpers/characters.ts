@@ -1,3 +1,4 @@
+import { Character, LookupCharacter, LookupOption } from './types';
 import {
   NO_SHIELD,
   NO_ARMOUR,
@@ -33,10 +34,10 @@ import {
   OPT_UP_POLEARM,
   OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
 } from './constants';
-
 import traits from './traits';
 
 const soothsayer = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 0,
   displayName: 'Soothsayer',
@@ -53,7 +54,7 @@ const soothsayer = {
   defaultBody: NO_ARMOUR,
   traits: [traits.OMENS],
 };
-const characters = {
+const characters: LookupCharacter = {
   lvl5: {
     dontCountForBreak: true,
     isCharacter: true,
@@ -145,7 +146,8 @@ const sake = {
   defaultBody: NO_ARMOUR,
   traits: [traits.SAKE],
 };
-const geisha = {
+const geisha: Character = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 0,
   displayName: 'Geisha',
@@ -162,7 +164,8 @@ const geisha = {
   defaultBody: NO_ARMOUR,
   traits: [traits.GEISHA],
 };
-const assassin = {
+const assassin: Character = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
   displayName: 'Assassin',
@@ -186,7 +189,8 @@ const assassin = {
     traits.DEADLY_STRIKE,
   ],
 };
-const masterAss = {
+const masterAss: Character = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
   displayName: 'Master Assassin',
@@ -211,7 +215,8 @@ const masterAss = {
     traits.DEADLY_STRIKE,
   ],
 };
-const shrine = {
+const shrine: Character = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 0,
   displayName: 'Buddhist Shrine',
@@ -228,7 +233,8 @@ const shrine = {
   defaultBody: NO_ARMOUR,
   traits: [traits.SHRINE],
 };
-const families = {
+const families: Character = {
+  dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 0,
   displayName: 'Supporting Families',
@@ -246,7 +252,7 @@ const families = {
   traits: [traits.FAMILY],
 };
 
-const chariotRider = {
+const chariotRider: Character = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -269,7 +275,7 @@ const chariotRider = {
     traits.CHARIOT,
   ],
 };
-const charioteer = {
+const charioteer: Character = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -288,9 +294,9 @@ const charioteer = {
   traits: ['wounds(2)', traits.IRON_WILL, traits.INDEPENDENT],
 };
 
-function charactersWithAbilities(nation) {
+function charactersWithAbilities(nation: string): LookupCharacter {
   const ret = JSON.parse(JSON.stringify(characters));
-  const nationalOptions = {
+  const nationalOptions: LookupOption = {
     numidian: OPT_COMMAND_NUMIDIAN,
     pyrric: OPT_COMMAND_PYRRHIC,
     punic: OPT_COMMAND_PUNIC,
@@ -307,7 +313,7 @@ function charactersWithAbilities(nation) {
   return ret;
 }
 
-function samuraiCharacters() {
+function samuraiCharacters(): LookupCharacter {
   let ret = JSON.parse(JSON.stringify(characters));
   Object.getOwnPropertyNames(ret).forEach((key) => {
     ret[key].defaultShield = NO_SHIELD;
@@ -324,7 +330,7 @@ function samuraiCharacters() {
   return ret;
 }
 
-function katanaCharacters() {
+function katanaCharacters(): LookupCharacter {
   let ret = JSON.parse(JSON.stringify(characters));
   Object.getOwnPropertyNames(ret).forEach((key) => {
     ret[key].defaultShield = NO_SHIELD;
@@ -339,7 +345,7 @@ function katanaCharacters() {
   return ret;
 }
 
-function charactersWithChariots(nation) {
+function charactersWithChariots(nation: string): LookupCharacter {
   const ret = nation
     ? JSON.parse(JSON.stringify(charactersWithAbilities(nation)))
     : JSON.parse(JSON.stringify(characters));
@@ -350,20 +356,20 @@ function charactersWithChariots(nation) {
   return ret;
 }
 
-function charactersWithFamilies() {
+function charactersWithFamilies(): LookupCharacter {
   const ret = JSON.parse(JSON.stringify(characters));
   delete ret.soothsayer;
   ret.families = families;
   return ret;
 }
 
-function addTsukaiban(japanCharacters) {
+function addTsukaiban(japanCharacters: LookupCharacter): LookupCharacter {
   const ret = JSON.parse(JSON.stringify(japanCharacters));
   ret.lvl5.options = [...ret.lvl5.options, OPT_TSUKAIBAN];
   ret.lvl4.options = [...ret.lvl4.options, OPT_TSUKAIBAN];
   return ret;
 }
-const condCharacters = {
+const condCharacters: LookupCharacter = {
   lvl5: {
     dontCountForBreak: true,
     isCharacter: true,

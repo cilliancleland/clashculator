@@ -1,3 +1,5 @@
+import { LookupUnit, LookupArmy } from './types';
+
 import {
   samuraiCharacters,
   katanaCharacters,
@@ -59,7 +61,7 @@ import {
 
 import traits from './traits';
 
-const odaToyotomiTokugawa = {
+const odaToyotomiTokugawa: LookupUnit = {
   ...addTsukaiban(samuraiCharacters()),
   geisha,
   supportAshigaru: {
@@ -316,7 +318,7 @@ const odaToyotomiTokugawa = {
     ],
   },
 };
-const katanas = {
+const katanas: LookupArmy = {
   Shimazu: {
     ...addTsukaiban(samuraiCharacters()),
     geisha,

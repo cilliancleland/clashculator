@@ -1,3 +1,5 @@
+import { LookupUnit, Unit } from './types';
+
 import {
   mageOptions,
   characterOptions,
@@ -10,7 +12,7 @@ import {
 
 import traits from './traits';
 
-export const mages = {
+export const mages: LookupUnit = {
   archmage: {
     dontCountForBreak: true,
     isCharacter: true,
@@ -67,7 +69,7 @@ export const mages = {
   },
 };
 
-export const warlord = {
+export const warlord: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -85,7 +87,7 @@ export const warlord = {
   defaultBody: FULL,
   traits: ['attacks(3)', 'wounds(3)', traits.IRON_WILL, traits.DVERGR],
 };
-export const lord = {
+export const lord: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -103,7 +105,7 @@ export const lord = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(3)', traits.IRON_WILL, traits.DVERGR],
 };
-export const hero = {
+export const hero: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -121,7 +123,7 @@ export const hero = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(2)', traits.IRON_WILL, traits.DVERGR],
 };
-export const champion = {
+export const champion: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -139,7 +141,7 @@ export const champion = {
   defaultBody: FULL,
   traits: ['attacks(2)', traits.IRON_WILL, traits.DVERGR],
 };
-export const sorcerer = {
+export const sorcerer: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -157,7 +159,7 @@ export const sorcerer = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(2)', 'attacks(2)', traits.IRON_WILL, traits.ARCANIST_2, traits.DVERGR],
 };
-export const deathLord = {
+export const deathLord: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -175,7 +177,7 @@ export const deathLord = {
   defaultBody: FULL,
   traits: ['attacks(3)', 'wounds(3)', 'Controller(10)', traits.UNDEAD],
 };
-export const charnelWarrior = {
+export const charnelWarrior: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -193,7 +195,7 @@ export const charnelWarrior = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(3)', 'Controller(10)', traits.UNDEAD],
 };
-export const eldark = {
+export const eldark: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -211,7 +213,7 @@ export const eldark = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(2)', 'Controller(10)', traits.UNDEAD],
 };
-export const skogarmadr = {
+export const skogarmadr: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -229,7 +231,7 @@ export const skogarmadr = {
   defaultBody: FULL,
   traits: ['wounds(2)', 'Controller(10)', traits.UNDEAD],
 };
-export const necrach = {
+export const necrach: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -247,7 +249,7 @@ export const necrach = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(3)', 'Controller(10)', traits.ARCANIST_2, traits.UNDEAD],
 };
-export const undeadSorcerer = {
+export const undeadSorcerer: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -265,7 +267,7 @@ export const undeadSorcerer = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(2)', 'Controller(10)', traits.ARCANIST_2, traits.UNDEAD],
 };
-export const consul = {
+export const consul: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -283,7 +285,7 @@ export const consul = {
   defaultBody: FULL,
   traits: ['wounds(3)', 'attacks(3)', 'Controller(10)', traits.ARCANIST_2, traits.UNDEAD],
 };
-export const centurion = {
+export const centurion: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -301,7 +303,7 @@ export const centurion = {
   defaultBody: FULL,
   traits: ['wounds(3)', 'attacks(2)', 'Controller(10)', traits.UNDEAD],
 };
-export const optio = {
+export const optio: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -319,7 +321,7 @@ export const optio = {
   defaultBody: FULL,
   traits: ['wounds(2)', 'attacks(2)', 'Controller(10)', traits.UNDEAD],
 };
-export const prince = {
+export const prince: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -337,7 +339,7 @@ export const prince = {
   defaultBody: FULL,
   traits: ['attacks(3)', 'wounds(3)', traits.IRON_WILL, traits.PRIDE],
 };
-export const kinlord = {
+export const kinlord: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -355,7 +357,7 @@ export const kinlord = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(3)', traits.IRON_WILL, traits.PRIDE],
 };
-export const earl = {
+export const earl: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -373,7 +375,7 @@ export const earl = {
   defaultBody: FULL,
   traits: ['attacks(2)', 'wounds(2)', traits.IRON_WILL, traits.PRIDE],
 };
-export const kinthane = {
+export const kinthane: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -391,7 +393,7 @@ export const kinthane = {
   defaultBody: FULL,
   traits: ['attacks(2)', traits.IRON_WILL, traits.PRIDE],
 };
-export const elvenMage = {
+export const elvenMage: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -409,7 +411,7 @@ export const elvenMage = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(3)', traits.IRON_WILL, traits.ARCANIST_3, traits.PRIDE],
 };
-export const wiseWizard = {
+export const wiseWizard: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -427,7 +429,7 @@ export const wiseWizard = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(3)', traits.IRON_WILL, traits.ARCANIST_3],
 };
-export const cunningWizard = {
+export const cunningWizard: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,
@@ -445,7 +447,7 @@ export const cunningWizard = {
   defaultBody: NO_ARMOUR,
   traits: ['wounds(3)', traits.IRON_WILL, traits.ARCANIST_3],
 };
-export const orcShaman = {
+export const orcShaman: Unit = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 1,

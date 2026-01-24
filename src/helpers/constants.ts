@@ -1,7 +1,7 @@
-
+import { Option, LookupString, LookupNumber } from './types';
 import traits from './traits';
 
-const PERIODS = {
+const PERIODS: LookupString = {
   punic: 'Punic Wars',
   eagles: 'Rise of Eagles',
   katanas: 'Clash of Katanas',
@@ -118,7 +118,7 @@ const WEAPON_INITIATIVES = {
   [ADDITIONAL]: '(1)',
   [KONTOS]: '(3)',
 };
-const OPT_UNPAINTED = {
+const OPT_UNPAINTED: Option = {
   name: 'unpainted',
   cost: 5,
   upgradeWeapon: '',
@@ -127,7 +127,7 @@ const OPT_UNPAINTED = {
   upgradeTraits: [],
   removeTraits: [],
 };
-const OPT_NOT_POORLY = {
+const OPT_NOT_POORLY: Option = {
   name: 'remove pooly equipped',
   cost: 1,
   upgradeWeapon: '',
@@ -136,7 +136,7 @@ const OPT_NOT_POORLY = {
   upgradeTraits: [],
   removeTraits: [traits.POORLY],
 };
-const OPT_DOWN_FULL_TO_PARTIAL_ARMOUR = {
+const OPT_DOWN_FULL_TO_PARTIAL_ARMOUR: Option = {
   name: 'Downgrade to partial armour',
   cost: -1,
   upgradeWeapon: '',
@@ -144,7 +144,7 @@ const OPT_DOWN_FULL_TO_PARTIAL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_MIXED = {
+const OPT_MIXED: Option = {
   name: 'Upgrade to mixed weapons (+1pts/model)',
   cost: 1,
   upgradeWeapon: MIXED,
@@ -152,7 +152,7 @@ const OPT_MIXED = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_BUCKLER = {
+const OPT_BUCKLER: Option = {
   name: 'Add buckler (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -160,7 +160,7 @@ const OPT_BUCKLER = {
   upgradeShield: 'buckler',
   upgradeTraits: [traits.BUCKLER],
 };
-const OPT_BARDING = {
+const OPT_BARDING: Option = {
   name: 'Add barding (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -169,7 +169,7 @@ const OPT_BARDING = {
   upgradeBarding: BARDING,
   upgradeTraits: [],
 };
-const OPT_DOWN_HALF_BARDING = {
+const OPT_DOWN_HALF_BARDING: Option = {
   name: 'change to half barding (-1pts/model),',
   cost: -1,
   upgradeWeapon: '',
@@ -178,7 +178,7 @@ const OPT_DOWN_HALF_BARDING = {
   upgradeBarding: HALF_BARDING,
   upgradeTraits: [],
 };
-const OPT_UP_HEAVY_WEAPON = {
+const OPT_UP_HEAVY_WEAPON: Option = {
   name: 'upgrade to heavy weapon',
   cost: 2,
   upgradeWeapon: HEAVY_WPN,
@@ -187,7 +187,7 @@ const OPT_UP_HEAVY_WEAPON = {
   upgradeBarding: '',
   upgradeTraits: [],
 };
-const OPT_UP_POLEARM = {
+const OPT_UP_POLEARM: Option = {
   name: 'upgrade to polearm',
   cost: 2,
   upgradeWeapon: POLEARMS,
@@ -196,7 +196,7 @@ const OPT_UP_POLEARM = {
   upgradeBarding: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_FULL_TO_NO_BARDING = {
+const OPT_DOWN_FULL_TO_NO_BARDING: Option = {
   name: 'Remove horse barding (-2pts/model)',
   cost: -2,
   upgradeWeapon: '',
@@ -205,7 +205,7 @@ const OPT_DOWN_FULL_TO_NO_BARDING = {
   upgradeBarding: NO_BARDING,
   upgradeTraits: [],
 };
-const OPT_JAVELIN_SHIELD = {
+const OPT_JAVELIN_SHIELD: Option = {
   name: 'Upgrade to shield and extra equipmnent javelin (+3)',
   cost: 3,
   upgradeWeapon: '',
@@ -214,7 +214,7 @@ const OPT_JAVELIN_SHIELD = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_JAVELIN],
 };
-const OPT_LIGHT_LANCE_EXTRA = {
+const OPT_LIGHT_LANCE_EXTRA: Option = {
   name: 'Upgrade to light lance extra equipment (+2)',
   cost: 3,
   upgradeWeapon: '',
@@ -223,7 +223,7 @@ const OPT_LIGHT_LANCE_EXTRA = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_LIGHT_LANCE],
 };
-const OPT_UP_TEMPERED_STEEL = {
+const OPT_UP_TEMPERED_STEEL: Option = {
   name: 'Upgrade to tempered steel',
   cost: 1,
   upgradeWeapon: '',
@@ -232,7 +232,7 @@ const OPT_UP_TEMPERED_STEEL = {
   upgradeBarding: '',
   upgradeTraits: [traits.TEMPERED_STEEL],
 };
-const OPT_EXTRA_MACE = {
+const OPT_EXTRA_MACE: Option = {
   name: 'Upgrade to mace extra equipment (+2)',
   cost: 2,
   upgradeWeapon: '',
@@ -241,7 +241,7 @@ const OPT_EXTRA_MACE = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_MACE],
 };
-const OPT_EXTRA_WAR_BOW = {
+const OPT_EXTRA_WAR_BOW: Option = {
   name: 'Add War Bow and Extra Equipment (War Bow) (+ 4 pts)',
   cost: 4,
   upgradeWeapon: '',
@@ -250,7 +250,7 @@ const OPT_EXTRA_WAR_BOW = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_WAR_BOW],
 };
-const OPT_EXTRA_ARQUEBUS = {
+const OPT_EXTRA_ARQUEBUS: Option = {
   name: 'Add arquebus and Extra Equipment (arquebus) (+ 4 pts)',
   cost: 4,
   upgradeWeapon: '',
@@ -259,7 +259,7 @@ const OPT_EXTRA_ARQUEBUS = {
   upgradeBarding: '',
   upgradeTraits: [traits.EXTRA_ARQUEBUS],
 };
-const OPT_THROWING_OFFENSIVE = {
+const OPT_THROWING_OFFENSIVE: Option = {
   name: 'Upgrade to throwing spears and offensive spear (+4)',
   cost: 4,
   upgradeWeapon: THROWING,
@@ -268,7 +268,7 @@ const OPT_THROWING_OFFENSIVE = {
   upgradeBarding: '',
   upgradeTraits: [traits.OFFENSIVE_SPEAR],
 };
-const OPT_UP_THROWING = {
+const OPT_UP_THROWING: Option = {
   name: 'Upgrade to throwing spears',
   cost: 0,
   upgradeWeapon: THROWING,
@@ -277,7 +277,7 @@ const OPT_UP_THROWING = {
   upgradeBarding: '',
   upgradeTraits: [],
 };
-const OPT_HALF_BARDING = {
+const OPT_HALF_BARDING: Option = {
   name: 'Add half barding (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -286,7 +286,7 @@ const OPT_HALF_BARDING = {
   upgradeBarding: HALF_BARDING,
   upgradeTraits: [],
 };
-const OPT_DRILLED = {
+const OPT_DRILLED: Option = {
   name: 'Add drilled (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -294,7 +294,7 @@ const OPT_DRILLED = {
   upgradeShield: '',
   upgradeTraits: [traits.DRILLED],
 };
-const OPT_SHIELD = {
+const OPT_SHIELD: Option = {
   name: 'Add shield (+1pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -302,7 +302,7 @@ const OPT_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
-const OPT_PAVAIS = {
+const OPT_PAVAIS: Option = {
   name: 'Add pavais (+2pts/model)',
   cost: 2,
   upgradeWeapon: '',
@@ -310,7 +310,7 @@ const OPT_PAVAIS = {
   upgradeShield: '',
   upgradeTraits: [traits.PAVAIS],
 };
-const OPT_PAVAIS_TATE = {
+const OPT_PAVAIS_TATE: Option = {
   name: 'Add pavais and tate (+3pts/model)',
   cost: 3,
   upgradeWeapon: '',
@@ -318,7 +318,7 @@ const OPT_PAVAIS_TATE = {
   upgradeShield: '',
   upgradeTraits: [traits.PAVAIS, traits.TATE],
 };
-const OPT_UP_ADD_SHIELD = {
+const OPT_UP_ADD_SHIELD: Option = {
   name: 'Replace shield with additional hand weapon and gain rain of blows (free)',
   cost: 0,
   upgradeWeapon: ADDITIONAL,
@@ -326,7 +326,7 @@ const OPT_UP_ADD_SHIELD = {
   upgradeShield: NO_SHIELD,
   upgradeTraits: [traits.RAIN],
 };
-const OPT_UP_FULL_TO_ENCLOSED_ARMOUR = {
+const OPT_UP_FULL_TO_ENCLOSED_ARMOUR: Option = {
   name: 'Upgrade to enclosed armour',
   cost: 2,
   upgradeWeapon: '',
@@ -334,7 +334,7 @@ const OPT_UP_FULL_TO_ENCLOSED_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR = {
+const OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR: Option = {
   name: 'Upgrade to improved full armour',
   cost: 1,
   upgradeWeapon: '',
@@ -342,7 +342,7 @@ const OPT_UP_FULL_TO_IMPROVED_FULL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_NO_ARMOUR = {
+const OPT_DOWN_NO_ARMOUR: Option = {
   name: 'Downgrade to no armour',
   cost: -2,
   upgradeWeapon: '',
@@ -350,7 +350,7 @@ const OPT_DOWN_NO_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_NO_SHIELD = {
+const OPT_DOWN_NO_SHIELD: Option = {
   name: 'Downgrade to no shield',
   cost: -1,
   upgradeWeapon: '',
@@ -358,7 +358,7 @@ const OPT_DOWN_NO_SHIELD = {
   upgradeShield: NO_SHIELD,
   upgradeTraits: [],
 };
-const OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR = {
+const OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR: Option = {
   name: 'Downgrade to partial armour(-3pts)',
   cost: -3,
   upgradeWeapon: '',
@@ -366,7 +366,7 @@ const OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_ENCLOSED_TO_NO_ARMOUR = {
+const OPT_DOWN_ENCLOSED_TO_NO_ARMOUR: Option = {
   name: 'Downgrade to no armour(-5pts)',
   cost: -5,
   upgradeWeapon: '',
@@ -374,7 +374,7 @@ const OPT_DOWN_ENCLOSED_TO_NO_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_FULL_TO_NO_ARMOUR = {
+const OPT_DOWN_FULL_TO_NO_ARMOUR: Option = {
   name: 'Downgrade to no armour',
   cost: -3,
   upgradeWeapon: '',
@@ -382,7 +382,7 @@ const OPT_DOWN_FULL_TO_NO_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR = {
+const OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR: Option = {
   name: 'Downgrade to full armour',
   cost: -2,
   upgradeWeapon: '',
@@ -390,7 +390,7 @@ const OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_NO_TO_HEAVY_SHIELD = {
+const OPT_UP_NO_TO_HEAVY_SHIELD: Option = {
   name: 'Upgrade to heavy shield',
   cost: 2,
   upgradeWeapon: '',
@@ -398,7 +398,7 @@ const OPT_UP_NO_TO_HEAVY_SHIELD = {
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [],
 };
-const OPT_DOWN_PARTIAL_ARMOUR = {
+const OPT_DOWN_PARTIAL_ARMOUR: Option = {
   name: 'Downgrade to partial armour',
   cost: -1,
   upgradeWeapon: '',
@@ -406,7 +406,7 @@ const OPT_DOWN_PARTIAL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_DOWN_IMPROVED_PARTIAL_TO_NO_ARMOUR = {
+const OPT_DOWN_IMPROVED_PARTIAL_TO_NO_ARMOUR: Option = {
   name: 'Remove armour',
   cost: -3,
   upgradeWeapon: '',
@@ -414,7 +414,7 @@ const OPT_DOWN_IMPROVED_PARTIAL_TO_NO_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_ENCLOSED_TO_IMP_ENCLOSED = {
+const OPT_UP_ENCLOSED_TO_IMP_ENCLOSED: Option = {
   name: 'upgrade to Improved Enclosed Armor (+1 pts)',
   cost: 1,
   upgradeWeapon: '',
@@ -422,7 +422,7 @@ const OPT_UP_ENCLOSED_TO_IMP_ENCLOSED = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_PARTIAL_ARMOUR = {
+const OPT_UP_PARTIAL_ARMOUR: Option = {
   name: 'Upgrade to partial armor (+2 pts/model)',
   cost: 2,
   upgradeWeapon: '',
@@ -430,7 +430,7 @@ const OPT_UP_PARTIAL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_FULL_ARMOUR = {
+const OPT_UP_FULL_ARMOUR: Option = {
   name: 'Upgrade to full armor (+1 pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -438,7 +438,7 @@ const OPT_UP_FULL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UP_IMPROVED_FULL_ARMOUR = {
+const OPT_UP_IMPROVED_FULL_ARMOUR: Option = {
   name: 'Upgrade to improved full armor (+1 pts/model)',
   cost: 1,
   upgradeWeapon: '',
@@ -446,7 +446,7 @@ const OPT_UP_IMPROVED_FULL_ARMOUR = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_UPGRADE_CAVALRY_JAVELIN = {
+const OPT_UPGRADE_CAVALRY_JAVELIN: Option = {
   name: 'Upgrade to gain javelin and extra equipment javelin (+3 pts/model)',
   cost: 3,
   upgradeWeapon: 'javelin and extra equipment javelin',
@@ -454,7 +454,7 @@ const OPT_UPGRADE_CAVALRY_JAVELIN = {
   upgradeShield: '',
   upgradeTraits: [traits.EXTRA_JAVELIN],
 };
-const OPT_UPGRADE_EXTRA_BOW = {
+const OPT_UPGRADE_EXTRA_BOW: Option = {
   name: 'add bow and extra equipment(bow ) trait (3pts/model)',
   cost: 3,
   upgradeWeapon: '',
@@ -462,7 +462,7 @@ const OPT_UPGRADE_EXTRA_BOW = {
   upgradeShield: '',
   upgradeTraits: [traits.EXTRA_BOW],
 };
-const OPT_UPGRADE_POLEARM_MOMENTUM = {
+const OPT_UPGRADE_POLEARM_MOMENTUM: Option = {
   name: 'add Polearms + Extra Equipment(polearms) and Momentum (+4pts)',
   cost: 4,
   upgradeWeapon: POLEARMS,
@@ -470,7 +470,7 @@ const OPT_UPGRADE_POLEARM_MOMENTUM = {
   upgradeShield: '',
   upgradeTraits: [traits.MOMENTUM, traits.EXTRA_POLEARM],
 };
-const OPT_DOWN_HEAVY_SHIELD = {
+const OPT_DOWN_HEAVY_SHIELD: Option = {
   name: 'downgrade heavy shield to shield ( -1 pts)',
   cost: -1,
   upgradeWeapon: '',
@@ -478,7 +478,7 @@ const OPT_DOWN_HEAVY_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
-const OPT_UP_HEAVY_SHIELD = {
+const OPT_UP_HEAVY_SHIELD: Option = {
   name: 'Upgrade to heavy shield ( +1 pts)',
   cost: 1,
   upgradeWeapon: '',
@@ -486,7 +486,7 @@ const OPT_UP_HEAVY_SHIELD = {
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [],
 };
-const OPT_UP_SHIELD_AND_OVERLAP = {
+const OPT_UP_SHIELD_AND_OVERLAP: Option = {
   name: 'Upgrade to heavy shield and shield overlap ( +2 pts)',
   cost: 2,
   upgradeWeapon: '',
@@ -494,7 +494,7 @@ const OPT_UP_SHIELD_AND_OVERLAP = {
   upgradeShield: HEAVY_SHIELD,
   upgradeTraits: [traits.SHIELD_OVERLAP],
 };
-const OPT_ADDITIONAL_AND_PARRY = {
+const OPT_ADDITIONAL_AND_PARRY: Option = {
   name: 'replace shield with additional hand weapon and gain rain of blows (-1)',
   cost: -1,
   upgradeArmour: '',
@@ -503,7 +503,7 @@ const OPT_ADDITIONAL_AND_PARRY = {
   upgradeTraits: [traits.RAIN],
   removeTraits: [traits.SHIELDS_UP],
 };
-const OPT_UP_SHIELD = {
+const OPT_UP_SHIELD: Option = {
   name: 'Add shield',
   cost: 1,
   upgradeWeapon: '',
@@ -511,7 +511,7 @@ const OPT_UP_SHIELD = {
   upgradeShield: SHIELD,
   upgradeTraits: [],
 };
-const OPT_UP_PIKE = {
+const OPT_UP_PIKE: Option = {
   name: 'Add pike',
   cost: 1,
   upgradeWeapon: PIKE,
@@ -519,7 +519,7 @@ const OPT_UP_PIKE = {
   upgradeShield: '',
   upgradeTraits: [],
 };
-const OPT_OP_ZWEIHANDER = {
+const OPT_OP_ZWEIHANDER: Option = {
   name: 'Zweihander trait',
   cost: 1,
   upgradeWeapon: '',
@@ -527,7 +527,7 @@ const OPT_OP_ZWEIHANDER = {
   upgradeShield: '',
   upgradeTraits: [traits.ZWEIHANDER],
 };
-const OPT_OP_INDEPENDENT = {
+const OPT_OP_INDEPENDENT: Option = {
   name: 'Zweihander trait',
   cost: 7,
   upgradeWeapon: '',
@@ -536,7 +536,7 @@ const OPT_OP_INDEPENDENT = {
   upgradeTraits: [traits.INDEPENDENT],
 };
 
-const OPT_UP_SHIELD_EXTRA = {
+const OPT_UP_SHIELD_EXTRA: Option = {
   name: 'Add shield and extra equipment shield',
   cost: 1,
   upgradeWeapon: '',
@@ -544,7 +544,7 @@ const OPT_UP_SHIELD_EXTRA = {
   upgradeShield: SHIELD,
   upgradeTraits: [traits.EXTRA_SHIELD],
 };
-const OPT_DOWN_BUCKLER = {
+const OPT_DOWN_BUCKLER: Option = {
   name: 'Downgrade to buckler ( -1 pts)',
   cost: -1,
   upgradeWeapon: '',
@@ -552,7 +552,7 @@ const OPT_DOWN_BUCKLER = {
   upgradeShield: BUCKLER,
   upgradeTraits: [traits.BUCKLER],
 };
-const OPT_UP_EXTRA_BOW = {
+const OPT_UP_EXTRA_BOW: Option = {
   name: 'upgrade to extra equipment bow (+3)',
   cost: 3,
   upgradeWeapon: '',
@@ -560,7 +560,7 @@ const OPT_UP_EXTRA_BOW = {
   upgradeShield: '',
   upgradeTraits: [traits.EXTRA_BOW],
 };
-const OPT_CHARGING = {
+const OPT_CHARGING: Option = {
   name: 'Upgrade to gain: impetus, cavalry spear & extra equipment-(cavalry spear) (+ 3pts/model)',
   cost: 3,
   upgradeWeapon: '',
@@ -568,7 +568,7 @@ const OPT_CHARGING = {
   upgradeShield: '',
   upgradeTraits: [traits.IMPETUS, traits.EXTRA_CAVALRY],
 };
-const OPT_UP_CHARIOT = {
+const OPT_UP_CHARIOT: Option = {
   name: 'Upgrade to Chariot',
   cost: 8,
   upgradeArmour: '',
@@ -577,7 +577,7 @@ const OPT_UP_CHARIOT = {
   unlessMounted: true,
   upgradeTraits: [traits.CHARIOT],
 };
-const OPT_HUNTER = {
+const OPT_HUNTER: Option = {
   name: 'Upgrade to hunter',
   cost: 1,
   upgradeArmour: '',
@@ -585,7 +585,7 @@ const OPT_HUNTER = {
   upgradeWeapon: '',
   upgradeTraits: [traits.HUNTER],
 };
-const OPT_POLE_FOR_WAR_BOW = {
+const OPT_POLE_FOR_WAR_BOW: Option = {
   name: 'Replace polearms for War Bow (mounted) (+1pts)',
   cost: 1,
   upgradeArmour: '',
@@ -593,7 +593,7 @@ const OPT_POLE_FOR_WAR_BOW = {
   upgradeWeapon: WAR_BOW,
   upgradeTraits: [],
 };
-const OPT_COMMAND_ALL = {
+const OPT_COMMAND_ALL: Option = {
   name: traits.COMMAND_ALL,
   cost: 15,
   upgradeArmour: '',
@@ -602,7 +602,7 @@ const OPT_COMMAND_ALL = {
   upgradeCommand: traits.COMMAND_ALL,
   upgradeTraits: [traits.COMMAND_ALL],
 };
-const OPT_COMMAND_NUMIDIAN = {
+const OPT_COMMAND_NUMIDIAN: Option = {
   name: traits.COMMAND_NUMIDIAN,
   cost: 15,
   upgradeArmour: '',
@@ -611,7 +611,7 @@ const OPT_COMMAND_NUMIDIAN = {
   upgradeCommand: traits.COMMAND_NUMIDIAN,
   upgradeTraits: [traits.COMMAND_NUMIDIAN],
 };
-const OPT_COMMAND_PYRRHIC = {
+const OPT_COMMAND_PYRRHIC: Option = {
   name: traits.COMMAND_PYRRHIC,
   cost: 15,
   upgradeArmour: '',
@@ -620,7 +620,7 @@ const OPT_COMMAND_PYRRHIC = {
   upgradeCommand: traits.COMMAND_PYRRHIC,
   upgradeTraits: [traits.COMMAND_PYRRHIC],
 };
-const OPT_COMMAND_SPANISH = {
+const OPT_COMMAND_SPANISH: Option = {
   name: traits.COMMAND_SPANISH,
   cost: 15,
   upgradeArmour: '',
@@ -629,7 +629,7 @@ const OPT_COMMAND_SPANISH = {
   upgradeCommand: traits.COMMAND_SPANISH,
   upgradeTraits: [traits.COMMAND_SPANISH],
 };
-const OPT_COMMAND_ITALIAN = {
+const OPT_COMMAND_ITALIAN: Option = {
   name: traits.COMMAND_ITALIAN,
   cost: 15,
   upgradeArmour: '',
@@ -638,7 +638,7 @@ const OPT_COMMAND_ITALIAN = {
   upgradeCommand: traits.COMMAND_ITALIAN,
   upgradeTraits: [traits.COMMAND_ITALIAN],
 };
-const OPT_COMMAND_ROMAN = {
+const OPT_COMMAND_ROMAN: Option = {
   name: traits.COMMAND_ROMAN,
   cost: 15,
   upgradeArmour: '',
@@ -647,7 +647,7 @@ const OPT_COMMAND_ROMAN = {
   upgradeCommand: traits.COMMAND_ROMAN,
   upgradeTraits: [traits.COMMAND_ROMAN],
 };
-const OPT_COMMAND_GREEK = {
+const OPT_COMMAND_GREEK: Option = {
   name: traits.COMMAND_GREEK,
   cost: 15,
   upgradeArmour: '',
@@ -656,7 +656,7 @@ const OPT_COMMAND_GREEK = {
   upgradeCommand: traits.COMMAND_GREEK,
   upgradeTraits: [traits.COMMAND_GREEK],
 };
-const OPT_COMMAND_GALLIC = {
+const OPT_COMMAND_GALLIC: Option = {
   name: traits.COMMAND_GALLIC,
   cost: 15,
   upgradeArmour: '',
@@ -665,7 +665,7 @@ const OPT_COMMAND_GALLIC = {
   upgradeCommand: traits.COMMAND_GALLIC,
   upgradeTraits: [traits.COMMAND_GALLIC],
 };
-const OPT_COMMAND_PUNIC = {
+const OPT_COMMAND_PUNIC: Option = {
   name: traits.COMMAND_PUNIC,
   cost: 15,
   upgradeArmour: '',
@@ -674,7 +674,7 @@ const OPT_COMMAND_PUNIC = {
   upgradeCommand: traits.COMMAND_PUNIC,
   upgradeTraits: [traits.COMMAND_PUNIC],
 };
-const OPT_JAV_TO_BOW = {
+const OPT_JAV_TO_BOW: Option = {
   name: 'change javelin to bow (free)',
   cost: 0,
   upgradeArmour: '',
@@ -682,7 +682,7 @@ const OPT_JAV_TO_BOW = {
   upgradeWeapon: BOW,
   upgradeTraits: [],
 };
-const OPT_TSUKAIBAN = {
+const OPT_TSUKAIBAN: Option = {
   name: 'Attach a tsukaiban',
   cost: 10,
   upgradeArmour: '',
@@ -690,7 +690,7 @@ const OPT_TSUKAIBAN = {
   upgradeWeapon: '',
   upgradeTraits: [traits.TSUKAIBAN],
 };
-const elephantOptions = [
+const elephantOptions: Option[] = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
@@ -708,7 +708,7 @@ const elephantOptions = [
     name: 'add howda -tower- for crew 8pts', cost: 4, upgradeArmour: '', upgradeShield: SHIELD_HOWDA, upgradeWeapon: '', upgradeTraits: [traits.HOWDA],
   },
 ];
-const indianElephantOptions = [
+const indianElephantOptions: Option[] = [
   {
     name: 'purchase thrusting spears (2 pts)', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
@@ -724,7 +724,7 @@ const indianElephantOptions = [
   },
 ];
 
-const mageOptions = [
+const mageOptions: Option[] = [
   {
     name: 'Upgrade to thrusting spear', cost: 1, upgradeArmour: '', upgradeShield: '', upgradeWeapon: THRUSTING, upgradeTraits: [],
   },
@@ -754,13 +754,13 @@ const mageOptions = [
   },
 ];
 
-const characterOptions = [
+const characterOptions: Option[] = [
   ...mageOptions,
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_DOWN_PARTIAL_ARMOUR,
 ];
 
-const samuraiCharacterOptions = [
+const samuraiCharacterOptions: Option[] = [
   OPT_DOWN_ENCLOSED_TO_NO_ARMOUR,
   OPT_DOWN_ENCLOSED_TO_PARTIAL_ARMOUR,
   OPT_DOWN_ENCLOSED_TO_FULL_ARMOUR,
@@ -795,7 +795,7 @@ const samuraiCharacterOptions = [
     name: 'Attach a standard-bearer', cost: 15, upgradeArmour: '', upgradeShield: '', upgradeWeapon: '', upgradeTraits: [traits.STANDARD],
   },
 ];
-const katanaCharacterOptions = [
+const katanaCharacterOptions: Option[] = [
   OPT_DOWN_FULL_TO_NO_ARMOUR,
   OPT_DOWN_FULL_TO_PARTIAL_ARMOUR,
   OPT_UP_FULL_TO_ENCLOSED_ARMOUR,
@@ -831,7 +831,7 @@ const katanaCharacterOptions = [
   },
 ];
 
-const SAVE_MODS = {
+const SAVE_MODS: LookupNumber = {
   [NO_ARMOUR]: 0,
   [NO_SHIELD]: 0,
   [BUCKLER]: 0,

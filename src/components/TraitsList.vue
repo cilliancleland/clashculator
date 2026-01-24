@@ -12,14 +12,14 @@
 
 
 <script>
-import traits from '../helpers/traits';
+import { traitDescriptions } from '../helpers/traits';
 
 export default {
   name: 'TraitsList',
   props: ['trait'],
   computed: {
     desc: function desc() {
-      return traits.descriptions[this.trait] || ['', '', ''];
+      return traitDescriptions[this.trait] || ['', '', ''];
     },
     traitConditions: function traitConditions() {
       return this.desc[0];

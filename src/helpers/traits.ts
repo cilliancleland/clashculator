@@ -1,4 +1,6 @@
-const traits = {};
+import { LookupString } from './types';
+
+const traits: LookupString = {};
 
 traits.IRON_WILL = 'iron Will';
 traits.SHIELD_OVERLAP = 'shield overlap';
@@ -154,7 +156,7 @@ traits.NOBLE_BORN = 'Noble born';
 traits.ZWEIHANDER = 'Zweihander';
 traits.GOLD_NOT_GLORY = 'Gold not glory';
 
-traits.descriptions = {
+export const traitDescriptions = {
   [traits.SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
   front rank is depicted as sparabara armed spearmen. While in close formation any figure not in the
   front rank may fire bows and they gain the unit gains the shield overlap rule. When in loose formation

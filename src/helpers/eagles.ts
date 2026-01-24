@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+import { LookupArmy } from './types';
+
 import {
   MILITES,
   CIVIS,
@@ -59,7 +60,7 @@ import {
 } from './characters';
 
 
-const eagles = {
+const eagles: LookupArmy = {
   'Late Republican Roman': {
     ...characters,
     slack: {
@@ -491,7 +492,7 @@ const eagles = {
     },
   },
   'Ancient British': {
-    ...charactersWithChariots(),
+    ...charactersWithChariots(''),
     chariotRider,
     javelinmen: {
       displayName: 'Javelin men',
@@ -1215,7 +1216,6 @@ const eagles = {
       ],
     },
   },
-
   Pontic: {
     ...characters,
     charioteer,

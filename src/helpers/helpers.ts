@@ -1,11 +1,15 @@
+import { Unit, LookupNumber } from './types';
+
 import {
   SAVE_MODS,
   HALF_BARDING,
-  OPT_BUCKLER,
+  BUCKLER,
 } from './constants';
 import traits from './traits';
 
-function shuffle(inArray) {
+const importedSaveMods: LookupNumber = SAVE_MODS;
+
+function shuffle(inArray:Array<Unit>):Array<Unit> {
   const array = inArray;
   let currentIndex = array.length;
   let temporaryValue;
@@ -23,34 +27,36 @@ function shuffle(inArray) {
   return array;
 }
 
-function calcSaveNumber(unit) {
+function calcSaveNumber(unit: Unit):number {
   let save = 7;
-  const shield = unit.upgradedShield ? unit.upgradedShield : unit.defaultShield;
-  const barding = unit.upgradedBarding ? unit.upgradedBarding : unit.defaultBarding;
-  const armour = unit.upgradedArmour ? unit.upgradedArmour : unit.defaultBody;
+  const shield: string = unit.upgradedShield ? unit.upgradedShield : unit.defaultShield;
+  const barding: string | undefined = unit.upgradedBarding
+    ? unit.upgradedBarding
+    : unit.defaultBarding;
+  const armour: string = unit.upgradedArmour ? unit.upgradedArmour : unit.defaultBody;
   if (armour) {
-    save -= SAVE_MODS[armour];
+    save -= importedSaveMods[armour as keyof LookupNumber];
   }
   if (shield) {
-    save -= SAVE_MODS[shield];
+    save -= importedSaveMods[shield as keyof LookupNumber];
   }
   if (barding) {
-    save -= SAVE_MODS[barding];
+    save -= importedSaveMods[barding as keyof LookupNumber];
   }
   return save;
 }
 
-function calcSaveSymbol(unit) {
+function calcSaveSymbol(unit: Unit): string {
   const shield = unit.upgradedShield ? unit.upgradedShield : unit.defaultShield;
   const barding = unit.upgradedBarding ? unit.upgradedBarding : unit.defaultBarding;
   let symbol = '+';
-  if (shield === OPT_BUCKLER || barding === HALF_BARDING) {
+  if (shield === BUCKLER || barding === HALF_BARDING) {
     symbol = '*';
   }
   return symbol;
 }
 
-function numDeploymentCounters(unit) {
+function numDeploymentCounters(unit: Unit): number {
   if (unit.availability === 'character') {
     return 0;
   }

@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+import { LookupUnit, LookupArmy } from './types';
+
 import {
   MILITES,
   CIVIS,
@@ -44,7 +45,7 @@ import {
   characters,
 } from './characters';
 
-const thraciansAndGetae = {
+const thraciansAndGetae: LookupUnit = {
   ...characters,
   wildmen: {
     displayName: 'Wildmen',
@@ -189,7 +190,7 @@ const thraciansAndGetae = {
     ],
   },
 };
-const macedonians = {
+const macedonians: LookupUnit = {
   ...characters,
   slingers: {
     displayName: 'Slingers',
@@ -393,7 +394,7 @@ const macedonians = {
     ],
   },
 };
-const galgamala = {
+const galgamala: LookupUnit = {
   eastern: {
     displayName: 'Eastern Phalangites',
     availability: CIVIS,
@@ -454,7 +455,7 @@ const galgamala = {
     ],
   },
 };
-const indus = {
+const indus: LookupUnit = {
   elephant: {
     dontCountForBreak: true,
     displayName: 'Indian War Elephant',
@@ -515,7 +516,7 @@ const indus = {
   },
 };
 
-const successors = {
+const successors: LookupUnit = {
   thureophoroi: {
     displayName: 'Thureophoroi',
     availability: RARE,
@@ -538,7 +539,7 @@ const successors = {
   },
 };
 
-const alex = {
+const alex: LookupArmy = {
   Macedonian: macedonians,
   'Alexander after Galgamala': {
     ...macedonians,

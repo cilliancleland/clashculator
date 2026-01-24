@@ -1,3 +1,5 @@
+import { LookupArmy } from './types';
+
 import {
   characters,
 } from './characters';
@@ -57,7 +59,7 @@ import {
 
 import traits from './traits';
 
-const arcane = {
+const arcane: LookupArmy = {
   'Dark Dwarfs': {
     warlord,
     lord,

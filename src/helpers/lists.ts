@@ -1,3 +1,4 @@
+import { LookupLists } from './types';
 import alex from './alex';
 import arcane from './arcane';
 import darkAge from './darkAge';
@@ -6,7 +7,7 @@ import katanas from './katanas';
 import punic from './punic';
 import condottieri from './condottieri';
 
-const allLists = {
+const allLists: LookupLists = {
   punic,
   eagles,
   katanas,

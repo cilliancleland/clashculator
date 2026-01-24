@@ -1,3 +1,5 @@
+import { LookupArmy } from './types';
+
 import {
   characters,
 } from './characters';
@@ -37,7 +39,7 @@ import {
 
 import traits from './traits';
 
-const darkAge = {
+const darkAge: LookupArmy = {
   Byzantine: {
     ...characters,
     cataphracts_k: {
