@@ -35,8 +35,9 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/helpers/lists.js"  ],
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/registerServiceWorker.js"
   ]
 }
