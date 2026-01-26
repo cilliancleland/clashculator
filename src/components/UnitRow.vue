@@ -112,9 +112,9 @@
   </div>
 </template>
 
-<script>
-/* xx-eslint-disable */
-// TODO - enable linting and fix the errors
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { SelectedUnit } from '../helpers/types';
 import {
   HIDE_OPTION,
   SAVE_MODS,
@@ -125,10 +125,9 @@ import {
   PARTIAL_IMPROVED,
   ENCLOSED_IMPROVED,
 } from '../helpers/constants';
-// import { calcSaveNumber, calcSaveSymbol } from '../helpers/helpers';
 import traits, { traitDescriptions } from '../helpers/traits';
 
-export default {
+export default Vue.extend({
   name: 'UnitRow',
   data: () => {
     return {
@@ -136,59 +135,60 @@ export default {
       traits,
     };
   },
-  props: [
-    'row',
-    'index',
-    'num-units',
-    'sorting',
-    'deployment-numbers',
-    'auto-number',
-    'updateRow',
-  ],
+  props: {
+    row: Object as PropType<SelectedUnit>,
+    index: Number,
+    numUnits: Number,
+    sorting: String,
+    deploymentNumbers: Boolean,
+    'auto-number': Boolean,
+    updateRow: Function,
+  },
   computed: {
-    rowCost() {
+    rowCost(): number {
       const { row } = this;
       const numFigs = row.size || 1;
       return Math.round((numFigs * (row.cost + this.optionsCostPerFigure)));
     },
-    displayWeapon() {
+    displayWeapon(): string {
       const weap = this.upgradedWeapon ? this.upgradedWeapon : this.row.defaultWeapon;
       return `${weap} ${WEAPON_INITIATIVES[weap]}`;
     },
-    showWeapon: function showWeapon() {
+    showWeapon: function showWeapon(): boolean {
       return this.row.defaultWeapon !== HIDE_OPTION;
     },
-    showBody: function showBody() {
+    showBody: function showBody(): boolean {
       return this.row.defaultBody !== HIDE_OPTION;
     },
-    showShield: function showShield() {
+    showShield: function showShield(): boolean {
       return this.row.defaultShield !== HIDE_OPTION;
     },
-    upgradedTraits: function upgradedTraits() {
-      const myTraits = [];
+    upgradedTraits: function upgradedTraits(): string[] {
+      const myTraits: string[] = [];
       this.row.selectedOptions.forEach((key) => {
-        myTraits.push(...this.row.options[key].upgradeTraits);
+        const upgradeTraits: string[] = this.row.options[key].upgradeTraits || [];
+        myTraits.push(...upgradeTraits);
       });
       return myTraits;
     },
-    reducingTraits: function upgradedTraits() {
-      const myTraits = [];
+    reducingTraits: function upgradedTraits(): string[] {
+      const myTraits: string[] = [];
       this.row.selectedOptions.forEach((key) => {
-        return this.row.options[key].removeTraits
-          && myTraits.push(...this.row.options[key].removeTraits);
+        const removeTraits: string[] = this.row.options[key].removeTraits || [];
+        myTraits.push(...removeTraits);
       });
       return myTraits;
     },
-    filteredTraits: function filteredTraits() {
-      let allTraits = [...this.row.traits, ...this.upgradedTraits];
-      allTraits = allTraits.reduce((acc, el) => {
+    filteredTraits: function filteredTraits(): string[] {
+      let allTraits: string[] = [...this.row.traits, ...this.upgradedTraits];
+      allTraits = allTraits.reduce((acc: string[], el: string) => {
         return this.reducingTraits.includes(el)
           ? acc
           : [...acc, el];
-      }, []);
+      }, [] as string[]);
       return allTraits;
     },
-    upgradedWeapon: function ungradedWeapon() {
+    upgradedWeapon: function ungradedWeapon(): string {
       let ret = '';
       this.row.selectedOptions.forEach((key) => {
         if (this.row.options[key].upgradeWeapon) {
@@ -197,7 +197,7 @@ export default {
       });
       return ret;
     },
-    upgradedArmour: function ungradedArmour() {
+    upgradedArmour: function ungradedArmour(): string {
       let ret = '';
       this.row.selectedOptions.forEach((key) => {
         if (this.row.options[key].upgradeArmour) {
@@ -206,7 +206,7 @@ export default {
       });
       return ret;
     },
-    upgradedShield: function upgradedShield() {
+    upgradedShield: function upgradedShield(): string {
       let ret = '';
       this.row.selectedOptions.forEach((key) => {
         if (this.row.options[key].upgradeShield) {
@@ -215,16 +215,16 @@ export default {
       });
       return ret;
     },
-    upgradedBarding: function upgradedBarding() {
+    upgradedBarding: function upgradedBarding(): string {
       let ret = '';
       this.row.selectedOptions.forEach((key) => {
         if (this.row.options[key].upgradeBarding) {
-          ret = this.row.options[key].upgradeBarding;
+          ret = this.row.options[key].upgradeBarding || '';
         }
       });
       return ret;
     },
-    excludedOptions: function excludedOptions() {
+    excludedOptions: function excludedOptions(): number[] {
       // loop through selected options
       //   for each selected option, record if it mods armour,shield or weapon
       let excludeWeaponOptions = false;
@@ -232,7 +232,7 @@ export default {
       let excludeShieldOptions = false;
       let excludeBardingOptions = false;
       let excludeCommandOptions = false;
-      const exclusions = [];
+      const exclusions: number[] = [];
       let isMounted = false;
       let isHeavyShield = false;
       this.row.selectedOptions.forEach((key) => {
@@ -278,20 +278,20 @@ export default {
       });
       return exclusions;
     },
-    availableOptions: function availableOptions() {
+    availableOptions: function availableOptions(): number[] {
       return this.row.options.reduce((arr, val, index) => {
         if (this.excludedOptions.indexOf(index) < 0) {
           arr.push(index);
         }
         return arr;
-      }, []);
+      }, [] as number[]);
     },
-    optionsCostPerFigure: function optionsCostPerFigure() {
+    optionsCostPerFigure: function optionsCostPerFigure(): number {
       return this.row.selectedOptions.reduce((total, selectedOption) => {
         return (total + this.row.options[selectedOption].cost);
       }, 0);
     },
-    calculateSave: function calculateSave() {
+    calculateSave: function calculateSave(): string {
       if (this.row.fixedSave) {
         return this.row.fixedSave;
       }
@@ -310,7 +310,7 @@ export default {
         save -= SAVE_MODS[barding];
       }
       if (
-        shield === OPT_BUCKLER
+        shield === OPT_BUCKLER.name
         || barding === HALF_BARDING
         || armour === FULL_IMPROVED
         || armour === PARTIAL_IMPROVED
@@ -329,48 +329,47 @@ export default {
         if (this.row.availability === 'character' || this.row.noDeployToken) {
           tokens = 0;
         } else {
-          const save = a.substr(0, 1);
-          const mounted = this.row.traits.indexOf(this.traits.MOUNTED) > -1;
+          const save: number = parseInt(a.substr(0, 1), 10);
+          const mounted: boolean = this.row.traits.indexOf(this.traits.MOUNTED) > -1;
           if ((save > 4 && mounted) || save > 5) {
             tokens = 2;
           } else {
             tokens = 1;
           }
         }
-        // this.row.numTokens = tokens; // fix mutation
+        // this.row.numTokens = tokens;
         this.updateRow(this.index, 'numTokens', tokens);
       },
     },
   },
   methods: {
-    traitTitle: function traitTitle(trait) {
+    traitTitle: function traitTitle(trait: string): string {
       const desc = traitDescriptions[trait] || ['', ''];
       return `${desc[0]}\n${desc[1]}`;
     },
-    removeOption: function removeOption(optionIndex) {
-      // this.row.selectedOptions.splice(
-      // this.row.selectedOptions.indexOf(optionIndex), 1); // fix mutation
-      const newSelectedOptions = this.row.selectedOptions.filter(
-        (val) => { return val !== optionIndex; },
+    removeOption: function removeOption(optionIndex: number): void {
+      console.log('removing option', optionIndex);
+      const newSelectedOptions: number[] = this.row.selectedOptions.filter(
+        (val: number): boolean => { return val !== optionIndex; },
       );
       this.updateRow(this.index, 'selectedOptions', newSelectedOptions);
     },
-    addOption: function addOption() {
+    addOption: function addOption(): void {
       const optionKey = this.availableOptions[this.optionToAdd];
       // this.row.selectedOptions.push(optionKey); // fix mutation
       this.updateRow(this.index, 'selectedOptions', this.row.selectedOptions.concat([optionKey]));
       this.optionToAdd = -1;
     },
-    addFigure: function addFigure() {
+    addFigure: function addFigure(): void {
       // this.row.size = Math.min(this.row.size + 1, 15); // fix mutation
       this.updateRow(this.index, 'size', Math.min(this.row.size + 1, 15));
     },
-    removeFigure: function removeFigure() {
+    removeFigure: function removeFigure(): void {
       // this.row.size = Math.max(this.row.size - 1, 0); // fix mutation
       this.updateRow(this.index, 'size', Math.max(this.row.size - 1, 0));
     },
   },
-};
+});
 </script>
 <style scoped lang="scss">
   .unit-trait {

@@ -45,17 +45,31 @@ export interface Troops {
   fixedSave?: string,
   countsDouble?: boolean,
   improvedArmour?: boolean,
+  dontCountForBreak?: boolean,
+  fixedFigures?: number,
 }
 
 export interface Character extends Troops {
   isCharacter: boolean,
-  dontCountForBreak: boolean,
-  fixedFigures: number,
   commandRange: number,
   commandPoints: number,
 }
 
 export type Unit = Troops | Character;
+
+export type SelectedUnit = Unit & {
+  id: number,
+  size: number,
+  numTokens: number,
+  upgradedArmour: string,
+  upgradedShield: string,
+  upgradedWeapon: string,
+  upgradedBarding: string,
+  type: number,
+  excludedOptions: Array<number>,
+  selectedOptions: Array< number>,
+  unitSize: Function,
+};
 
 export interface LookupCharacter {
   [key: string]: Character
@@ -71,4 +85,16 @@ export interface LookupArmy {
 
 export interface LookupLists {
   [key: string]: LookupArmy
+}
+
+export interface ArmyDetail {
+  size: number,
+  selectedOptions: Array<number>,
+  type: number,
+}
+export interface SavedArmy {
+  sp: string,
+  sa: string,
+  an: string,
+  ac: Array<ArmyDetail>,
 }

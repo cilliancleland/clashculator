@@ -32,12 +32,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TitleRow',
-  props: [
-    'sorting',
-  ],
+  props: {
+    sorting: String,
+  },
 };
 </script>
 <style scoped lang="scss">

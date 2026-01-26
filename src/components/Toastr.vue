@@ -6,20 +6,23 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'Toastr',
   props: {
     message: String,
   },
   computed: {
-    displayClasses() {
-      return this.message === ''
+    displayClasses():string {
+      console.log(this.message);
+      return (this.message === ''
         ? 'toastr'
-        : 'toastr toastr-visible';
+        : 'toastr toastr-visible');
     },
   },
-};
+});
 </script>
 <style scoped lang="scss">
     .toastr{

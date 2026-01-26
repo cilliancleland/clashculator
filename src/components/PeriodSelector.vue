@@ -12,20 +12,21 @@
 </template>
 
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { PERIODS } from '../helpers/constants';
 
-export default {
+export default Vue.extend({
   name: 'PeriodSelector',
-  props: [
-    'selectedPeriod',
-    'period',
-    'selectPeriod',
-  ],
+  props: {
+    selectedPeriod: String,
+    period: String,
+    selectPeriod: Function,
+  },
   data: function data() {
     return {
       periodLabels: PERIODS,
     };
   },
-};
+});
 </script>

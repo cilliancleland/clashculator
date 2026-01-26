@@ -78,9 +78,9 @@ const NATURAL_WEAPONS = 'Natural Weapons';
 // other
 const HIDE_OPTION = 'hideoption';
 
-const WEAPON_INITIATIVES = {
-  [TEETH]: (0),
-  [NATURAL_WEAPONS]: (0),
+const WEAPON_INITIATIVES: LookupString = {
+  [TEETH]: '(0)',
+  [NATURAL_WEAPONS]: '(0)',
   [JAVELIN]: '',
   [SLING]: '',
   [BOW]: '',

@@ -42,23 +42,25 @@
 
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'TopButtons',
-  props: [
-    'armyChanged',
-    'showFaq',
-    'showOptions',
-    'reset',
-    'saveLocally',
-    'deleteLocally',
-  ],
+  props: {
+    armyChanged: Function,
+    showFaq: Function,
+    showOptions: Function,
+    reset: Function,
+    saveLocally: Function,
+    deleteLocally: Function,
+  },
   methods: {
-    print() {
+    print(): void {
       window.print();
     },
   },
-};
+});
 </script>
 <style scoped lang="scss">
 

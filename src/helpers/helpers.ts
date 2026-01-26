@@ -9,7 +9,7 @@ import traits from './traits';
 
 const importedSaveMods: LookupNumber = SAVE_MODS;
 
-function shuffle(inArray:Array<Unit>):Array<Unit> {
+function shuffle(inArray:Array<number>):Array<number> {
   const array = inArray;
   let currentIndex = array.length;
   let temporaryValue;

@@ -59,14 +59,16 @@
 </template>
 
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'OptionsScreen',
-  props: [
-    'sorting',
-    'autoNumber',
-    'defaultNumber',
-    'showDeployTable',
-  ],
-};
+  props: {
+    sorting: String,
+    autoNumber: Boolean,
+    defaultNumber: Number,
+    showDeployTable: Boolean,
+  },
+});
 </script>

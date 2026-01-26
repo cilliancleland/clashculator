@@ -11,27 +11,30 @@
 </template>
 
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { traitDescriptions } from '../helpers/traits';
 
-export default {
+export default Vue.extend({
   name: 'TraitsList',
-  props: ['trait'],
+  props: {
+    trait: String,
+  },
   computed: {
-    desc: function desc() {
+    desc: function desc(): [string, string, string] {
       return traitDescriptions[this.trait] || ['', '', ''];
     },
-    traitConditions: function traitConditions() {
+    traitConditions: function traitConditions(): string {
       return this.desc[0];
     },
-    traitText: function traitText() {
+    traitText: function traitText(): string {
       return this.desc[1];
     },
-    traitPage: function traitText() {
+    traitPage: function traitPage(): string {
       return this.desc[2];
     },
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

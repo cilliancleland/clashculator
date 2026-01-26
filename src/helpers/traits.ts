@@ -156,15 +156,15 @@ traits.NOBLE_BORN = 'Noble born';
 traits.ZWEIHANDER = 'Zweihander';
 traits.GOLD_NOT_GLORY = 'Gold not glory';
 
-export const traitDescriptions = {
+export const traitDescriptions: { [key: string]: [string, string, string] } = {
   [traits.SPARABARA]: ['affects movement, being attacked', `When this unit is in close formation the unit is treated as if they have heavy shields. The
   front rank is depicted as sparabara armed spearmen. While in close formation any figure not in the
   front rank may fire bows and they gain the unit gains the shield overlap rule. When in loose formation
   there are not a sufficient number of shields to afford protection to the unit and they are treated as
   having armor 7. All figures may fire bows when in lose formation. Their formation determines their
-  armor for the purpose of fatigue.`],
-  [traits.EXTRA_BOW]: ['affects shooting', 'can switch to bow for an action'],
-  [traits.EXTRA_TWO]: ['affects melee', 'can switch to two handed weapon for an action'],
+  armor for the purpose of fatigue.`, ''],
+  [traits.EXTRA_BOW]: ['affects shooting', 'can switch to bow for an action', ''],
+  [traits.EXTRA_TWO]: ['affects melee', 'can switch to two handed weapon for an action', ''],
   [traits.IRON_WILL]: ['affects fatigue effects', 'do not remove if fatigue is twice model count', 'p.73'],
   [traits.SHIELD_OVERLAP]: ['requires heavy shield and close order, affects enemy to hit', 'melee or shooting attacks are -1 to hit', 'p.70'],
   [traits.SKIRMISH_SPECIALIST]: ['requires loose order, affects save, grit, reaction', '+1 to save from missles, free reaction at 4", worse morale in melee unless fighting skirmishers', 'p.70'],

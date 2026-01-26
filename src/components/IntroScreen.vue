@@ -66,26 +66,28 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { LookupLists } from '../helpers/types';
 import PeriodSelector from './PeriodSelector.vue';
 
-export default {
+export default Vue.extend({
   name: 'IntroScreen',
   components: {
     'period-selector': PeriodSelector,
   },
-  props: [
-    'selectedNation',
-    'selectedPeriod',
-    'periods',
-    'lists',
-    'localSaves',
-    'savedName',
-    'loadArmy',
-    'selectNation',
-    'selectPeriod',
-  ],
-};
+  props: {
+    selectedNation: String,
+    selectedPeriod: String,
+    periods: Array as PropType<string[]>,
+    lists: Object as PropType<LookupLists>,
+    localSaves: Array,
+    savedName: String,
+    loadArmy: Function,
+    selectNation: Function,
+    selectPeriod: Function,
+  },
+});
 </script>
 <style scoped lang="scss">
     .add-unit {

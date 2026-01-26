@@ -34,26 +34,53 @@
   </div>
 </template>
 
-<script>
-const warPartyNations = {
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { LookupNumber, SelectedUnit } from '../helpers/types';
+
+const warPartyNations: LookupNumber = {
   'Early Imperial Roman': 1,
   'Late Republican Roman': 1,
 };
-export default {
+export default Vue.extend({
   name: 'HeaderSection',
-  props: [
-    'armyContents',
-    'selectedNation',
-    'armyName',
-    'lists',
-    'unitToAdd',
-    'armyChanged',
-    'addUnit',
-    'updateArmyName',
-  ],
+  props: {
+    armyContents: {
+      type: Array as PropType<SelectedUnit[]>,
+      required: true,
+    },
+    selectedNation: {
+      type: String,
+      required: true,
+    },
+    armyName: {
+      type: String,
+      required: true,
+    },
+    lists: {
+      type: Object,
+      required: true,
+    },
+    unitToAdd: {
+      type: String,
+      required: true,
+    },
+    armyChanged: {
+      type: Function,
+      required: false,
+    },
+    addUnit: {
+      type: Function,
+      required: false,
+    },
+    updateArmyName: {
+      type: Function,
+      required: false,
+    },
+  },
   computed: {
-    totalCost: function totalCost() {
-      return this.armyContents.reduce((total, unit) => {
+    totalCost: function totalCost(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
         const optionsCost = unit.selectedOptions.reduce((unitTotal, selectedOption) => {
           return unitTotal + unit.options[selectedOption].cost;
         }, 0);
@@ -63,58 +90,42 @@ export default {
         return total + thisUnitCost;
       }, 0);
     },
-    totalFiguresCount: function totalFiguresCount() {
-      return this.armyContents.reduce((total, unit) => {
+    totalFiguresCount: function totalFiguresCount(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit): number => {
         return total + (unit.unitSize());
       }, 0);
     },
-    figureCountForBreak: function figureCountForBreak() {
-      return this.armyContents.reduce((total, unit) => {
+    figureCountForBreak: function figureCountForBreak(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit): number => {
         return total + (unit.dontCountForBreak ? 0 : unit.unitSize());
       }, 0);
     },
-    breakPointThreshold: function breakPointThreshold() {
+    breakPointThreshold: function breakPointThreshold(): number {
       return Math.floor(this.figureCountForBreak / 6);
     },
-    warbandType: function warbandType() {
-      if (warPartyNations[this.selectedNation]) {
-        return this.isWarParty
-          ? 'War-party'
-          : 'Ad Hoc';
-      }
-      return this.isMuster ? 'Muster' : 'Ad Hoc';
-    },
-    isMuster: function isMuster() {
-      return (this.civisCount >= (this.militesCount + this.rareCount))
-        && (this.militesCount >= this.rareCount);
-    },
-    isWarParty: function isWarParty() {
-      return (this.militesCount >= this.civisCount)
-        && (this.militesCount >= (2 * this.rareCount));
-    },
-    charactersCount: function charactersCount() {
-      return this.armyContents.reduce((total, unit) => {
+    charactersCount: function charactersCount(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
         return unit.availability === 'character'
           ? total + (unit.unitSize())
           : total;
       }, 0);
     },
-    civisCount: function civisCount() {
-      return this.armyContents.reduce((total, unit) => {
+    civisCount: function civisCount(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
         return unit.availability === 'civis'
           ? total + (unit.unitSize())
           : total;
       }, 0);
     },
-    militesCount: function militesCount() {
-      return this.armyContents.reduce((total, unit) => {
+    militesCount: function militesCount(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
         return unit.availability === 'milites'
           ? total + (unit.unitSize())
           : total;
       }, 0);
     },
-    rareCount: function rareCount() {
-      return this.armyContents.reduce((total, unit) => {
+    rareCount: function rareCount(): number {
+      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
         const size = unit.countsDouble
           ? unit.unitSize() * 2
           : unit.unitSize();
@@ -123,8 +134,24 @@ export default {
           : total;
       }, 0);
     },
+    warbandType: function warbandType(): string {
+      if (warPartyNations[this.selectedNation]) {
+        return this.isWarParty
+          ? 'War-party'
+          : 'Ad Hoc';
+      }
+      return this.isMuster ? 'Muster' : 'Ad Hoc';
+    },
+    isMuster: function isMuster(): boolean {
+      return (this.civisCount >= (this.militesCount + this.rareCount))
+        && (this.militesCount >= this.rareCount);
+    },
+    isWarParty: function isWarParty(): boolean {
+      return (this.militesCount >= this.civisCount)
+        && (this.militesCount >= (2 * this.rareCount));
+    },
   },
-};
+});
 </script>
 <style scoped lang="scss">
 

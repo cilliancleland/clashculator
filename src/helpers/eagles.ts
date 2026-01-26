@@ -252,7 +252,6 @@ const eagles: LookupArmy = {
       options: [
       ],
     },
-
     elephant: {
       dontCountForBreak: true,
       displayName: 'African Forest Elephant',
