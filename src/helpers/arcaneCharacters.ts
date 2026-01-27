@@ -462,4 +462,6 @@ export const orcShaman: Unit = {
   defaultShield: NO_SHIELD,
   defaultBody: NO_ARMOUR,
   traits: ['wounds(2)', traits.IRON_WILL, traits.INDEPENDENT, traits.ARCANIST_1],
+  commandRange: 0,
+  commandPoints: 0,
 };

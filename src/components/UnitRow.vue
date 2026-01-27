@@ -16,8 +16,8 @@
       <div class="unit-row-stats">
         <div class="deployment-numbers" v-if="autoNumber==true">
           <div class="deployment-number"
-                v-for="(num,index) in deploymentNumbers[index]"
-                v-bind:key="index">{{num + 1}}<span v-if="index > 0">s</span>
+                v-for="(num,itmIndex) in deploymentNumbers[index]"
+                v-bind:key="itmIndex">{{num + 1}}<span v-if="itmIndex > 0">s</span>
           </div>
         </div>
         <div class="unit-cell unit-cell-wide">
@@ -56,8 +56,8 @@
             <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
           </span>
 
-          <span v-if="row.commandPoints">
-            <span class="unit-trait">{{row.commandPoints}} CP @ {{row.commandRange}}&quot;</span>
+          <span v-if="row.isCharacter" class="unit-trait">
+            {{row.commandPoints}} CP @ {{row.commandRange}}&quot;
           </span>
         </div>
         <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
@@ -73,7 +73,7 @@
             <i class="fa fa-minus"></i>
           </button>
           {{row.size}} figures
-          <span v-if="row.traits.indexOf('feral') > -1">
+          <span v-if="row.traits.includes('feral')">
             (+1)
           </span>
           <button v-on:click="addFigure"
@@ -101,7 +101,7 @@
           {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add|Attach a/g, '')}}
       </button>
       <select v-if="row.options.length && row.options.length > excludedOptions.length"
-            v-model="optionToAdd" v-on:change="addOption(index)" class="unit-option">
+            v-model="optionToAdd" v-on:change="addOption()" class="unit-option">
         <option value="-1">Add an option</option>
         <option v-for="(value, index) in availableOptions"
                   :value="index" v-bind:key="index">
@@ -136,13 +136,16 @@ export default Vue.extend({
     };
   },
   props: {
-    row: Object as PropType<SelectedUnit>,
-    index: Number,
-    numUnits: Number,
-    sorting: String,
-    deploymentNumbers: Boolean,
-    'auto-number': Boolean,
-    updateRow: Function,
+    row: { type: Object as PropType<SelectedUnit>, required: true },
+    index: { type: Number, required: true },
+    numUnits: { type: Number, required: true },
+    sorting: { type: String, required: true },
+    deploymentNumbers: { type: Array as PropType<number[][]>, required: false },
+    autoNumber: { type: Boolean, required: true },
+    updateRow: {
+      type: Function,
+      required: true,
+    },
   },
   computed: {
     rowCost(): number {
@@ -171,7 +174,7 @@ export default Vue.extend({
       });
       return myTraits;
     },
-    reducingTraits: function upgradedTraits(): string[] {
+    reducingTraits: function reducingTraits(): string[] {
       const myTraits: string[] = [];
       this.row.selectedOptions.forEach((key) => {
         const removeTraits: string[] = this.row.options[key].removeTraits || [];
@@ -271,7 +274,7 @@ export default Vue.extend({
           || (isHeavyShield && option.unlessHeavyShield)
           || (isMounted && option.unlessMounted)
           || (!isMounted && option.requiresMounted)
-          || (this.row.selectedOptions.indexOf(idx) > -1)
+          || (this.row.selectedOptions.includes(idx))
         ) {
           exclusions.push(idx);
         }
@@ -280,7 +283,7 @@ export default Vue.extend({
     },
     availableOptions: function availableOptions(): number[] {
       return this.row.options.reduce((arr, val, index) => {
-        if (this.excludedOptions.indexOf(index) < 0) {
+        if (!this.excludedOptions.includes(index)) {
           arr.push(index);
         }
         return arr;
@@ -324,13 +327,13 @@ export default Vue.extend({
   watch: {
     calculateSave: { // set the number of deployment tokens
       immediate: true,
-      handler(a) {
+      handler(a: string) {
         let tokens = 0;
         if (this.row.availability === 'character' || this.row.noDeployToken) {
           tokens = 0;
         } else {
           const save: number = parseInt(a.substr(0, 1), 10);
-          const mounted: boolean = this.row.traits.indexOf(this.traits.MOUNTED) > -1;
+          const mounted: boolean = this.row.traits.includes(this.traits.MOUNTED);
           if ((save > 4 && mounted) || save > 5) {
             tokens = 2;
           } else {

@@ -25,7 +25,7 @@ export interface LookupOption {
   [key: string]: Option
 }
 
-export interface Troops {
+export interface TroopBase {
   displayName: string,
   availability: string,
   combat: number,
@@ -48,9 +48,12 @@ export interface Troops {
   dontCountForBreak?: boolean,
   fixedFigures?: number,
 }
+export interface Troops extends TroopBase {
+  isCharacter?: false,
+}
 
-export interface Character extends Troops {
-  isCharacter: boolean,
+export interface Character extends TroopBase {
+  isCharacter: true,
   commandRange: number,
   commandPoints: number,
 }

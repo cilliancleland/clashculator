@@ -26,7 +26,7 @@
         ></options-screen>
         <div v-if="showScreen=='main'">
           <top-buttons
-            v-bind:army-changed="armyChanged"
+            v-bind:army-unchanged="armyUnchanged"
             v-on:show-faq="showFaq"
             v-on:show-options="showOptions"
             v-on:reset="reset"
@@ -120,14 +120,33 @@ export default Vue.extend({
     'options-screen': OptionsScreen,
   },
 
-  data: function data() {
+  data: function data(): {
+  title: string;
+  allLists: LookupLists;
+  selectedPeriod: string;
+  selectedNation: string;
+  armyContents: SelectedUnit[];
+  onDiskArmy: ArmyDetail[];
+  savedArmyName: string;
+  unitToAdd: string;
+  armyName: string;
+  localSaves: string[];
+  savedName: string;
+  toastrMessage: string;
+  toastrTimeout: number;
+  showScreen: string;
+  sorting: string;
+  autoNumber: boolean;
+  defaultNumber: number;
+  showDeployTable: boolean;
+  } {
     return {
       title: 'Clashculator',
       allLists: allLists as LookupLists,
       selectedPeriod: 'punic',
       selectedNation: '',
       armyContents: [] as SelectedUnit[],
-      onDiskArmy: '',
+      onDiskArmy: [] as ArmyDetail[],
       savedArmyName: '',
       unitToAdd: '',
       armyName: 'Unknown soldiers',
@@ -195,7 +214,7 @@ export default Vue.extend({
         ret += Object.keys(this.periodLists[this.selectedNation]).indexOf(type).toString(32);
         let optionsBin = '1';
         for (let i = 0; i < 14; i += 1) {
-          if (unit.selectedOptions.indexOf(i) > -1) {
+          if (unit.selectedOptions.includes(i)) {
             optionsBin += '1';
           } else {
             optionsBin += '0';
@@ -207,7 +226,7 @@ export default Vue.extend({
       ad += `_${this.armyName}`;
       return ad;
     },
-    armyChanged: function armyChanged(): boolean {
+    armyUnchanged: function armyUnchanged(): boolean {
       return (JSON.stringify(this.armyDetails) === JSON.stringify(this.onDiskArmy))
               && (this.armyName === this.savedArmyName);
     },
@@ -233,7 +252,7 @@ export default Vue.extend({
       // legacy from before we had multi armies
       objStr = objStr.split('&')[0].substr(3);
       this.hydrateCompactArmy(objStr, 'punic');
-    } else if (Object.keys(PERIODS).indexOf(army) > -1) {
+    } else if (Object.keys(PERIODS).includes(army)) {
       objStr = objStr.split('&')[0].substr(army.length + 2);
       this.hydrateCompactArmy(objStr, army);
     }
@@ -278,7 +297,7 @@ export default Vue.extend({
         const type = parseInt(nums.substr(1, 1), 32);
         const opts = parseInt(nums.substr(2, 3), 32);
         const optsBin = opts.toString(2);
-        const optsArr = [];
+        const optsArr: number[] = [];
         const unitIndex = Object.keys(this.periodLists[this.selectedNation])[type];
         const newUnit = this.addUnit(parseInt(unitIndex, 10));
         newUnit.size = size;
@@ -302,8 +321,8 @@ export default Vue.extend({
       const armies = JSON.parse(localStorage.getItem('armies') || '{}');
       const confirmMessage = 'An army by this name already exists locally.\n\nClick ok to overwrite!';
       // eslint-disable-next-line
-      if (((armyNames.indexOf(this.armyName) > -1 && confirm(confirmMessage)) || armyNames.indexOf(this.armyName) < 0)) {
-        if (armyNames.indexOf(this.armyName) < 0) {
+      if (((armyNames.includes(this.armyName) && confirm(confirmMessage)) || !armyNames.includes(this.armyName))) {
+        if (!armyNames.includes(this.armyName)) {
           armyNames.push(this.armyName);
         }
         armies[this.armyName] = {
@@ -339,7 +358,7 @@ export default Vue.extend({
     addUnit: function addUnit(unitToAdd: number): SelectedUnit {
       // eslint-disable-next-line no-unused-vars
       function unitSize(this: SelectedUnit): number {
-        return this.traits.indexOf('feral') > -1
+        return this.traits.includes('feral')
           ? this.size + 1
           : this.size;
       }
@@ -388,10 +407,10 @@ export default Vue.extend({
       this.selectedNation = '';
       this.armyContents = [];
       this.armyName = 'Unknown soldiers';
-      this.onDiskArmy = '';
+      this.onDiskArmy = [];
       this.savedArmyName = '';
       this.localSaves = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      window.history.pushState('', '', `${window.location.protocol}\\\\${window.location.host}${window.location.pathname}`);
+      window.history.pushState('', '', `${window.location.protocol}//${window.location.host}${window.location.pathname}`);
     },
     reposUp: function reposUp(idx: number): void {
       const tmp = this.armyContents[idx];
@@ -411,7 +430,7 @@ export default Vue.extend({
         return orderA - orderB;
       });
     },
-    updateRow: function updateRow(index: number, field: string, value: any): void {
+    updateRow: function updateRow(index: number, field: string, value: unknown): void {
       const newRow: SelectedUnit = { ...this.armyContents[index] };
       Vue.set(newRow, field, value);
       Vue.set(this.armyContents, index, newRow);

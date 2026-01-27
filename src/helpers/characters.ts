@@ -36,7 +36,7 @@ import {
 } from './constants';
 import traits from './traits';
 
-const soothsayer = {
+const soothsayer: Character = {
   dontCountForBreak: true,
   isCharacter: true,
   fixedFigures: 0,
@@ -129,7 +129,7 @@ const characters: LookupCharacter = {
   },
   soothsayer,
 };
-const sake = {
+const sake: Character = {
   isCharacter: true,
   fixedFigures: 0,
   displayName: 'Sake Rations',

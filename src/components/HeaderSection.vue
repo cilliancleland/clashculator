@@ -11,7 +11,8 @@
       <label >
         Army name
         <input v-bind:value="armyName"
-          v-on:keyup="$emit('update-army-name', $event.target.value)" class="army-name" />
+          v-on:keyup="onArmyNameChange"
+          class="army-name" />
       </label>
     </div>
     </div>
@@ -24,7 +25,7 @@
     </div>
     <div class="header-right">
         <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
-          v-on:change="$emit('add-unit', $event.target.value)">
+          v-on:change="onAddUnit">
           <option value="">Add a unit</option>
           <option v-for="(value, name) in lists[selectedNation]" :value="name" v-bind:key="name">
             {{ value.displayName }}
@@ -64,10 +65,6 @@ export default Vue.extend({
     unitToAdd: {
       type: String,
       required: true,
-    },
-    armyChanged: {
-      type: Function,
-      required: false,
     },
     addUnit: {
       type: Function,
@@ -149,6 +146,14 @@ export default Vue.extend({
     isWarParty: function isWarParty(): boolean {
       return (this.militesCount >= this.civisCount)
         && (this.militesCount >= (2 * this.rareCount));
+    },
+  },
+  methods: {
+    onArmyNameChange: function onArmyNameChange(event: Event): void {
+      this.$emit('update-army-name', (event.target as HTMLInputElement).value);
+    },
+    onAddUnit: function onAddUnit(ev: Event): void {
+      this.$emit('add-unit', (ev.target as HTMLSelectElement).value);
     },
   },
 });

@@ -530,7 +530,7 @@ Vue.component('header-section',{
     'armyName',
     'lists',
     'unitToAdd',
-    'armyChanged',
+    'armyUnchanged',
     'reset',
     'saveLocally',
     'deleteLocally',
@@ -551,15 +551,15 @@ Vue.component('header-section',{
       <button 
         title="Save locally" 
         v-on:click="$emit('save-locally')" 
-        :disabled="armyChanged" 
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyChanged }">
+        :disabled="armyUnchanged" 
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyUnchanged }">
         <i class="fa fa-floppy-o top-button-icon"></i> Save
       </button>
       <button 
         title="Delete army from device" 
         v-on:click="$emit('delete-locally')" 
-        :disabled="!armyChanged" 
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
+        :disabled="!armyUnchanged" 
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyUnchanged }">
         <i class="fa fa-trash top-button-icon"></i> Delete
       </button>
     </h2>
@@ -631,7 +631,7 @@ Vue.component('header-section',{
 new Vue({
   el: '#app',
   computed:{
-    armyChanged: function(){
+    armyUnchanged: function(){
       return (JSON.stringify(this.armyContents) == JSON.stringify(this.onDiskArmy)) && (this.armyName == this.savedArmyName);      
     },
     sharable: function(){
@@ -1403,7 +1403,7 @@ new Vue({
       ></intro-screen>
       <div v-if="selectedNation" >
         <header-section
-          v-bind:army-changed="armyChanged"
+          v-bind:army-changed="armyUnchanged"
           v-bind:army-contents="armyContents"
           v-bind:selected-nation="selectedNation"
           v-bind:army-name="armyName"

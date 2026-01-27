@@ -21,15 +21,15 @@
       <button
         title="Save locally"
         v-on:click="$emit('save-locally')"
-        :disabled="armyChanged"
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyChanged }">
+        :disabled="armyUnchanged"
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': armyUnchanged }">
         <i class="fa fa-floppy-o top-button-icon"></i> Save
       </button>
       <button
         title="Delete army from device"
         v-on:click="$emit('delete-locally')"
-        :disabled="!armyChanged"
-        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyChanged }">
+        :disabled="!armyUnchanged"
+        v-bind:class="{ 'top-button': 1, 'top-button-disabled': !armyUnchanged }">
         <i class="fa fa-trash top-button-icon"></i> Delete
       </button>
       <button
@@ -48,7 +48,10 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'TopButtons',
   props: {
-    armyChanged: Function,
+    armyUnchanged: {
+      type: Boolean,
+      required: true,
+    },
     showFaq: Function,
     showOptions: Function,
     reset: Function,
