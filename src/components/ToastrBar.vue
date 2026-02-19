@@ -10,13 +10,12 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Toastr',
+  name: 'ToastrBar',
   props: {
     message: String,
   },
   computed: {
     displayClasses():string {
-      console.log(this.message);
       return (this.message === ''
         ? 'toastr'
         : 'toastr toastr-visible');

@@ -6,7 +6,7 @@
                 :value="period"
                 :id="period"
                 :checked="period==selectedPeriod"
-                v-on:change="$emit('select-period', $event.target.value)" />
+                v-on:change="handleChange" />
         {{periodLabels[period]}}
       </label>
 </template>
@@ -27,6 +27,11 @@ export default Vue.extend({
     return {
       periodLabels: PERIODS,
     };
+  },
+  methods: {
+    handleChange(event: Event) {
+      this.$emit('select-period', (event.target as HTMLInputElement).value);
+    },
   },
 });
 </script>

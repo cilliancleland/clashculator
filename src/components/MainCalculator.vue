@@ -96,7 +96,7 @@ import HeaderSection from './HeaderSection.vue';
 import IntroScreen from './IntroScreen.vue';
 import SharableLink from './SharableLink.vue';
 import TitleRow from './TitleRow.vue';
-import Toastr from './Toastr.vue';
+import Toastr from './ToastrBar.vue';
 import UnitRow from './UnitRow.vue';
 import TraitsList from './TraitsList.vue';
 import DeploymentTable from './DeploymentTable.vue';
@@ -105,7 +105,7 @@ import OptionsScreen from './OptionsScreen.vue';
 import { shuffle } from '../helpers/helpers';
 
 export default Vue.extend({
-  name: 'Calculator',
+  name: 'MainCalculator',
   components: {
     'top-buttons': TopButtons,
     'header-section': HeaderSection,

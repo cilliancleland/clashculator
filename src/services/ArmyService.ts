@@ -57,7 +57,7 @@ class ArmyService {
 
   get deploymentNumbers(): number[][] {
     // Example: implement your deployment number logic here
-    return this.armyContents.map(() => []);
+    return this.armyContents.map(() => { return []; });
   }
 
   get mostTraits(): string[] {

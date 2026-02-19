@@ -1,7 +1,7 @@
 <template>
-    <tr >
-      <th>{{trait}}<span>({{traitPage}})</span></th>
-      <td>
+    <tr class="trait-row">
+      <th class="trait-head">{{trait}}<span>({{traitPage}})</span></th>
+      <td class="trait-desc">
         <span class="conditions">
           {{traitConditions}}
         </span>

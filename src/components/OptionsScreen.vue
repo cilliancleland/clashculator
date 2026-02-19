@@ -6,18 +6,18 @@
                 <legend>Sorting</legend>
                 <div>
                     <label>
-                        <input type="radio" name="sorting" value="manual"
+                        <input type="radio" name="sorting" value="manual" id="sorting-manual"
                             v-bind:checked="sorting=='manual'"
-                            v-on:change="$emit('set-option', 'sorting', 'manual')"
+                            v-on:change="doEmit('sorting', 'manual')"
                             />
                         Allow manual sort
                     </label>
                 </div>
                 <div>
                     <label>
-                        <input type="radio" name="sorting" value="auto"
+                        <input type="radio" name="sorting" value="auto" id="sorting-auto"
                             v-bind:checked="sorting=='auto'"
-                            v-on:change="$emit('set-option', 'sorting', 'auto')"
+                            v-on:change="doEmit('sorting', 'auto')"
                          />
                         Automatic sort
                     </label>
@@ -27,14 +27,14 @@
                 <label for="defaultNumber">Default number for new units</label>
                 <input type="number" min="0" max="16" name="defaultNumber" id="defaultNumber"
                     v-bind:value="defaultNumber"
-                    v-on:keyup="$emit('set-option', 'defaultNumber', $event.target.value)"
-                    v-on:change="$emit('set-option', 'defaultNumber', $event.target.value)" />
+                    @input="(e) =>handleTextChange('defaultNumber', e)"
+                    @change="(e) =>handleTextChange('defaultNumber', e)" />
             </div>
             <div>
                 <label for="autoNumber">
                     <input type="checkbox" name="autoNumber" id="autoNumber" value="1"
                         v-bind:checked="autoNumber==true"
-                        v-on:change="$emit('set-option', 'autoNumber', $event.target.checked)"
+                        @change="(e) => handleCheckboxChange('autoNumber', e)"
                         />
                     Automatically assign a random number to units when
                     printing for deployment tokens
@@ -44,15 +44,15 @@
                 <label for="showDeployTable">
                     <input type="checkbox" name="showDeployTable" id="showDeployTable" value="1"
                         v-bind:checked="showDeployTable==true"
-                        v-on:change="$emit('set-option', 'showDeployTable', $event.target.checked)"
+                        @change="(e) => handleCheckboxChange('showDeployTable', e)"
                         />
                     Print deployment fatigue table under traits
                 </label>
             </div>
         </fieldset>
-        <button
+        <button id="close-button"
             title="Close"
-            v-on:click="$emit('no-options')" >
+            @click="$emit('no-options')" >
                 close
         </button>
     </div>
@@ -69,6 +69,17 @@ export default Vue.extend({
     autoNumber: Boolean,
     defaultNumber: Number,
     showDeployTable: Boolean,
+  },
+  methods: {
+    doEmit(option: string, value: any) {
+      this.$emit('set-option', option, value);
+    },
+    handleCheckboxChange(option: string, event: Event) {
+      this.doEmit(option, (event.target as HTMLInputElement).checked);
+    },
+    handleTextChange(option: string, event: Event) {
+      this.doEmit(option, (event.target as HTMLInputElement).value);
+    },
   },
 });
 </script>
