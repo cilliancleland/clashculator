@@ -60,8 +60,8 @@
             :updateRow="updateRow"
           ></unit-row>
           <sharable-link
-            v-bind:sharable="sharable"
-            v-on:show-toastr="showToastr"
+            :sharable="sharable"
+            :show-toastr="showToastr"
           ></sharable-link>
           <h2>Trait descriptions</h2>
           <table>
@@ -253,6 +253,8 @@ export default Vue.extend({
       objStr = objStr.split('&')[0].substr(3);
       this.hydrateCompactArmy(objStr, 'punic');
     } else if (Object.keys(PERIODS).includes(army)) {
+      console.log('objStr', objStr);
+      console.log('army', army);
       objStr = objStr.split('&')[0].substr(army.length + 2);
       this.hydrateCompactArmy(objStr, army);
     }
@@ -294,12 +296,12 @@ export default Vue.extend({
       let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
       while (nums.length > 4) {
         const size = parseInt(nums.substr(0, 1), 32);
-        const type = parseInt(nums.substr(1, 1), 32);
+        const unitIndex = parseInt(nums.substr(1, 1), 32);
         const opts = parseInt(nums.substr(2, 3), 32);
         const optsBin = opts.toString(2);
         const optsArr: number[] = [];
-        const unitIndex = Object.keys(this.periodLists[this.selectedNation])[type];
-        const newUnit = this.addUnit(parseInt(unitIndex, 10));
+        const type = Object.keys(this.periodLists[this.selectedNation])[unitIndex];
+        const newUnit = this.addUnit(type);
         newUnit.size = size;
         for (let i = 1; i < 15; i += 1) {
           if (optsBin.substr(i, 1) === '1') {
@@ -355,7 +357,7 @@ export default Vue.extend({
         v.toastrMessage = '';
       }, 3000);
     },
-    addUnit: function addUnit(unitToAdd: number): SelectedUnit {
+    addUnit: function addUnit(unitToAdd: string): SelectedUnit {
       // eslint-disable-next-line no-unused-vars
       function unitSize(this: SelectedUnit): number {
         return this.traits.includes('feral')
@@ -363,6 +365,7 @@ export default Vue.extend({
           : this.size;
       }
       const base: Unit = this.periodLists[this.selectedNation][unitToAdd];
+      if (!base) return {} as SelectedUnit;
       const size = 'fixedFigures' in base ? base.fixedFigures : this.defaultNumber;
       const newEntry: SelectedUnit = Vue.observable({
         ...base,

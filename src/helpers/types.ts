@@ -68,7 +68,7 @@ export type SelectedUnit = Unit & {
   upgradedShield: string,
   upgradedWeapon: string,
   upgradedBarding: string,
-  type: number,
+  type: string,
   excludedOptions: Array<number>,
   selectedOptions: Array< number>,
   unitSize: Function,
@@ -93,7 +93,7 @@ export interface LookupLists {
 export interface ArmyDetail {
   size: number,
   selectedOptions: Array<number>,
-  type: number,
+  type: string,
 }
 export interface SavedArmy {
   sp: string,

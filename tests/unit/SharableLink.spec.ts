@@ -13,7 +13,7 @@ describe('SharableLink.vue', () => {
     expect(input.classes()).toContain('sharable-input');
   });
 
-  it('emits show-toastr when copyToClip is called', async () => {
+  it('calls show-toastr when copyToClip is called', async () => {
     const wrapper = shallowMount(SharableLink, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
@@ -21,8 +21,7 @@ describe('SharableLink.vue', () => {
     wrapper.vm.$refs.sharableInput = document.createElement('input');
     document.execCommand = jest.fn();
     await (wrapper.vm as any).copyToClip();
-    expect(wrapper.emitted('show-toastr')).toBeTruthy();
-    expect(wrapper.emitted('show-toastr')?.[0]?.[0]).toBe('Sharing link copied to clipboard');
+    expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
   });
 
   it('does not throw if sharableInput ref is missing', async () => {
@@ -35,7 +34,7 @@ describe('SharableLink.vue', () => {
     }).not.toThrow();
   });
 
-  it('emits show-toastr when icon is clicked', async () => {
+  it('calls show-toastr when icon is clicked', async () => {
     const wrapper = shallowMount(SharableLink, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
@@ -43,10 +42,10 @@ describe('SharableLink.vue', () => {
     document.execCommand = jest.fn();
     const icon = wrapper.find('i.fa-link');
     await icon.trigger('click');
-    expect(wrapper.emitted('show-toastr')).toBeTruthy();
+    expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
   });
 
-  it('emits show-toastr when input is clicked', async () => {
+  it('calls show-toastr when input is clicked', async () => {
     const wrapper = shallowMount(SharableLink, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
@@ -54,7 +53,7 @@ describe('SharableLink.vue', () => {
     document.execCommand = jest.fn();
     const input = wrapper.find('input.sharable-input');
     await input.trigger('click');
-    expect(wrapper.emitted('show-toastr')).toBeTruthy();
+    expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
   });
 
   it('updates input value when sharable prop changes', async () => {

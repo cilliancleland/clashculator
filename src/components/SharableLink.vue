@@ -16,27 +16,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import { defineProps, defineExpose, ref } from 'vue';
 
-
-export default Vue.extend({
-  name: 'SharableLink',
-  props: {
-    sharable: String,
-    showToastr: Function,
+const props = defineProps({
+  sharable: {
+    type: String,
+    required: true,
   },
-  methods: {
-    copyToClip: function copyToClip() {
-      if (!this.$refs.sharableInput) return;
-      const inputElem = this.$refs.sharableInput as HTMLInputElement;
-      inputElem.focus();
-      inputElem.select();
-      inputElem.setSelectionRange(0, 99999);
-      document.execCommand('copy');
-      this.$emit('show-toastr', 'Sharing link copied to clipboard');
-    },
+  showToastr: {
+    type: Function,
+    required: true,
   },
+});
+const sharableInput = ref<HTMLInputElement | null>(null);
+const copyToClip = () => {
+  if (!sharableInput.value) return;
+  const inputElem = sharableInput.value;
+  inputElem.focus();
+  inputElem.select();
+  inputElem.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  props.showToastr('Sharing link copied to clipboard');
+};
+defineExpose({
+  copyToClip,
 });
 </script>
 <style scoped lang="scss">
