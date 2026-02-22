@@ -3,7 +3,7 @@ import TraitsList from '@/components/TraitsList.vue';
 
 describe('TraitsList.vue', () => {
   it('doesn\'t crash if no matchinbg trait', () => {
-    const wrapper = shallowMount(TraitsList, {
+    const wrapper = shallowMount(TraitsList as any, {
       propsData: { trait: 'nope' },
     });
     const traitHead = wrapper.find('th.trait-head');
@@ -11,7 +11,7 @@ describe('TraitsList.vue', () => {
   });
   it('renders traits in order with correct classes', () => {
     const trait = 'guerrilla';
-    const wrapper = shallowMount(TraitsList, {
+    const wrapper = shallowMount(TraitsList as any, {
       propsData: { trait },
     });
 

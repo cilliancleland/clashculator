@@ -6,32 +6,37 @@
                 :value="period"
                 :id="period"
                 :checked="period==selectedPeriod"
-                v-on:change="handleChange" />
+                @click="handleChange" />
         {{periodLabels[period]}}
       </label>
 </template>
 
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import { defineProps, reactive, defineExpose } from 'vue';
 import { PERIODS } from '../helpers/constants';
 
-export default Vue.extend({
-  name: 'PeriodSelector',
-  props: {
-    selectedPeriod: String,
-    period: String,
-    selectPeriod: Function,
+const props = defineProps({
+  selectedPeriod: {
+    type: String,
+    required: true,
   },
-  data: function data() {
-    return {
-      periodLabels: PERIODS,
-    };
+  period: {
+    type: String,
+    required: true,
   },
-  methods: {
-    handleChange(event: Event) {
-      this.$emit('select-period', (event.target as HTMLInputElement).value);
-    },
+  selectPeriod: {
+    type: Function,
+    required: true,
   },
+});
+
+const periodLabels = reactive(PERIODS);
+const handleChange = (event: Event) => {
+  props.selectPeriod((event.target as HTMLInputElement).value);
+};
+defineExpose({
+  handleChange,
+  periodLabels,
 });
 </script>

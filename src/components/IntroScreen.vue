@@ -4,16 +4,16 @@
     <div class="period-selector">
       <period-selector
         v-for="(period) in periods"
-        v-bind:key="period"
-        v-bind:period="period"
-        v-bind:selected-period = "selectedPeriod"
-        v-on="$listeners"
+        :key="period"
+        :period="period"
+        :selected-period = "selectedPeriod"
+        :select-period="selectPeriod"
       ></period-selector>
     </div>
     <select id="armySelect"
             v-bind:value="selectedNation"
             class="add-unit"
-            v-on:change="$emit('select-nation', $event.target.value)">
+            @change="selectNation">
       <option value="">Please select an army to start</option>
       <option v-for="(value, name) in lists" :value="name" v-bind:key="name">
       {{ name }}
@@ -24,7 +24,7 @@
       <select id="saveSelect"
               v-bind:value="savedName"
               class="add-unit"
-              v-on:change="$emit('load-army', $event.target.value)">
+              @change="loadArmy">
           <option value="">Load a saved army</option>
           <option v-for="(value) in localSaves" :value="value" v-bind:key="value">
             {{ value }}
@@ -66,28 +66,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue, { PropType } from 'vue';
-import { LookupLists } from '../helpers/types';
+<script setup lang="ts">
+import { defineProps, PropType } from 'vue';
+import { LookupArmy } from '../helpers/types';
 import PeriodSelector from './PeriodSelector.vue';
 
-export default Vue.extend({
-  name: 'IntroScreen',
-  components: {
-    'period-selector': PeriodSelector,
-  },
-  props: {
-    selectedNation: String,
-    selectedPeriod: String,
-    periods: Array as PropType<string[]>,
-    lists: Object as PropType<LookupLists>,
-    localSaves: Array,
-    savedName: String,
-    loadArmy: Function,
-    selectNation: Function,
-    selectPeriod: Function,
-  },
+const props = defineProps({
+  selectedNation: { type: String, required: true },
+  selectedPeriod: { type: String, required: true },
+  periods: { type: Array as PropType<string[]>, required: true },
+  lists: { type: Object as PropType<LookupArmy>, required: true },
+  localSaves: { type: Array as PropType<string[]>, required: true },
+  savedName: { type: String, required: true },
+  loadArmy: { type: Function, required: true },
+  selectNation: { type: Function, required: true },
+  selectPeriod: { type: Function, required: true },
 });
+
+const selectNation = (e: Event) => {
+  props.selectNation((e.target as HTMLSelectElement).value);
+};
+
+const loadArmy = (e: Event) => {
+  props.loadArmy((e.target as HTMLSelectElement).value);
+};
 </script>
 <style scoped lang="scss">
     .add-unit {

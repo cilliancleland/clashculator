@@ -11,7 +11,7 @@ const propsData = {
 
 describe('OptionsScreen.vue', () => {
   it('renders sorting options and emits event on change', async () => {
-    const wrapper = shallowMount(OptionsScreen, {
+    const wrapper = shallowMount(OptionsScreen as any, {
       propsData: { ...propsData },
     });
 
@@ -28,7 +28,7 @@ describe('OptionsScreen.vue', () => {
   });
 
   it('renders default number input and emits event on change', async () => {
-    const wrapper = shallowMount(OptionsScreen, {
+    const wrapper = shallowMount(OptionsScreen as any, {
       propsData: { ...propsData },
     });
 
@@ -41,7 +41,7 @@ describe('OptionsScreen.vue', () => {
   });
 
   it('renders auto number checkbox and emits event on change', async () => {
-    const wrapper = shallowMount(OptionsScreen, {
+    const wrapper = shallowMount(OptionsScreen as any, {
       propsData: { ...propsData },
     });
 
@@ -54,7 +54,7 @@ describe('OptionsScreen.vue', () => {
   });
 
   it('renders show deploy table checkbox and emits event on change', async () => {
-    const wrapper = shallowMount(OptionsScreen, {
+    const wrapper = shallowMount(OptionsScreen as any, {
       propsData: { ...propsData },
     });
 
@@ -67,7 +67,7 @@ describe('OptionsScreen.vue', () => {
   });
 
   it('emits no-options when close button is clicked', async () => {
-    const wrapper = shallowMount(OptionsScreen, {
+    const wrapper = shallowMount(OptionsScreen as any, {
       propsData: { ...propsData },
     });
 

@@ -95,10 +95,7 @@
     </table>
 </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'DeploymentTable',
-};
+<script setup lang="ts">
 </script>
 <style scoped lang="scss">
     h3 {

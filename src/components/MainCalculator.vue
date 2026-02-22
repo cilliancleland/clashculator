@@ -2,15 +2,15 @@
     <div >
       <h1>{{ title }}</h1>
       <intro-screen  v-if="!selectedNation"
-        v-bind:selected-army="selectedNation"
-        v-bind:lists="periodLists"
-        v-bind:periods="periods"
-        v-bind:local-saves="localSaves"
-        v-bind:saved-name="savedName"
-        v-bind:selected-period="selectedPeriod"
-        v-on:load-army="loadArmy"
-        v-on:select-nation="selectNation"
-        v-on:select-period="selectPeriod"
+        :lists="periodLists"
+        :periods="periods"
+        :local-saves="localSaves"
+        :saved-name="savedName"
+        :selected-period="selectedPeriod"
+        :selected-nation="selectedNation"
+        :load-army="loadArmy"
+        :select-nation="selectNation"
+        :select-period="selectPeriod"
       ></intro-screen>
       <div v-if="selectedNation" >
         <faq-me v-if="showScreen=='faq'"
@@ -19,10 +19,10 @@
         <options-screen v-if="showScreen=='options'"
           v-on:no-options="noOptions"
           v-on:set-option="setOption"
-          v-bind:sorting="sorting"
-          v-bind:auto-number="autoNumber"
-          v-bind:default-number="defaultNumber"
-          v-bind:show-deploy-table="showDeployTable"
+          :sorting="sorting"
+          :auto-number="autoNumber"
+          :default-number="defaultNumber"
+          :show-deploy-table="showDeployTable"
         ></options-screen>
         <div v-if="showScreen=='main'">
           <top-buttons
@@ -402,9 +402,9 @@ export default Vue.extend({
     noOptions: function noOptions(): void {
       this.showScreen = 'main';
     },
-    setOption: function setOption(name: string, value: string): void {
+    setOption: function setOption(name: string, value: string | number | boolean): void {
       Vue.set(this, name, value);
-      localStorage.setItem(name, value);
+      localStorage.setItem(name, value.toString());
     },
     reset: function reset() {
       this.selectedNation = '';

@@ -6,21 +6,18 @@
     </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import { defineProps, computed } from 'vue';
 
-export default Vue.extend({
-  name: 'ToastrBar',
-  props: {
-    message: String,
+const props = defineProps({
+  message: {
+    type: String,
+    required: true,
   },
-  computed: {
-    displayClasses():string {
-      return (this.message === ''
-        ? 'toastr'
-        : 'toastr toastr-visible');
-    },
-  },
+});
+
+const displayClasses = computed(() => {
+  return props.message === '' ? 'toastr' : 'toastr toastr-visible';
 });
 </script>
 <style scoped lang="scss">

@@ -52,34 +52,36 @@
         </fieldset>
         <button id="close-button"
             title="Close"
-            @click="$emit('no-options')" >
+            @click="emit('no-options')" >
                 close
         </button>
     </div>
 </template>
 
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import { defineProps, defineExpose, defineEmits } from 'vue';
 
-export default Vue.extend({
-  name: 'OptionsScreen',
-  props: {
-    sorting: String,
-    autoNumber: Boolean,
-    defaultNumber: Number,
-    showDeployTable: Boolean,
-  },
-  methods: {
-    doEmit(option: string, value: any) {
-      this.$emit('set-option', option, value);
-    },
-    handleCheckboxChange(option: string, event: Event) {
-      this.doEmit(option, (event.target as HTMLInputElement).checked);
-    },
-    handleTextChange(option: string, event: Event) {
-      this.doEmit(option, (event.target as HTMLInputElement).value);
-    },
-  },
+defineProps({
+  sorting: String,
+  autoNumber: Boolean,
+  defaultNumber: Number,
+  showDeployTable: Boolean,
+});
+const emit = defineEmits(['set-option', 'no-options']);
+
+const doEmit = (option: string, value: any) => {
+  emit('set-option', option, value);
+};
+const handleCheckboxChange = (option: string, event: Event) => {
+  doEmit(option, (event.target as HTMLInputElement).checked);
+};
+const handleTextChange = (option: string, event: Event) => {
+  doEmit(option, (event.target as HTMLInputElement).value);
+};
+defineExpose({
+  doEmit,
+  handleCheckboxChange,
+  handleTextChange,
 });
 </script>

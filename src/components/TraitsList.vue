@@ -11,30 +11,23 @@
 </template>
 
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import { computed, defineProps } from 'vue';
 import { traitDescriptions } from '../helpers/traits';
 
-export default Vue.extend({
-  name: 'TraitsList',
-  props: {
-    trait: String,
-  },
-  computed: {
-    desc: function desc(): [string, string, string] {
-      return traitDescriptions[this.trait] || ['', '', ''];
-    },
-    traitConditions: function traitConditions(): string {
-      return this.desc[0];
-    },
-    traitText: function traitText(): string {
-      return this.desc[1];
-    },
-    traitPage: function traitPage(): string {
-      return this.desc[2];
-    },
+const props = defineProps({
+  trait: {
+    type: String,
+    required: true,
   },
 });
+const desc = computed((): [string, string, string] => {
+  return traitDescriptions[props.trait] || ['', '', ''];
+});
+const traitConditions = computed(() => { return desc.value[0]; });
+const traitText = computed(() => { return desc.value[1]; });
+const traitPage = computed(() => { return desc.value[2]; });
+
 </script>
 
 <style scoped lang="scss">

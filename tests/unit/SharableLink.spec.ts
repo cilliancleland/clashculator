@@ -3,7 +3,7 @@ import SharableLink from '@/components/SharableLink.vue';
 
 describe('SharableLink.vue', () => {
   it('renders the sharable input with the correct value', () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     const input = wrapper.find('input.sharable-input');
@@ -14,7 +14,7 @@ describe('SharableLink.vue', () => {
   });
 
   it('calls show-toastr when copyToClip is called', async () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     // Mock $refs
@@ -25,7 +25,7 @@ describe('SharableLink.vue', () => {
   });
 
   it('does not throw if sharableInput ref is missing', async () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     wrapper.vm.$refs.sharableInput = undefined;
@@ -35,7 +35,7 @@ describe('SharableLink.vue', () => {
   });
 
   it('calls show-toastr when icon is clicked', async () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
@@ -46,7 +46,7 @@ describe('SharableLink.vue', () => {
   });
 
   it('calls show-toastr when input is clicked', async () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
@@ -57,7 +57,7 @@ describe('SharableLink.vue', () => {
   });
 
   it('updates input value when sharable prop changes', async () => {
-    const wrapper = shallowMount(SharableLink, {
+    const wrapper = shallowMount(SharableLink as any, {
       propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
     });
     await wrapper.setProps({ sharable: 'http://new.link' });
