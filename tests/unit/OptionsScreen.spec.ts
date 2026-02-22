@@ -22,9 +22,11 @@ describe('OptionsScreen.vue', () => {
     expect(autoOption.exists()).toBe(true);
     expect((manualOption.element as HTMLInputElement).checked).toBe(false);
     expect((autoOption.element as HTMLInputElement).checked).toBe(true);
-    await manualOption.setChecked();
+    await manualOption.setValue(true);
     expect(wrapper.emitted('set-option')).toBeTruthy();
     expect(wrapper.emitted('set-option')?.[0]).toEqual(['sorting', 'manual']);
+    await autoOption.setValue(true);
+    expect(wrapper.emitted('set-option')?.[1]).toEqual(['sorting', 'auto']);
   });
 
   it('renders default number input and emits event on change', async () => {
@@ -48,7 +50,7 @@ describe('OptionsScreen.vue', () => {
     const autoNumberCheckbox = wrapper.find('input#autoNumber');
     expect(autoNumberCheckbox.exists()).toBe(true);
     expect((autoNumberCheckbox.element as HTMLInputElement).checked).toBe(false);
-    await autoNumberCheckbox.setChecked();
+    await autoNumberCheckbox.setValue(true);
     expect(wrapper.emitted('set-option')).toBeTruthy();
     expect(wrapper.emitted('set-option')?.[0]).toEqual(['autoNumber', true]);
   });
@@ -61,7 +63,7 @@ describe('OptionsScreen.vue', () => {
     const showDeployTableCheckbox = wrapper.find('input#showDeployTable');
     expect(showDeployTableCheckbox.exists()).toBe(true);
     expect((showDeployTableCheckbox.element as HTMLInputElement).checked).toBe(false);
-    await showDeployTableCheckbox.setChecked();
+    await showDeployTableCheckbox.setValue(true);
     expect(wrapper.emitted('set-option')).toBeTruthy();
     expect(wrapper.emitted('set-option')?.[0]).toEqual(['showDeployTable', true]);
   });

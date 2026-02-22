@@ -35,128 +35,132 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue, { PropType } from 'vue';
+<script setup lang="ts">
+import { defineProps, PropType, computed } from 'vue';
 import { LookupNumber, SelectedUnit } from '../helpers/types';
 
 const warPartyNations: LookupNumber = {
   'Early Imperial Roman': 1,
   'Late Republican Roman': 1,
 };
-export default Vue.extend({
-  name: 'HeaderSection',
-  props: {
-    armyContents: {
-      type: Array as PropType<SelectedUnit[]>,
-      required: true,
-    },
-    selectedNation: {
-      type: String,
-      required: true,
-    },
-    armyName: {
-      type: String,
-      required: true,
-    },
-    lists: {
-      type: Object,
-      required: true,
-    },
-    unitToAdd: {
-      type: String,
-      required: true,
-    },
-    addUnit: {
-      type: Function,
-      required: false,
-    },
-    updateArmyName: {
-      type: Function,
-      required: false,
-    },
+// const props = defineProps<{
+//   armyContents: SelectedUnit[];
+//   selectedNation: string;
+//   armyName: string;
+//   lists: Record<string, any>;
+//   unitToAdd: string;
+//   addUnit?: () => void;
+//   updateArmyName?: () => void;
+// }>();
+const props = defineProps({
+  armyContents: {
+    type: Array as PropType<SelectedUnit[]>,
+    required: true,
   },
-  computed: {
-    totalCost: function totalCost(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
-        const optionsCost = unit.selectedOptions.reduce((unitTotal, selectedOption) => {
-          return unitTotal + unit.options[selectedOption].cost;
-        }, 0);
-        const thisUnitCost = Math.round(
-          (unit.size || 1) * (unit.cost + optionsCost),
-        );
-        return total + thisUnitCost;
-      }, 0);
-    },
-    totalFiguresCount: function totalFiguresCount(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit): number => {
-        return total + (unit.unitSize());
-      }, 0);
-    },
-    figureCountForBreak: function figureCountForBreak(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit): number => {
-        return total + (unit.dontCountForBreak ? 0 : unit.unitSize());
-      }, 0);
-    },
-    breakPointThreshold: function breakPointThreshold(): number {
-      return Math.floor(this.figureCountForBreak / 6);
-    },
-    charactersCount: function charactersCount(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
-        return unit.availability === 'character'
-          ? total + (unit.unitSize())
-          : total;
-      }, 0);
-    },
-    civisCount: function civisCount(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
-        return unit.availability === 'civis'
-          ? total + (unit.unitSize())
-          : total;
-      }, 0);
-    },
-    militesCount: function militesCount(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
-        return unit.availability === 'milites'
-          ? total + (unit.unitSize())
-          : total;
-      }, 0);
-    },
-    rareCount: function rareCount(): number {
-      return this.armyContents.reduce((total: number, unit: SelectedUnit) => {
-        const size = unit.countsDouble
-          ? unit.unitSize() * 2
-          : unit.unitSize();
-        return unit.availability === 'rare'
-          ? total + size
-          : total;
-      }, 0);
-    },
-    warbandType: function warbandType(): string {
-      if (warPartyNations[this.selectedNation]) {
-        return this.isWarParty
-          ? 'War-party'
-          : 'Ad Hoc';
-      }
-      return this.isMuster ? 'Muster' : 'Ad Hoc';
-    },
-    isMuster: function isMuster(): boolean {
-      return (this.civisCount >= (this.militesCount + this.rareCount))
-        && (this.militesCount >= this.rareCount);
-    },
-    isWarParty: function isWarParty(): boolean {
-      return (this.militesCount >= this.civisCount)
-        && (this.militesCount >= (2 * this.rareCount));
-    },
+  selectedNation: {
+    type: String,
+    required: true,
   },
-  methods: {
-    onArmyNameChange: function onArmyNameChange(event: Event): void {
-      this.$emit('update-army-name', (event.target as HTMLInputElement).value);
-    },
-    onAddUnit: function onAddUnit(ev: Event): void {
-      this.$emit('add-unit', (ev.target as HTMLSelectElement).value);
-    },
+  armyName: {
+    type: String,
+    required: true,
+  },
+  lists: {
+    type: Object,
+    required: true,
+  },
+  unitToAdd: {
+    type: String,
+    required: true,
+  },
+  addUnit: {
+    type: Function,
+    required: true,
+  },
+  updateArmyName: {
+    type: Function,
+    required: true,
   },
 });
+const totalCost = computed((): number => {
+return props.armyContents.reduce((total: number, unit: SelectedUnit) => {
+  const optionsCost = unit.selectedOptions.reduce((unitTotal, selectedOption) => {
+    return unitTotal + unit.options[selectedOption].cost;
+    }, 0);
+    const thisUnitCost = Math.round(
+      (unit.size || 1) * (unit.cost + optionsCost),
+    );
+    return total + thisUnitCost;
+  }, 0);
+});
+const totalFiguresCount = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit): number => {
+    return total + (unit.unitSize());
+  }, 0);
+});
+const figureCountForBreak = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit): number => {
+    return total + (unit.dontCountForBreak ? 0 : unit.unitSize());
+  }, 0);
+});
+const breakPointThreshold = computed((): number => {
+  return Math.floor(figureCountForBreak.value / 6);
+});
+const charactersCount = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit) => {
+    return unit.availability === 'character'
+      ? total + (unit.unitSize())
+      : total;
+  }, 0);
+});
+const civisCount = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit) => {
+    return unit.availability === 'civis'
+      ? total + (unit.unitSize())
+      : total;
+  }, 0);
+});
+const militesCount = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit) => {
+    return unit.availability === 'milites'
+      ? total + (unit.unitSize())
+      : total;
+  }, 0);
+});
+const rareCount = computed((): number => {
+  return props.armyContents.reduce((total: number, unit: SelectedUnit) => {
+    const size = unit.countsDouble
+      ? unit.unitSize() * 2
+      : unit.unitSize();
+    return unit.availability === 'rare'
+      ? total + size
+      : total;
+  }, 0);
+});
+const warbandType = computed((): string => {
+  if (warPartyNations[props.selectedNation]) {
+    return isWarParty.value
+      ? 'War-party'
+      : 'Ad Hoc';
+  }
+  return isMuster.value ? 'Muster' : 'Ad Hoc';
+});
+const isMuster = computed((): boolean => {
+  return (civisCount.value >= (militesCount.value + rareCount.value))
+    && (militesCount.value >= rareCount.value);
+});
+const isWarParty = computed((): boolean => {
+  return (militesCount.value >= civisCount.value)
+    && (militesCount.value >= (2 * rareCount.value));
+});
+
+const onArmyNameChange = (event: Event): void => {
+  props.updateArmyName?.((event.target as HTMLInputElement).value);
+};
+const onAddUnit = (ev: Event): void => {
+  props.addUnit?.((ev.target as HTMLSelectElement).value);
+};
+
 </script>
 <style scoped lang="scss">
 

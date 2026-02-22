@@ -13,6 +13,7 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "outDir": "./dist",
     "types":["vitest/globals"],
     "paths": {
       "@/*": [
@@ -34,7 +35,6 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "src/registerServiceWorker.js"
+    "node_modules"
   ]
 }

@@ -41,29 +41,22 @@
     </div>
 
 </template>
+  
+<script setup lang="ts">
+import { defineProps } from 'vue';
 
-<script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
-  name: 'TopButtons',
-  props: {
-    armyUnchanged: {
-      type: Boolean,
-      required: true,
-    },
-    showFaq: Function,
-    showOptions: Function,
-    reset: Function,
-    saveLocally: Function,
-    deleteLocally: Function,
-  },
-  methods: {
-    print(): void {
-      window.print();
-    },
-  },
+const props = defineProps({
+  armyUnchanged: {type: Boolean, required: true},
+  showFaq: {type: Function, required: true},
+  showOptions: {type: Function, required: true},
+  reset: {type: Function, required: true},
+  saveLocally: {type: Function, required: true},
+  deleteLocally: {type: Function, required: true},
 });
+
+function print(): void {
+  window.print();
+}
 </script>
 <style scoped lang="scss">
 

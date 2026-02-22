@@ -26,21 +26,21 @@
         ></options-screen>
         <div v-if="showScreen=='main'">
           <top-buttons
-            v-bind:army-unchanged="armyUnchanged"
-            v-on:show-faq="showFaq"
-            v-on:show-options="showOptions"
-            v-on:reset="reset"
-            v-on:save-locally="saveLocally"
-            v-on:delete-locally="deleteLocally"
+            :army-unchanged="armyUnchanged"
+            :show-faq="showFaq"
+            :show-options="showOptions"
+            :reset="reset"
+            :save-locally="saveLocally"
+            :delete-locally="deleteLocally"
           ></top-buttons>
           <header-section
-            v-bind:army-contents="armyContents"
-            v-bind:selected-nation="selectedNation"
-            v-bind:army-name="armyName"
-            v-bind:lists="periodLists"
-            v-bind:unit-to-add="unitToAdd"
-            v-on:update-army-name="updateArmyName"
-            v-on:add-unit="addUnit"
+            :army-contents="armyContents"
+            :selected-nation="selectedNation"
+            :army-name="armyName"
+            :lists="periodLists"
+            :unit-to-add="unitToAdd"
+            :update-army-name="updateArmyName"
+            :add-unit="addUnit"
           ></header-section>
           <title-row
             v-on:army-sort="armySort"
