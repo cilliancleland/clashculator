@@ -1,124 +1,132 @@
 <template>
-<div>
+  <div>
     <h3>Deployment fatigue table - foot (mounted)</h3>
     <table>
+      <tbody>
         <tr>
-            <th class="main">
+          <th class="main">
             Action tokens
-            </th>
-            <th>
+          </th>
+          <th>
             1
-            </th>
-            <th>
+          </th>
+          <th>
             2
-            </th>
-            <th>
+          </th>
+          <th>
             3
-            </th>
-            <th>
+          </th>
+          <th>
             4
-            </th>
-            <th>
+          </th>
+          <th>
             5
-            </th>
-            <th>
+          </th>
+          <th>
             6
-            </th>
+          </th>
         </tr>
+
         <tr class="alt">
-            <th>
+          <th>
             Save 6+
-            </th>
-            <td>0
-            </td>
-            <td>0
-            </td>
-            <td>
+          </th>
+          <td>0
+          </td>
+          <td>0
+          </td>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             1(0)
-            </td>
-            <td>
+          </td>
+          <td>
             1
-            </td>
+          </td>
         </tr>
         <tr>
-            <th>
+          <th>
             Save 4+
-            </th>
-            <td>
+          </th>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             1(0)
-            </td>
-            <td>
+          </td>
+          <td>
             1
-            </td>
-            <td>
+          </td>
+          <td>
             2
-            </td>
-            <td>
+          </td>
+          <td>
             2
-            </td>
+          </td>
         </tr>
         <tr class="alt">
-            <th>
+          <th>
             Save 3+
-            </th>
-            <td>
+          </th>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             0
-            </td>
-            <td>
+          </td>
+          <td>
             1
-            </td>
-            <td>
+          </td>
+          <td>
             2
-            </td>
-            <td>
+          </td>
+          <td>
             3
-            </td>
-            <td>
+          </td>
+          <td>
             4
-            </td>
+          </td>
         </tr>
+      </tbody>
     </table>
-</div>
+  </div>
 </template>
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
-    h3 {
-        display: none;
-    }
-    table {
-        width: 100%;
-        display: none;
-    }
-    th {
-        width: 12.5%;
-        border-bottom: solid black 1px;
-    }
-    td {
-        text-align: center;
-        border-bottom: solid black 1px;
-    }
-    @media print {
-        table {
-            display: table;
-        }
-    h3 {
-        display: block;
-    }
-    }
+h3 {
+  display: none;
+}
+
+table {
+  width: 100%;
+  display: none;
+}
+
+th {
+  width: 12.5%;
+  border-bottom: solid black 1px;
+}
+
+td {
+  text-align: center;
+  border-bottom: solid black 1px;
+}
+
+@media print {
+  table {
+    display: table;
+  }
+
+  h3 {
+    display: block;
+  }
+}
 </style>
