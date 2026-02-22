@@ -78,14 +78,18 @@
     </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
+<script setup lang="ts">
+import {
+  ref,
+  reactive,
+  computed,
+} from 'vue';
 import {
   Unit,
   SavedArmy,
   SelectedUnit,
   LookupArmy,
-  LookupLists,
+  // LookupLists,
   ArmyDetail,
   LookupUnit,
 } from '../helpers/types';
@@ -104,345 +108,323 @@ import FaqMe from './FaqMe.vue';
 import OptionsScreen from './OptionsScreen.vue';
 import { shuffle } from '../helpers/helpers';
 
-export default Vue.extend({
-  name: 'MainCalculator',
-  components: {
-    'top-buttons': TopButtons,
-    'header-section': HeaderSection,
-    'intro-screen': IntroScreen,
-    'sharable-link': SharableLink,
-    'title-row': TitleRow,
-    'deployment-table': DeploymentTable,
-    toastr: Toastr,
-    'unit-row': UnitRow,
-    'traits-list': TraitsList,
-    'faq-me': FaqMe,
-    'options-screen': OptionsScreen,
-  },
+const title = 'Clashculator';
+const selectedPeriod = ref('punic');
+const selectedNation = ref('');
+const armyContents = ref([] as SelectedUnit[]);
+const onDiskArmy = ref([] as ArmyDetail[]);
+const savedArmyName = ref('');
+const unitToAdd = ref('');
+const armyName = ref('Unknown soldiers');
+const localSaves = ref([] as string[]);
+const savedName = ref('');
+const toastrMessage = ref('');
+const toastrTimeout = ref(0);
+const showScreen = ref('main');
+const sorting = ref('manual');
+const autoNumber = ref(false);
+const defaultNumber = ref(6);
+const showDeployTable = ref(false);
 
-  data: function data(): {
-  title: string;
-  allLists: LookupLists;
-  selectedPeriod: string;
-  selectedNation: string;
-  armyContents: SelectedUnit[];
-  onDiskArmy: ArmyDetail[];
-  savedArmyName: string;
-  unitToAdd: string;
-  armyName: string;
-  localSaves: string[];
-  savedName: string;
-  toastrMessage: string;
-  toastrTimeout: number;
-  showScreen: string;
-  sorting: string;
-  autoNumber: boolean;
-  defaultNumber: number;
-  showDeployTable: boolean;
-  } {
-    return {
-      title: 'Clashculator',
-      allLists: allLists as LookupLists,
-      selectedPeriod: 'punic',
-      selectedNation: '',
-      armyContents: [] as SelectedUnit[],
-      onDiskArmy: [] as ArmyDetail[],
-      savedArmyName: '',
-      unitToAdd: '',
-      armyName: 'Unknown soldiers',
-      localSaves: [] as string[],
-      savedName: '',
-      toastrMessage: '',
-      toastrTimeout: 0,
-      showScreen: 'main',
-      sorting: 'manual',
-      autoNumber: false,
-      defaultNumber: 6,
-      showDeployTable: false,
-    };
-  },
-  computed: {
-    deploymentNumbers: function deploymentNumbers(): number[][] {
-      const numCounters: number = this.armyContents.reduce((total, unit) => {
-        return total + unit.numTokens;
-      }, 0);
-      const shuffled: number[] = shuffle([...Array(numCounters).keys()]);
-      const sorted = this.armyContents.map((unit) => {
-        return shuffled.splice(0, unit.numTokens);
-      }, []);
-      return sorted; // sorted.map((x) => { return x + 1; });
-    },
-    periods: function periods(): string[] {
-      return Object.keys(this.allLists);
-    },
-    periodLists: function periodLists(): LookupArmy {
-      return this.allLists[this.selectedPeriod];
-    },
-    mostTraits: function mostTraits(): string[] {
-      const allTraits = this.armyContents.reduce((acc, unit: SelectedUnit) => {
-        const upgradedTraits: string[] = [];
-        unit.selectedOptions.forEach((key) => {
-          const option = unit.options[key];
-          if (option && option.upgradeTraits) {
-            upgradedTraits.push(...option.upgradeTraits);
-          }
-        });
-        return [...new Set(acc.concat(unit.traits, upgradedTraits))];
-      }, [] as string[]).sort();
-      return allTraits.reduce((acc: string[], val: string) => {
-        if (val.substring(0, 5) !== 'wound' && val.substring(0, 6) !== 'attack') {
-          acc.push(val);
-        }
-        return acc;
-      }, [] as string[]);
-    },
-    armyDetails: function armyDetails(): ArmyDetail[] {
-      return this.armyContents.reduce((acc: ArmyDetail[], unit: SelectedUnit) => {
-        acc.push({
-          size: unit.size,
-          selectedOptions: unit.selectedOptions,
-          type: unit.type,
-        });
-        return acc;
-      }, [] as ArmyDetail[]);
-    },
-    armyDetailsCompact: function armyDetailsCompact(): string {
-      let ad = Object.keys(this.periodLists).indexOf(this.selectedNation).toString(32);
-      ad += this.armyContents.reduce((acc, unit) => {
-        const type = unit.type.toString();
-        let ret = unit.size.toString(32);
-        ret += Object.keys(this.periodLists[this.selectedNation]).indexOf(type).toString(32);
-        let optionsBin = '1';
-        for (let i = 0; i < 14; i += 1) {
-          if (unit.selectedOptions.includes(i)) {
-            optionsBin += '1';
-          } else {
-            optionsBin += '0';
-          }
-        }
-        ret += parseInt(optionsBin, 2).toString(32).replace(/g00/g, '-').replace(/o00/g, '~');
-        return acc + ret;
-      }, '');
-      ad += `_${this.armyName}`;
-      return ad;
-    },
-    armyUnchanged: function armyUnchanged(): boolean {
-      return (JSON.stringify(this.armyDetails) === JSON.stringify(this.onDiskArmy))
-              && (this.armyName === this.savedArmyName);
-    },
-    sharable: function sharable(): string {
-      const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-      const uri = `${loc}?${this.selectedPeriod}=${encodeURIComponent(this.armyDetailsCompact)}`;
-      // side effect alert!!
-      window.history.pushState({}, 'Clashculator', uri);
-      return uri;
-    },
-  },
-  created: function created(): void {
-    let objStr = decodeURI(document.location.search);
-    const army = objStr.split('=')[0].slice(1);
-    // just the first arg, FB or something might have added other params
-    if (army === 'a') {
-      // legacy from shitty sharing url
-      objStr = objStr.split('&')[0].substr(3);
-      objStr = atob(decodeURIComponent(objStr));
-      const savedArmy = JSON.parse(objStr);
-      this.hydrateArmy(savedArmy);
-    } else if (army === 'b') {
-      // legacy from before we had multi armies
-      objStr = objStr.split('&')[0].substr(3);
-      this.hydrateCompactArmy(objStr, 'punic');
-    } else if (Object.keys(PERIODS).includes(army)) {
-      console.log('objStr', objStr);
-      console.log('army', army);
-      objStr = objStr.split('&')[0].substr(army.length + 2);
-      this.hydrateCompactArmy(objStr, army);
-    }
-
-    this.localSaves = JSON.parse(localStorage.getItem('armyNames') || '[]');
-    // see if any options are set
-    this.sorting = localStorage.getItem('sorting') || this.sorting;
-    this.autoNumber = localStorage.getItem('autoNumber') === 'true' || this.autoNumber;
-    this.defaultNumber = parseInt(localStorage.getItem('defaultNumber') || '6', 10) || this.defaultNumber;
-    this.showDeployTable = (localStorage.getItem('showDeployTable') === 'true') || this.showDeployTable;
-  },
-  methods: {
-    // setUnitSave: function setUnitSave(index, save) {
-    //   this.armyContents[index].calcSave = save;
-    // },
-    loadArmy: function loadArmy(savedName: string): void {
-      const savedArmies = JSON.parse(localStorage.getItem('armies') || '{}');
-      const savedArmy = savedArmies[savedName];
-      this.hydrateArmy(savedArmy);
-      this.savedArmyName = savedName;
-      this.savedName = '';
-      this.onDiskArmy = JSON.parse(JSON.stringify(this.armyDetails));
-    },
-    hydrateArmy: function hydrateArmy(savedObj: SavedArmy): void {
-      this.selectedPeriod = savedObj.sp || 'punic';
-      this.selectedNation = savedObj.sa;
-      this.armyName = savedObj.an;
-      savedObj.ac.forEach((unit: ArmyDetail) => {
-        const newUnit = this.addUnit(unit.type);
-        newUnit.size = unit.size;
-        newUnit.selectedOptions = unit.selectedOptions;
-      });
-    },
-    hydrateCompactArmy: function hydrateCompactArmy(str: string, sp: string): void {
-      const pos = str.indexOf('_');
-      this.selectedPeriod = sp;
-      this.armyName = str.substr(pos + 1);
-      this.selectedNation = Object.keys(this.periodLists)[parseInt(str.substr(0, 1), 32)];
-      let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
-      while (nums.length > 4) {
-        const size = parseInt(nums.substr(0, 1), 32);
-        const unitIndex = parseInt(nums.substr(1, 1), 32);
-        const opts = parseInt(nums.substr(2, 3), 32);
-        const optsBin = opts.toString(2);
-        const optsArr: number[] = [];
-        const type = Object.keys(this.periodLists[this.selectedNation])[unitIndex];
-        const newUnit = this.addUnit(type);
-        newUnit.size = size;
-        for (let i = 1; i < 15; i += 1) {
-          if (optsBin.substr(i, 1) === '1') {
-            optsArr.push(i - 1);
-          }
-        }
-        newUnit.selectedOptions = optsArr;
-        nums = nums.substr(5);
-      }
-    },
-    selectNation: function selectNation(selectedNation: string): void {
-      this.selectedNation = selectedNation;
-    },
-    selectPeriod: function selectPeriod(selectedPeriod: string): void {
-      this.selectedPeriod = selectedPeriod;
-    },
-    saveLocally: function saveLocally(): void {
-      const armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      const armies = JSON.parse(localStorage.getItem('armies') || '{}');
-      const confirmMessage = 'An army by this name already exists locally.\n\nClick ok to overwrite!';
-      // eslint-disable-next-line
-      if (((armyNames.includes(this.armyName) && confirm(confirmMessage)) || !armyNames.includes(this.armyName))) {
-        if (!armyNames.includes(this.armyName)) {
-          armyNames.push(this.armyName);
-        }
-        armies[this.armyName] = {
-          an: this.armyName,
-          sa: this.selectedNation,
-          sp: this.selectedPeriod,
-          ac: this.armyDetails,
-        };
-        localStorage.setItem('armyNames', JSON.stringify(armyNames));
-        localStorage.setItem('armies', JSON.stringify(armies));
-        this.onDiskArmy = JSON.parse(JSON.stringify(this.armyDetails));
-        this.savedArmyName = this.armyName;
-        this.showToastr('Your army has been saved to this device');
-      }
-    },
-    deleteLocally: function deleteLocally(): void {
-      const armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      const armies = JSON.parse(localStorage.getItem('armies') || '{}');
-      armyNames.splice(armyNames.indexOf(this.armyName), 1);
-      delete armies[this.armyName];
-      localStorage.setItem('armyNames', JSON.stringify(armyNames));
-      localStorage.setItem('armies', JSON.stringify(armies));
-      this.reset();
-    },
-    showToastr: function showToastr(msg: string): void {
-      clearTimeout(this.toastrTimeout);
-      this.toastrMessage = msg;
-      const v = this;
-      this.toastrTimeout = setTimeout(() => {
-        v.toastrMessage = '';
-      }, 3000);
-    },
-    addUnit: function addUnit(unitToAdd: string): SelectedUnit {
-      // eslint-disable-next-line no-unused-vars
-      function unitSize(this: SelectedUnit): number {
-        return this.traits.includes('feral')
-          ? this.size + 1
-          : this.size;
-      }
-      const base: Unit = this.periodLists[this.selectedNation][unitToAdd];
-      if (!base) return {} as SelectedUnit;
-      const size = 'fixedFigures' in base ? base.fixedFigures : this.defaultNumber;
-      const newEntry: SelectedUnit = Vue.observable({
-        ...base,
-        id: Math.random(),
-        size: size || 1,
-        selectedOptions: [] as number[],
-        excludedOptions: [] as number[],
-        upgradedArmour: '',
-        upgradedShield: '',
-        upgradedWeapon: '',
-        upgradedBarding: '',
-        type: unitToAdd,
-        numTokens: 0,
-        unitSize,
-      });
-      newEntry.unitSize = unitSize.bind(newEntry);
-      this.armyContents.push(newEntry);
-      this.unitToAdd = '';
-      if (this.sorting === 'auto') this.armySort();
-      return newEntry;
-    },
-    removeUnit: function removeUnit(idx: number): void {
-      this.armyContents.splice(idx, 1);
-    },
-    showFaq: function showFaq(): void {
-      this.showScreen = 'faq';
-    },
-    noFaq: function noFaq(): void {
-      this.showScreen = 'main';
-    },
-    showOptions: function showOptions(): void {
-      this.showScreen = 'options';
-    },
-    noOptions: function noOptions(): void {
-      this.showScreen = 'main';
-    },
-    setOption: function setOption(name: string, value: string | number | boolean): void {
-      Vue.set(this, name, value);
-      localStorage.setItem(name, value.toString());
-    },
-    reset: function reset() {
-      this.selectedNation = '';
-      this.armyContents = [];
-      this.armyName = 'Unknown soldiers';
-      this.onDiskArmy = [];
-      this.savedArmyName = '';
-      this.localSaves = JSON.parse(localStorage.getItem('armyNames') || '[]');
-      window.history.pushState('', '', `${window.location.protocol}//${window.location.host}${window.location.pathname}`);
-    },
-    reposUp: function reposUp(idx: number): void {
-      const tmp = this.armyContents[idx];
-      this.armyContents.splice(idx, 1);
-      this.armyContents.splice(idx - 1, 0, tmp);
-    },
-    reposDown: function reposDown(idx: number): void {
-      const tmp = this.armyContents[idx];
-      this.armyContents.splice(idx, 1);
-      this.armyContents.splice(idx + 1, 0, tmp);
-    },
-    armySort: function armySort(): void {
-      this.armyContents.sort((a: SelectedUnit, b: SelectedUnit) => {
-        const list: LookupUnit = this.periodLists[this.selectedNation];
-        const orderA: number = Object.keys(list).indexOf(a.type.toString());
-        const orderB: number = Object.keys(list).indexOf(b.type.toString());
-        return orderA - orderB;
-      });
-    },
-    updateRow: function updateRow(index: number, field: string, value: unknown): void {
-      const newRow: SelectedUnit = { ...this.armyContents[index] };
-      Vue.set(newRow, field, value);
-      Vue.set(this.armyContents, index, newRow);
-    },
-    updateArmyName: function updateArmyName(armyName: string): void {
-      this.armyName = armyName;
-    },
-  },
+const deploymentNumbers = computed<number[][]>(() => {
+  const numCounters: number = armyContents.value.reduce((total, unit) => {
+    return total + unit.numTokens;
+  }, 0);
+  const shuffled: number[] = shuffle([...Array(numCounters).keys()]);
+  const sorted = armyContents.value.map((unit) => {
+    return shuffled.splice(0, unit.numTokens);
+  }, []);
+  return sorted; // sorted.map((x) => { return x + 1; });
 });
+
+const periods = computed<string[]>(() => {
+  return Object.keys(allLists);
+});
+const periodLists = computed<LookupArmy>(() => {
+  return allLists[selectedPeriod.value];
+});
+
+const mostTraits = computed<string[]>(() => {
+  const allTraits = armyContents.value.reduce((acc, unit: SelectedUnit) => {
+    const upgradedTraits: string[] = [];
+    unit.selectedOptions.forEach((key) => {
+      const option = unit.options[key];
+      if (option && option.upgradeTraits) {
+        upgradedTraits.push(...option.upgradeTraits);
+      }
+    });
+    return [...new Set(acc.concat(unit.traits, upgradedTraits))];
+  }, [] as string[]).sort();
+  return allTraits.reduce((acc: string[], val: string) => {
+    if (val.substring(0, 5) !== 'wound' && val.substring(0, 6) !== 'attack') {
+      acc.push(val);
+    }
+    return acc;
+  }, [] as string[]);
+});
+
+const armyDetails = computed<ArmyDetail[]>(() => {
+  return armyContents.value.reduce((acc: ArmyDetail[], unit: SelectedUnit) => {
+    acc.push({
+      size: unit.size,
+      selectedOptions: unit.selectedOptions,
+      type: unit.type,
+    });
+    return acc;
+  }, [] as ArmyDetail[]);
+});
+
+const armyDetailsCompact = computed<string>(() => {
+  let ad = Object.keys(periodLists.value).indexOf(selectedNation.value).toString(32);
+  ad += armyContents.value.reduce((acc, unit) => {
+    const type = unit.type.toString();
+    let ret = unit.size.toString(32);
+    ret += Object.keys(periodLists.value[selectedNation.value]).indexOf(type).toString(32);
+    let optionsBin = '1';
+    for (let i = 0; i < 14; i += 1) {
+      if (unit.selectedOptions.includes(i)) {
+        optionsBin += '1';
+      } else {
+        optionsBin += '0';
+      }
+    }
+    ret += parseInt(optionsBin, 2).toString(32).replace(/g00/g, '-').replace(/o00/g, '~');
+    return acc + ret;
+  }, '');
+  ad += `_${armyName.value}`;
+  return ad;
+});
+
+const armyUnchanged = computed<boolean>(() => {
+  return (JSON.stringify(armyDetails.value) === JSON.stringify(onDiskArmy.value))
+          && (armyName.value === savedArmyName.value);
+});
+
+const sharable = computed<string>(() => {
+  const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
+  const uri = `${loc}?${selectedPeriod.value}=${encodeURIComponent(armyDetailsCompact.value)}`;
+  // side effect alert!!
+  window.history.pushState({}, 'Clashculator', uri);
+  return uri;
+});
+
+
+const showFaq = (): void => {
+  showScreen.value = 'faq';
+};
+const noFaq = (): void => {
+  showScreen.value = 'main';
+};
+const showOptions = (): void => {
+  showScreen.value = 'options';
+};
+const noOptions = (): void => {
+  showScreen.value = 'main';
+};
+
+const reset = (): void => {
+  selectedNation.value = '';
+  armyContents.value = [];
+  armyName.value = 'Unknown soldiers';
+  onDiskArmy.value = [];
+  savedArmyName.value = '';
+  localSaves.value = JSON.parse(localStorage.getItem('armyNames') || '[]');
+  window.history.pushState('', '', `${window.location.protocol}//${window.location.host}${window.location.pathname}`);
+};
+// const setUnitSave = (index: number, save: string): void => {
+//   const newContents = [...armyContents.value];
+//   newContents[index].calcSave = save;
+//   armyContents.value = newContents;
+// };
+
+const showToastr = (msg: string): void => {
+  clearTimeout(toastrTimeout.value);
+  toastrMessage.value = msg;
+  toastrTimeout.value = setTimeout(() => {
+    toastrMessage.value = '';
+  }, 3000);
+};
+
+const reposUp = (idx: number): void => {
+  const tmp = armyContents.value[idx];
+  armyContents.value.splice(idx, 1);
+  armyContents.value.splice(idx - 1, 0, tmp);
+};
+const reposDown = (idx: number): void => {
+  const tmp = armyContents.value[idx];
+  armyContents.value.splice(idx, 1);
+  armyContents.value.splice(idx + 1, 0, tmp);
+};
+const armySort = (): void => {
+  armyContents.value.sort((a: SelectedUnit, b: SelectedUnit) => {
+    const list: LookupUnit = periodLists.value[selectedNation.value];
+    const orderA: number = Object.keys(list).indexOf(a.type.toString());
+    const orderB: number = Object.keys(list).indexOf(b.type.toString());
+    return orderA - orderB;
+  });
+};
+const addUnit = (unitNName: string): SelectedUnit => {
+  // eslint-disable-next-line no-unused-vars
+  function unitSize(this: SelectedUnit): number {
+    return this.traits.includes('feral')
+      ? this.size + 1
+      : this.size;
+  }
+  const base: Unit = periodLists.value[selectedNation.value][unitNName];
+  if (!base) return {} as SelectedUnit;
+  const size = 'fixedFigures' in base ? base.fixedFigures : defaultNumber.value;
+  // const newEntry: SelectedUnit = Vue.observable({
+  const newEntry: SelectedUnit = reactive({
+    ...base,
+    id: Math.random(),
+    size: size || 1,
+    selectedOptions: [] as number[],
+    excludedOptions: [] as number[],
+    upgradedArmour: '',
+    upgradedShield: '',
+    upgradedWeapon: '',
+    upgradedBarding: '',
+    type: unitNName,
+    numTokens: 0,
+    unitSize,
+  });
+  newEntry.unitSize = unitSize.bind(newEntry);
+  armyContents.value.push(newEntry);
+  unitToAdd.value = '';
+  if (sorting.value === 'auto') armySort();
+  return newEntry;
+};
+
+const hydrateArmy = (savedObj: SavedArmy): void => {
+  selectedPeriod.value = savedObj.sp || 'punic';
+  selectedNation.value = savedObj.sa;
+  armyName.value = savedObj.an;
+  savedObj.ac.forEach((unit: ArmyDetail) => {
+    const newUnit = addUnit(unit.type);
+    newUnit.size = unit.size;
+    newUnit.selectedOptions = unit.selectedOptions;
+  });
+};
+
+const hydrateCompactArmy = (str: string, sp: string): void => {
+  const pos = str.indexOf('_');
+  selectedPeriod.value = sp;
+  armyName.value = str.substr(pos + 1);
+  selectedNation.value = Object.keys(periodLists.value)[parseInt(str.substr(0, 1), 32)];
+  let nums = str.substr(1, pos).replace(/-/g, 'g00').replace(/~/g, 'o00');
+  while (nums.length > 4) {
+    const size = parseInt(nums.substr(0, 1), 32);
+    const unitIndex = parseInt(nums.substr(1, 1), 32);
+    const opts = parseInt(nums.substr(2, 3), 32);
+    const optsBin = opts.toString(2);
+    const optsArr: number[] = [];
+    const type = Object.keys(periodLists.value[selectedNation.value])[unitIndex];
+    const newUnit = addUnit(type);
+    newUnit.size = size;
+    for (let i = 1; i < 15; i += 1) {
+      if (optsBin.substr(i, 1) === '1') {
+        optsArr.push(i - 1);
+      }
+    }
+    newUnit.selectedOptions = optsArr;
+    nums = nums.substr(5);
+  }
+};
+
+const loadArmy = (name: string): void => {
+  const savedArmies = JSON.parse(localStorage.getItem('armies') || '{}');
+  const savedArmy = savedArmies[name];
+  hydrateArmy(savedArmy);
+  savedArmyName.value = name;
+  savedName.value = '';
+  onDiskArmy.value = JSON.parse(JSON.stringify(armyDetails.value));
+};
+
+const selectNation = (nation: string): void => {
+  selectedNation.value = nation;
+};
+
+const selectPeriod = (period: string): void => {
+  selectedPeriod.value = period;
+};
+
+const saveLocally = (): void => {
+  const armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
+  const armies = JSON.parse(localStorage.getItem('armies') || '{}');
+  const confirmMessage = 'An army by this name already exists locally.\n\nClick ok to overwrite!';
+  // eslint-disable-next-line
+  if (((armyNames.includes(armyName.value) && confirm(confirmMessage)) || !armyNames.includes(armyName.value))) {
+    if (!armyNames.includes(armyName.value)) {
+      armyNames.push(armyName.value);
+    }
+    armies[armyName.value] = {
+      an: armyName.value,
+      sa: selectedNation.value,
+      sp: selectedPeriod.value,
+      ac: armyDetails.value,
+    };
+    localStorage.setItem('armyNames', JSON.stringify(armyNames));
+    localStorage.setItem('armies', JSON.stringify(armies));
+    onDiskArmy.value = JSON.parse(JSON.stringify(armyDetails.value));
+    savedArmyName.value = armyName.value;
+    showToastr('Your army has been saved to this device');
+  }
+};
+
+const deleteLocally = (): void => {
+  const armyNames = JSON.parse(localStorage.getItem('armyNames') || '[]');
+  const armies = JSON.parse(localStorage.getItem('armies') || '{}');
+  armyNames.splice(armyNames.indexOf(armyName.value), 1);
+  delete armies[armyName.value];
+  localStorage.setItem('armyNames', JSON.stringify(armyNames));
+  localStorage.setItem('armies', JSON.stringify(armies));
+  reset();
+};
+
+const removeUnit = (idx: number): void => {
+  armyContents.value.splice(idx, 1);
+};
+const setOption = (name: string, value: string | number | boolean): void => {
+  if (name === 'sorting') sorting.value = value as string;
+  if (name === 'autoNumber') autoNumber.value = value as boolean;
+  if (name === 'defaultNumber') defaultNumber.value = value as number;
+  if (name === 'showDeployTable') showDeployTable.value = value as boolean;
+  localStorage.setItem(name, value.toString());
+};
+
+const updateRow = (index: number, field: string, value: unknown): void => {
+  (armyContents.value[index] as any)[field] = value;
+};
+const updateArmyName = (name: string): void => {
+  armyName.value = name;
+};
+
+// initialise
+let objStr = decodeURI(document.location.search);
+const army = objStr.split('=')[0].slice(1);
+// just the first arg, FB or something might have added other params
+if (army === 'a') {
+  // legacy from shitty sharing url
+  objStr = objStr.split('&')[0].substr(3);
+  objStr = atob(decodeURIComponent(objStr));
+  const savedArmy = JSON.parse(objStr);
+  hydrateArmy(savedArmy);
+} else if (army === 'b') {
+  // legacy from before we had multi armies
+  objStr = objStr.split('&')[0].substr(3);
+  hydrateCompactArmy(objStr, 'punic');
+} else if (Object.keys(PERIODS).includes(army)) {
+  objStr = objStr.split('&')[0].substr(army.length + 2);
+  hydrateCompactArmy(objStr, army);
+}
+
+localSaves.value = JSON.parse(localStorage.getItem('armyNames') || '[]');
+// see if any options are set
+sorting.value = localStorage.getItem('sorting') || sorting.value;
+autoNumber.value = localStorage.getItem('autoNumber') === 'true' || autoNumber.value;
+defaultNumber.value = parseInt(localStorage.getItem('defaultNumber') || '6', 10) || defaultNumber.value;
+showDeployTable.value = (localStorage.getItem('showDeployTable') === 'true') || showDeployTable.value;
+
 </script>
 <style scoped lang="scss">
 
