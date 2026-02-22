@@ -36,85 +36,43 @@
           {{calculateSave}}
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait"  v-if="showWeapon">
+          <span class="pill"  v-if="showWeapon">
             {{displayWeapon}}
           </span>
         </div>
         <div class="unit-cell unit-cell-medium">
-          <span class="unit-trait" v-if="showShield">
+          <span class="pill" v-if="showShield">
             {{upgradedShield ? upgradedShield : row.defaultShield}}
           </span>
-          <span class="unit-trait" v-if="showBody">
+          <span class="pill" v-if="showBody">
             {{upgradedArmour ? upgradedArmour : row.defaultBody}}
           </span>
-          <span class="unit-trait" v-if="row.defaultBarding || row.upgradedBarding">
+          <span class="pill" v-if="row.defaultBarding || row.upgradedBarding">
             {{upgradedBarding ? upgradedBarding : row.defaultBarding}}
           </span>
         </div>
-        <div class="unit-cell unit-cell-medium">
-          <span v-for="(trait) in filteredTraits" v-bind:key="trait">
-            <span class="unit-trait" :title="traitTitle(trait)">{{trait}}</span>
-          </span>
-
-          <span v-if="row.isCharacter" class="unit-trait">
-            {{row.commandPoints}} CP @ {{row.commandRange}}&quot;
-          </span>
-        </div>
+        <UnitRowTraits :row="row" />
         <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
           <i class="fa fa-times"></i>
         </button>
       </div>
-      <div class="unit-row-stats">
-        <div class="unit-cell unit-cell-full-on-mob">
-          <button v-on:click="removeFigure"
-            title="Remove figure"
-            v-if="row.fixedFigures === undefined"
-            class="adjust-figure">
-            <i class="fa fa-minus"></i>
-          </button>
-          {{row.size}} figures
-          <span v-if="row.traits.includes('feral')">
-            (+1)
-          </span>
-          <button v-on:click="addFigure"
-            title="Add figure"
-            v-if="row.fixedFigures === undefined"
-            class="adjust-figure">
-            <i class="fa fa-plus"></i>
-          </button>
-        </div>
-        <div class="unit-cell unit-cell-wide">
-          @ {{row.cost}}
-          <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
-          <span v-if="optionsCostPerFigure < 0">({{optionsCostPerFigure}})</span>
-          points each
-        </div>
-        <div class="unit-cell unit-cell-wide">
-          Total unit cost:  {{rowCost}}
-        </div>
-      </div>
-      <button v-for="(value, index) in row.selectedOptions"
-        v-on:click="removeOption(value)"
-        class="unit-option-remove"
-        v-bind:key="index">
-          <i class="fa fa-times"></i>
-          {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add|Attach a/g, '')}}
-      </button>
-      <select v-if="row.options.length && row.options.length > excludedOptions.length"
-            v-model="optionToAdd" v-on:change="addOption()" class="unit-option">
-        <option value="-1">Add an option</option>
-        <option v-for="(value, index) in availableOptions"
-                  :value="index" v-bind:key="index">
-          {{ row.options[value].name }}
-        </option>
-      </select>
+      <UnitRowStats :row="row" :rowIndex="index" :updateRow="updateRow" />
+      <UnitRowOptions :row="row" :index="index" :updateRow="updateRow" />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue, { PropType } from 'vue';
+<script setup lang="ts">
+import {
+  computed,
+  defineProps,
+  PropType,
+  watch,
+} from 'vue';
 import { SelectedUnit } from '../helpers/types';
+import UnitRowStats from './UnitRowStats.vue';
+import UnitRowOptions from './UnitRowOptions.vue';
+import UnitRowTraits from './UnitRowTraits.vue';
 import {
   HIDE_OPTION,
   SAVE_MODS,
@@ -125,257 +83,135 @@ import {
   PARTIAL_IMPROVED,
   ENCLOSED_IMPROVED,
 } from '../helpers/constants';
-import traits, { traitDescriptions } from '../helpers/traits';
+import traits from '../helpers/traits';
 
-export default Vue.extend({
-  name: 'UnitRow',
-  data: () => {
-    return {
-      optionToAdd: -1,
-      traits,
-    };
+const props = defineProps({
+  row: {
+    type: Object as PropType<SelectedUnit>,
+    required: true,
   },
-  props: {
-    row: { type: Object as PropType<SelectedUnit>, required: true },
-    index: { type: Number, required: true },
-    numUnits: { type: Number, required: true },
-    sorting: { type: String, required: true },
-    deploymentNumbers: { type: Array as PropType<number[][]>, required: false },
-    autoNumber: { type: Boolean, required: true },
-    updateRow: {
-      type: Function,
-      required: true,
-    },
+  index: {
+    type: Number,
+    required: true,
   },
-  computed: {
-    rowCost(): number {
-      const { row } = this;
-      const numFigs = row.size || 1;
-      return Math.round((numFigs * (row.cost + this.optionsCostPerFigure)));
-    },
-    displayWeapon(): string {
-      const weap = this.upgradedWeapon ? this.upgradedWeapon : this.row.defaultWeapon;
-      return `${weap} ${WEAPON_INITIATIVES[weap]}`;
-    },
-    showWeapon: function showWeapon(): boolean {
-      return this.row.defaultWeapon !== HIDE_OPTION;
-    },
-    showBody: function showBody(): boolean {
-      return this.row.defaultBody !== HIDE_OPTION;
-    },
-    showShield: function showShield(): boolean {
-      return this.row.defaultShield !== HIDE_OPTION;
-    },
-    upgradedTraits: function upgradedTraits(): string[] {
-      const myTraits: string[] = [];
-      this.row.selectedOptions.forEach((key) => {
-        const upgradeTraits: string[] = this.row.options[key].upgradeTraits || [];
-        myTraits.push(...upgradeTraits);
-      });
-      return myTraits;
-    },
-    reducingTraits: function reducingTraits(): string[] {
-      const myTraits: string[] = [];
-      this.row.selectedOptions.forEach((key) => {
-        const removeTraits: string[] = this.row.options[key].removeTraits || [];
-        myTraits.push(...removeTraits);
-      });
-      return myTraits;
-    },
-    filteredTraits: function filteredTraits(): string[] {
-      let allTraits: string[] = [...this.row.traits, ...this.upgradedTraits];
-      allTraits = allTraits.reduce((acc: string[], el: string) => {
-        return this.reducingTraits.includes(el)
-          ? acc
-          : [...acc, el];
-      }, [] as string[]);
-      return allTraits;
-    },
-    upgradedWeapon: function ungradedWeapon(): string {
-      let ret = '';
-      this.row.selectedOptions.forEach((key) => {
-        if (this.row.options[key].upgradeWeapon) {
-          ret = this.row.options[key].upgradeWeapon;
-        }
-      });
-      return ret;
-    },
-    upgradedArmour: function ungradedArmour(): string {
-      let ret = '';
-      this.row.selectedOptions.forEach((key) => {
-        if (this.row.options[key].upgradeArmour) {
-          ret = this.row.options[key].upgradeArmour;
-        }
-      });
-      return ret;
-    },
-    upgradedShield: function upgradedShield(): string {
-      let ret = '';
-      this.row.selectedOptions.forEach((key) => {
-        if (this.row.options[key].upgradeShield) {
-          ret = this.row.options[key].upgradeShield;
-        }
-      });
-      return ret;
-    },
-    upgradedBarding: function upgradedBarding(): string {
-      let ret = '';
-      this.row.selectedOptions.forEach((key) => {
-        if (this.row.options[key].upgradeBarding) {
-          ret = this.row.options[key].upgradeBarding || '';
-        }
-      });
-      return ret;
-    },
-    excludedOptions: function excludedOptions(): number[] {
-      // loop through selected options
-      //   for each selected option, record if it mods armour,shield or weapon
-      let excludeWeaponOptions = false;
-      let excludeArmourOptions = false;
-      let excludeShieldOptions = false;
-      let excludeBardingOptions = false;
-      let excludeCommandOptions = false;
-      const exclusions: number[] = [];
-      let isMounted = false;
-      let isHeavyShield = false;
-      this.row.selectedOptions.forEach((key) => {
-        if (this.row.options[key].upgradeArmour) {
-          excludeArmourOptions = true;
-        }
-        if (this.row.options[key].upgradeWeapon) {
-          excludeWeaponOptions = true;
-        }
-        if (this.row.options[key].upgradeShield) {
-          excludeShieldOptions = true;
-        }
-        if (this.row.options[key].upgradeCommand) {
-          excludeCommandOptions = true;
-        }
-        if (this.row.options[key].upgradeBarding) {
-          excludeBardingOptions = true;
-        }
-        if (this.row.options[key].name === 'Upgrade to Horse'
-          || this.row.options[key].name === 'Upgrade to Chariot') {
-          isMounted = true;
-        }
-        if (this.row.options[key].name === 'Upgrade to heavy shield') {
-          isHeavyShield = true;
-        }
-      });
-      // loop through all options,
-      // if that option has shield or armour or weapon
-      // and not allowed, then add it to excludedOptions
-      this.row.options.forEach((option, idx) => {
-        if ((excludeShieldOptions && option.upgradeShield)
-          || (excludeWeaponOptions && option.upgradeWeapon)
-          || (excludeArmourOptions && option.upgradeArmour)
-          || (excludeCommandOptions && option.upgradeCommand)
-          || (excludeBardingOptions && option.upgradeBarding)
-          || (isHeavyShield && option.unlessHeavyShield)
-          || (isMounted && option.unlessMounted)
-          || (!isMounted && option.requiresMounted)
-          || (this.row.selectedOptions.includes(idx))
-        ) {
-          exclusions.push(idx);
-        }
-      });
-      return exclusions;
-    },
-    availableOptions: function availableOptions(): number[] {
-      return this.row.options.reduce((arr, val, index) => {
-        if (!this.excludedOptions.includes(index)) {
-          arr.push(index);
-        }
-        return arr;
-      }, [] as number[]);
-    },
-    optionsCostPerFigure: function optionsCostPerFigure(): number {
-      return this.row.selectedOptions.reduce((total, selectedOption) => {
-        return (total + this.row.options[selectedOption].cost);
-      }, 0);
-    },
-    calculateSave: function calculateSave(): string {
-      if (this.row.fixedSave) {
-        return this.row.fixedSave;
-      }
-      let save = 7;
-      let symbol = '+';
-      const shield = this.upgradedShield ? this.upgradedShield : this.row.defaultShield;
-      const barding = this.upgradedBarding ? this.upgradedBarding : this.row.defaultBarding;
-      const armour = this.upgradedArmour ? this.upgradedArmour : this.row.defaultBody;
-      if (armour) {
-        save -= SAVE_MODS[armour];
-      }
-      if (shield) {
-        save -= SAVE_MODS[shield];
-      }
-      if (barding) {
-        save -= SAVE_MODS[barding];
-      }
-      if (
-        shield === OPT_BUCKLER.name
-        || barding === HALF_BARDING
-        || armour === FULL_IMPROVED
-        || armour === PARTIAL_IMPROVED
-        || armour === ENCLOSED_IMPROVED
-      ) {
-        symbol = '+*';
-      }
-      return save + symbol;
-    },
+  numUnits: {
+    type: Number,
+    required: true,
   },
-  watch: {
-    calculateSave: { // set the number of deployment tokens
-      immediate: true,
-      handler(a: string) {
-        let tokens = 0;
-        if (this.row.availability === 'character' || this.row.noDeployToken) {
-          tokens = 0;
-        } else {
-          const save: number = parseInt(a.substr(0, 1), 10);
-          const mounted: boolean = this.row.traits.includes(this.traits.MOUNTED);
-          if ((save > 4 && mounted) || save > 5) {
-            tokens = 2;
-          } else {
-            tokens = 1;
-          }
-        }
-        // this.row.numTokens = tokens;
-        this.updateRow(this.index, 'numTokens', tokens);
-      },
-    },
+  sorting: {
+    type: String,
+    required: true,
   },
-  methods: {
-    traitTitle: function traitTitle(trait: string): string {
-      const desc = traitDescriptions[trait] || ['', ''];
-      return `${desc[0]}\n${desc[1]}`;
-    },
-    removeOption: function removeOption(optionIndex: number): void {
-      console.log('removing option', optionIndex);
-      const newSelectedOptions: number[] = this.row.selectedOptions.filter(
-        (val: number): boolean => { return val !== optionIndex; },
-      );
-      this.updateRow(this.index, 'selectedOptions', newSelectedOptions);
-    },
-    addOption: function addOption(): void {
-      const optionKey = this.availableOptions[this.optionToAdd];
-      // this.row.selectedOptions.push(optionKey); // fix mutation
-      this.updateRow(this.index, 'selectedOptions', this.row.selectedOptions.concat([optionKey]));
-      this.optionToAdd = -1;
-    },
-    addFigure: function addFigure(): void {
-      // this.row.size = Math.min(this.row.size + 1, 15); // fix mutation
-      this.updateRow(this.index, 'size', Math.min(this.row.size + 1, 15));
-    },
-    removeFigure: function removeFigure(): void {
-      // this.row.size = Math.max(this.row.size - 1, 0); // fix mutation
-      this.updateRow(this.index, 'size', Math.max(this.row.size - 1, 0));
-    },
+  deploymentNumbers: {
+    type: Array as PropType<number[][]>,
+    required: true,
+  },
+  autoNumber: {
+    type: Boolean,
+    required: true,
+  },
+  updateRow: {
+    type: Function,
+    required: true,
   },
 });
+const upgradedWeapon = computed((): string => {
+  let ret = '';
+  props.row.selectedOptions.forEach((key) => {
+    if (props.row.options[key].upgradeWeapon) {
+      ret = props.row.options[key].upgradeWeapon;
+    }
+  });
+  return ret;
+});
+const upgradedArmour = computed((): string => {
+  let ret = '';
+  props.row.selectedOptions.forEach((key) => {
+    if (props.row.options[key].upgradeArmour) {
+      ret = props.row.options[key].upgradeArmour;
+    }
+  });
+  return ret;
+});
+const upgradedShield = computed((): string => {
+  let ret = '';
+  props.row.selectedOptions.forEach((key) => {
+    if (props.row.options[key].upgradeShield) {
+      ret = props.row.options[key].upgradeShield;
+    }
+  });
+  return ret;
+});
+const upgradedBarding = computed((): string => {
+  let ret = '';
+  props.row.selectedOptions.forEach((key) => {
+    if (props.row.options[key].upgradeBarding) {
+      ret = props.row.options[key].upgradeBarding || '';
+    }
+  });
+  return ret;
+});
+const displayWeapon = computed((): string => {
+  const weap = upgradedWeapon.value ? upgradedWeapon.value : props.row.defaultWeapon;
+  return `${weap} ${WEAPON_INITIATIVES[weap]}`;
+});
+const showWeapon = computed((): boolean => {
+  return props.row.defaultWeapon !== HIDE_OPTION;
+});
+const showBody = computed((): boolean => {
+  return props.row.defaultBody !== HIDE_OPTION;
+});
+const showShield = computed((): boolean => {
+  return props.row.defaultShield !== HIDE_OPTION;
+});
+const calculateSave = computed((): string => {
+  if (props.row.fixedSave) {
+    return props.row.fixedSave;
+  }
+  let save = 7;
+  let symbol = '+';
+  const shield = upgradedShield.value ? upgradedShield.value : props.row.defaultShield;
+  const barding = upgradedBarding.value ? upgradedBarding.value : props.row.defaultBarding;
+  const armour = upgradedArmour.value ? upgradedArmour.value : props.row.defaultBody;
+  if (armour) {
+    save -= SAVE_MODS[armour];
+  }
+  if (shield) {
+    save -= SAVE_MODS[shield];
+  }
+  if (barding) {
+    save -= SAVE_MODS[barding];
+  }
+  if (
+    shield === OPT_BUCKLER.name
+    || barding === HALF_BARDING
+    || armour === FULL_IMPROVED
+    || armour === PARTIAL_IMPROVED
+    || armour === ENCLOSED_IMPROVED
+  ) {
+    symbol = '+*';
+  }
+  return save + symbol;
+});
+watch(calculateSave, (a: string) => {
+  let tokens = 0;
+  if (props.row.availability === 'character' || props.row.noDeployToken) {
+    tokens = 0;
+  } else {
+    const save: number = parseInt(a.substr(0, 1), 10);
+    const mounted: boolean = props.row.traits.includes(traits.MOUNTED);
+    if ((save > 4 && mounted) || save > 5) {
+      tokens = 2;
+    } else {
+      tokens = 1;
+    }
+  }
+  props.updateRow(props.index, 'numTokens', tokens);
+});
+
 </script>
 <style scoped lang="scss">
-  .unit-trait {
+  .pill {
     background-color: #505050;
     border: solid #505050 1px;
     border-radius: 10px;
