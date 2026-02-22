@@ -24,7 +24,7 @@ module.exports = {
         '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
       env: {
-        jest: true,
+        'vitest-globals/env': true,
       },
     },
   ],

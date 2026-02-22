@@ -1,10 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
 import SharableLink from '@/components/SharableLink.vue';
+import { vi } from 'vitest';
 
 describe('SharableLink.vue', () => {
   it('renders the sharable input with the correct value', () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     const input = wrapper.find('input.sharable-input');
     expect(input.exists()).toBe(true);
@@ -15,18 +16,18 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when copyToClip is called', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     // Mock $refs
     wrapper.vm.$refs.sharableInput = document.createElement('input');
-    document.execCommand = jest.fn();
+    document.execCommand = vi.fn();
     await (wrapper.vm as any).copyToClip();
     expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
   });
 
   it('does not throw if sharableInput ref is missing', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     wrapper.vm.$refs.sharableInput = undefined;
     expect(async () => {
@@ -36,10 +37,10 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when icon is clicked', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
-    document.execCommand = jest.fn();
+    document.execCommand = vi.fn();
     const icon = wrapper.find('i.fa-link');
     await icon.trigger('click');
     expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
@@ -47,10 +48,10 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when input is clicked', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
-    document.execCommand = jest.fn();
+    document.execCommand = vi.fn();
     const input = wrapper.find('input.sharable-input');
     await input.trigger('click');
     expect(wrapper.props().showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
@@ -58,7 +59,7 @@ describe('SharableLink.vue', () => {
 
   it('updates input value when sharable prop changes', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: jest.fn() },
+      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     await wrapper.setProps({ sharable: 'http://new.link' });
     const input = wrapper.find('input.sharable-input');

@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import IntroScreen from '@/components/IntroScreen.vue';
+import { vi } from 'vitest';
 
 const propsData = {
   selectedNation: '',
@@ -8,9 +9,9 @@ const propsData = {
   lists: { period1: [], period2: [] },
   localSaves: ['save1', 'save2'],
   savedName: '',
-  loadArmy: jest.fn(),
-  selectNation: jest.fn(),
-  selectPeriod: jest.fn(),
+  loadArmy: vi.fn(),
+  selectNation: vi.fn(),
+  selectPeriod: vi.fn(),
 };
 
 describe('IntroScreen.vue', () => {

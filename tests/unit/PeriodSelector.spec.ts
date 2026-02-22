@@ -1,6 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import PeriodSelector from '@/components/PeriodSelector.vue';
 import { PERIODS } from '@/helpers/constants';
+import { vi } from 'vitest';
 
 const periodKeys = Object.keys(PERIODS);
 
@@ -10,7 +11,7 @@ describe('PeriodSelector.vue', () => {
       propsData: {
         selectedPeriod: 'punic',
         period: 'punic',
-        selectPeriod: jest.fn((val: string) => {}),
+        selectPeriod: vi.fn((val: string) => {}),
       },
     });
     const radio = wrapper.find('input[type="radio"]');
@@ -23,7 +24,7 @@ describe('PeriodSelector.vue', () => {
       propsData: {
         selectedPeriod: 'punic',
         period: 'katanas',
-        selectPeriod: jest.fn((val: string) => {}),
+        selectPeriod: vi.fn((val: string) => {}),
       },
     });
     const radio = wrapper.find('input[type="radio"]');
