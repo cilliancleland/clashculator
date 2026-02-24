@@ -7,7 +7,7 @@ const baseProps = { sharable: 'http://test.link', showToastr: vi.fn() };
 describe('SharableLink.vue', () => {
   it('renders the sharable input with the correct value', () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { sharable: 'http://test.link', showToastr: vi.fn() },
+      props: { sharable: 'http://test.link', showToastr: vi.fn() },
     });
     const input = wrapper.find('input.sharable-input');
     expect(input.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when copyToClip is called', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     // Mock $refs
     wrapper.vm.$refs.sharableInput = document.createElement('input');
@@ -29,7 +29,7 @@ describe('SharableLink.vue', () => {
 
   it('does not throw if sharableInput ref is missing', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     wrapper.vm.$refs.sharableInput = undefined;
     expect(async () => {
@@ -39,7 +39,7 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when icon is clicked', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
     document.execCommand = vi.fn();
@@ -50,7 +50,7 @@ describe('SharableLink.vue', () => {
 
   it('calls show-toastr when input is clicked', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
     document.execCommand = vi.fn();
@@ -61,7 +61,7 @@ describe('SharableLink.vue', () => {
 
   it('updates input value when sharable prop changes', async () => {
     const wrapper = shallowMount(SharableLink as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     await wrapper.setProps({ sharable: 'http://new.link' });
     const input = wrapper.find('input.sharable-input');

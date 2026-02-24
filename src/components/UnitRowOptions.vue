@@ -27,7 +27,7 @@ const props = defineProps({
     type: Object as () => SelectedUnit,
     required: true,
   },
-  index: {
+  rowIndex: {
     type: Number,
     required: true,
   },
@@ -105,13 +105,13 @@ const removeOption = (optionIndex: number): void => {
   const newSelectedOptions: number[] = props.row.selectedOptions.filter(
     (val: number): boolean => { return val !== optionIndex; },
   );
-  props.updateRow(props.index, 'selectedOptions', newSelectedOptions);
+  props.updateRow(props.rowIndex, 'selectedOptions', newSelectedOptions);
 };
 
 const addOption = (ev: Event): void => {
   const select = ev.target as HTMLSelectElement;
   const optionKey = availableOptions.value[select.selectedIndex - 1];
-  props.updateRow(props.index, 'selectedOptions', props.row.selectedOptions.concat([optionKey]));
+  props.updateRow(props.rowIndex, 'selectedOptions', props.row.selectedOptions.concat([optionKey]));
   select.selectedIndex = 0;
 };
 </script>

@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import OptionsScreen from '@/components/OptionsScreen.vue';
 
 
-const propsData = {
+const props = {
   sorting: 'auto',
   defaultNumber: 0,
   autoNumber: false,
@@ -12,7 +12,7 @@ const propsData = {
 describe('OptionsScreen.vue', () => {
   it('renders sorting options and emits event on change', async () => {
     const wrapper = shallowMount(OptionsScreen as any, {
-      propsData: { ...propsData },
+      props: { ...props },
     });
 
     const manualOption = wrapper.find('input#sorting-manual');
@@ -31,7 +31,7 @@ describe('OptionsScreen.vue', () => {
 
   it('renders default number input and emits event on change', async () => {
     const wrapper = shallowMount(OptionsScreen as any, {
-      propsData: { ...propsData },
+      props: { ...props },
     });
 
     const defaultNumberInput = wrapper.find('input#defaultNumber');
@@ -44,7 +44,7 @@ describe('OptionsScreen.vue', () => {
 
   it('renders auto number checkbox and emits event on change', async () => {
     const wrapper = shallowMount(OptionsScreen as any, {
-      propsData: { ...propsData },
+      props: { ...props },
     });
 
     const autoNumberCheckbox = wrapper.find('input#autoNumber');
@@ -57,7 +57,7 @@ describe('OptionsScreen.vue', () => {
 
   it('renders show deploy table checkbox and emits event on change', async () => {
     const wrapper = shallowMount(OptionsScreen as any, {
-      propsData: { ...propsData },
+      props: { ...props },
     });
 
     const showDeployTableCheckbox = wrapper.find('input#showDeployTable');
@@ -70,7 +70,7 @@ describe('OptionsScreen.vue', () => {
 
   it('emits no-options when close button is clicked', async () => {
     const wrapper = shallowMount(OptionsScreen as any, {
-      propsData: { ...propsData },
+      props: { ...props },
     });
 
     const closeButton = wrapper.find('button#close-button');

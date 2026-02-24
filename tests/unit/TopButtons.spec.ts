@@ -14,7 +14,7 @@ const baseProps = {
 describe("TopButtons.vue", () => {
   it("renders faq, reset, print and options buttons and calls events on click", async () => {
     const wrapper = shallowMount(TopButtons as any, {
-      propsData: { ...baseProps },
+      props: { ...baseProps },
     });
     const faqButton = wrapper.find('button[title="FAQ"]');
     expect(faqButton.exists()).toBe(true);
@@ -41,7 +41,7 @@ describe("TopButtons.vue", () => {
 
 it("renders save and delete buttons with correct disabled state and calls events on click", async () => {
   const wrapper = shallowMount(TopButtons as any, {
-    propsData: { ...baseProps, armyUnchanged: true },
+    props: { ...baseProps, armyUnchanged: true },
   });
   const saveButton = wrapper.find('button[title="Save locally"]');
   const deleteButton = wrapper.find('button[title="Delete army from device"]');

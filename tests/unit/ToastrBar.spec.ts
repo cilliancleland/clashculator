@@ -4,7 +4,7 @@ import ToastrBar from '@/components/ToastrBar.vue';
 describe('ToastrBar.vue', () => {
   it('renders the message when provided', () => {
     const wrapper = shallowMount(ToastrBar as any, {
-      propsData: { message: 'Test message' },
+      props: { message: 'Test message' },
     });
     expect(wrapper.text()).toContain('Test message');
     expect(wrapper.classes()).toContain('toastr-visible');
@@ -12,7 +12,7 @@ describe('ToastrBar.vue', () => {
 
   it('does not have toastr-visible class when message is empty', () => {
     const wrapper = shallowMount(ToastrBar as any, {
-      propsData: { message: '' },
+      props: { message: '' },
     });
     expect(wrapper.classes()).not.toContain('toastr-visible');
   });

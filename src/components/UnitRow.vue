@@ -57,7 +57,7 @@
         </button>
       </div>
       <UnitRowStats :row="row" :rowIndex="index" :updateRow="updateRow" />
-      <UnitRowOptions :row="row" :index="index" :updateRow="updateRow" />
+      <UnitRowOptions :row="row" :rowIndex="index" :updateRow="updateRow" />
     </div>
   </div>
 </template>
