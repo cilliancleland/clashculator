@@ -83,6 +83,7 @@ import {
   ref,
   reactive,
   computed,
+  watch,
 } from 'vue';
 import {
   Unit,
@@ -202,11 +203,12 @@ const armyUnchanged = computed<boolean>(() => {
 
 const sharable = computed<string>(() => {
   const loc = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
-  const uri = `${loc}?${selectedPeriod.value}=${encodeURIComponent(armyDetailsCompact.value)}`;
-  // side effect alert!!
-  window.history.pushState({}, 'Clashculator', uri);
-  return uri;
+  return `${loc}?${selectedPeriod.value}=${encodeURIComponent(armyDetailsCompact.value)}`;
 });
+
+watch(sharable, (uri) => {
+  window.history.pushState({}, 'Clashculator', uri);
+}, { immediate: false });
 
 
 const showFaq = (): void => {
@@ -425,6 +427,7 @@ autoNumber.value = localStorage.getItem('autoNumber') === 'true' || autoNumber.v
 defaultNumber.value = parseInt(localStorage.getItem('defaultNumber') || '6', 10) || defaultNumber.value;
 showDeployTable.value = (localStorage.getItem('showDeployTable') === 'true') || showDeployTable.value;
 
+defineExpose({ selectNation, sharable });
 </script>
 <style scoped lang="scss">
 

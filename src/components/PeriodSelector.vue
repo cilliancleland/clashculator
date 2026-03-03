@@ -13,7 +13,7 @@
 
 
 <script setup lang="ts">
-import { defineProps, reactive, defineExpose } from 'vue';
+import { reactive } from 'vue';
 import { PERIODS } from '../helpers/constants';
 
 const props = defineProps({

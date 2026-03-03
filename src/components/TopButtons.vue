@@ -43,7 +43,6 @@
 </template>
   
 <script setup lang="ts">
-import { defineProps } from 'vue';
 
 const props = defineProps({
   armyUnchanged: {type: Boolean, required: true},

@@ -43,15 +43,6 @@ const warPartyNations: LookupNumber = {
   'Early Imperial Roman': 1,
   'Late Republican Roman': 1,
 };
-// const props = defineProps<{
-//   armyContents: SelectedUnit[];
-//   selectedNation: string;
-//   armyName: string;
-//   lists: Record<string, any>;
-//   unitToAdd: string;
-//   addUnit?: () => void;
-//   updateArmyName?: () => void;
-// }>();
 const props = defineProps({
   armyContents: {
     type: Array as PropType<SelectedUnit[]>,

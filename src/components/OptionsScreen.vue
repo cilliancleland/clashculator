@@ -60,8 +60,6 @@
 
 
 <script setup lang="ts">
-import { defineProps, defineExpose, defineEmits } from 'vue';
-
 defineProps({
   sorting: String,
   autoNumber: Boolean,
