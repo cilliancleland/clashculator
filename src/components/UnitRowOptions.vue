@@ -7,7 +7,8 @@
         <i class="fa fa-times"></i>
         {{row.options[value].name.replace(/Upgrade to|Downgrade to|Add|Attach a/g, '')}}
     </button>
-    <select v-if="row.options.length && row.options.length > excludedOptions.length"
+    <select aria-label="Add an option"
+          v-if="row.options.length && row.options.length > excludedOptions.length"
           v-on:change="addOption" class="unit-option">
       <option value="-1">Add an option</option>
       <option v-for="(value, index) in availableOptions"

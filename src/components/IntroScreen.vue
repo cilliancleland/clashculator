@@ -11,6 +11,7 @@
       ></period-selector>
     </div>
     <select id="armySelect"
+            aria-label="Select nation"
             v-bind:value="selectedNation"
             class="add-unit"
             @change="selectNation">
@@ -22,6 +23,7 @@
     <span v-if="localSaves.length">
       or
       <select id="saveSelect"
+              aria-label="Load a saved army"
               v-bind:value="savedName"
               class="add-unit"
               @change="loadArmy">
@@ -38,8 +40,8 @@
         <li>Clash of Katanas!!
         </li>
         <li>Added lists from the new expansion
-          <a href="https://www.wargamevault.com/product/373720/RISE-of-Eagles"  target="_blank">
-          <b>Rise of Eagles</b>
+          <a href="https://www.wargamevault.com/product/373720/RISE-of-Eagles" target="_blank" rel="noopener noreferrer">
+          <b>Rise of Eagles</b><span class="sr-only"> (opens in new tab)</span>
           </a>
         </li>
         <li>
@@ -49,12 +51,12 @@
           Fixed a couple of options for Numidians.
         </li>
         <li>Fixed soothsayer bug (please report any bugs on
-          <a href="https://www.facebook.com/groups/TheWargameSpot/" target="_blank">
-          Facebook</a>.
+          <a href="https://www.facebook.com/groups/TheWargameSpot/" target="_blank" rel="noopener noreferrer">
+          Facebook<span class="sr-only"> (opens in new tab)</span></a>.
           Bug reports are always welcome)</li>
         <li>Added command abilities from the excellent new supplement
-          <a href="https://www.wargamevault.com/product/310813/FIELDS-of-BLOOD"  target="_blank">
-          <b>FIELDS of <span  style="color:red">BLOOD</span></b>
+          <a href="https://www.wargamevault.com/product/310813/FIELDS-of-BLOOD" target="_blank" rel="noopener noreferrer">
+          <b>FIELDS of <span style="color:red">BLOOD</span></b><span class="sr-only"> (opens in new tab)</span>
           </a>
         </li>
         <li>Options button. Set default unit size, auto sorting and print options</li>

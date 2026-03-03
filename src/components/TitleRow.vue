@@ -1,9 +1,10 @@
 <template>
   <div class="unit-row unit-row-title">
     <button class="button-sort"
+        aria-label="Sort units"
         title="Sort"
         v-on:click="$emit('army-sort')" >
-      <i class="fa fa-sort"></i>
+      <i class="fa fa-sort" aria-hidden="true"></i>
     </button>
     <div class="unit-cell unit-cell-wide">
       Troop type

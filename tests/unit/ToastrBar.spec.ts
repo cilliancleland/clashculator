@@ -16,4 +16,13 @@ describe('ToastrBar.vue', () => {
     });
     expect(wrapper.classes()).not.toContain('toastr-visible');
   });
+
+  it('outer element has role="status" and aria-live="polite"', () => {
+    const wrapper = shallowMount(ToastrBar as any, {
+      props: { message: '' },
+    });
+    expect(wrapper.attributes('role')).toBe('status');
+    expect(wrapper.attributes('aria-live')).toBe('polite');
+    expect(wrapper.attributes('aria-atomic')).toBe('true');
+  });
 });

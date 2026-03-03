@@ -1,5 +1,5 @@
 <template>
-    <div :class="displayClasses">
+    <div :class="displayClasses" role="status" aria-live="polite" aria-atomic="true">
       <div class="toastr-message">
         {{message}}
       </div>
@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   message: {

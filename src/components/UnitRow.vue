@@ -1,15 +1,16 @@
 <template>
   <div class="unit-row">
     <div class="row-reposition">
-    <button title="Move up" v-if="index != 0 && sorting=='manual'"
+    <button aria-label="Move up" title="Move up" v-if="index != 0 && sorting=='manual'"
       v-on:click="$emit('repos-up',index)" class="unit-up">
-      <i class="fa fa-arrow-up"></i>
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </button>
     <button
+      aria-label="Move down"
       title="Move down"
       v-if="numUnits -1 != index && sorting=='manual'"
       v-on:click="$emit('repos-down',index)" class="unit-down">
-      <i class="fa fa-arrow-down"></i>
+      <i class="fa fa-arrow-down" aria-hidden="true"></i>
     </button>
     </div>
     <div style="margin-left:32px;">
@@ -52,8 +53,8 @@
           </span>
         </div>
         <UnitRowTraits :row="row" />
-        <button v-on:click="$emit('remove-unit',index)"  title="Remove unit" class="unit-delete">
-          <i class="fa fa-times"></i>
+        <button v-on:click="$emit('remove-unit',index)" aria-label="Remove unit" title="Remove unit" class="unit-delete">
+          <i class="fa fa-times" aria-hidden="true"></i>
         </button>
       </div>
       <UnitRowStats :row="row" :rowIndex="index" :updateRow="updateRow" />

@@ -2,7 +2,7 @@
   <div>
     <h3>Deployment fatigue table - foot (mounted)</h3>
     <table>
-      <tbody>
+      <thead>
         <tr>
           <th class="main">
             Action tokens
@@ -26,7 +26,8 @@
             6
           </th>
         </tr>
-
+      </thead>
+      <tbody>
         <tr class="alt">
           <th>
             Save 6+

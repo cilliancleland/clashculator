@@ -67,4 +67,31 @@ describe("UnitRow.vue", () => {
     expect(statsComponent.props('rowIndex')).toBe(baseProps.index);
     expect(statsComponent.props('updateRow')).toBe(baseProps.updateRow);
   });
+
+  it('remove unit button has aria-label="Remove unit"', () => {
+    const wrapper = shallowMount(UnitRow as any, {
+      props: { ...baseProps },
+    });
+    const btn = wrapper.find('button.unit-delete');
+    expect(btn.exists()).toBe(true);
+    expect(btn.attributes('aria-label')).toBe('Remove unit');
+  });
+
+  it('move-up button has aria-label="Move up"', () => {
+    const wrapper = shallowMount(UnitRow as any, {
+      props: { ...baseProps, index: 1, numUnits: 3, sorting: 'manual' },
+    });
+    const btn = wrapper.find('button.unit-up');
+    expect(btn.exists()).toBe(true);
+    expect(btn.attributes('aria-label')).toBe('Move up');
+  });
+
+  it('move-down button has aria-label="Move down"', () => {
+    const wrapper = shallowMount(UnitRow as any, {
+      props: { ...baseProps, index: 0, numUnits: 3, sorting: 'manual' },
+    });
+    const btn = wrapper.find('button.unit-down');
+    expect(btn.exists()).toBe(true);
+    expect(btn.attributes('aria-label')).toBe('Move down');
+  });
 });

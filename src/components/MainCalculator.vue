@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <main id="main-content">
       <h1>{{ title }}</h1>
       <intro-screen  v-if="!selectedNation"
         :lists="periodLists"
@@ -75,7 +75,7 @@
         </div>
       </div>
       <toastr v-bind:message="toastrMessage"></toastr>
-    </div>
+    </main>
 </template>
 
 <script setup lang="ts">

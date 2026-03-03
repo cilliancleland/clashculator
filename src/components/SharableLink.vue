@@ -2,9 +2,9 @@
   <div>
     <div class="sharable-link" title="Click to copy sharable link">
       <label>Share this list
-        <div class="input-flag">
-          <i class="fa fa-link"  v-on:click="copyToClip"></i>
-        </div>
+        <button type="button" class="input-flag" aria-label="Copy sharing link" @click="copyToClip">
+          <i class="fa fa-link" aria-hidden="true"></i>
+        </button>
         <input
               readonly
               :value="sharable"
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineExpose, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   sharable: {

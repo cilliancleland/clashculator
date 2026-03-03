@@ -3,20 +3,22 @@
     <div class="unit-row-stats">
       <div class="unit-cell unit-cell-full-on-mob">
         <button v-on:click="removeFigure"
+          aria-label="Remove figure"
           title="Remove figure"
           v-if="row.fixedFigures === undefined"
           class="adjust-figure">
-          <i class="fa fa-minus"></i>
+          <i class="fa fa-minus" aria-hidden="true"></i>
         </button>
         {{row.size}} figures
         <span v-if="row.traits.includes('feral')">
           (+1)
         </span>
         <button v-on:click="addFigure"
+          aria-label="Add figure"
           title="Add figure"
           v-if="row.fixedFigures === undefined"
           class="adjust-figure">
-          <i class="fa fa-plus"></i>
+          <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
       </div>
       <div class="unit-cell unit-cell-wide">

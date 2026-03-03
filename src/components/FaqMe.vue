@@ -24,8 +24,7 @@
             v-on:click="$emit('no-faq')" >
                 close
         </button>
-        <a name="what" />
-        <h2>What is all this?</h2>
+        <h2 id="what">What is all this?</h2>
         <p>
             This is a simple tool to help you build lists for the rather excellent
             miniatures game <a href="https://www.clashofspears.com">Clash of Spears</a>.
@@ -35,14 +34,12 @@
             page for "The wargames Spot". Please tag "Cillian Cleland" if you do.
             Likewise feature requests and usability feedback is welcome.
         </p>
-        <a name="print" />
-        <h2>How do I print?</h2>
+        <h2 id="print">How do I print?</h2>
         <p>
             When a list is being edited you should see a print button in the top
             right of the screen.
         </p>
-        <a name="save" />
-        <h2>How do I save?</h2>
+        <h2 id="save">How do I save?</h2>
         <p>
             Clicking the Save button will save the army to your device.
             It is saved to local storage, a bit like a cookie, and won't
@@ -53,8 +50,7 @@
             The army name defaults to Unknown soldiers. You can change
             this by typing over this name. Clicking the delete button will remove this army.
         </p>
-        <a name="what" />
-        <h2>How do I sort?</h2>
+        <h2 id="sort">How do I sort?</h2>
         <p>
             You can move a single row up or down by clicking the up arrow or down
             arrow in that row. To sort a list into book order you can click the double
@@ -64,8 +60,7 @@
             In the options section there is an option to autosort. This will sort the units
             into book order each time you add a unit.
         </p>
-        <a name="share" />
-        <h2>How do I share?</h2>
+        <h2 id="share">How do I share?</h2>
         <p>
             Beneath the army list, but above the Trait Descriptions, there is a text
             box labelled 'Share this list'. Clicking here will copy a link to your clipboard.

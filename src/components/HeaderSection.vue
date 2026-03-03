@@ -24,7 +24,7 @@
         <div>Break point every {{breakPointThreshold}} figures</div>
     </div>
     <div class="header-right">
-        <select class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
+        <select aria-label="Add a unit" class="add-unit" v-if="selectedNation" v-bind:value="unitToAdd"
           v-on:change="onAddUnit">
           <option value="">Add a unit</option>
           <option v-for="(value, name) in lists[selectedNation]" :value="name" v-bind:key="name">
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType, computed } from 'vue';
+import { PropType, computed } from 'vue';
 import { LookupNumber, SelectedUnit } from '../helpers/types';
 
 const warPartyNations: LookupNumber = {

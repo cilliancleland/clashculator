@@ -37,14 +37,22 @@ describe('SharableLink.vue', () => {
     }).not.toThrow();
   });
 
-  it('calls show-toastr when icon is clicked', async () => {
+  it('has a button with aria-label="Copy sharing link"', () => {
+    const wrapper = shallowMount(SharableLink as any, {
+      props: { ...baseProps },
+    });
+    const btn = wrapper.find('button[aria-label="Copy sharing link"]');
+    expect(btn.exists()).toBe(true);
+  });
+
+  it('calls show-toastr when copy button is clicked', async () => {
     const wrapper = shallowMount(SharableLink as any, {
       props: { ...baseProps },
     });
     wrapper.vm.$refs.sharableInput = document.createElement('input');
     document.execCommand = vi.fn();
-    const icon = wrapper.find('i.fa-link');
-    await icon.trigger('click');
+    const btn = wrapper.find('button[aria-label="Copy sharing link"]');
+    await btn.trigger('click');
     expect(baseProps.showToastr).toHaveBeenCalledWith('Sharing link copied to clipboard');
   });
 
