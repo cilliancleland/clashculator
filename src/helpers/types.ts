@@ -101,3 +101,9 @@ export interface SavedArmy {
   an: string,
   ac: Array<ArmyDetail>,
 }
+
+export interface DecodedArmy {
+  nation: string,
+  armyName: string,
+  units: Array<ArmyDetail>,
+}
