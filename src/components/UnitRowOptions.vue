@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { SelectedUnit } from '../helpers/types';
 
 const props = defineProps({

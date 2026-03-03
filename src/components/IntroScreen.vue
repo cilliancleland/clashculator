@@ -1,14 +1,6 @@
 
 <template>
   <div>
-    <div class="top-buttons">
-      <button
-        title="Translate"
-        class="top-button"
-        @click="openTranslate">
-        <i class="fa fa-language top-button-icon"></i> Translate
-      </button>
-    </div>
     <div class="period-selector">
       <period-selector
         v-for="(period) in periods"
@@ -75,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType } from 'vue';
+import { PropType } from 'vue';
 import { LookupArmy } from '../helpers/types';
 import PeriodSelector from './PeriodSelector.vue';
 
