@@ -4,6 +4,8 @@ import { nextTick } from 'vue';
 import MainCalculator from '@/components/MainCalculator.vue';
 import allLists from '@/helpers/lists';
 
+type ExposedVM = { selectNation: (n: string) => void; sharable: string };
+
 const firstPunicNation = Object.keys(allLists.punic)[0];
 
 const localStorageMock = {
@@ -31,12 +33,13 @@ describe('MainCalculator.vue', () => {
 
   it('calls pushState with the sharable URL when army state changes', async () => {
     const wrapper = shallowMount(MainCalculator as any);
-    wrapper.vm.selectNation(firstPunicNation);
+    const vm = wrapper.vm as unknown as ExposedVM;
+    vm.selectNation(firstPunicNation);
     await nextTick();
     expect(window.history.pushState).toHaveBeenCalledWith(
       {},
       'Clashculator',
-      wrapper.vm.sharable,
+      vm.sharable,
     );
   });
 });
