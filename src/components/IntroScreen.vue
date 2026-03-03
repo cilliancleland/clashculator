@@ -1,6 +1,14 @@
 
 <template>
   <div>
+    <div class="top-buttons">
+      <button
+        title="Translate"
+        class="top-button"
+        @click="openTranslate">
+        <i class="fa fa-language top-button-icon"></i> Translate
+      </button>
+    </div>
     <div class="period-selector">
       <period-selector
         v-for="(period) in periods"
@@ -89,6 +97,10 @@ const selectNation = (e: Event) => {
 
 const loadArmy = (e: Event) => {
   props.loadArmy((e.target as HTMLSelectElement).value);
+};
+
+const openTranslate = (): void => {
+  window.open(`https://translate.google.com/translate?u=${encodeURIComponent(window.location.href)}`, '_blank');
 };
 </script>
 <style scoped lang="scss">

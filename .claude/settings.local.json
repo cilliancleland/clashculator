@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -h \"style\" D:/dev/clashculator/src/components/*.vue)",
+      "Bash(grep -v \"^[[:space:]]*//\")",
+      "Bash(npx vitest:*)"
+    ]
+  }
+}

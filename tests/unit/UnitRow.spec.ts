@@ -53,15 +53,18 @@ describe("UnitRow.vue", () => {
       props: { ...baseProps },
       });
     // expect(wrapper.findComponent({ name: 'UnitRowTraits' }).exists()).toBe(true);
-    expect(wrapper.findComponent(UnitRowTraits).exists()).toBe(true);
-    expect((wrapper.findComponent(UnitRowOptions).vm).row).toStrictEqual(baseProps.row);
-    expect((wrapper.findComponent(UnitRowOptions).vm).rowIndex).toBe(baseProps.index);
-    expect((wrapper.findComponent(UnitRowOptions).vm).updateRow).toBe(baseProps.updateRow);
-    expect(wrapper.findComponent(UnitRowStats).exists()).toBe(true);
-    expect((wrapper.findComponent(UnitRowStats).vm).row).toStrictEqual(baseProps.row);
-    expect((wrapper.findComponent(UnitRowStats).vm).rowIndex).toBe(baseProps.index);
-    expect((wrapper.findComponent(UnitRowStats).vm).updateRow).toBe(baseProps.updateRow);
-    expect(wrapper.findComponent(UnitRowOptions).exists()).toBe(true);
-    expect((wrapper.findComponent(UnitRowOptions).vm).row).toStrictEqual(baseProps.row);
+    const traitsComponent = wrapper.findComponent(UnitRowTraits);
+    expect(traitsComponent.exists()).toBe(true);
+    expect(traitsComponent.props('row')).toStrictEqual(baseProps.row);
+    const optionsComponent = wrapper.findComponent(UnitRowOptions);
+    expect(optionsComponent.exists()).toBe(true);
+    expect(optionsComponent.props('row')).toStrictEqual(baseProps.row);
+    expect(optionsComponent.props('rowIndex')).toBe(baseProps.index);
+    expect(optionsComponent.props('updateRow')).toBe(baseProps.updateRow);
+    const statsComponent = wrapper.findComponent(UnitRowStats);
+    expect(statsComponent.exists()).toBe(true);
+    expect(statsComponent.props('row')).toStrictEqual(baseProps.row);
+    expect(statsComponent.props('rowIndex')).toBe(baseProps.index);
+    expect(statsComponent.props('updateRow')).toBe(baseProps.updateRow);
   });
 });

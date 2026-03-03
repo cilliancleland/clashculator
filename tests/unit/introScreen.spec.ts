@@ -33,4 +33,19 @@ describe('IntroScreen.vue', () => {
     saveSelect.trigger('change');
     expect(props.loadArmy).toHaveBeenCalled();
   });
+
+  it('renders a Translate button that opens Google Translate for the current page', async () => {
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const wrapper = shallowMount(IntroScreen as any, {
+      props: { ...props },
+    });
+    const translateButton = wrapper.find('button[title="Translate"]');
+    expect(translateButton.exists()).toBe(true);
+    await translateButton.trigger('click');
+    expect(openSpy).toHaveBeenCalledWith(
+      `https://translate.google.com/translate?u=${encodeURIComponent(window.location.href)}`,
+      '_blank',
+    );
+    openSpy.mockRestore();
+  });
 });
