@@ -12,7 +12,7 @@
 
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import { traitDescriptions } from '../helpers/traits';
 
 const props = defineProps({

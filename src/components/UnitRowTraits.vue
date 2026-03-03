@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed } from 'vue';
 import { SelectedUnit } from '../helpers/types';
 import { traitDescriptions } from '../helpers/traits';
 

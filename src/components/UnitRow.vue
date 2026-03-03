@@ -66,7 +66,6 @@
 <script setup lang="ts">
 import {
   computed,
-  defineProps,
   PropType,
   watch,
 } from 'vue';
