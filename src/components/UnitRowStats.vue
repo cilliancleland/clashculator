@@ -23,7 +23,7 @@
       </div>
       <div class="unit-cell unit-cell-wide">
         @ {{row.cost}}
-        <span v-if="optionsCostPerFigure > 0">(+{{optionsCostPerFigure}})</span>
+        <span v-if="optionsCostPerFigure !== 0">({{ optionsCostPerFigure > 0 ? '+' : '' }}{{ optionsCostPerFigure }})</span>
         points each
       </div>
       <div class="unit-cell unit-cell-wide">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, PropType } from 'vue';
+import { computed, PropType } from 'vue';
 import { SelectedUnit } from '../helpers/types';
 
 const props = defineProps({
@@ -53,7 +53,7 @@ const props = defineProps({
 });
 const optionsCostPerFigure = computed((): number => {
   return props.row.selectedOptions.reduce((total, selectedOption) => {
-    return (total + props.row.options[selectedOption].cost);
+    return total + props.row.options[selectedOption].cost;
   }, 0);
 });
 const rowCost = computed((): number => {

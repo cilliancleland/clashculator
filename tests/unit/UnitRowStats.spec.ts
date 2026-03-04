@@ -18,7 +18,35 @@ const baseProps = {
   updateRow: vi.fn(),
 };
 
+const rowWithOptions = (costs: number[]) => ({
+  ...baseRow,
+  options: costs.map((cost) => ({ cost, name: '', upgradeWeapon: '', upgradeArmour: '', upgradeShield: '' })),
+  selectedOptions: costs.map((_, i) => i),
+});
+
 describe('UnitRowStats.vue', () => {
+  it('shows a positive option cost with a + prefix', () => {
+    const wrapper = shallowMount(UnitRowStats as any, {
+      props: { ...baseProps, row: rowWithOptions([1]) },
+    });
+    expect(wrapper.text()).toContain('(+1)');
+  });
+
+  it('shows a negative option cost without a + prefix', () => {
+    const wrapper = shallowMount(UnitRowStats as any, {
+      props: { ...baseProps, row: rowWithOptions([-1]) },
+    });
+    expect(wrapper.text()).toContain('(-1)');
+    expect(wrapper.text()).not.toContain('(+-1)');
+  });
+
+  it('hides the option cost span when cost is zero', () => {
+    const wrapper = shallowMount(UnitRowStats as any, {
+      props: { ...baseProps },
+    });
+    expect(wrapper.find('span').exists()).toBe(false);
+  });
+
   it('remove figure button has aria-label="Remove figure"', () => {
     const wrapper = shallowMount(UnitRowStats as any, {
       props: { ...baseProps },
