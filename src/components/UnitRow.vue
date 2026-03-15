@@ -207,7 +207,7 @@ watch(calculateSave, (a: string) => {
     }
   }
   props.updateRow(props.index, 'numTokens', tokens);
-});
+}, { immediate: true });
 
 </script>
 <style scoped lang="scss">
