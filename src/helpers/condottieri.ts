@@ -443,8 +443,8 @@ const condottieri: LookupArmy = {
       defaultWeapon: HEAVY_LANCE,
       defaultShield: NO_SHIELD,
       defaultBody: ENCLOSED,
+      defaultBarding: BARDING,
       traits: [
-        traits.BARDING,
         traits.MOUNTED,
         traits.EXTRA_MACE,
         traits.CHARGE,
